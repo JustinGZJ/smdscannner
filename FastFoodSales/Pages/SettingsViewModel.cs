@@ -21,8 +21,8 @@ namespace DAQ
 
         public string[] Ports { get { return SerialPort.GetPortNames(); } }
 
-        public string[] PortACMDs { get { return new string[] { "*IDN?", "TRIG?" }; } }
-        public string[] PortBCMDs { get { return new string[] { "*IDN?", "TRIG?" }; } }
+        public string[] PortACMDs { get { return new string[] { "*IDN?", "TRIG?","SCAN:DATA?","READ?","FETCH?" }; } }
+        public string[] PortBCMDs { get { return new string[] { "*IDN?", "TRIG?","FETCh?"}; } }
 
         public SettingsViewModel()
         {
@@ -74,7 +74,6 @@ namespace DAQ
 
         public void QueryA(string Cmd)
         {
-            Events.Publish("hello");
             PortABuffer = $"Send:\t{Cmd}{Environment.NewLine}";
             bool r = PortServiceA.Request(Cmd, out string replay);
             if (r)
@@ -91,12 +90,11 @@ namespace DAQ
             PortBBuffer = $"Send:\t{Cmd}{Environment.NewLine}";
             bool r = PortServiceB.Request(Cmd, out string replay);
             if (r)
-            {
+            { 
                 PortBBuffer += $"Recieve:\t{replay}{Environment.NewLine}";
             }
             else
             {
-
                 PortBBuffer += $"error:\t{replay}{Environment.NewLine}";
             }
         }
@@ -106,12 +104,17 @@ namespace DAQ
             get { return Properties.Settings.Default.CAMERA_IP; }
             set { Properties.Settings.Default.CAMERA_IP = value; }
         }
-
+        protected override void OnDeactivate()
+        {
+            Properties.Settings.Default.Save();
+            base.OnDeactivate();
+        }
         public int CameraPort
         {
             get { return Properties.Settings.Default.CAMERA_PORT; }
             set { Properties.Settings.Default.CAMERA_PORT = value; }
         }
+       
 
 
     }

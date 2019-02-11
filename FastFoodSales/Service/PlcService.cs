@@ -16,17 +16,17 @@ namespace DAQ.Service
         public int Index { get; set; }
         public bool Value { get; set; }
     }
+
     public class PlcService : PropertyChangedBase
     {
         OmronFinsNet omr;
         string addr = "D100";
-        public bool Ready { get; set; }
+        public bool IsConnected { get; set; }
         public BindableCollection<short> Datas { get; set; } = new BindableCollection<short>(new short[100]);
         public BindableCollection<bool> Bits { get; set; } = new BindableCollection<bool>(new bool[16]);
         public BindableCollection<string> BitTags { get; set; } = new BindableCollection<string>(new string[16]);
-        [Inject]
-        public IEventAggregator Events { get; set; }
 
+        public IEventAggregator Events { get; set; }
 
         public bool Connect()
         {
@@ -47,8 +47,8 @@ namespace DAQ.Service
                     while (true)
                     {
                         var rop = omr.ReadInt16(addr, 100);
-                        Ready = rop.IsSuccess;
-                        if (Ready)
+                        IsConnected = rop.IsSuccess;
+                        if (IsConnected)
                         {
                             if (Datas[0] != rop.Content[0])
                             {
@@ -57,22 +57,34 @@ namespace DAQ.Service
                                     bool v = (Datas[0] & (1 << i)) > 0;
                                     if (Bits[i] != v)
                                     {
-                                        var ei = new EventIO
+                                        Bits[i] = v;
+                                        Events.Publish(new EventIO
                                         {
                                             Index = i,
                                             Value = v
-                                        };
-                                        Bits[i] = v;
-                                        Events.Publish(ei, "BITS");
+                                        });
+                                        Events.Publish(new MsgItem
+                                        {
+                                            Level = "D",
+                                            Time = DateTime.Now,
+                                            Value = $"Bit[{i}]:" + (v ? "Rising edge" : "Failing edge")
+                                        });
                                     }
                                 }
-                                NotifyOfPropertyChange("Bits");
                             }
+
                             for (int i = 0; i < 100; i++)
                             {
                                 if (Datas[i] != rop.Content[i])
                                 {
                                     Datas[i] = rop.Content[i];
+
+                                    Events.Publish(new MsgItem
+                                    {
+                                        Level = "D",
+                                        Time = DateTime.Now,
+                                        Value = $"DATA[{i}]\t{Convert.ToString(Datas[i], 16)}"
+                                    });
                                 }
                             }
                         }
@@ -80,7 +92,7 @@ namespace DAQ.Service
                     }
                 });
             }
-            Ready = op.IsSuccess;
+            IsConnected = op.IsSuccess;
             return op.IsSuccess;
         }
 
@@ -99,6 +111,16 @@ namespace DAQ.Service
             }
             return false;
         }
+        public void Pulse(int bitIndex, int Delayms = 100)
+        {
+            Task.Factory.StartNew(() =>
+            {
+                WriteBool(bitIndex, true);
+                System.Threading.Thread.Sleep(Delayms);
+                WriteBool(bitIndex, true);
+            });
+        }
+
         public bool WriteValue(int index, float value)
         {
             var r = int.TryParse(addr.Trim().Substring(1), result: out int v);
@@ -108,11 +130,25 @@ namespace DAQ.Service
             }
             return false;
         }
-
+        public float GetFloat(int byteindex)
+        {
+            var bytes = new byte[4];
+            if (byteindex > Datas.Count - 1)
+                throw new Exception("get float value out of index");
+            bytes[0] = BitConverter.GetBytes(Datas[byteindex + 1])[0];
+            bytes[1] = BitConverter.GetBytes(Datas[byteindex + 1])[1];
+            bytes[2] = BitConverter.GetBytes(Datas[byteindex])[0];
+            bytes[3] = BitConverter.GetBytes(Datas[byteindex])[1];
+            var single = BitConverter.ToSingle(bytes, 0);
+            return single;
+        }
+        public float GetGroupValue(int group, int subidx)
+        {
+            return GetFloat(group * 4 * 2 + subidx + 1);
+        }
         public bool WriteGroupValue(int group, int subidx, float value)
         {
             return WriteValue(group * 4 * 2 + subidx + 1, value);
         }
-
     }
 }

@@ -1,0 +1,104 @@
+﻿<UserControl x:Class="DAQ.Pages.MaterialView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DAQ.Pages"
+            xmlns:s="https://github.com/canton7/Stylet"
+             mc:Ignorable="d" 
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             d:DesignHeight="800" d:DesignWidth="1000"
+             d:DataContext="{d:DesignInstance local:MaterialViewModel }"
+             Foreground="Gray">
+    <Grid Margin="0,0,0,0">
+
+        <StackPanel>
+            <Border BorderThickness="0 0 0 1" BorderBrush="Gray" Height="50" Margin=" 0,0,0,20"       
+                >
+                <TextBlock VerticalAlignment="Center" FontSize="30" Text="{Binding DisplayName}"></TextBlock>
+            </Border>
+            <StackPanel Orientation="Horizontal" Margin="0 0 10 20">
+                <md:Card md:ShadowAssist.ShadowDepth="Depth1" >
+                    <Grid MinWidth="260" MinHeight="200">
+                        <StackPanel Margin="20">
+                            <TextBlock Margin="0 0 0 10" Text="Production info." FontSize="16"/>
+                            <StackPanel Orientation="Horizontal">
+                                <md:PackIcon Kind="User" Height="25" Width="25" VerticalAlignment="Bottom"/>
+                                <TextBox Text="{Binding Info.Name}" MinWidth="150"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" md:HintAssist.Hint="User"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <md:PackIcon Kind="UserGroup" Height="25" Width="25" VerticalAlignment="Bottom"/>
+                                <TextBox Text="{Binding Info.Shift}" MinWidth="150"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" md:HintAssist.Hint="Shift"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <md:PackIcon Kind="WalletProduct" Height="25" Width="25" VerticalAlignment="Bottom"/>
+                                <TextBox Text="{Binding Info.Product}" MinWidth="150"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" md:HintAssist.Hint="Product"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </md:Card>
+                <md:Card Margin="20 0" md:ShadowAssist.ShadowDepth="Depth1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                    <ContentControl  VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20 0" s:View.Model="{Binding OEE}" ></ContentControl>
+                </md:Card>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <md:Card md:ShadowAssist.ShadowDepth="Depth1"  >
+                    <Grid MinHeight="200" MinWidth="220" Margin="20">
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Margin="0 0 0 10" Text="WIRE&amp;TAPE" FontSize="16"/>
+
+                            <StackPanel Orientation="Horizontal">
+                                <md:PackIcon Kind="Tilde" FontSize="36" Height="25" Width="25" Foreground="Green" VerticalAlignment="Bottom" />
+                                <TextBox
+                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" MinWidth="160" Text="KEYENCE1234567890111" md:HintAssist.Hint="First Wire"   />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <md:PackIcon Kind="Tilde" FontSize="36" Height="25" Width="25" VerticalAlignment="Bottom" Foreground="Red" />
+                                <TextBox
+                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" MinWidth="160" Text="KEYENCE1234567890111" md:HintAssist.Hint="Second Wire"   />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <md:PackIcon Kind="Tilde" FontSize="36" Height="25" Width="25" VerticalAlignment="Bottom" Foreground="Blue" />
+                                <TextBox
+                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" MinWidth="160" Text="KEYENCE1234567890111" md:HintAssist.Hint="Third Wire"   />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <md:PackIcon Kind="TapeMeasure" Height="25" Width="25" VerticalAlignment="Bottom" />
+                                <TextBox
+                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" MinWidth="160" Text="KEYENCE1234567890111" md:HintAssist.Hint="Tape"   />
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </md:Card>
+                <md:Card Margin="20 0 0 0" VerticalAlignment="Stretch"  md:ShadowAssist.ShadowDepth="Depth1" Width="710"  >
+                    <DockPanel>
+                        <TextBlock  DockPanel.Dock="Top" Margin="30 20 0 0" Text="BOBBINS" FontSize="16"/>
+                        <ItemsControl Margin="30 10" ItemsSource="{Binding Barcodes}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <md:TransitioningContent   OpeningEffect="{ md:TransitionEffect  Kind=SlideInFromRight, Duration=00:00:0.2}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Border Height="30" Width="30" Margin="10 0" CornerRadius="5" Background="LightSeaGreen" md:ShadowAssist.ShadowDepth="Depth1" VerticalAlignment="Bottom">
+                                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Text="{Binding Index}"/>
+                                            </Border>
+                                            <TextBox
+                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" MinWidth="160" Text="{Binding Content}" md:HintAssist.Hint="{Binding Axis}" IsReadOnly="True"   />
+                                        </StackPanel>
+                                    </md:TransitioningContent>
+
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+
+                        </ItemsControl>
+                    </DockPanel>
+
+                </md:Card>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

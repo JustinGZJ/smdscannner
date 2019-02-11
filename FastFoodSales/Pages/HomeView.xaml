@@ -8,350 +8,232 @@
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d" 
              xmlns:s="https://github.com/canton7/Stylet"
-             d:DesignHeight="600" d:DesignWidth="1000">
-    <md:TransitioningContent OpeningEffect="{md:TransitionEffect Kind=SlideInFromRight, Duration=00:00:0.8}">
+             d:DesignHeight="600" d:DesignWidth="1000"
+              d:DataContext="{d:DesignInstance  local:HomeViewModel}"
+             >
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
- 
-            <Grid Grid.Row="0" Grid.Column="0">
-            <md:Card Background="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20" Grid.RowSpan="2" Grid.ColumnSpan="2">
+        <md:Transitioner SelectedIndex="{Binding SelectedIndex}" AutoApplyTransitionOrigins="True">
+            <md:Transitioner.InputBindings>
+                <KeyBinding
+                  Key="Left"
+                  Command="{x:Static md:Transitioner.MovePreviousCommand}" />
+                <KeyBinding
+                  Key="Right"
+                  Command="{x:Static md:Transitioner.MoveNextCommand}" />
+            </md:Transitioner.InputBindings>
+            <md:TransitionerSlide OpeningEffect="{md:TransitionEffect  Kind=SlideInFromRight}">
                 <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="78*"/>
-                        <ColumnDefinition Width="47*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Grid Background="DarkGray">
-                    <lvc:AngularGauge Value="{Binding Value}" FromValue="50" ToValue="250" 
-                          LabelsStep="50" TicksStep="25" Wedge="200" 
-                          TicksForeground="White" Foreground="White" 
-                          FontWeight="Bold" FontSize="16"
-                          SectionsInnerRadius=".5"  >
-                        <lvc:AngularGauge.Sections>
-                            <lvc:AngularSection FromValue="50" ToValue="200" Fill="#F8A725"/>
-                            <lvc:AngularSection FromValue="200" ToValue="250" Fill="#FF3939"/>
-                        </lvc:AngularGauge.Sections>
-                    </lvc:AngularGauge>
-                    </Grid>
-                    <Grid Grid.Row="1" Background="DarkGray">
-                        <lvc:AngularGauge Grid.Row="1"  Value="{Binding Value}" FromValue="50" ToValue="250" 
-                          LabelsStep="50" TicksStep="25" Wedge="200"
-                          TicksForeground="White" Foreground="White" 
-                          FontWeight="Bold" FontSize="16"
-                          SectionsInnerRadius=".5">
-                            <lvc:AngularGauge.Sections>
-                                <lvc:AngularSection FromValue="50" ToValue="200" Fill="#F8A725"/>
-                                <lvc:AngularSection FromValue="200" ToValue="250" Fill="#FF3939"/>
-                            </lvc:AngularGauge.Sections>
-                        </lvc:AngularGauge>
-                    </Grid>
-                    <Grid Grid.Column="1" Grid.Row="0">
-                        <DockPanel VerticalAlignment="Stretch">
-                            <TextBlock Background="DarkGray" Foreground="White"  HorizontalAlignment="Stretch" DockPanel.Dock="Top" FontWeight="Bold" FontSize="14">Resistance</TextBlock>
-                            <Line StrokeThickness="1" Fill="DarkGray" DockPanel.Dock="Top" HorizontalAlignment="Stretch" Stroke="Gray"></Line>
-                            <StackPanel Margin="5">
-                                <DockPanel>
-                                    <TextBlock DockPanel.Dock="Left">Top </TextBlock>
-                                    <TextBlock HorizontalAlignment="Center">0</TextBlock>
-                                </DockPanel>
-                                <DockPanel>
-                                    <TextBlock DockPanel.Dock="Left">Bot.</TextBlock>
-                                    <TextBlock HorizontalAlignment="Center">0</TextBlock>
-                                </DockPanel>
-                                <DockPanel>
-                                    <TextBlock DockPanel.Dock="Left">Val. </TextBlock>
-                                    <TextBlock HorizontalAlignment="Center">0</TextBlock>
-                                </DockPanel>
-                                <md:PackIcon Height="50" Width="50" HorizontalAlignment="Center" Foreground="Green" Kind="Smiley"/>
-                            </StackPanel>
-                            
-                        </DockPanel>
-                    </Grid>
-                    <Grid Grid.Column="1" Grid.Row="1">
-                        <DockPanel VerticalAlignment="Stretch">
-                            <TextBlock Background="DarkGray" Foreground="White"  HorizontalAlignment="Stretch" DockPanel.Dock="Top" FontWeight="Bold" FontSize="14">Hi-pot</TextBlock>
-                            <Line StrokeThickness="1" Fill="DarkGray" DockPanel.Dock="Top" HorizontalAlignment="Stretch" Stroke="Gray"></Line>
-                            <StackPanel Margin="5">
-                                <DockPanel>
-                                    <TextBlock DockPanel.Dock="Left">Top</TextBlock>
-                                    <TextBlock HorizontalAlignment="Center">0</TextBlock>
-                                </DockPanel>
-                                <DockPanel>
-                                    <TextBlock DockPanel.Dock="Left">Bot.</TextBlock>
-                                    <TextBlock HorizontalAlignment="Center">0</TextBlock>
-                                </DockPanel>
-                                <DockPanel>
-                                    <TextBlock DockPanel.Dock="Left">Val.</TextBlock>
-                                    <TextBlock HorizontalAlignment="Center">0</TextBlock>
-                                </DockPanel>
-                                <md:PackIcon Height="50" Width="50" HorizontalAlignment="Center" Foreground="Green" Kind="Smiley"/>
-                            </StackPanel>
-
-                        </DockPanel>
-                    </Grid>
+                    <ContentControl s:View.Model="{Binding N1}"/>
+                    <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal">
+                        <Button Style="{DynamicResource MaterialDesignFloatingActionAccentButton}"                     
+                        Command="{x:Static md:Transitioner.MoveNextCommand}"                    
+                        Margin="16">
+                            <md:PackIcon Kind="StepForward" />
+                        </Button>
+                    </StackPanel>
                 </Grid>
-            </md:Card>
-            </Grid>
-            <Grid Grid.Row="0" Grid.Column="1">
-                <md:Card Background="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20" Grid.RowSpan="2" Grid.ColumnSpan="2">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="78*"/>
-                            <ColumnDefinition Width="47*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Grid Background="DarkGray">
-                            <lvc:AngularGauge Value="{Binding Value}" FromValue="50" ToValue="250" 
-                          LabelsStep="50" TicksStep="25" Wedge="200" 
-                          TicksForeground="White" Foreground="White" 
-                          FontWeight="Bold" FontSize="16"
-                          SectionsInnerRadius=".5"  >
-                                <lvc:AngularGauge.Sections>
-                                    <lvc:AngularSection FromValue="50" ToValue="200" Fill="#F8A725"/>
-                                    <lvc:AngularSection FromValue="200" ToValue="250" Fill="#FF3939"/>
-                                </lvc:AngularGauge.Sections>
-                            </lvc:AngularGauge>
-                        </Grid>
-                        <Grid Grid.Row="1" Background="DarkGray">
-                            <lvc:AngularGauge Grid.Row="1"  Value="{Binding Value}" FromValue="50" ToValue="250" 
-                          LabelsStep="50" TicksStep="25" Wedge="200"
-                          TicksForeground="White" Foreground="White" 
-                          FontWeight="Bold" FontSize="16"
-                          SectionsInnerRadius=".5">
-                                <lvc:AngularGauge.Sections>
-                                    <lvc:AngularSection FromValue="50" ToValue="200" Fill="#F8A725"/>
-                                    <lvc:AngularSection FromValue="200" ToValue="250" Fill="#FF3939"/>
-                                </lvc:AngularGauge.Sections>
-                            </lvc:AngularGauge>
-                        </Grid>
-                        <Grid Grid.Column="1" Grid.Row="0">
-                            <DockPanel VerticalAlignment="Stretch">
-                                <TextBlock Background="DarkGray" Foreground="White"  HorizontalAlignment="Stretch" DockPanel.Dock="Top" FontWeight="Bold" FontSize="14">Resistance</TextBlock>
-                                <Line StrokeThickness="1" Fill="DarkGray" DockPanel.Dock="Top" HorizontalAlignment="Stretch" Stroke="Gray"></Line>
-                                <StackPanel Margin="5">
-                                    <DockPanel>
-                                        <TextBlock DockPanel.Dock="Left">Top</TextBlock>
-                                        <TextBlock HorizontalAlignment="Center">0</TextBlock>
-                                    </DockPanel>
-                                    <DockPanel>
-                                        <TextBlock DockPanel.Dock="Left">Bot.</TextBlock>
-                                        <TextBlock HorizontalAlignment="Center">0</TextBlock>
-                                    </DockPanel>
-                                    <DockPanel>
-                                        <TextBlock DockPanel.Dock="Left">Val.</TextBlock>
-                                        <TextBlock HorizontalAlignment="Center">0</TextBlock>
-                                    </DockPanel>
-                                    <md:PackIcon Height="50" Width="50" HorizontalAlignment="Center" Foreground="Green" Kind="Smiley"/>
-                                </StackPanel>
+            </md:TransitionerSlide>
+            <md:TransitionerSlide OpeningEffect="{md:TransitionEffect Kind=ExpandIn}">
+                <Grid>
+                    <ContentControl s:View.Model="{Binding N2}"/>
+                    <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal">
+                        <Button Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" 
+                        Command="{x:Static md:Transitioner.MovePreviousCommand}"
+                        VerticalAlignment="Center"
+                        Margin="16">
+                            <md:PackIcon Kind="StepBackward" />
+                        </Button>
+                        <Button Style="{DynamicResource MaterialDesignFloatingActionAccentButton}"                     
+                        Command="{x:Static md:Transitioner.MoveNextCommand}"                    
+                        Margin="16">
+                            <md:PackIcon Kind="StepForward" />
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </md:TransitionerSlide>
+            <md:TransitionerSlide OpeningEffect="{md:TransitionEffect Kind=ExpandIn}">
+                <Grid>
+                    <ContentControl s:View.Model="{Binding N3}"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                        <Button Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" 
+                        Command="{x:Static md:Transitioner.MovePreviousCommand}"
+                        VerticalAlignment="Center"
+                        Margin="16">
+                            <md:PackIcon Kind="StepBackward" />
+                        </Button>
+                        <Button Style="{DynamicResource MaterialDesignFloatingActionAccentButton}"                     
+                        Command="{x:Static md:Transitioner.MoveNextCommand}"                    
+                        Margin="16">
+                            <md:PackIcon Kind="StepForward" />
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </md:TransitionerSlide>
+            <md:TransitionerSlide OpeningEffect="{md:TransitionEffect Kind=ExpandIn}">
+                <Grid>
+                    <ContentControl s:View.Model="{Binding N4}"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                        <Button Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" 
+                        Command="{x:Static md:Transitioner.MovePreviousCommand}"
+                        VerticalAlignment="Center"
+                        Margin="16">
+                            <md:PackIcon Kind="StepBackward" />
+                        </Button>
+                        <Button Style="{DynamicResource MaterialDesignFloatingActionAccentButton}"                     
+                        Command="{x:Static md:Transitioner.MoveNextCommand}"                    
+                        Margin="16">
+                            <md:PackIcon Kind="StepForward" />
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </md:TransitionerSlide>
+            <md:TransitionerSlide  OpeningEffect="{md:TransitionEffect Kind=ExpandIn}">
+                <Grid>
+                    <ContentControl s:View.Model="{Binding N5}"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                        <Button Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" 
+                        Command="{x:Static md:Transitioner.MovePreviousCommand}"
+                        VerticalAlignment="Center"
+                        Margin="16">
+                            <md:PackIcon Kind="StepBackward" />
+                        </Button>
+                        <Button Style="{DynamicResource MaterialDesignFloatingActionAccentButton}"                     
+                        Command="{x:Static md:Transitioner.MoveNextCommand}"                    
+                        Margin="16">
+                            <md:PackIcon Kind="StepForward" />
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </md:TransitionerSlide>
+            <md:TransitionerSlide OpeningEffect="{md:TransitionEffect Kind=ExpandIn}">
+                <Grid>
+                    <ContentControl s:View.Model="{Binding N6}"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                        <Button Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" 
+                        Command="{x:Static md:Transitioner.MovePreviousCommand}"
+                        VerticalAlignment="Center"
+                        Margin="16">
+                            <md:PackIcon Kind="StepBackward" />
+                        </Button>
+                        <Button Style="{DynamicResource MaterialDesignFloatingActionAccentButton}"                     
+                        Command="{x:Static md:Transitioner.MoveNextCommand}"                    
+                        Margin="16">
+                            <md:PackIcon Kind="StepForward" />
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </md:TransitionerSlide>
+            <md:TransitionerSlide OpeningEffect="{md:TransitionEffect Kind=ExpandIn}">
+                <Grid>
+                    <ContentControl s:View.Model="{Binding N7}"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                        <Button Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" 
+                        Command="{x:Static md:Transitioner.MovePreviousCommand}"
+                        VerticalAlignment="Center"
+                        Margin="16">
+                            <md:PackIcon Kind="StepBackward" />
+                        </Button>
+                        <Button Style="{DynamicResource MaterialDesignFloatingActionAccentButton}"                     
+                        Command="{x:Static md:Transitioner.MoveNextCommand}"                    
+                        Margin="16">
+                            <md:PackIcon Kind="StepForward" />
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </md:TransitionerSlide>
+            <md:TransitionerSlide OpeningEffect="{md:TransitionEffect Kind=ExpandIn}">
+                <Grid>
+                    <ContentControl s:View.Model="{Binding N8}"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                        <Button Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" 
+                        Command="{x:Static md:Transitioner.MovePreviousCommand}"
+                        VerticalAlignment="Center"
+                        Margin="16">
+                            <md:PackIcon Kind="StepBackward" />
+                        </Button>
+                        <Button Style="{DynamicResource MaterialDesignFloatingActionAccentButton}"                     
+                        Command="{x:Static md:Transitioner.MoveNextCommand}"                    
+                        Margin="16">
+                            <md:PackIcon Kind="StepForward" />
+                        </Button>
+                    </StackPanel>
+                </Grid>
+                            
+            </md:TransitionerSlide>
+            <md:TransitionerSlide OpeningEffect="{md:TransitionEffect Kind=ExpandIn}">
+                <Grid>
+                    <ContentControl s:View.Model="{Binding N9}"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                        <Button Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" 
+                        Command="{x:Static md:Transitioner.MovePreviousCommand}"
+                        VerticalAlignment="Center"
+                        Margin="16">
+                            <md:PackIcon Kind="StepBackward" />
+                        </Button>
+                        <Button Style="{DynamicResource MaterialDesignFloatingActionAccentButton}"                     
+                        Command="{x:Static md:Transitioner.MoveNextCommand}"                    
+                        Margin="16">
+                            <md:PackIcon Kind="StepForward" />
+                        </Button>
+                    </StackPanel>
+                </Grid>
 
-                            </DockPanel>
-                        </Grid>
-                        <Grid Grid.Column="1" Grid.Row="1">
-                            <DockPanel VerticalAlignment="Stretch">
-                                <TextBlock Background="DarkGray" Foreground="White"  HorizontalAlignment="Stretch" DockPanel.Dock="Top" FontWeight="Bold" FontSize="14">Hi-pot</TextBlock>
-                                <Line StrokeThickness="1" Fill="DarkGray" DockPanel.Dock="Top" HorizontalAlignment="Stretch" Stroke="Gray"></Line>
-                                <StackPanel Margin="5">
-                                    <DockPanel>
-                                        <TextBlock DockPanel.Dock="Left">Top</TextBlock>
-                                        <TextBlock HorizontalAlignment="Center">0</TextBlock>
-                                    </DockPanel>
-                                    <DockPanel>
-                                        <TextBlock DockPanel.Dock="Left">Bot.</TextBlock>
-                                        <TextBlock HorizontalAlignment="Center">0</TextBlock>
-                                    </DockPanel>
-                                    <DockPanel>
-                                        <TextBlock DockPanel.Dock="Left">Val.</TextBlock>
-                                        <TextBlock HorizontalAlignment="Center">0</TextBlock>
-                                    </DockPanel>
-                                    <md:PackIcon Height="50" Width="50" HorizontalAlignment="Center" Foreground="Green" Kind="Smiley"/>
-                                </StackPanel>
+            </md:TransitionerSlide>
+            <md:TransitionerSlide OpeningEffect="{md:TransitionEffect Kind=ExpandIn}">
+                <Grid>
+                    <ContentControl s:View.Model="{Binding N10}"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                        <Button Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" 
+                        Command="{x:Static md:Transitioner.MovePreviousCommand}"
+                        VerticalAlignment="Center"
+                        Margin="16">
+                            <md:PackIcon Kind="StepBackward" />
+                        </Button>
+                        <Button Style="{DynamicResource MaterialDesignFloatingActionAccentButton}"                     
+                        Command="{x:Static md:Transitioner.MoveNextCommand}"                    
+                        Margin="16">
+                            <md:PackIcon Kind="StepForward" />
+                        </Button>
+                    </StackPanel>
+                </Grid>
 
-                            </DockPanel>
-                        </Grid>
-                    </Grid>
-                </md:Card>
-            </Grid>
-            <Grid Grid.Row="0" Grid.Column="2">
-                <md:Card Background="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20" Grid.RowSpan="2" Grid.ColumnSpan="2">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="78*"/>
-                            <ColumnDefinition Width="47*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Grid Background="DarkGray">
-                            <lvc:AngularGauge Value="{Binding Value}" FromValue="50" ToValue="250" 
-                          LabelsStep="50" TicksStep="25" Wedge="200" 
-                          TicksForeground="White" Foreground="White" 
-                          FontWeight="Bold" FontSize="16"
-                          SectionsInnerRadius=".5"  >
-                                <lvc:AngularGauge.Sections>
-                                    <lvc:AngularSection FromValue="50" ToValue="200" Fill="#F8A725"/>
-                                    <lvc:AngularSection FromValue="200" ToValue="250" Fill="#FF3939"/>
-                                </lvc:AngularGauge.Sections>
-                            </lvc:AngularGauge>
-                        </Grid>
-                        <Grid Grid.Row="1" Background="DarkGray">
-                            <lvc:AngularGauge Grid.Row="1"  Value="{Binding Value}" FromValue="50" ToValue="250" 
-                          LabelsStep="50" TicksStep="25" Wedge="200"
-                          TicksForeground="White" Foreground="White" 
-                          FontWeight="Bold" FontSize="16"
-                          SectionsInnerRadius=".5">
-                                <lvc:AngularGauge.Sections>
-                                    <lvc:AngularSection FromValue="50" ToValue="200" Fill="#F8A725"/>
-                                    <lvc:AngularSection FromValue="200" ToValue="250" Fill="#FF3939"/>
-                                </lvc:AngularGauge.Sections>
-                            </lvc:AngularGauge>
-                        </Grid>
-                        <Grid Grid.Column="1" Grid.Row="0">
-                            <DockPanel VerticalAlignment="Stretch">
-                                <TextBlock Background="DarkGray" Foreground="White"  HorizontalAlignment="Stretch" DockPanel.Dock="Top" FontWeight="Bold" FontSize="14">Resistance</TextBlock>
-                                <Line StrokeThickness="1" Fill="DarkGray" DockPanel.Dock="Top" HorizontalAlignment="Stretch" Stroke="Gray"></Line>
-                                <StackPanel Margin="5">
-                                    <DockPanel>
-                                        <TextBlock DockPanel.Dock="Left">Top</TextBlock>
-                                        <TextBlock HorizontalAlignment="Center">0</TextBlock>
-                                    </DockPanel>
-                                    <DockPanel>
-                                        <TextBlock DockPanel.Dock="Left">Bot.</TextBlock>
-                                        <TextBlock HorizontalAlignment="Center">0</TextBlock>
-                                    </DockPanel>
-                                    <DockPanel>
-                                        <TextBlock DockPanel.Dock="Left">Val.</TextBlock>
-                                        <TextBlock HorizontalAlignment="Center">0</TextBlock>
-                                    </DockPanel>
-                                    <md:PackIcon Height="50" Width="50" HorizontalAlignment="Center" Foreground="Green" Kind="Smiley"/>
-                                </StackPanel>
+            </md:TransitionerSlide>
+            <md:TransitionerSlide OpeningEffect="{md:TransitionEffect Kind=ExpandIn}">
+                <Grid>
+                    <ContentControl s:View.Model="{Binding N11}"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                        <Button Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" 
+                        Command="{x:Static md:Transitioner.MovePreviousCommand}"
+                        VerticalAlignment="Center"
+                        Margin="16">
+                            <md:PackIcon Kind="StepBackward" />
+                        </Button>
+                        <Button Style="{DynamicResource MaterialDesignFloatingActionAccentButton}"                     
+                        Command="{x:Static md:Transitioner.MoveNextCommand}"                    
+                        Margin="16">
+                            <md:PackIcon Kind="StepForward" />
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </md:TransitionerSlide>
+            <md:TransitionerSlide OpeningEffect="{md:TransitionEffect Kind=ExpandIn}">
+                <Grid>
+                    <ContentControl s:View.Model="{Binding N12}"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                        <Button Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" 
+                        Command="{x:Static md:Transitioner.MovePreviousCommand}"
+                        VerticalAlignment="Center"
+                        Margin="16">
+                            <md:PackIcon Kind="StepBackward" />
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </md:TransitionerSlide>
 
-                            </DockPanel>
-                        </Grid>
-                        <Grid Grid.Column="1" Grid.Row="1">
-                            <DockPanel VerticalAlignment="Stretch">
-                                <TextBlock Background="DarkGray" Foreground="White"  HorizontalAlignment="Stretch" DockPanel.Dock="Top" FontWeight="Bold" FontSize="14">Hi-pot</TextBlock>
-                                <Line StrokeThickness="1" Fill="DarkGray" DockPanel.Dock="Top" HorizontalAlignment="Stretch" Stroke="Gray"></Line>
-                                <StackPanel Margin="5">
-                                    <DockPanel>
-                                        <TextBlock DockPanel.Dock="Left">Top</TextBlock>
-                                        <TextBlock HorizontalAlignment="Center">0</TextBlock>
-                                    </DockPanel>
-                                    <DockPanel>
-                                        <TextBlock DockPanel.Dock="Left">Bot.</TextBlock>
-                                        <TextBlock HorizontalAlignment="Center">0</TextBlock>
-                                    </DockPanel>
-                                    <DockPanel>
-                                        <TextBlock DockPanel.Dock="Left">Val.</TextBlock>
-                                        <TextBlock HorizontalAlignment="Center">0</TextBlock>
-                                    </DockPanel>
-                                    <md:PackIcon Height="50" Width="50" HorizontalAlignment="Center" Foreground="Green" Kind="Smiley"/>
-                                </StackPanel>
+        </md:Transitioner>
 
-                            </DockPanel>
-                        </Grid>
-                    </Grid>
-                </md:Card>
-            </Grid>
-            <Grid Grid.Row="0" Grid.Column="3">
-                <md:Card Background="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20" Grid.RowSpan="2" Grid.ColumnSpan="2">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="78*"/>
-                            <ColumnDefinition Width="47*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Grid Background="DarkGray">
-                            <lvc:AngularGauge Value="{Binding Value}" FromValue="50" ToValue="250" 
-                          LabelsStep="50" TicksStep="25" Wedge="200" 
-                          TicksForeground="White" Foreground="White" 
-                          FontWeight="Bold" FontSize="16"
-                          SectionsInnerRadius=".5"  >
-                                <lvc:AngularGauge.Sections>
-                                    <lvc:AngularSection FromValue="50" ToValue="200" Fill="#F8A725"/>
-                                    <lvc:AngularSection FromValue="200" ToValue="250" Fill="#FF3939"/>
-                                </lvc:AngularGauge.Sections>
-                            </lvc:AngularGauge>
-                        </Grid>
-                        <Grid Grid.Row="1" Background="DarkGray">
-                            <lvc:AngularGauge Grid.Row="1"  Value="{Binding Value}" FromValue="50" ToValue="250" 
-                          LabelsStep="50" TicksStep="25" Wedge="200"
-                          TicksForeground="White" Foreground="White" 
-                          FontWeight="Bold" FontSize="16"
-                          SectionsInnerRadius=".5">
-                                <lvc:AngularGauge.Sections>
-                                    <lvc:AngularSection FromValue="50" ToValue="200" Fill="#F8A725"/>
-                                    <lvc:AngularSection FromValue="200" ToValue="250" Fill="#FF3939"/>
-                                </lvc:AngularGauge.Sections>
-                            </lvc:AngularGauge>
-                        </Grid>
-                        <Grid Grid.Column="1" Grid.Row="0">
-                            <DockPanel VerticalAlignment="Stretch">
-                                <TextBlock Background="DarkGray" Foreground="White"  HorizontalAlignment="Stretch" DockPanel.Dock="Top" FontWeight="Bold" FontSize="14">Resistance</TextBlock>
-                                <Line StrokeThickness="1" Fill="DarkGray" DockPanel.Dock="Top" HorizontalAlignment="Stretch" Stroke="Gray"></Line>
-                                <StackPanel Margin="5">
-                                    <DockPanel>
-                                        <TextBlock DockPanel.Dock="Left">Top</TextBlock>
-                                        <TextBlock HorizontalAlignment="Center">0</TextBlock>
-                                    </DockPanel>
-                                    <DockPanel>
-                                        <TextBlock DockPanel.Dock="Left">Bot.</TextBlock>
-                                        <TextBlock HorizontalAlignment="Center">0</TextBlock>
-                                    </DockPanel>
-                                    <DockPanel>
-                                        <TextBlock DockPanel.Dock="Left">Val.</TextBlock>
-                                        <TextBlock HorizontalAlignment="Center">0</TextBlock>
-                                    </DockPanel>
-                                    <md:PackIcon Height="50" Width="50" HorizontalAlignment="Center" Foreground="Green" Kind="Smiley"/>
-                                </StackPanel>
 
-                            </DockPanel>
-                        </Grid>
-                        <Grid Grid.Column="1" Grid.Row="1">
-                            <DockPanel VerticalAlignment="Stretch">
-                                <TextBlock Background="DarkGray" Foreground="White"  HorizontalAlignment="Stretch" DockPanel.Dock="Top" FontWeight="Bold" FontSize="14">Hi-pot</TextBlock>
-                                <Line StrokeThickness="1" Fill="DarkGray" DockPanel.Dock="Top" HorizontalAlignment="Stretch" Stroke="Gray"></Line>
-                                <StackPanel Margin="5">
-                                    <DockPanel>
-                                        <TextBlock DockPanel.Dock="Left">Top</TextBlock>
-                                        <TextBlock HorizontalAlignment="Center">0</TextBlock>
-                                    </DockPanel>
-                                    <DockPanel>
-                                        <TextBlock DockPanel.Dock="Left">Bot.</TextBlock>
-                                        <TextBlock HorizontalAlignment="Center">0</TextBlock>
-                                    </DockPanel>
-                                    <DockPanel>
-                                        <TextBlock DockPanel.Dock="Left">Val.</TextBlock>
-                                        <TextBlock HorizontalAlignment="Center">0</TextBlock>
-                                    </DockPanel>
-                                    <md:PackIcon Height="50" Width="50" HorizontalAlignment="Center" Foreground="Green" Kind="Smiley"/>
-                                </StackPanel>
+    </Grid>
+      
 
-                            </DockPanel>
-                        </Grid>
-                    </Grid>
-                </md:Card>
-            </Grid>
-            <Button x:Name="button" Content="Button" Command="{ s:Action Method=Send}" HorizontalAlignment="Left" Margin="98,15,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75"/>
-
-        </Grid>
-    </md:TransitioningContent>
 </UserControl>

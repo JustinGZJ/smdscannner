@@ -73,7 +73,7 @@ namespace DAQ.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("192.168.0.11")]
+        [global::System.Configuration.DefaultSettingValueAttribute("127.0.0.1")]
         public string CAMERA_IP {
             get {
                 return ((string)(this["CAMERA_IP"]));
