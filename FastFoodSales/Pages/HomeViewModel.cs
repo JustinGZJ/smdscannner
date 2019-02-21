@@ -10,14 +10,10 @@ using DAQ.Pages;
 
 namespace DAQ
 {
-    public class HomeViewModel:Screen
+    public class HomeViewModel:Conductor<MaterialViewModel>.Collection.AllActive
     {
         [Inject]
         IEventAggregator EventAggregator { get; set; }
-        [Inject]
-        public PortAService PortAService{get;set;}
-        [Inject]
-        public PortBService PortBService { get; set; }
         public int SelectedIndex { get; set; }
         public HomeViewModel()
         {
@@ -37,6 +33,20 @@ namespace DAQ
                 }
             });
         }
+
+        protected override void OnActivate()
+        {
+
+            base.OnActivate();
+        }
+        protected override void OnInitialActivate()
+        {
+
+            base.OnInitialActivate();
+        }
+ 
+
+
         [Inject("N1")]
         public MaterialViewModel N1 { get; set; }
         [Inject("N2")]

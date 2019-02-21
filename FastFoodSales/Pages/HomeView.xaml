@@ -8,6 +8,7 @@
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d" 
              xmlns:s="https://github.com/canton7/Stylet"
+             xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
              d:DesignHeight="600" d:DesignWidth="1000"
               d:DataContext="{d:DesignInstance  local:HomeViewModel}"
              >
@@ -231,7 +232,6 @@
             </md:TransitionerSlide>
 
         </md:Transitioner>
-
 
     </Grid>
       

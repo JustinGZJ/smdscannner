@@ -46,10 +46,17 @@ namespace DAQ
         {        
                 Dispatcher.BeginInvoke(new Action(() =>
                 {
-                    if (e.LeftButton == MouseButtonState.Pressed)
+                    try
+                    {
+                        if (e.LeftButton == MouseButtonState.Pressed)
+                        {
+                            DragMove();
+                        }
+                    }
+                    catch (Exception)
                     {
 
-                        DragMove();
+                       // throw;
                     }
                 }
                 ));
