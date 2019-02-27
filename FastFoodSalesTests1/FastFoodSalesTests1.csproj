@@ -63,9 +63,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FastFoodSales\FastFoodSales.csproj">
+    <ProjectReference Include="..\FastFoodSales\Scanner.csproj">
       <Project>{21EA4D72-3CD0-4FDE-82DE-6C05360B8A8E}</Project>
-      <Name>FastFoodSales</Name>
+      <Name>Scanner</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

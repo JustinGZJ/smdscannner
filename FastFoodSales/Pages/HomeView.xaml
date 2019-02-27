@@ -12,228 +12,42 @@
              d:DesignHeight="600" d:DesignWidth="1000"
               d:DataContext="{d:DesignInstance  local:HomeViewModel}"
              >
-    <Grid>
-        <md:Transitioner SelectedIndex="{Binding SelectedIndex}" AutoApplyTransitionOrigins="True">
-            <md:Transitioner.InputBindings>
-                <KeyBinding
-                  Key="Left"
-                  Command="{x:Static md:Transitioner.MovePreviousCommand}" />
-                <KeyBinding
-                  Key="Right"
-                  Command="{x:Static md:Transitioner.MoveNextCommand}" />
-            </md:Transitioner.InputBindings>
-            <md:TransitionerSlide OpeningEffect="{md:TransitionEffect  Kind=SlideInFromRight}">
+    <md:TransitioningContent  OpeningEffect="{md:TransitionEffect Kind=SlideInFromRight, Duration=00:00:0.5}">
+        <DockPanel>
+            <md:Card HorizontalAlignment="Left" Margin="30 10 10 10" Background="DarkSlateBlue"    md:ShadowAssist.ShadowDepth="Depth1" Width="900" DockPanel.Dock="Top">
                 <Grid>
-                    <ContentControl s:View.Model="{Binding N1}"/>
-                    <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal">
-                        <Button Style="{DynamicResource MaterialDesignFloatingActionAccentButton}"                     
-                        Command="{x:Static md:Transitioner.MoveNextCommand}"                    
-                        Margin="16">
-                            <md:PackIcon Kind="StepForward" />
-                        </Button>
-                    </StackPanel>
-                </Grid>
-            </md:TransitionerSlide>
-            <md:TransitionerSlide OpeningEffect="{md:TransitionEffect Kind=ExpandIn}">
-                <Grid>
-                    <ContentControl s:View.Model="{Binding N2}"/>
-                    <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal">
-                        <Button Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" 
-                        Command="{x:Static md:Transitioner.MovePreviousCommand}"
-                        VerticalAlignment="Center"
-                        Margin="16">
-                            <md:PackIcon Kind="StepBackward" />
-                        </Button>
-                        <Button Style="{DynamicResource MaterialDesignFloatingActionAccentButton}"                     
-                        Command="{x:Static md:Transitioner.MoveNextCommand}"                    
-                        Margin="16">
-                            <md:PackIcon Kind="StepForward" />
-                        </Button>
-                    </StackPanel>
-                </Grid>
-            </md:TransitionerSlide>
-            <md:TransitionerSlide OpeningEffect="{md:TransitionEffect Kind=ExpandIn}">
-                <Grid>
-                    <ContentControl s:View.Model="{Binding N3}"/>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                        <Button Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" 
-                        Command="{x:Static md:Transitioner.MovePreviousCommand}"
-                        VerticalAlignment="Center"
-                        Margin="16">
-                            <md:PackIcon Kind="StepBackward" />
-                        </Button>
-                        <Button Style="{DynamicResource MaterialDesignFloatingActionAccentButton}"                     
-                        Command="{x:Static md:Transitioner.MoveNextCommand}"                    
-                        Margin="16">
-                            <md:PackIcon Kind="StepForward" />
-                        </Button>
-                    </StackPanel>
-                </Grid>
-            </md:TransitionerSlide>
-            <md:TransitionerSlide OpeningEffect="{md:TransitionEffect Kind=ExpandIn}">
-                <Grid>
-                    <ContentControl s:View.Model="{Binding N4}"/>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                        <Button Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" 
-                        Command="{x:Static md:Transitioner.MovePreviousCommand}"
-                        VerticalAlignment="Center"
-                        Margin="16">
-                            <md:PackIcon Kind="StepBackward" />
-                        </Button>
-                        <Button Style="{DynamicResource MaterialDesignFloatingActionAccentButton}"                     
-                        Command="{x:Static md:Transitioner.MoveNextCommand}"                    
-                        Margin="16">
-                            <md:PackIcon Kind="StepForward" />
-                        </Button>
-                    </StackPanel>
-                </Grid>
-            </md:TransitionerSlide>
-            <md:TransitionerSlide  OpeningEffect="{md:TransitionEffect Kind=ExpandIn}">
-                <Grid>
-                    <ContentControl s:View.Model="{Binding N5}"/>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                        <Button Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" 
-                        Command="{x:Static md:Transitioner.MovePreviousCommand}"
-                        VerticalAlignment="Center"
-                        Margin="16">
-                            <md:PackIcon Kind="StepBackward" />
-                        </Button>
-                        <Button Style="{DynamicResource MaterialDesignFloatingActionAccentButton}"                     
-                        Command="{x:Static md:Transitioner.MoveNextCommand}"                    
-                        Margin="16">
-                            <md:PackIcon Kind="StepForward" />
-                        </Button>
-                    </StackPanel>
-                </Grid>
-            </md:TransitionerSlide>
-            <md:TransitionerSlide OpeningEffect="{md:TransitionEffect Kind=ExpandIn}">
-                <Grid>
-                    <ContentControl s:View.Model="{Binding N6}"/>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                        <Button Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" 
-                        Command="{x:Static md:Transitioner.MovePreviousCommand}"
-                        VerticalAlignment="Center"
-                        Margin="16">
-                            <md:PackIcon Kind="StepBackward" />
-                        </Button>
-                        <Button Style="{DynamicResource MaterialDesignFloatingActionAccentButton}"                     
-                        Command="{x:Static md:Transitioner.MoveNextCommand}"                    
-                        Margin="16">
-                            <md:PackIcon Kind="StepForward" />
-                        </Button>
-                    </StackPanel>
-                </Grid>
-            </md:TransitionerSlide>
-            <md:TransitionerSlide OpeningEffect="{md:TransitionEffect Kind=ExpandIn}">
-                <Grid>
-                    <ContentControl s:View.Model="{Binding N7}"/>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                        <Button Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" 
-                        Command="{x:Static md:Transitioner.MovePreviousCommand}"
-                        VerticalAlignment="Center"
-                        Margin="16">
-                            <md:PackIcon Kind="StepBackward" />
-                        </Button>
-                        <Button Style="{DynamicResource MaterialDesignFloatingActionAccentButton}"                     
-                        Command="{x:Static md:Transitioner.MoveNextCommand}"                    
-                        Margin="16">
-                            <md:PackIcon Kind="StepForward" />
-                        </Button>
-                    </StackPanel>
-                </Grid>
-            </md:TransitionerSlide>
-            <md:TransitionerSlide OpeningEffect="{md:TransitionEffect Kind=ExpandIn}">
-                <Grid>
-                    <ContentControl s:View.Model="{Binding N8}"/>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                        <Button Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" 
-                        Command="{x:Static md:Transitioner.MovePreviousCommand}"
-                        VerticalAlignment="Center"
-                        Margin="16">
-                            <md:PackIcon Kind="StepBackward" />
-                        </Button>
-                        <Button Style="{DynamicResource MaterialDesignFloatingActionAccentButton}"                     
-                        Command="{x:Static md:Transitioner.MoveNextCommand}"                    
-                        Margin="16">
-                            <md:PackIcon Kind="StepForward" />
-                        </Button>
-                    </StackPanel>
-                </Grid>
-                            
-            </md:TransitionerSlide>
-            <md:TransitionerSlide OpeningEffect="{md:TransitionEffect Kind=ExpandIn}">
-                <Grid>
-                    <ContentControl s:View.Model="{Binding N9}"/>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                        <Button Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" 
-                        Command="{x:Static md:Transitioner.MovePreviousCommand}"
-                        VerticalAlignment="Center"
-                        Margin="16">
-                            <md:PackIcon Kind="StepBackward" />
-                        </Button>
-                        <Button Style="{DynamicResource MaterialDesignFloatingActionAccentButton}"                     
-                        Command="{x:Static md:Transitioner.MoveNextCommand}"                    
-                        Margin="16">
-                            <md:PackIcon Kind="StepForward" />
-                        </Button>
-                    </StackPanel>
-                </Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
 
-            </md:TransitionerSlide>
-            <md:TransitionerSlide OpeningEffect="{md:TransitionEffect Kind=ExpandIn}">
-                <Grid>
-                    <ContentControl s:View.Model="{Binding N10}"/>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                        <Button Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" 
-                        Command="{x:Static md:Transitioner.MovePreviousCommand}"
-                        VerticalAlignment="Center"
-                        Margin="16">
-                            <md:PackIcon Kind="StepBackward" />
-                        </Button>
-                        <Button Style="{DynamicResource MaterialDesignFloatingActionAccentButton}"                     
-                        Command="{x:Static md:Transitioner.MoveNextCommand}"                    
-                        Margin="16">
-                            <md:PackIcon Kind="StepForward" />
-                        </Button>
-                    </StackPanel>
+                    <UniformGrid  Grid.Row="1" Columns="4" >
+                        <TextBox Foreground="White" Text="{Binding Shift}" MaxLength="100" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10" md:HintAssist.Hint="Shift"></TextBox>
+                        <TextBox Foreground="White" Text="{Binding ShiftName}" MaxLength="100" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10" md:HintAssist.Hint="Shift Name"></TextBox>
+                        <TextBox Foreground="White" Text="{Binding LineNo}" MaxLength="100" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10" md:HintAssist.Hint="Line No."></TextBox>
+                        <TextBox Foreground="White" Text="{Binding LotNo}" MaxLength="100" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10" md:HintAssist.Hint="Wire lot No."></TextBox>
+                    </UniformGrid>
                 </Grid>
-
-            </md:TransitionerSlide>
-            <md:TransitionerSlide OpeningEffect="{md:TransitionEffect Kind=ExpandIn}">
-                <Grid>
-                    <ContentControl s:View.Model="{Binding N11}"/>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                        <Button Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" 
-                        Command="{x:Static md:Transitioner.MovePreviousCommand}"
-                        VerticalAlignment="Center"
-                        Margin="16">
-                            <md:PackIcon Kind="StepBackward" />
-                        </Button>
-                        <Button Style="{DynamicResource MaterialDesignFloatingActionAccentButton}"                     
-                        Command="{x:Static md:Transitioner.MoveNextCommand}"                    
-                        Margin="16">
-                            <md:PackIcon Kind="StepForward" />
-                        </Button>
-                    </StackPanel>
-                </Grid>
-            </md:TransitionerSlide>
-            <md:TransitionerSlide OpeningEffect="{md:TransitionEffect Kind=ExpandIn}">
-                <Grid>
-                    <ContentControl s:View.Model="{Binding N12}"/>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                        <Button Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" 
-                        Command="{x:Static md:Transitioner.MovePreviousCommand}"
-                        VerticalAlignment="Center"
-                        Margin="16">
-                            <md:PackIcon Kind="StepBackward" />
-                        </Button>
-                    </StackPanel>
-                </Grid>
-            </md:TransitionerSlide>
-
-        </md:Transitioner>
-
-    </Grid>
-      
+            </md:Card>
+            <ScrollViewer>
+                <ItemsControl>
+                    <ItemsControl.Items>
+                        <ContentControl Margin="10"  s:View.Model="{Binding N1}"/>
+                        <ContentControl Margin="10"  s:View.Model="{Binding N2}"/>
+                        <ContentControl  Margin="10" s:View.Model="{Binding N3}"/>
+                        <ContentControl  Margin="10" s:View.Model="{Binding N4}"/>
+                        <ContentControl Margin="10"  s:View.Model="{Binding N5}"/>
+                        <ContentControl Margin="10" s:View.Model="{Binding N6}"/>
+                        <ContentControl Margin="10" s:View.Model="{Binding N7}"/>
+                        <ContentControl Margin="10" s:View.Model="{Binding N8}"/>
+                        <ContentControl Margin="10" s:View.Model="{Binding N9}"/>
+                        <ContentControl Margin="10" s:View.Model="{Binding N10}"/>
+                        <ContentControl Margin="10" s:View.Model="{Binding N11}"/>
+                        <ContentControl Margin="10" s:View.Model="{Binding N12}"/>
+                    </ItemsControl.Items>
+                </ItemsControl>
+            </ScrollViewer>
+        </DockPanel>
+    </md:TransitioningContent>
 
 </UserControl>

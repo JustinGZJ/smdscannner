@@ -12,7 +12,7 @@ namespace DAQ.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.9.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.0.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -25,73 +25,49 @@ namespace DAQ.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("COM1")]
-        public string PORT_A {
+        [global::System.Configuration.DefaultSettingValueAttribute("S")]
+        public string Shift {
             get {
-                return ((string)(this["PORT_A"]));
+                return ((string)(this["Shift"]));
             }
             set {
-                this["PORT_A"] = value;
+                this["Shift"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("COM2")]
-        public string PORT_B {
+        [global::System.Configuration.DefaultSettingValueAttribute("102B")]
+        public string ShiftName {
             get {
-                return ((string)(this["PORT_B"]));
+                return ((string)(this["ShiftName"]));
             }
             set {
-                this["PORT_B"] = value;
+                this["ShiftName"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("192.168.0.10")]
-        public string PLC_IP {
+        [global::System.Configuration.DefaultSettingValueAttribute("111231")]
+        public string LotNo {
             get {
-                return ((string)(this["PLC_IP"]));
+                return ((string)(this["LotNo"]));
             }
             set {
-                this["PLC_IP"] = value;
+                this["LotNo"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("9600")]
-        public int PLC_PORT {
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public string LineNo {
             get {
-                return ((int)(this["PLC_PORT"]));
+                return ((string)(this["LineNo"]));
             }
             set {
-                this["PLC_PORT"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("127.0.0.1")]
-        public string CAMERA_IP {
-            get {
-                return ((string)(this["CAMERA_IP"]));
-            }
-            set {
-                this["CAMERA_IP"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("9600")]
-        public int CAMERA_PORT {
-            get {
-                return ((int)(this["CAMERA_PORT"]));
-            }
-            set {
-                this["CAMERA_PORT"] = value;
+                this["LineNo"] = value;
             }
         }
     }

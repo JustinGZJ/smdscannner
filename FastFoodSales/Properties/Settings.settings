@@ -2,23 +2,17 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DAQ.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="PORT_A" Type="System.String" Scope="User">
-      <Value Profile="(Default)">COM1</Value>
+    <Setting Name="Shift" Type="System.String" Scope="User">
+      <Value Profile="(Default)">S</Value>
     </Setting>
-    <Setting Name="PORT_B" Type="System.String" Scope="User">
-      <Value Profile="(Default)">COM2</Value>
+    <Setting Name="ShiftName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">102B</Value>
     </Setting>
-    <Setting Name="PLC_IP" Type="System.String" Scope="User">
-      <Value Profile="(Default)">192.168.0.10</Value>
+    <Setting Name="LotNo" Type="System.String" Scope="User">
+      <Value Profile="(Default)">111231</Value>
     </Setting>
-    <Setting Name="PLC_PORT" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">9600</Value>
-    </Setting>
-    <Setting Name="CAMERA_IP" Type="System.String" Scope="User">
-      <Value Profile="(Default)">127.0.0.1</Value>
-    </Setting>
-    <Setting Name="CAMERA_PORT" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">9600</Value>
+    <Setting Name="LineNo" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1</Value>
     </Setting>
   </Settings>
 </SettingsFile>

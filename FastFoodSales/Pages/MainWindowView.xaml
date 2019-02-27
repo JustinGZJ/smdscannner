@@ -10,7 +10,8 @@
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal" 
-        TextOptions.TextRenderingMode="Auto"        
+        TextOptions.TextRenderingMode="Auto"   
+     WindowState="Maximized"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="DAQ.MainWindowView"
@@ -79,7 +80,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <Grid  x:Name="G_MSG" Width="250" MinHeight="60"  Grid.Column="1" >
+            <Grid  x:Name="G_MSG" Width="0" MinHeight="60"  Grid.Column="1" >
                 <DockPanel LastChildFill="True">
                     <materialDesign:ColorZone DockPanel.Dock="Top" 
                            Background="{x:Null}">

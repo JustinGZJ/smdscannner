@@ -10,16 +10,54 @@ using DAQ.Pages;
 
 namespace DAQ
 {
-    public class HomeViewModel:Conductor<MaterialViewModel>.Collection.AllActive
+    public class HomeViewModel : Conductor<MaterialViewModel>.Collection.AllActive
     {
+        Properties.Settings settings = Properties.Settings.Default;
+
         [Inject]
         IEventAggregator EventAggregator { get; set; }
         public int SelectedIndex { get; set; }
+
+        public string ShiftName
+        {
+            get => settings.ShiftName; set
+            {
+                settings.ShiftName = value;
+                settings.Save();
+            }
+        }
+        public string Shift
+        {
+            get => settings.Shift; set
+            {
+                settings.Shift = value;
+                settings.Save();
+            }
+        }
+
+        public string LineNo
+        {
+            get => settings.LineNo; set
+            {
+                settings.LineNo = value;
+                settings.Save();
+
+            }
+        }
+
+        public string LotNo
+        {
+            get => settings.LotNo; set
+            {
+                settings.LotNo = value;
+                settings.Save();
+            }
+        }
         public HomeViewModel()
         {
             Task.Run(() =>
             {
-                while(true)
+                while (true)
                 {
                     if (SelectedIndex < 11)
                     {
@@ -44,7 +82,7 @@ namespace DAQ
 
             base.OnInitialActivate();
         }
- 
+
 
 
         [Inject("N1")]

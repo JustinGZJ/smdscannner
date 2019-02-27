@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.106
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28606.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastFoodSales", "FastFoodSales\FastFoodSales.csproj", "{21EA4D72-3CD0-4FDE-82DE-6C05360B8A8E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scanner", "FastFoodSales\Scanner.csproj", "{21EA4D72-3CD0-4FDE-82DE-6C05360B8A8E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastFoodSalesTests", "FastFoodSalesTests\FastFoodSalesTests.csproj", "{53D38B60-9B97-42DF-8FD7-DCF85529C35A}"
 EndProject

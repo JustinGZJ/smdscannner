@@ -7,76 +7,53 @@
             xmlns:s="https://github.com/canton7/Stylet"
              mc:Ignorable="d" 
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
-             d:DesignHeight="800" d:DesignWidth="1000"
+        
              d:DataContext="{d:DesignInstance local:MaterialViewModel }"
              Foreground="Gray">
-    <Grid Margin="0,0,0,0">
-
-        <StackPanel>
-            <Border BorderThickness="0 0 0 1" BorderBrush="Gray" Height="50" Margin=" 0,0,0,20"       
-                >
-                <TextBlock VerticalAlignment="Center" FontSize="30" Text="{Binding DisplayName}"></TextBlock>
-            </Border>
-            <StackPanel Orientation="Horizontal" Margin="0 0 10 20">
-                <md:Card md:ShadowAssist.ShadowDepth="Depth1" >
-                    <Grid MinWidth="260" MinHeight="200">
-                        <StackPanel Margin="20">
-                            <TextBlock Margin="0 0 0 10" Text="Production info." FontSize="16"/>
-                            <StackPanel Orientation="Horizontal">
-                                <md:PackIcon Kind="User" Height="25" Width="25" VerticalAlignment="Bottom"/>
-                                <TextBox Text="{Binding Info.Name}" MinWidth="150"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" md:HintAssist.Hint="User"/>
+    <Grid Margin="0,0,0,0" >
+        <StackPanel Orientation="Horizontal">
+            <md:Card  Margin="20 0 0 0" md:ShadowAssist.ShadowDepth="Depth1" Width="900"  >
+                <DockPanel>
+                    <Border DockPanel.Dock="Top" BorderThickness="0 0 0 0" BorderBrush="Gray" Margin="30,10">
+                        <Grid>
+                            <TextBlock VerticalAlignment="Center" FontSize="20" Text="{Binding DisplayName}"></TextBlock>
+                            <StackPanel Margin="20,0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                                <TextBlock  >scan success rate:</TextBlock>
+                                <TextBlock  Text="{Binding ScanRate}"></TextBlock>
                             </StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <md:PackIcon Kind="UserGroup" Height="25" Width="25" VerticalAlignment="Bottom"/>
-                                <TextBox Text="{Binding Info.Shift}" MinWidth="150"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" md:HintAssist.Hint="Shift"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <md:PackIcon Kind="WalletProduct" Height="25" Width="25" VerticalAlignment="Bottom"/>
-                                <TextBox Text="{Binding Info.Product}" MinWidth="150"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" md:HintAssist.Hint="Product"/>
-                            </StackPanel>
-                        </StackPanel>
-                    </Grid>
-                </md:Card>
-                <md:Card Margin="20 0" md:ShadowAssist.ShadowDepth="Depth1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-                    <ContentControl  VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20 0" s:View.Model="{Binding OEE}" ></ContentControl>
-                </md:Card>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <md:Card md:ShadowAssist.ShadowDepth="Depth1"  >
-                    <Grid MinHeight="200" MinWidth="220" Margin="20">
-                        <StackPanel HorizontalAlignment="Center">
-                            <TextBlock Margin="0 0 0 10" Text="WIRE&amp;TAPE" FontSize="16"/>
-
-                            <StackPanel Orientation="Horizontal">
+                        </Grid>
+                    </Border>
+                    <!--<StackPanel DockPanel.Dock="Bottom" HorizontalAlignment="Left" Margin="30 10">
+                        <TextBlock Margin="0 0 0 10" Text="WIRE&amp;TAPE" FontSize="16"/>
+                        <WrapPanel>
+                            <StackPanel Margin="5 0" Orientation="Horizontal">
                                 <md:PackIcon Kind="Tilde" FontSize="36" Height="25" Width="25" Foreground="Green" VerticalAlignment="Bottom" />
                                 <TextBox
                               Style="{StaticResource MaterialDesignFloatingHintTextBox}" MinWidth="160" Text="KEYENCE1234567890111" md:HintAssist.Hint="First Wire"   />
                             </StackPanel>
-                            <StackPanel Orientation="Horizontal">
+                            <StackPanel Margin="5 0" Orientation="Horizontal">
                                 <md:PackIcon Kind="Tilde" FontSize="36" Height="25" Width="25" VerticalAlignment="Bottom" Foreground="Red" />
                                 <TextBox
                               Style="{StaticResource MaterialDesignFloatingHintTextBox}" MinWidth="160" Text="KEYENCE1234567890111" md:HintAssist.Hint="Second Wire"   />
                             </StackPanel>
-                            <StackPanel Orientation="Horizontal">
+                            <StackPanel Margin="5 0" Orientation="Horizontal">
                                 <md:PackIcon Kind="Tilde" FontSize="36" Height="25" Width="25" VerticalAlignment="Bottom" Foreground="Blue" />
                                 <TextBox
                               Style="{StaticResource MaterialDesignFloatingHintTextBox}" MinWidth="160" Text="KEYENCE1234567890111" md:HintAssist.Hint="Third Wire"   />
                             </StackPanel>
-                            <StackPanel Orientation="Horizontal">
+                            <StackPanel Margin="5 0" Orientation="Horizontal">
                                 <md:PackIcon Kind="TapeMeasure" Height="25" Width="25" VerticalAlignment="Bottom" />
                                 <TextBox
                               Style="{StaticResource MaterialDesignFloatingHintTextBox}" MinWidth="160" Text="KEYENCE1234567890111" md:HintAssist.Hint="Tape"   />
                             </StackPanel>
-                        </StackPanel>
-                    </Grid>
-                </md:Card>
-                <md:Card Margin="20 0 0 0" VerticalAlignment="Stretch"  md:ShadowAssist.ShadowDepth="Depth1" Width="710"  >
-                    <DockPanel>
-                        <TextBlock  DockPanel.Dock="Top" Margin="30 20 0 0" Text="BOBBINS" FontSize="16"/>
-                        <ItemsControl Margin="30 10" ItemsSource="{Binding Barcodes}">
+                        </WrapPanel>
+                    </StackPanel>-->
+                    <TextBlock  DockPanel.Dock="Top" Margin="30 0 0 0" Text="BOBBINS" FontSize="16"/>
+                    <Grid Height="{Binding ItemsHeight}">
+                        <ItemsControl VerticalAlignment="Top" Margin="30 10" ItemsSource="{Binding Barcodes}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <WrapPanel/>
+                                    <UniformGrid Columns="4"/>
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
@@ -93,12 +70,13 @@
 
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
-
                         </ItemsControl>
-                    </DockPanel>
+                    </Grid>
 
-                </md:Card>
-            </StackPanel>
+
+                </DockPanel>
+
+            </md:Card>
         </StackPanel>
     </Grid>
 </UserControl>

@@ -145,18 +145,21 @@ namespace DAQ.Service
         IEventAggregator Events;
         SimpleTcpServer _server = null;
       
-        public ScannerService()
+        public ScannerService([Inject] IEventAggregator @event)
         {
-            CreateServer();
-       
+            Events = @event;
+            CreateServer();      
         }
 
     
         public void CreateServer()
         {
+
             _server?.Stop();
             _server = new SimpleTcpServer();
             _server.Start(9004, AddressFamily.InterNetwork);
+
+            Events.Publish(new MsgItem { Level = "D", Time = DateTime.Now, Value ="Server initialize: "+IPAddress.Any.ToString()+":9004"} );
             _server.Delimiter = 0x0d;
             _server.DelimiterDataReceived -= Client_DelimiterDataReceived;
             _server.DelimiterDataReceived += Client_DelimiterDataReceived;
@@ -164,8 +167,7 @@ namespace DAQ.Service
 
         public void Dispose()
         {
-
-            _server?.Stop();
+            _server?.Stop();   
         }
 
         private void Client_DelimiterDataReceived(object sender, Message e)
@@ -174,7 +176,8 @@ namespace DAQ.Service
             {
                 var addr = ((IPEndPoint)e.TcpClient.Client.RemoteEndPoint).Address.GetAddressBytes()[3];
                 var str = e.MessageString.Trim('\r', '\n');
-                Events.Publish(str,addr.ToString());
+                Events.Publish(str,addr.ToString(),addr.ToString());
+                Events.Publish(new MsgItem { Level = "D", Time = DateTime.Now, Value = ((IPEndPoint)e.TcpClient.Client.RemoteEndPoint).Address.ToString()+":"+ str });
             }
             catch (Exception ex)
             {

@@ -17,38 +17,39 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid>
+    <materialDesign:TransitioningContent  OpeningEffect="{materialDesign:TransitionEffect Kind=SlideInFromRight, Duration=00:00:0.5}">
+        <Grid>
 
-        <TabControl Background="{x:Null}" TabStripPlacement="Top" mah:ControlsHelper.HeaderFontSize="15" >
-            <TabItem Header="Values" mah:ControlsHelper.ContentCharacterCasing="Upper" mah:ControlsHelper.HeaderFontWeight="SemiBold" mah:ControlsHelper.HeaderMargin="8,0,-4,0">
-                <ListView x:Name="lvValues"  ItemsSource="{Binding Store.DataValues}" SelectedItem="{Binding SelectedItem}" MouseDoubleClick="{s:Action Method=ModifyDataValue}" >
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
-                            <GridViewColumn Header="Time" DisplayMemberBinding="{Binding Time}"/>
-                            <GridViewColumn Header="Index" DisplayMemberBinding="{Binding Index}"/>
-                            <GridViewColumn Header="Value" DisplayMemberBinding="{Binding Value}"/>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-            </TabItem>
-        </TabControl>
-        <materialDesign:PopupBox
+            <TabControl Background="{x:Null}" TabStripPlacement="Top" mah:ControlsHelper.HeaderFontSize="15" >
+                <TabItem Header="Values" mah:ControlsHelper.ContentCharacterCasing="Upper" mah:ControlsHelper.HeaderFontWeight="SemiBold" mah:ControlsHelper.HeaderMargin="8,0,-4,0">
+                    <ListView x:Name="lvValues"  ItemsSource="{Binding Store.DataValues}" SelectedItem="{Binding SelectedItem}" MouseDoubleClick="{s:Action Method=ModifyDataValue}" >
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
+                                <GridViewColumn Header="Time" DisplayMemberBinding="{Binding Time}"/>
+                                <GridViewColumn Header="Index" DisplayMemberBinding="{Binding Index}"/>
+                                <GridViewColumn Header="Value" DisplayMemberBinding="{Binding Value}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </TabItem>
+            </TabControl>
+            <materialDesign:PopupBox
             Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
             PlacementMode="LeftAndAlignMiddles"
             ToolTipService.Placement="Bottom"
             HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="20"
             ToolTip="PopupBox, Style MaterialDesignMultiFloatingActionPopupBox">
-            <StackPanel Orientation="Horizontal">
-                <Button ToolTip="Add Value" Command="{s:Action Method=AddStorageValue}">
-                    <materialDesign:PackIcon Kind="Add"/>
-                </Button>
-                <Button ToolTip="Remove Value" Command="{s:Action RemoveStorageValue}" 
+                <StackPanel Orientation="Horizontal">
+                    <Button ToolTip="Add Value" Command="{s:Action Method=AddStorageValue}">
+                        <materialDesign:PackIcon Kind="Add"/>
+                    </Button>
+                    <Button ToolTip="Remove Value" Command="{s:Action RemoveStorageValue}" 
                         CommandParameter="{Binding Path=SelectedItem,ElementName=lvValues}">
-                    <materialDesign:PackIcon Kind="Remove"/>
-                </Button>
-            </StackPanel>
-        </materialDesign:PopupBox>
-    </Grid>
-   
+                        <materialDesign:PackIcon Kind="Remove"/>
+                    </Button>
+                </StackPanel>
+            </materialDesign:PopupBox>
+        </Grid>
+    </materialDesign:TransitioningContent>
 </UserControl>

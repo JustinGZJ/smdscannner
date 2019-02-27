@@ -78,31 +78,54 @@ namespace DAQ.Pages
         public string Product { get; set; }
         public string Shift { get; set; }
     }
+
+    public class TScan : ISource
+    {
+        public string Source { get ; set; }
+        public string Bobbin { get; set; }
+        public string Shift { get; set; }
+        public string ShiftName { get; set; }
+        public string SpindleNo { get; set; }
+
+        public string WireLotNo { get; set; }
+
+    }
     public class MaterialViewModel : Screen, IHandle<string>
     {
+        MsgFileSaver<TScan> fileSaver = new MsgFileSaver<TScan>();
         public int SelectedMode { get; set; }
 
         public int Capcity { get; set; }
         public int IPUnit { get; set; }
         public OEEViewModel OEE { get; set; } = new OEEViewModel();
-        public BindableCollection<TBarcode> Barcodes { get; set; } = new BindableCollection<TBarcode>() { };
+        public BindableCollection<TBarcode> Barcodes { get; set; } = new BindableCollection<TBarcode>() {
+            //new TBarcode() { Index = 1, Content = "11111111111" },
+            //new TBarcode() { Index = 2, Content = "11111111111" },
+            //new TBarcode() { Index = 3, Content = "44444444" },
+            //new TBarcode() { Index = 4, Content = "11111121" } ,
+            //new TBarcode() { Index = 5, Content = "11111111111" },
+            //new TBarcode() { Index = 6, Content = "11111111111" },
+
+            //new TBarcode() { Index = 7, Content = "11111121" } ,
+            //new TBarcode() { Index = 8, Content = "11111111111" },
+            //new TBarcode() { Index = 9, Content = "11111111111" }
+        };
         ScannerService service;
         IEventAggregator Events;
         [Inject]
         public Info Info { get; set; }
-        public MaterialViewModel(IEventAggregator Events, ScannerService service, int IPUnit, int Capcity = 12)
+        public MaterialViewModel([Inject]IEventAggregator Events, [Inject]ScannerService service, int IPUnit, int Capcity = 12)
         {
-
             this.Events = Events;
             this.service = service;
             this.Capcity = Capcity;
             this.IPUnit = IPUnit;
             Events.Subscribe(this, IPUnit.ToString());
-
         }
+
+        public int ItemsHeight => Capcity / 4 * 35 + 20;
         protected override void OnViewLoaded()
         {
-
             base.OnViewLoaded();
             dataStore.Bind(x => x.DataValues, (s, e) =>
             {
@@ -114,6 +137,11 @@ namespace DAQ.Pages
         }
         [Inject]
         public DataStore dataStore { get; set; }
+
+        int cnt_barcode = 0;
+        int cnt_error_barcode = 0;
+
+        public string ScanRate { get; set; } = "0.00%";
         public void Handle(string message)
         {
             var count = Barcodes.Count;
@@ -122,7 +150,23 @@ namespace DAQ.Pages
                 Barcodes.Clear();
                 count = 0;
             }
+            cnt_barcode++;
+            if (message.ToUpper().Contains("ERROR"))
+            {
+                cnt_error_barcode++;
+            }
+            ScanRate = ((cnt_barcode - cnt_error_barcode) * 1.0 / cnt_barcode).ToString("P");
             Barcodes.Add(new TBarcode { Index = count + 1, Content = message });
+            fileSaver.Process(new TScan()
+            {
+                Bobbin = message,
+                Shift = Properties.Settings.Default.Shift,
+                ShiftName = Properties.Settings.Default.ShiftName,
+                Source = DisplayName,
+                SpindleNo = count.ToString(),
+                WireLotNo = Properties.Settings.Default.LotNo
+            });
+            
         }
     }
 }

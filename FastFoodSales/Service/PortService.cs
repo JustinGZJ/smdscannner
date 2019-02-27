@@ -22,7 +22,7 @@ namespace DAQ.Service
                 TestSpecs[i].Name = "RESISTANCE " + i.ToString();
             }
         }
-        public override string PortName => Properties.Settings.Default.PORT_A;
+        public override string PortName => Properties.Settings.Default.Shift;
 
 
         public override void UpdateDatas()
@@ -92,7 +92,7 @@ namespace DAQ.Service
     }
     public class PortBService : PortService
     {
-        public override string PortName => Properties.Settings.Default.PORT_B;
+        public override string PortName => Properties.Settings.Default.ShiftName;
         public PortBService(PlcService plc, IEventAggregator @event) : base(plc, @event)
         {
             InstName = "TH";

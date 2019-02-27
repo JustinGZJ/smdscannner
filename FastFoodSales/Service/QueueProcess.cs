@@ -82,7 +82,7 @@ namespace DAQ.Service
     public class MsgFileSaver<T> : IQueueProcesser<T> where T:ISource
     {
         QueueProcesser<T> processer;
-        public string FolderName { get; set; } = "../DAQData/";
+        public string FolderName { get; set; } = "../Data/";
         public MsgFileSaver()
         {
             processer = new QueueProcesser<T>((s) =>
@@ -107,6 +107,9 @@ namespace DAQ.Service
                               stringBuilder.Append("Date Time,");
                               foreach (var p in propertyInfos)
                               {
+                                  if (p.Name == "Source")
+                                      stringBuilder.Append($"Station,");
+                                  else
                                       stringBuilder.Append($"{p.Name},");
                               }
                               stringBuilder.AppendLine();

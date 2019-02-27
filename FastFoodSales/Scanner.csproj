@@ -168,14 +168,11 @@
     <Compile Include="Pages\StorageValueDialog.xaml.cs">
       <DependentUpon>StorageValueDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Service\CameraService.cs" />
     <Compile Include="Service\DataAccess.cs" />
     <Compile Include="Service\DataStore.cs" />
     <Compile Include="Service\IModbusService.cs" />
     <Compile Include="Service\IMsgSaver.cs" />
     <Compile Include="Service\IPortBService.cs" />
-    <Compile Include="Service\PlcService.cs" />
-    <Compile Include="Service\PortService.cs" />
     <Compile Include="Service\QueueProcess.cs" />
     <Compile Include="Service\ScannerService.cs" />
     <Compile Include="Service\TestSpecViewModel.cs" />
