@@ -20,7 +20,7 @@ namespace DAQ.Pages
 
         public AlarmInfoSettingsViewModel()
         {
-            using (var db = new OeedbContext())
+            using (var db = new OeedbContext())  
             {
                 if (db.AlarmInfos.Any())
                 {
