@@ -7,15 +7,13 @@ using StyletIoC;
 using Stylet;
 using DAQ.Service;
 using DAQ.Pages;
+using MaterialDesignThemes.Wpf;
 
 namespace DAQ
 {
-    public class HomeViewModel : Conductor<MaterialViewModel>.Collection.AllActive
+    public class HomeViewModel : Conductor<MaterialViewModel>.Collection.AllActive,IMainTabViewModel
     {
         Properties.Settings settings = Properties.Settings.Default;
-
-        [Inject]
-        IEventAggregator EventAggregator { get; set; }
         public int SelectedIndex { get; set; }
 
         public string ShiftName
@@ -24,6 +22,30 @@ namespace DAQ
             {
                 settings.ShiftName = value;
                 settings.Save();
+            }
+        }
+
+        private int _unit = 3;
+        private readonly int _radioCnt;
+        private int _index;
+        private readonly BindableCollection<MaterialViewModel> _items = new BindableCollection<MaterialViewModel>();
+
+        public BindableCollection<OeeCollectionViewModel.Ts> Selector { get; set; } = new BindableCollection<OeeCollectionViewModel.Ts>();
+        public int Index
+        {
+            get => _index;
+            set
+            {
+                if (value >= _radioCnt || value < 0) return;
+                _index = value;
+                foreach (var v in Selector)
+                {
+                    v.Selected = false;
+                }
+                Selector[_index].Selected = true;
+                var l = _items.Skip(Index * _unit).Take(_unit);
+                Items.Clear();
+                Items.AddRange(l);
             }
         }
         public string Shift
@@ -41,7 +63,6 @@ namespace DAQ
             {
                 settings.LineNo = value;
                 settings.Save();
-
             }
         }
 
@@ -53,68 +74,46 @@ namespace DAQ
                 settings.Save();
             }
         }
-        public HomeViewModel()
+
+        public HomeViewModel([Inject("N1")] MaterialViewModel N1,
+            [Inject("N2")] MaterialViewModel N2,
+            [Inject("N3")] MaterialViewModel N3,
+            [Inject("N4")] MaterialViewModel N4,
+            [Inject("N5")] MaterialViewModel N5,
+            [Inject("N6")] MaterialViewModel N6,
+            [Inject("N7")] MaterialViewModel N7,
+            [Inject("N8")] MaterialViewModel N8,
+            [Inject("N9")] MaterialViewModel N9,
+            [Inject("N10")] MaterialViewModel N10,
+            [Inject("N11")] MaterialViewModel N11,
+            [Inject("N12")] MaterialViewModel N12)
         {
-            Task.Run(() =>
+            _items.Clear();
+            _items.AddRange(new[] { N1, N2, N3, N4, N5, N6, N7, N8, N9, N10, N11, N12 });
+
+            _radioCnt = _items.Count / _unit + (_items.Count % _unit > 0 ? 1 : 0);
+            for (int i = 0; i < _radioCnt; i++)
             {
-                while (true)
-                {
-                    if (SelectedIndex < 11)
-                    {
-                        SelectedIndex++;
-                    }
-                    else
-                    {
-                        SelectedIndex = 0;
-                    }
-                    System.Threading.Thread.Sleep(20000);
-                }
-            });
+                Selector.Add(new OeeCollectionViewModel.Ts(){Selected = (i==0)});
+            }
+            var l = _items.Skip(Index * _unit).Take(_unit);
+            Items.Clear();
+            Items.AddRange(l);
         }
-
-        protected override void OnActivate()
-        {
-
-            base.OnActivate();
-        }
-        protected override void OnInitialActivate()
-        {
-
-            base.OnInitialActivate();
-        }
-
-
-
-        [Inject("N1")]
-        public MaterialViewModel N1 { get; set; }
-        [Inject("N2")]
-        public MaterialViewModel N2 { get; set; }
-        [Inject("N3")]
-        public MaterialViewModel N3 { get; set; }
-        [Inject("N4")]
-        public MaterialViewModel N4 { get; set; }
-        [Inject("N5")]
-        public MaterialViewModel N5 { get; set; }
-        [Inject("N6")]
-        public MaterialViewModel N6 { get; set; }
-        [Inject("N7")]
-        public MaterialViewModel N7 { get; set; }
-        [Inject("N8")]
-        public MaterialViewModel N8 { get; set; }
-        [Inject("N9")]
-        public MaterialViewModel N9 { get; set; }
-        [Inject("N10")]
-        public MaterialViewModel N10 { get; set; }
-        [Inject("N11")]
-        public MaterialViewModel N11 { get; set; }
-        [Inject("N12")]
-        public MaterialViewModel N12 { get; set; }
 
         [Inject]
         public ScannerService Scanner { get; set; }
 
+        protected override void OnActivate()
+        {
+            base.OnActivate();
+            var l = _items.Skip(Index * _unit).Take(_unit);
+            Items.Clear();
+            Items.AddRange(l);
+        }
 
-
-
+        public int TabIndex { get; set; } =(int)Pages.TabIndex.SCANNER;
+        public PackIconKind PackIcon { get; set; } = PackIconKind.ViewDashboard;
+        public string Header { get; set; } = "Scanner";
     }
 }

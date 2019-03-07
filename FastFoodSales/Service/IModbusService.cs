@@ -14,7 +14,7 @@ namespace DAQ.Service
         string ReadString(int index, int len);
         ushort? ReadUInt16(int index);
         int? ReadInt(int Index);
-        bool Write(int index, bool bit);
+        bool Write(int index, int bit,bool value);
         bool Write(int index, string str);
         bool Write(int index, ushort value);
         bool Write(int index, int value);
@@ -26,21 +26,37 @@ namespace DAQ.Service
         public object Value { get; set; }
         public TYPE Type { get; set; }
         public int StartIndex { get; set; }
-        public int tag { get; set; }
+        public int Tag { get; set; }
         public string Index
         {
             get
             {
                 if (this.Type == TYPE.BOOL)
                 {
-                    return $"{StartIndex}:{tag}";
+                    return $"{StartIndex}:{Tag}";
                 }
                 else if (this.Type == TYPE.STRING)
                 {
-                    return $"{StartIndex}^{tag}";
+                    return $"{StartIndex}^{Tag}";
                 }
                 else
                     return StartIndex.ToString();
+            }
+        }
+
+        public int GetLength()
+        {
+            if (Type == TYPE.FLOAT ||Type == TYPE.INT)
+            {
+                return 2;
+            }
+            else if (Type == TYPE.STRING)
+            {
+                return (Tag/ 2 + Tag % 2);
+            }
+            else
+            {
+                return 1;
             }
         }
     }

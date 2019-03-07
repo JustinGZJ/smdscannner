@@ -11,16 +11,15 @@ using System.Timers;
 
 namespace DAQ.Pages
 {
-    public class OEEViewModel : PropertyChangedBase
+    public class OEEViewModel : Screen
     {
 
-        public int Pass { get; set; } = 1;
-        public int Fail { get; set; } = 1;
+        public int Pass { get; set; } = 0;
+        public int Fail { get; set; } = 0;
         public int TotalProduct { get => Pass + Fail; }
-        public int Run { get; set; } = 2;
-        public int Stop { get; set; } = 3;
+        public int Run { get; set; } =0;
+        public int Stop { get; set; } = 0;
         public int TotalRun { get => Run + Stop; }
-        Timer timer = new Timer(500);
         public int PlanProduct
         {
             get
@@ -32,15 +31,11 @@ namespace DAQ.Pages
                 return 0;
             }
         }
-       public OEEViewModel()
-        {
 
-            timer.Elapsed += (s, e) =>
-            {
-                Refresh();
-            };
-            timer.Start();
-        }
+        public string RunTime => TimeSpan.FromSeconds(Run).ToString();
+
+        public string StopTime => TimeSpan.FromSeconds(Stop).ToString();
+
 
         public int PlanCircle { get; set; } = 4;
 

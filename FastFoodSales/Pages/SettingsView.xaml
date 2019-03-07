@@ -4,11 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DAQ"
-             mc:Ignorable="d" Foreground="DarkGray"
              xmlns:s="https://github.com/canton7/Stylet"
+             mc:Ignorable="d" Foreground="DarkGray"  
              d:DataContext="{d:DesignInstance local:SettingsViewModel}"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             d:DesignHeight="600" d:DesignWidth="900">
+             d:DesignHeight="600" d:DesignWidth="900"
+            >
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -22,18 +23,12 @@
     </UserControl.Resources>
 
     <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect Kind=SlideInFromBottom, Duration=00:00:0.5}">
-        <ScrollViewer >
-            <Grid Margin="20" MinWidth="900" >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="327*"/>
-                    <ColumnDefinition Width="124*"/>
-                    <ColumnDefinition Width="450*"/>
-                </Grid.ColumnDefinitions>
-            </Grid>
-        </ScrollViewer>
+        <TabControl ItemsSource="{Binding Items}" SelectedItem="{Binding ActiveItem}" DisplayMemberPath="DisplayName">
+            <TabControl.ContentTemplate>
+                <DataTemplate >
+                    <ContentControl s:View.Model="{Binding}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" IsTabStop="False"/>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+        </TabControl>
     </materialDesign:TransitioningContent>
 </UserControl>

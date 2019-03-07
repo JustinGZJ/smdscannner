@@ -44,7 +44,7 @@
             md:HintAssist.Hint="ASCII Length" 
             Visibility="Collapsed" 
          
-            Text="{Binding tag}">
+            Text="{Binding Tag}">
             <TextBox.Style>
                 <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
                     <Style.Triggers>
@@ -61,7 +61,7 @@
             md:HintAssist.Hint="Bit Lenth" 
             Visibility="Collapsed" 
         
-            Text="{Binding tag}">
+            Text="{Binding Tag}">
             <TextBox.Style >
                 <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
                     <Style.Triggers>

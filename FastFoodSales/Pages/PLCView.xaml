@@ -22,7 +22,7 @@
 
             <TabControl Background="{x:Null}" TabStripPlacement="Top" mah:ControlsHelper.HeaderFontSize="15" >
                 <TabItem Header="Values" mah:ControlsHelper.ContentCharacterCasing="Upper" mah:ControlsHelper.HeaderFontWeight="SemiBold" mah:ControlsHelper.HeaderMargin="8,0,-4,0">
-                    <ListView x:Name="lvValues"  ItemsSource="{Binding Store.DataValues}" SelectedItem="{Binding SelectedItem}" MouseDoubleClick="{s:Action Method=ModifyDataValue}" >
+                    <ListView x:Name="lvValues"  ItemsSource="{Binding Storage.DataValues}" SelectedItem="{Binding SelectedItem}" MouseDoubleClick="{s:Action Method=ModifyDataValue}" >
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>

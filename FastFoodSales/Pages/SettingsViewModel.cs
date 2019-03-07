@@ -4,16 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO.Ports;
+using DAQ.Pages;
 using Stylet;
 using StyletIoC;
 using DAQ.Service;
+using MaterialDesignThemes.Wpf;
 
 namespace DAQ
 {
-    public class SettingsViewModel : Screen
+    public class SettingsViewModel : Conductor<Screen>.Collection.OneActive,IMainTabViewModel
     {
-        
-
-
+        public SettingsViewModel()
+        {
+            Items.Add(new  AlarmInfoSettingsViewModel());
+        }
+        public int TabIndex { get; set; } = (int)Pages.TabIndex.SETTING;
+        public PackIconKind PackIcon { get; set; } = PackIconKind.Settings;
+        public string Header { get; set; } = "Settings";
     }
 }

@@ -12,9 +12,33 @@
              d:DesignHeight="600" d:DesignWidth="1000"
               d:DataContext="{d:DesignInstance  local:HomeViewModel}"
              >
+    <UserControl.Resources>
+        <Style TargetType="{x:Type CheckBox}" >
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type CheckBox}">
+
+                        <Ellipse  Width="10" Height="10" x:Name="Marker" Fill="Black" StrokeThickness="0"></Ellipse>
+
+                        <!--If item is checked, trigger the visibility of the mark-->
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="true">
+                                <!--If item is checked, trigger the visibility of the mark and change the color of the selected bullet into a darker gray for better highlighting-->
+                                <Setter TargetName="Marker" Property="Opacity" Value="0.5"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="False">
+                                <!--If item is checked, trigger the visibility of the mark and change the color of the selected bullet into a darker gray for better highlighting-->
+                                <Setter TargetName="Marker" Property="Opacity" Value="0.2"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
     <md:TransitioningContent  OpeningEffect="{md:TransitionEffect Kind=SlideInFromRight, Duration=00:00:0.5}">
         <DockPanel>
-            <md:Card HorizontalAlignment="Left" Margin="30 10 10 10" Background="DarkSlateBlue"    md:ShadowAssist.ShadowDepth="Depth1" Width="900" DockPanel.Dock="Top">
+            <md:Card HorizontalAlignment="Left" Margin="30 10 10 10" Background="{x:Null}"  Foreground="DimGray"   Width="900" DockPanel.Dock="Top">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"></RowDefinition>
@@ -22,29 +46,66 @@
                     </Grid.RowDefinitions>
 
                     <UniformGrid  Grid.Row="1" Columns="4" >
-                        <TextBox Foreground="White" Text="{Binding Shift}" MaxLength="100" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10" md:HintAssist.Hint="Shift"></TextBox>
-                        <TextBox Foreground="White" Text="{Binding ShiftName}" MaxLength="100" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10" md:HintAssist.Hint="Shift Name"></TextBox>
-                        <TextBox Foreground="White" Text="{Binding LineNo}" MaxLength="100" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10" md:HintAssist.Hint="Line No."></TextBox>
-                        <TextBox Foreground="White" Text="{Binding LotNo}" MaxLength="100" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10" md:HintAssist.Hint="Wire lot No."></TextBox>
+                        <DockPanel  Margin="10 0" >
+                            <Label FontSize="20" VerticalContentAlignment="Bottom">Shift</Label>
+                            <TextBox FontSize="20" Text="{Binding Shift}"     md:HintAssist.Hint="Shift"></TextBox>
+                        </DockPanel>
+                        <DockPanel Margin="10 0">
+                            <Label FontSize="20" VerticalContentAlignment="Bottom">Shift Name</Label>
+                            <TextBox FontSize="20" Text="{Binding ShiftName}"  md:HintAssist.Hint="Shift Name"></TextBox>
+                        </DockPanel>
+                        <DockPanel Margin="10 0">
+                            <Label FontSize="20" VerticalContentAlignment="Bottom">Line No.</Label>
+                            <TextBox FontSize="20" Text="{Binding LineNo}" MaxLength="100"  md:HintAssist.Hint="Line No."></TextBox>
+                        </DockPanel>
+                        <DockPanel Margin="10 0">
+                            <Label FontSize="20" VerticalContentAlignment="Bottom">Lot No.</Label>
+                            <TextBox FontSize="20" Text="{Binding LotNo}" MaxLength="100" md:HintAssist.Hint="Wire lot No."></TextBox>
+                        </DockPanel>
                     </UniformGrid>
                 </Grid>
             </md:Card>
+            <ListBox  HorizontalAlignment="Left" Width="900" ItemsSource="{Binding Selector}" SelectedIndex="{Binding Index}" DockPanel.Dock="Bottom" Foreground="{x:Null}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel HorizontalAlignment="Center"></WrapPanel>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Background" Value="{x:Null}" />
+                        <Setter Property="BorderThickness" Value="0"></Setter>
+                        <Setter Property="BorderBrush" Value="Transparent"></Setter>
+                        <Setter Property="Foreground" Value="Transparent"></Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Trigger.Setters>
+                                    <Setter Property="Focusable" Value="False"></Setter>
+                                </Trigger.Setters>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <CheckBox IsChecked="{ Binding Selected}" IsEnabled="False"></CheckBox>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ListBox>
             <ScrollViewer>
-                <ItemsControl>
-                    <ItemsControl.Items>
-                        <ContentControl Margin="10"  s:View.Model="{Binding N1}"/>
-                        <ContentControl Margin="10"  s:View.Model="{Binding N2}"/>
-                        <ContentControl  Margin="10" s:View.Model="{Binding N3}"/>
-                        <ContentControl  Margin="10" s:View.Model="{Binding N4}"/>
-                        <ContentControl Margin="10"  s:View.Model="{Binding N5}"/>
-                        <ContentControl Margin="10" s:View.Model="{Binding N6}"/>
-                        <ContentControl Margin="10" s:View.Model="{Binding N7}"/>
-                        <ContentControl Margin="10" s:View.Model="{Binding N8}"/>
-                        <ContentControl Margin="10" s:View.Model="{Binding N9}"/>
-                        <ContentControl Margin="10" s:View.Model="{Binding N10}"/>
-                        <ContentControl Margin="10" s:View.Model="{Binding N11}"/>
-                        <ContentControl Margin="10" s:View.Model="{Binding N12}"/>
-                    </ItemsControl.Items>
+                <ItemsControl ItemsSource="{Binding Items}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel></WrapPanel>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <md:TransitioningContent Margin="10" OpeningEffect="{md:TransitionEffect Kind=SlideInFromRight, Duration=00:00:0.5}">
+                                <ContentControl HorizontalAlignment="Center" s:View.Model="{Binding}" ></ContentControl>
+                            </md:TransitioningContent>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </ScrollViewer>
         </DockPanel>

@@ -81,7 +81,7 @@ namespace DAQ.Pages
 
     public class TScan : ISource
     {
-        public string Source { get ; set; }
+        public string Source { get; set; }
         public string Bobbin { get; set; }
         public string Shift { get; set; }
         public string ShiftName { get; set; }
@@ -99,16 +99,6 @@ namespace DAQ.Pages
         public int IPUnit { get; set; }
         public OEEViewModel OEE { get; set; } = new OEEViewModel();
         public BindableCollection<TBarcode> Barcodes { get; set; } = new BindableCollection<TBarcode>() {
-            //new TBarcode() { Index = 1, Content = "11111111111" },
-            //new TBarcode() { Index = 2, Content = "11111111111" },
-            //new TBarcode() { Index = 3, Content = "44444444" },
-            //new TBarcode() { Index = 4, Content = "11111121" } ,
-            //new TBarcode() { Index = 5, Content = "11111111111" },
-            //new TBarcode() { Index = 6, Content = "11111111111" },
-
-            //new TBarcode() { Index = 7, Content = "11111121" } ,
-            //new TBarcode() { Index = 8, Content = "11111111111" },
-            //new TBarcode() { Index = 9, Content = "11111111111" }
         };
         ScannerService service;
         IEventAggregator Events;
@@ -127,21 +117,12 @@ namespace DAQ.Pages
         protected override void OnViewLoaded()
         {
             base.OnViewLoaded();
-            dataStore.Bind(x => x.DataValues, (s, e) =>
-            {
-                OEE.Pass = (int)dataStore[$"DW_N{IPUnit}_PASS"];
-                OEE.Fail = (int)dataStore[$"DW_N{IPUnit}_FAIL"];
-                OEE.Run = (int)dataStore[$"DW_N{IPUnit}_RUN"];
-                OEE.Stop = (int)dataStore[$"DW_N{IPUnit}_STOP"];
-            });
+
         }
-        [Inject]
-        public DataStore dataStore { get; set; }
+        int _cntBarcode = 0;
+        int _cntErrorBarcode = 0;
 
-        int cnt_barcode = 0;
-        int cnt_error_barcode = 0;
-
-        public string ScanRate { get; set; } = "0.00%";
+        public string ScanRate { get; set; } = "100.00%";
         public void Handle(string message)
         {
             var count = Barcodes.Count;
@@ -150,12 +131,12 @@ namespace DAQ.Pages
                 Barcodes.Clear();
                 count = 0;
             }
-            cnt_barcode++;
+            _cntBarcode++;
             if (message.ToUpper().Contains("ERROR"))
             {
-                cnt_error_barcode++;
+                _cntErrorBarcode++;
             }
-            ScanRate = ((cnt_barcode - cnt_error_barcode) * 1.0 / cnt_barcode).ToString("P");
+            ScanRate = ((_cntBarcode - _cntErrorBarcode) * 1.0 / _cntBarcode).ToString("P");
             Barcodes.Add(new TBarcode { Index = count + 1, Content = message });
             fileSaver.Process(new TScan()
             {
@@ -166,7 +147,7 @@ namespace DAQ.Pages
                 SpindleNo = count.ToString(),
                 WireLotNo = Properties.Settings.Default.LotNo
             });
-            
+
         }
     }
 }

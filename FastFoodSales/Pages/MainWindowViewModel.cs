@@ -8,17 +8,10 @@ using StyletIoC;
 using DAQ.Pages;
 namespace DAQ
 {
-    public class MainWindowViewModel : Conductor<object>
+
+    public class MainWindowViewModel : Conductor<IMainTabViewModel>.Collection.OneActive
     {
         int index = 0;
-        [Inject]
-        public HomeViewModel Home { get; set; }
-        [Inject]
-        public SettingsViewModel Setting { get; set; }
-        [Inject]
-        public MsgViewModel Msg { get; set; }
-        [Inject]
-        public PLCViewModel PLC { get; set; }
 
         public object CurrentPage { get; set; }
         public int Index
@@ -27,44 +20,36 @@ namespace DAQ
             set
             {
                 index = value;
-                
-                switch (index)
+                if (value >= 0)
                 {
-                    case 0:
-                        ActivateItem(Home);
-                        break;
-                    case 1:
-                        ActivateItem(PLC);
-                        break;
-                    case 2:
-                        ActivateItem(Msg);
-                        break;
-                    case 3:
-                        ActivateItem(new AboutViewModel());
-                        break;
+                    ActivateItem(Items[index]);
                 }
-
             }
         }
+
+        public MainWindowViewModel([Inject]IEnumerable<IMainTabViewModel> mainTabs)
+        {
+            Items.AddRange(mainTabs.OrderBy(x=>x.TabIndex));
+        }
+
         protected override void OnInitialActivate()
         {
-            ActivateItem(Home);
             ActiveMessages();
             base.OnInitialActivate();
         }
 
         public void ShowSetting()
         {
-           ActivateItem(Setting);        
+            ActivateItem(Items[(int) TabIndex.SETTING]);
         }
 
         public void ActiveValues()
         {
-            CurrentPage = PLC;
+            CurrentPage = Items[(int)TabIndex.VALUES];
         }
         public void ActiveMessages()
         {
-            CurrentPage = Msg;
+            CurrentPage = Items[(int)TabIndex.MESSAGES];
         }
     }
 }

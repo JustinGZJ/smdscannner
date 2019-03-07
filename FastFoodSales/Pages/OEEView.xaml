@@ -12,7 +12,7 @@
 
     <Grid>
         <StackPanel Orientation="Horizontal">
-            <md:Card  Margin="0 0 10 0" x:Name="Avalibity"  Height="140" Width="120" Background="{Binding AvailibiltyBrush,Mode=OneWay}">
+            <md:Card md:ShadowAssist.ShadowDepth="Depth0"  Margin="0 0 10 0" x:Name="Avalibity"  Height="140" Width="120" Background="{Binding AvailibiltyBrush,Mode=OneWay}">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                     <TextBlock Foreground="White" HorizontalAlignment="Center" FontSize="30" Text="{Binding Availibilty,Mode=OneWay}"></TextBlock>
                     <TextBlock Foreground="White" HorizontalAlignment="Center">AVAILIBITY</TextBlock>
@@ -20,16 +20,16 @@
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <StackPanel Margin="10 0">
                             <TextBlock TextAlignment="Center" FontSize="8">RUN</TextBlock>
-                            <TextBlock Text="{Binding Run,Mode=OneWay}" TextAlignment="Center" FontSize="8"></TextBlock>
+                            <TextBlock Text="{Binding RunTime,Mode=OneWay}" TextAlignment="Center" FontSize="8"></TextBlock>
                         </StackPanel>
                         <StackPanel Margin="10 0">
                             <TextBlock  TextAlignment="Center" FontSize="8">STOP</TextBlock>
-                            <TextBlock TextAlignment="Center" Text="{Binding Stop,Mode=OneWay}" FontSize="8"></TextBlock>
+                            <TextBlock TextAlignment="Center" Text="{Binding StopTime,Mode=OneWay}" FontSize="8"></TextBlock>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
             </md:Card>
-            <md:Card x:Name="Performance"  md:ShadowAssist.ShadowDepth="Depth1" Margin="10,0" Height="140" Width="120" Background="{Binding PerformanceBrush,Mode=OneWay}">
+            <md:Card x:Name="Performance"  md:ShadowAssist.ShadowDepth="Depth0" Margin="10,0" Height="140" Width="120" Background="{Binding PerformanceBrush,Mode=OneWay}">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                     <TextBlock Foreground="White" HorizontalAlignment="Center" FontSize="30" Text="{Binding Performance,Mode=OneWay}"></TextBlock>
                     <TextBlock Foreground="White" HorizontalAlignment="Center">PERFORMANCE</TextBlock>
@@ -46,7 +46,7 @@
                     </StackPanel>
                 </StackPanel>
             </md:Card>
-            <md:Card  md:ShadowAssist.ShadowDepth="Depth1" Margin="10,0" Height="140" Width="120" Background="{Binding QualityBrush,Mode=OneWay}">
+            <md:Card  md:ShadowAssist.ShadowDepth="Depth0" Margin="10,0" Height="140" Width="120" Background="{Binding QualityBrush,Mode=OneWay}">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                     <TextBlock Text="{Binding Quality,Mode=OneWay}" Foreground="White" HorizontalAlignment="Center" FontSize="30"></TextBlock>
                     <TextBlock Foreground="White" HorizontalAlignment="Center">QUALITY</TextBlock>
@@ -63,7 +63,7 @@
                     </StackPanel>
                 </StackPanel>
             </md:Card>
-            <md:Card  md:ShadowAssist.ShadowDepth="Depth1" x:Name="OEE" Margin="10,0" Height="140" Width="120" Background="{Binding OEEBrush}">
+            <md:Card  md:ShadowAssist.ShadowDepth="Depth0" x:Name="OEE" Margin="10,0" Height="140" Width="120" Background="{Binding OEEBrush}">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                     <TextBlock Text="{Binding OEE,Mode=OneWay}" Foreground="White" HorizontalAlignment="Center" FontSize="30"></TextBlock>
                     <TextBlock Foreground="White" HorizontalAlignment="Center">OEE</TextBlock>
