@@ -1,0 +1,9 @@
+{
+    "sqltools.connections": [
+        {
+            "database": "C:\\Users\\justin\\Source\\Repos\\SMD-SCANNER\\FastFoodSales\\data.db",
+            "dialect": "SQLite",
+            "name": "1"
+        }
+    ]
+}

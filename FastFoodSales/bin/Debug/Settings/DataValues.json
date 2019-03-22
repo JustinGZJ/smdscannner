@@ -1,0 +1,291 @@
+[
+  {
+    "Name": "W_N1_STATUS",
+    "StartIndex": 101,
+    "Type": 2,
+
+    "Tag": 0
+  },
+  {
+    "Name": "W_N2_STATUS",
+    "StartIndex": 121,
+    "Type": 2,
+    "Tag": 0
+  },
+  {
+    "Name": "W_N3_STATUS",
+    "StartIndex": 141,
+    "Type": 2,
+    "Tag": 0
+  },
+  {
+    "Name": "W_N4_STATUS",
+    "StartIndex": 161,
+    "Type": 2,
+    "Tag": 0
+  },
+  {
+    "Name": "W_N5_STATUS",
+    "StartIndex": 181,
+    "Type": 2,
+    "Tag": 0
+  },
+  {
+    "Name": "W_N6_STATUS",
+    "StartIndex": 201,
+    "Type": 2,
+    "Tag": 0
+  },
+  {
+    "Name": "W_N7_STATUS",
+    "StartIndex": 221,
+    "Type": 2,
+    "Tag": 0
+  },
+  {
+    "Name": "W_N8_STATUS",
+    "StartIndex": 241,
+    "Type": 2,
+    "Tag": 0
+  },
+  {
+    "Name": "W_N9_STATUS",
+    "StartIndex": 261,
+    "Type": 2,
+    "Tag": 0
+  },
+  {
+    "Name": "W_N10_STATUS",
+    "StartIndex": 281,
+    "Type": 2,
+    "Tag": 0
+  },
+  {
+    "Name": "W_N11_STATUS",
+    "StartIndex": 301,
+    "Type": 2,
+    "Tag": 0
+  },
+  {
+    "Name": "W_N12_STATUS",
+    "StartIndex": 321,
+    "Type": 2,
+    "Tag": 0
+  },
+  {
+    "Name": "S_N2_PROG",
+    "StartIndex": 122,
+    "Type": 1,
+    "Tag": 14
+  },
+  {
+    "Name": "DW_N2_VAxis",
+    "StartIndex": 129,
+    "Type": 3,
+    "Tag": 0
+  },
+  {
+    "Name": "DW_N2_Angle",
+    "StartIndex": 131,
+    "Type": 3,
+    "Tag": 0
+  },
+  {
+    "Name": "DW_N2_NWindgingCircle",
+    "StartIndex": 133,
+    "Type": 3,
+    "Tag": 0
+  },
+  {
+    "Name": "DW_N2_CircleTime",
+    "StartIndex": 135,
+    "Type": 3,
+    "Tag": 0
+  },
+  {
+    "Name": "DW_N2_Pdt",
+    "StartIndex": 137,
+    "Type": 3,
+    "Tag": 0
+  },
+  {
+    "Name": "S_N3_PROG",
+    "StartIndex": 142,
+    "Type": 1,
+    "Tag": 14
+  },
+  {
+    "Name": "DW_N3_VAxis",
+    "StartIndex": 149,
+    "Type": 3,
+    "Tag": 0
+  },
+  {
+    "Name": "DW_N3_Angle",
+    "StartIndex": 151,
+    "Type": 3,
+    "Tag": 0
+  },
+  {
+    "Name": "DW_N3_NWindgingCircle",
+    "StartIndex": 153,
+    "Type": 3,
+    "Tag": 0
+  },
+  {
+    "Name": "DW_N3_CircleTime",
+    "StartIndex": 165,
+    "Type": 3,
+    "Tag": 0
+  },
+  {
+    "Name": "DW_N3_Pdt",
+    "StartIndex": 157,
+    "Type": 3,
+    "Tag": 0
+  },
+  {
+    "Name": "S_N4_PROG",
+    "StartIndex": 162,
+    "Type": 1,
+    "Tag": 14
+  },
+  {
+    "Name": "DW_N5_VAxis",
+    "StartIndex": 169,
+    "Type": 3,
+    "Tag": 0
+  },
+  {
+    "Name": "DW_N5_Angle",
+    "StartIndex": 171,
+    "Type": 3,
+    "Tag": 0
+  },
+  {
+    "Name": "DW_N5_NWindgingCircle",
+    "StartIndex": 173,
+    "Type": 3,
+    "Tag": 0
+  },
+  {
+    "Name": "DW_N5_CircleTime",
+    "StartIndex": 175,
+    "Type": 3,
+    "Tag": 0
+  },
+  {
+    "Name": "DW_N5_Pdt",
+    "StartIndex": 177,
+    "Type": 3,
+    "Tag": 0
+  },
+  {
+    "Name": "S_N6_PROG",
+    "StartIndex": 182,
+    "Type": 1,
+    "Tag": 14
+  },
+  {
+    "Name": "DW_N6_VAxis",
+    "StartIndex": 189,
+    "Type": 3,
+    "Tag": 0
+  },
+  {
+    "Name": "DW_N6_Angle",
+    "StartIndex": 191,
+    "Type": 3,
+    "Tag": 0
+  },
+  {
+    "Name": "DW_N6_NWindgingCircle",
+    "StartIndex": 193,
+    "Type": 3,
+    "Tag": 0
+  },
+  {
+    "Name": "DW_N6_CircleTime",
+    "StartIndex": 195,
+    "Type": 3,
+    "Tag": 0
+  },
+  {
+    "Name": "DW_N6_Pdt",
+    "StartIndex": 197,
+    "Type": 3,
+    "Tag": 0
+  },
+  {
+    "Name": "S_N7_PROG",
+    "StartIndex": 202,
+    "Type": 1,
+    "Tag": 14
+  },
+  {
+    "Name": "DW_N7_VAxis",
+    "StartIndex": 209,
+    "Type": 3,
+    "Tag": 0
+  },
+  {
+    "Name": "DW_N7_Angle",
+    "StartIndex": 211,
+    "Type": 3,
+    "Tag": 0
+  },
+  {
+    "Name": "DW_N7_NWindgingCircle",
+    "StartIndex": 213,
+    "Type": 3,
+    "Tag": 0
+  },
+  {
+    "Name": "DW_N7_CircleTime",
+    "StartIndex": 215,
+    "Type": 3,
+    "Tag": 0
+  },
+  {
+    "Name": "DW_N7_Pdt",
+    "StartIndex": 217,
+    "Type": 3,
+    "Tag": 0
+  },
+  {
+    "Name": "S_N8_PROG",
+    "StartIndex": 222,
+    "Type": 1,
+    "Tag": 14
+  },
+  {
+    "Name": "DW_N8_VAxis",
+    "StartIndex": 229,
+    "Type": 3,
+    "Tag": 0
+  },
+  {
+    "Name": "DW_N8_Angle",
+    "StartIndex": 231,
+    "Type": 3,
+    "Tag": 0
+  },
+  {
+    "Name": "DW_N8_NWindgingCircle",
+    "StartIndex": 233,
+    "Type": 3,
+    "Tag": 0
+  },
+  {
+    "Name": "DW_N8_CircleTime",
+    "StartIndex": 235,
+    "Type": 3,
+    "Tag": 0
+  },
+  {
+    "Name": "DW_N8_Pdt",
+    "StartIndex": 237,
+    "Type": 3,
+    "Tag": 0
+  }
+]

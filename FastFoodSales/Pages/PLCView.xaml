@@ -19,9 +19,8 @@
     </UserControl.Resources>
     <materialDesign:TransitioningContent  OpeningEffect="{materialDesign:TransitionEffect Kind=SlideInFromRight, Duration=00:00:0.5}">
         <Grid>
-
-            <TabControl Background="{x:Null}" TabStripPlacement="Top" mah:ControlsHelper.HeaderFontSize="15" >
-                <TabItem Header="Values" mah:ControlsHelper.ContentCharacterCasing="Upper" mah:ControlsHelper.HeaderFontWeight="SemiBold" mah:ControlsHelper.HeaderMargin="8,0,-4,0">
+            <TabControl Background="{x:Null}" TabStripPlacement="Top"  >
+                <TabItem Header="Values"  >
                     <ListView x:Name="lvValues"  ItemsSource="{Binding Storage.DataValues}" SelectedItem="{Binding SelectedItem}" MouseDoubleClick="{s:Action Method=ModifyDataValue}" >
                         <ListView.View>
                             <GridView>

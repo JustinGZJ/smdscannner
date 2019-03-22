@@ -20,13 +20,16 @@ namespace DAQ.Service
     {
         private const string DEFAULT_PATH = "./Settings/DataValues.json";
         IReadWriteNet _readwriter;
+
         
         private IByteTransform _transform;
         private IEventAggregator _events;
 
         private int PDU = 100;
+      
 
-        private object _enable = new object();
+       static  object _enable = new object();
+         public static object Locker=>_enable;
         public void Load(string FilePath = DEFAULT_PATH)
         {
             lock (_enable)
@@ -46,8 +49,7 @@ namespace DAQ.Service
                 catch (Exception ex)
                 {
 
-                }
-             
+                }            
             }
         }
         public async void Save(string FilePath = DEFAULT_PATH)
@@ -69,6 +71,7 @@ namespace DAQ.Service
         }
         public DataStorage([Inject]IReadWriteNet readwriter,[Inject]IByteTransform transform,[Inject] IEventAggregator events)
         {
+   
             this._events = events;
             this._transform = transform;
             _readwriter = readwriter;
@@ -77,10 +80,9 @@ namespace DAQ.Service
            {
                while (true)
                {
-
                    lock (_enable)
                    {
-                       //对数据进行分组，每组内间隔不超过PDU
+                    //   对数据进行分组，每组内间隔不超过PDU
                        int arrIndex = 0;
                        var sortedVars = DataValues.OrderBy(x => x.StartIndex).ToList();
                        var arrList = new List<List<VAR>> { new List<VAR>() { sortedVars[0] } };
@@ -100,7 +102,7 @@ namespace DAQ.Service
                        }
                        foreach (var list in arrList)
                        {
-                           //获取组内需要请求的字数
+                        //   获取组内需要请求的字数
                            int nShorts = 0;
                            foreach (var s in list)
                            {
@@ -120,7 +122,7 @@ namespace DAQ.Service
                                        {
                                            case TYPE.BOOL:
                                                var cs = transform.TransUInt16(buffer, (v.StartIndex - s) * 2);
-                                               v.Value =  (cs&(1<<v.Tag))>0;
+                                               v.Value = (cs & (1 << v.Tag)) > 0;
                                                break;
                                            case TYPE.FLOAT:
                                                v.Value = transform.TransSingle(buffer, (v.StartIndex - s) * 2);
@@ -142,7 +144,9 @@ namespace DAQ.Service
                                {
                                    _events.Publish(new MsgItem()
                                    {
-                                        Level = "E", Time = DateTime.Now, Value = "Read from data server fail"
+                                       Level = "E",
+                                       Time = DateTime.Now,
+                                       Value = "Read from data server fail"
                                    });
                                }
                            }
@@ -180,6 +184,7 @@ namespace DAQ.Service
                        }
                        Refresh();
                    }
+
                    System.Threading.Thread.Sleep(1);
                }
            });
@@ -197,6 +202,19 @@ namespace DAQ.Service
             lock (_enable)
             {
                 DataValues.Remove(var);
+            }
+            Save();
+        }
+
+        public void ModifyItem(VAR SelectedItem, VAR v)
+        {
+            lock (_enable)
+            {
+                SelectedItem.Name = v.Name;
+                SelectedItem.StartIndex = v.StartIndex;
+                SelectedItem.Type = v.Type;
+                SelectedItem.Tag = v.Tag;
+                // DataValues=
             }
             Save();
         }

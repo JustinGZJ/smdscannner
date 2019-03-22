@@ -10,19 +10,46 @@ using DAQ.Database;
 using DAQ.Service;
 using Stylet;
 using StyletIoC;
-using  DAQ.Pages;
+using DAQ.Pages;
+using Microsoft.EntityFrameworkCore;
+using Timer = System.Timers.Timer;
 
 namespace DAQ.Service
 {
+
+
+    public class SimpleMonitor
+    {
+        private int _busyCount;
+
+        public void Enter()
+        {
+            Interlocked.Exchange(ref _busyCount, 1);
+        }
+
+        public void Leave()
+        {
+            Interlocked.Exchange(ref _busyCount, 0);
+        }
+        public bool Busy => this._busyCount > 0;
+    }
     public class RunstatusService
     {
         private int _runid = -1;
-        readonly StatusDto _status = new StatusDto() { AlarmInfoId = -1 };
+        readonly StatusDto _status = new StatusDto() { StatusInfoId = -1 };
+        public StatusDto Status => _status;
         readonly List<StatusInfoDto> alarmInfo = new List<StatusInfoDto>();
         [Inject] public IEventAggregator events;
-        public RunstatusService([Inject]DataStorage storage, int stationId)
+        public static SimpleMonitor Monitor { get; } = new SimpleMonitor();
+        private int _stationid;
+        public RunstatusService(int stationId)
         {
-            OeedbContext.DbMutex.WaitOne();
+            _stationid = stationId;
+            LoadAlarmInfos(stationId);
+        }
+
+        private void LoadAlarmInfos(int stationId)
+        {
             try
             {
                 using (var db = new OeedbContext())
@@ -40,45 +67,25 @@ namespace DAQ.Service
             }
             catch (Exception ex)
             {
-                events.PostError(ex.Message);
-            }
-            finally
-            {
-                OeedbContext.DbMutex.ReleaseMutex();
+                    events.PostError(ex.Message);
             }
         }
+
+
         public void SetStatus(ushort value)
         {
+            if (Monitor.Busy)
+            {
+                SpinWait.SpinUntil(() => Monitor.Busy == false);
+                LoadAlarmInfos(_stationid);
+            }
             if (alarmInfo.Any(x => x.AlarmIndex == value))
             {
                 //找到报警信息的索引
                 var info = alarmInfo.Find(x => x.AlarmIndex == value);
-                if (_status.AlarmInfoId != info.Id)
+                if (_status.StatusInfoId != info.Id)
                 {
-                    if (_status.AlarmInfoId == -1)
-                    {
-                        OeedbContext.DbMutex.WaitOne();
-                        try
-                        {
-                            using (var db = new OeedbContext())
-                            {
-                                db.Alarms.Add(new StatusDto()
-                                {
-                                    Time = _status.Time,
-                                    StatusInfo = _status.StatusInfo,
-                                    AlarmInfoId = _status.AlarmInfoId,
-                                    Span = _status.Span
-                                });
-                                db.SaveChangesAsync();
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            events.PostError(ex.Message);
-                            //  throw;
-                        }
-                    }
-                    _status.AlarmInfoId = info.Id;
+                    _status.StatusInfoId = info.Id;
                     _status.Time = DateTime.Now;
                     _status.StatusInfo = info;
                 }
@@ -87,7 +94,6 @@ namespace DAQ.Service
                     _status.Span = DateTime.Now - _status.Time;
                 }
             }
-
         }
 
         public static void ReadAlarmFromFile(int stationid, string filename)
@@ -95,16 +101,25 @@ namespace DAQ.Service
             try
             {
                 var lines = File.ReadAllLines(filename);
-                var jbxx = lines.SkipWhile(x => x.Contains("基本信息"));
+                int index = 0;
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    if (lines[i].Contains("基本信息_Y39"))
+                    {
+                        index = i;
+                        break;
+                    }
+                }
+                var jbxx = lines.Skip(index);
                 if (jbxx.Any())
                 {
-                    var b = jbxx.Skip(3);
+                    var b = jbxx.Skip(3).ToArray();
                     List<StatusInfoDto> infos = new List<StatusInfoDto>();
                     foreach (var a in b)
                     {
                         var s = from m in a.Split('\t') select m.Trim('"');
                         var v = s as string[] ?? s.ToArray();
-                        if (v.Any())
+                        if (v.Length > 2 && !string.IsNullOrEmpty(v[1]))
                         {
                             var infoDto = new StatusInfoDto()
                             {
@@ -115,13 +130,25 @@ namespace DAQ.Service
                             infos.Add(infoDto);
                         }
                     }
+
+                    OeedbContext.DbMutex.WaitOne();
                     using (var db = new OeedbContext())
                     {
                         var oldinfos = db.AlarmInfos.Where(x => x.StationId == stationid);
-                        db.AlarmInfos.RemoveRange(oldinfos);
-                        db.AlarmInfos.AddRange();
+                        foreach (var info in infos)
+                        {
+                            if (oldinfos.Any(x => x.AlarmContent == info.AlarmContent))
+                            {
+                                oldinfos.Single(x => x.AlarmContent == info.AlarmContent).AlarmIndex = info.AlarmIndex;
+                            }
+                            else
+                            {
+                                db.AlarmInfos.Add(info);
+                            }
+                        }
                         db.SaveChangesAsync();
                     }
+                    OeedbContext.DbMutex.ReleaseMutex();
                 }
             }
             catch (Exception ex)
@@ -129,7 +156,6 @@ namespace DAQ.Service
                 MessageBox.Show(ex.Message);
                 //        throw;
             }
-
         }
 
     }

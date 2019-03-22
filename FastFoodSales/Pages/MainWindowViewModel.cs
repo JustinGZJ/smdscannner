@@ -29,7 +29,7 @@ namespace DAQ
 
         public MainWindowViewModel([Inject]IEnumerable<IMainTabViewModel> mainTabs)
         {
-            Items.AddRange(mainTabs.OrderBy(x=>x.TabIndex));
+            Items.AddRange(mainTabs.Where(x=>x.Visiable==true).OrderBy(x=>x.TabIndex));
         }
 
         protected override void OnInitialActivate()

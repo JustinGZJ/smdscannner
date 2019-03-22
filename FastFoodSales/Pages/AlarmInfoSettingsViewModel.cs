@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using DAQ.Database;
 using DAQ.Service;
@@ -20,8 +21,9 @@ namespace DAQ.Pages
 
         public AlarmInfoSettingsViewModel()
         {
+            DisplayName = "报警信息";
             using (var db = new OeedbContext())  
-            {
+            {              
                 if (db.AlarmInfos.Any())
                 {
                     var e = db.AlarmInfos.Select(x => x.StationId);
@@ -33,9 +35,16 @@ namespace DAQ.Pages
 
         public void Filter(object s, SelectionChangedEventArgs e)
         {
-            if (s is ComboBox cbo)
+            try
             {
-                FilterByStationId((int)cbo.SelectedValue);
+                if (s is ComboBox cbo)
+                {
+                    FilterByStationId((int)cbo.SelectedValue);
+                }
+            }
+            catch (Exception)
+            {
+               // throw;
             }
         }
 
@@ -44,22 +53,33 @@ namespace DAQ.Pages
             using (var db = new OeedbContext())
             {
                 Items.Clear();
-                Items.AddRange(db.AlarmInfos.Where(x => x.StationId == stationid));
+                Items.AddRange(db.AlarmInfos.Where(x => x.StationId == stationid).OrderBy(x=>x.AlarmIndex));
             }
         }
 
-        public void LoadFromFile(int stationid)
+        public void LoadFromFile(string Stationid)
         {
+           if(!int.TryParse(Stationid,out int stationid))
+           {
+               MessageBox.Show("Station id must be integer");
+               return;
+           }
+           
             OpenFileDialog dlgDialog = new OpenFileDialog();
             dlgDialog.Filter = "All files（*.*）|*.*|csv files(*.*)|*.csv";
             if (dlgDialog.ShowDialog() == true)
             {
+                RunstatusService.Monitor.Enter();
                 RunstatusService.ReadAlarmFromFile(stationid, dlgDialog.FileName);
+                RunstatusService.Monitor.Leave();
             }
             using (var db = new OeedbContext())
             {
                 Items.Clear();
-                Items.AddRange(db.AlarmInfos);
+                foreach (var d in db.AlarmInfos)
+                {
+                   Items.Add(d);
+                }
             }
         }
     }

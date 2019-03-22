@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,15 +22,24 @@ namespace DAQ.Pages
 
         public void Handle(MsgItem message)
         {
-            Items.Insert(0, message);
-            if (Items.Count > 20)
+            try
             {
-                Items.RemoveAt(Items.Count - 1);
+                Items.Insert(0, message);
+                if (Items.Count > 20)
+                {
+                    Items.RemoveAt(Items.Count - 1);
+                }
+            }
+            catch (Exception ex)
+            {
+
+            //    throw;
             }
         }
 
         public PackIconKind PackIcon { get; set; } = PackIconKind.Message;
         public string Header { get; set; } = "Message";
+        public bool Visiable { get; set; } = true;
         public int TabIndex { get; set; } = (int)Pages.TabIndex.MESSAGES;
     }
 

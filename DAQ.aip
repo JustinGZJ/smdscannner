@@ -1,0 +1,612 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<DOCUMENT Type="Advanced Installer" CreateVersion="15.2" version="15.2" Modules="professional" RootPath="." Language="en" Id="{1367FBB5-AB18-4818-9FC6-CD1F2460E24D}">
+  <COMPONENT cid="caphyon.advinst.msicomp.ProjectOptionsComponent">
+    <ROW Name="HiddenItems" Value="AppXProductDetailsComponent;AppXDependenciesComponent;AppXAppDetailsComponent;AppXVisualAssetsComponent;AppXCapabilitiesComponent;AppXAppDeclarationsComponent;AppXUriRulesComponent;MsiJavaComponent;MsiDriverPackagesComponent;UserAccountsComponent;ScheduledTasksComponent;SqlConnectionComponent;AutorunComponent;FirewallExceptionComponent;GameUxComponent;MsiDirectEditorComponent;SharePointSlnComponent;SilverlightSlnComponent;MultipleInstancesComponent;SccmComponent;ActSyncAppComponent"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiPropsComponent">
+    <ROW Property="AI_BITMAP_DISPLAY_MODE" Value="0"/>
+    <ROW Property="AI_FINDEXE_TITLE" Value="Select the installation package for [|ProductName]" ValueLocId="AI.Property.FindExeTitle"/>
+    <ROW Property="AI_PREDEF_LCONDS_PROPS" Value="AI_DETECTED_DOTNET_VERSION"/>
+    <ROW Property="AI_REQUIRED_DOTNET_DISPLAY" MultiBuildValue="DefaultBuild:4.6.2" ValueLocId="-"/>
+    <ROW Property="AI_REQUIRED_DOTNET_VERSION" MultiBuildValue="DefaultBuild:4.6.2" ValueLocId="-"/>
+    <ROW Property="AI_ThemeStyle" Value="aero" MultiBuildValue="DefaultBuild:style2" MsiKey="AI_ThemeStyle"/>
+    <ROW Property="ALLUSERS" Value="1"/>
+    <ROW Property="ARPCOMMENTS" Value="This installer database contains the logic and data required to install [|ProductName]." ValueLocId="*"/>
+    <ROW Property="ARPNOREPAIR" MultiBuildValue="DefaultBuild:1"/>
+    <ROW Property="ARPPRODUCTICON" Value="application.exe" Type="8"/>
+    <ROW Property="Manufacturer" Value="Tanac"/>
+    <ROW Property="ProductCode" Value="1033:{79C0D7C8-04D0-46BF-B943-3758F91F2880} " Type="16"/>
+    <ROW Property="ProductLanguage" Value="1033"/>
+    <ROW Property="ProductName" Value="DAQ"/>
+    <ROW Property="ProductVersion" Value="1.0.0" Type="32"/>
+    <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND;AI_SETUPEXEPATH;SETUPEXEDIR"/>
+    <ROW Property="UpgradeCode" Value="{3F8B88CC-D7F2-4FA0-99E6-DA29183BC11D}"/>
+    <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
+    <ROW Property="WindowsType9XDisplay" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT" MultiBuildValue="DefaultBuild:Windows XP SP3 x86, Windows Server 2003 SP2 x86, Windows Vista x86, Windows Server 2008 x86" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT40" MultiBuildValue="DefaultBuild:Windows NT 4.0" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT40Display" MultiBuildValue="DefaultBuild:Windows NT 4.0" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT50" MultiBuildValue="DefaultBuild:Windows 2000" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT50Display" MultiBuildValue="DefaultBuild:Windows 2000" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT5X" MultiBuildValue="DefaultBuild:Windows XP/2003 RTM, Windows XP/2003 SP1, Windows XP SP2 x86" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT5XDisplay" MultiBuildValue="DefaultBuild:Windows XP/2003 RTM, Windows XP/2003 SP1, Windows XP SP2 x86" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT64" MultiBuildValue="DefaultBuild:Windows XP SP2 x64, Windows Server 2003 SP2 x64, Windows Vista x64, Windows Server 2008 x64" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT64Display" MultiBuildValue="DefaultBuild:Windows XP SP2 x64, Windows Server 2003 SP2 x64, Windows Vista x64, Windows Server 2008 x64" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNTDisplay" MultiBuildValue="DefaultBuild:Windows XP SP3 x86, Windows Server 2003 SP2 x86, Windows Vista x86, Windows Server 2008 x86" ValueLocId="-"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiDirsComponent">
+    <ROW Directory="APPDIR" Directory_Parent="TARGETDIR" DefaultDir="APPDIR:." IsPseudoRoot="1"/>
+    <ROW Directory="DesktopFolder" Directory_Parent="TARGETDIR" DefaultDir="DESKTO~1|DesktopFolder" IsPseudoRoot="1"/>
+    <ROW Directory="SHORTCUTDIR" Directory_Parent="TARGETDIR" DefaultDir="SHORTC~1|SHORTCUTDIR" IsPseudoRoot="1"/>
+    <ROW Directory="Settings_Dir" Directory_Parent="APPDIR" DefaultDir="Settings"/>
+    <ROW Directory="StartupFolder" Directory_Parent="TARGETDIR" DefaultDir="STARTU~1|StartupFolder" IsPseudoRoot="1"/>
+    <ROW Directory="TARGETDIR" DefaultDir="SourceDir"/>
+    <ROW Directory="x64_Dir" Directory_Parent="APPDIR" DefaultDir="x64"/>
+    <ROW Directory="x86_Dir" Directory_Parent="APPDIR" DefaultDir="x86"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
+    <ROW Component="AI_ExePath" ComponentId="{1278495D-8CD4-4D43-8927-1601ACC68D43}" Directory_="APPDIR" Attributes="4" KeyPath="AI_ExePath"/>
+    <ROW Component="ControlzEx.dll" ComponentId="{67AF41D4-4CD6-474F-ADA0-3C01EA934969}" Directory_="APPDIR" Attributes="0" KeyPath="ControlzEx.dll"/>
+    <ROW Component="Costura.dll" ComponentId="{E889FBA0-088E-4598-BC3F-293F834EC032}" Directory_="APPDIR" Attributes="0" KeyPath="Costura.dll"/>
+    <ROW Component="DAQ.exe" ComponentId="{61614750-863C-4D01-929C-E3741BB6BE97}" Directory_="APPDIR" Attributes="0" KeyPath="DAQ.exe"/>
+    <ROW Component="Dapper.dll" ComponentId="{511454D2-B121-451A-A449-1D57C2AF348D}" Directory_="APPDIR" Attributes="0" KeyPath="Dapper.dll"/>
+    <ROW Component="DataValues.json" ComponentId="{149E6EF0-8075-4408-A23D-1E19F63D00CB}" Directory_="Settings_Dir" Attributes="0" KeyPath="DataValues.json" Type="0"/>
+    <ROW Component="Dragablz.dll" ComponentId="{3648C10E-B7CA-4987-963F-8A2111FEC2F4}" Directory_="APPDIR" Attributes="0" KeyPath="Dragablz.dll"/>
+    <ROW Component="HslCommunication.dll" ComponentId="{48C81CA3-A7B6-4BC3-8BD0-A3F110AFD21A}" Directory_="APPDIR" Attributes="0" KeyPath="HslCommunication.dll"/>
+    <ROW Component="LiveCharts.Wpf.dll" ComponentId="{BBE6D4DA-C80C-41FA-81C0-1211E5800F46}" Directory_="APPDIR" Attributes="0" KeyPath="LiveCharts.Wpf.dll"/>
+    <ROW Component="LiveCharts.dll" ComponentId="{6CF40895-83B0-4312-BAA8-7795CC2E40D1}" Directory_="APPDIR" Attributes="0" KeyPath="LiveCharts.dll"/>
+    <ROW Component="MahApps.Metro.dll" ComponentId="{F910344A-1FA9-4FFF-AA44-C66015036ADD}" Directory_="APPDIR" Attributes="0" KeyPath="MahApps.Metro.dll"/>
+    <ROW Component="MaterialDesignColors.dll" ComponentId="{C4598FF6-A6C7-4CB7-864D-5735B5B19D37}" Directory_="APPDIR" Attributes="0" KeyPath="MaterialDesignColors.dll"/>
+    <ROW Component="MaterialDesignThemes.Wpf.dll" ComponentId="{F7D81CFB-C925-497F-B159-FED98DFA0B7C}" Directory_="APPDIR" Attributes="0" KeyPath="MaterialDesignThemes.Wpf.dll"/>
+    <ROW Component="Microsoft.Data.Sqlite.dll" ComponentId="{AA5721D5-ACA7-421F-9B48-D7AB0213FE50}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.Data.Sqlite.dll"/>
+    <ROW Component="Microsoft.DotNet.PlatformAbstractions.dll" ComponentId="{9D6BF0BC-B6F1-46E8-BC3E-279345C8667B}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.DotNet.PlatformAbstractions.dll"/>
+    <ROW Component="Microsoft.EntityFrameworkCore.Abstractions.dll" ComponentId="{4E4B03A8-62B5-4F9F-A8CF-932F99A61AAE}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.EntityFrameworkCore.Abstractions.dll"/>
+    <ROW Component="Microsoft.EntityFrameworkCore.Design.dll" ComponentId="{F3052722-B538-4959-8371-C9E23C94C873}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.EntityFrameworkCore.Design.dll"/>
+    <ROW Component="Microsoft.EntityFrameworkCore.Relational.dll" ComponentId="{74298F7A-B53A-46C4-A5AF-CD3C87286AE2}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.EntityFrameworkCore.Relational.dll"/>
+    <ROW Component="Microsoft.EntityFrameworkCore.SqlServer.dll" ComponentId="{07239EEB-E678-4A22-A6A0-32CCB36645F9}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.EntityFrameworkCore.SqlServer.dll"/>
+    <ROW Component="Microsoft.EntityFrameworkCore.Sqlite.dll" ComponentId="{EDD87DFC-3E52-4885-8863-F425CCA11FF5}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.EntityFrameworkCore.Sqlite.dll"/>
+    <ROW Component="Microsoft.EntityFrameworkCore.dll" ComponentId="{6DAE2CF8-530C-46CF-B9A5-EDC449638C15}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.EntityFrameworkCore.dll"/>
+    <ROW Component="Microsoft.Extensions.Caching.Abstractions.dll" ComponentId="{E4079393-B909-49BE-91C0-9D16BEA947AD}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.Extensions.Caching.Abstractions.dll"/>
+    <ROW Component="Microsoft.Extensions.Caching.Memory.dll" ComponentId="{A2BB89E3-D96C-47F3-BC2F-9CF8212B0D3C}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.Extensions.Caching.Memory.dll"/>
+    <ROW Component="Microsoft.Extensions.Configuration.Abstractions.dll" ComponentId="{D2BEB816-2169-4298-90DB-C64A53522FE5}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.Extensions.Configuration.Abstractions.dll"/>
+    <ROW Component="Microsoft.Extensions.Configuration.Binder.dll" ComponentId="{5FFE7F52-42A7-4A3E-949A-81D97E93AE92}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.Extensions.Configuration.Binder.dll"/>
+    <ROW Component="Microsoft.Extensions.Configuration.dll" ComponentId="{2C16FF0D-7135-43CE-895E-A8E3D2A82562}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.Extensions.Configuration.dll"/>
+    <ROW Component="Microsoft.Extensions.DependencyInjection.Abstractions.dll" ComponentId="{3D13F262-F7B5-4A7A-8389-830A89737298}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.Extensions.DependencyInjection.Abstractions.dll"/>
+    <ROW Component="Microsoft.Extensions.DependencyInjection.dll" ComponentId="{AF16F4A5-745F-4390-972A-D07AFE756A71}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.Extensions.DependencyInjection.dll"/>
+    <ROW Component="Microsoft.Extensions.DependencyModel.dll" ComponentId="{3F131464-3852-41EF-8E13-B88183FC05ED}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.Extensions.DependencyModel.dll"/>
+    <ROW Component="Microsoft.Extensions.Logging.Abstractions.dll" ComponentId="{C54501BA-FC93-46F4-BA4C-147DB4C2455B}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.Extensions.Logging.Abstractions.dll"/>
+    <ROW Component="Microsoft.Extensions.Logging.dll" ComponentId="{A45E1FD1-5C3A-40CB-873E-696E3E0EBA61}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.Extensions.Logging.dll"/>
+    <ROW Component="Microsoft.Extensions.Options.dll" ComponentId="{0EB29BF8-29DF-4E44-9FEE-7C19C183256D}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.Extensions.Options.dll"/>
+    <ROW Component="Microsoft.Extensions.Primitives.dll" ComponentId="{BAEB0E34-B16B-4C54-A8A8-AADA87D4A8D0}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.Extensions.Primitives.dll"/>
+    <ROW Component="Microsoft.Win32.Primitives.dll" ComponentId="{585D6409-CD93-4B48-87E2-9FB87E836958}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.Win32.Primitives.dll"/>
+    <ROW Component="Microsoft.Xaml.Behaviors.dll" ComponentId="{DC343DE8-4122-4B62-B189-49E59E2AEC14}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.Xaml.Behaviors.dll"/>
+    <ROW Component="ModbusService.exe" ComponentId="{7B3EBF3B-D1D0-45AA-AEDF-A02766ADE2C2}" Directory_="APPDIR" Attributes="0" KeyPath="ModbusService.exe"/>
+    <ROW Component="NModbus4.dll" ComponentId="{56B22D9E-3783-4DAD-BF45-C8B71825C5D5}" Directory_="APPDIR" Attributes="0" KeyPath="NModbus4.dll"/>
+    <ROW Component="Newtonsoft.Json.dll" ComponentId="{2806812A-D415-46E4-A39D-40A018270AA8}" Directory_="APPDIR" Attributes="0" KeyPath="Newtonsoft.Json.dll"/>
+    <ROW Component="ProductInformation" ComponentId="{8D1AA62B-7EBC-42DD-B247-C12A39FE1FFB}" Directory_="APPDIR" Attributes="4" KeyPath="Version"/>
+    <ROW Component="Remotion.Linq.dll" ComponentId="{9753BE5E-D284-44B6-B922-64EE989D747F}" Directory_="APPDIR" Attributes="0" KeyPath="Remotion.Linq.dll"/>
+    <ROW Component="SHORTCUTDIR" ComponentId="{E782C5F2-2F79-4AE3-83CB-9070FD2112A3}" Directory_="SHORTCUTDIR" Attributes="0"/>
+    <ROW Component="SQLite.Interop.dll" ComponentId="{B27C6919-2FC9-46E1-8BCC-AC78804C13D6}" Directory_="x64_Dir" Attributes="256" KeyPath="SQLite.Interop.dll"/>
+    <ROW Component="SQLite.Interop.dll_1" ComponentId="{91E8DB7D-3A58-4602-A7D2-D744B3F0F6EB}" Directory_="x86_Dir" Attributes="0" KeyPath="SQLite.Interop.dll_1"/>
+    <ROW Component="SQLitePCLRaw.batteries_green.dll" ComponentId="{54B2864C-9BC8-4972-89BE-936443143F35}" Directory_="APPDIR" Attributes="0" KeyPath="SQLitePCLRaw.batteries_green.dll"/>
+    <ROW Component="SQLitePCLRaw.batteries_v2.dll" ComponentId="{88321262-B6B5-4183-A053-7485F9652C41}" Directory_="APPDIR" Attributes="0" KeyPath="SQLitePCLRaw.batteries_v2.dll"/>
+    <ROW Component="SQLitePCLRaw.core.dll" ComponentId="{957408AD-C541-458B-A9FF-F44CAFA7FEF1}" Directory_="APPDIR" Attributes="0" KeyPath="SQLitePCLRaw.core.dll"/>
+    <ROW Component="SQLitePCLRaw.provider.e_sqlite3.dll" ComponentId="{85CDD0F4-4B61-4B9B-B7A3-E0C592B56746}" Directory_="APPDIR" Attributes="0" KeyPath="SQLitePCLRaw.provider.e_sqlite3.dll"/>
+    <ROW Component="SimpleTCP.dll" ComponentId="{06049C6C-09E2-4686-9515-4AE0B83A5207}" Directory_="APPDIR" Attributes="0" KeyPath="SimpleTCP.dll"/>
+    <ROW Component="Stylet.dll" ComponentId="{0F82D19A-4388-46B5-8E70-89E1966D2271}" Directory_="APPDIR" Attributes="0" KeyPath="Stylet.dll"/>
+    <ROW Component="System.AppContext.dll" ComponentId="{0A0F757C-3E10-4125-AF7C-9BB9B0C25C49}" Directory_="APPDIR" Attributes="0" KeyPath="System.AppContext.dll"/>
+    <ROW Component="System.Buffers.dll" ComponentId="{8D24429F-F790-4FA1-803C-6F4C8F55607D}" Directory_="APPDIR" Attributes="0" KeyPath="System.Buffers.dll"/>
+    <ROW Component="System.Collections.Concurrent.dll" ComponentId="{E529DBBC-094B-4EA0-8A66-D41C59A18B67}" Directory_="APPDIR" Attributes="0" KeyPath="System.Collections.Concurrent.dll"/>
+    <ROW Component="System.Collections.Immutable.dll" ComponentId="{CD204872-1769-4B09-99A9-9BF5003A6052}" Directory_="APPDIR" Attributes="0" KeyPath="System.Collections.Immutable.dll"/>
+    <ROW Component="System.Collections.NonGeneric.dll" ComponentId="{FA668BC7-BE22-4A49-93BD-4B584068358B}" Directory_="APPDIR" Attributes="0" KeyPath="System.Collections.NonGeneric.dll"/>
+    <ROW Component="System.Collections.Specialized.dll" ComponentId="{80EA25D3-7E93-42AD-BC5A-47A4735F9001}" Directory_="APPDIR" Attributes="0" KeyPath="System.Collections.Specialized.dll"/>
+    <ROW Component="System.Collections.dll" ComponentId="{95E1F65D-AC9D-45CC-8B8D-76FB9F858ADA}" Directory_="APPDIR" Attributes="0" KeyPath="System.Collections.dll"/>
+    <ROW Component="System.ComponentModel.Annotations.dll" ComponentId="{F3C8E8B6-98B3-447A-BE19-D6BB85E143FC}" Directory_="APPDIR" Attributes="0" KeyPath="System.ComponentModel.Annotations.dll"/>
+    <ROW Component="System.ComponentModel.EventBasedAsync.dll" ComponentId="{5F37322C-5132-4386-8D7E-96A552503B14}" Directory_="APPDIR" Attributes="0" KeyPath="System.ComponentModel.EventBasedAsync.dll"/>
+    <ROW Component="System.ComponentModel.Primitives.dll" ComponentId="{5E56BEFC-5417-4443-8AC3-DAC546F08ED1}" Directory_="APPDIR" Attributes="0" KeyPath="System.ComponentModel.Primitives.dll"/>
+    <ROW Component="System.ComponentModel.TypeConverter.dll" ComponentId="{D247B738-987C-4349-8700-E44CB744A0E8}" Directory_="APPDIR" Attributes="0" KeyPath="System.ComponentModel.TypeConverter.dll"/>
+    <ROW Component="System.ComponentModel.dll" ComponentId="{691DC9E6-7A21-4A31-A3EA-AC4F13A5B17E}" Directory_="APPDIR" Attributes="0" KeyPath="System.ComponentModel.dll"/>
+    <ROW Component="System.Console.dll" ComponentId="{0D293D0B-8F04-441B-87F4-19DF741746FA}" Directory_="APPDIR" Attributes="0" KeyPath="System.Console.dll"/>
+    <ROW Component="System.Data.Common.dll" ComponentId="{DBF3C5E0-0F15-4784-A488-228A0C41FCE3}" Directory_="APPDIR" Attributes="0" KeyPath="System.Data.Common.dll"/>
+    <ROW Component="System.Data.SQLite.dll" ComponentId="{60CA9ECA-1757-4F75-B1C7-19A9CA6A6568}" Directory_="APPDIR" Attributes="0" KeyPath="System.Data.SQLite.dll"/>
+    <ROW Component="System.Data.SqlClient.dll" ComponentId="{5896623C-650C-4D83-9B40-5D0F5794690F}" Directory_="APPDIR" Attributes="0" KeyPath="System.Data.SqlClient.dll"/>
+    <ROW Component="System.Diagnostics.Contracts.dll" ComponentId="{8F0494DA-8CBA-4C8A-BA9D-62B132FFDE18}" Directory_="APPDIR" Attributes="0" KeyPath="System.Diagnostics.Contracts.dll"/>
+    <ROW Component="System.Diagnostics.Debug.dll" ComponentId="{5737039A-484C-49A5-A4F2-F755F5CD4A02}" Directory_="APPDIR" Attributes="0" KeyPath="System.Diagnostics.Debug.dll"/>
+    <ROW Component="System.Diagnostics.DiagnosticSource.dll" ComponentId="{63D19529-EC95-42CF-ADB7-7C8E163071FD}" Directory_="APPDIR" Attributes="0" KeyPath="System.Diagnostics.DiagnosticSource.dll"/>
+    <ROW Component="System.Diagnostics.FileVersionInfo.dll" ComponentId="{E46FB70B-4B5F-4C76-A3AA-71F9F65C0F07}" Directory_="APPDIR" Attributes="0" KeyPath="System.Diagnostics.FileVersionInfo.dll"/>
+    <ROW Component="System.Diagnostics.Process.dll" ComponentId="{BEAB6738-5043-4732-8956-51FD6C66C2F9}" Directory_="APPDIR" Attributes="0" KeyPath="System.Diagnostics.Process.dll"/>
+    <ROW Component="System.Diagnostics.StackTrace.dll" ComponentId="{234A7561-AAF3-4DEE-89C4-B57FA2321E1C}" Directory_="APPDIR" Attributes="0" KeyPath="System.Diagnostics.StackTrace.dll"/>
+    <ROW Component="System.Diagnostics.TextWriterTraceListener.dll" ComponentId="{5AA4F825-2BDE-4EAA-BF7C-FB6435FE9281}" Directory_="APPDIR" Attributes="0" KeyPath="System.Diagnostics.TextWriterTraceListener.dll"/>
+    <ROW Component="System.Diagnostics.Tools.dll" ComponentId="{E7310203-1DEB-4A56-A022-534448098D89}" Directory_="APPDIR" Attributes="0" KeyPath="System.Diagnostics.Tools.dll"/>
+    <ROW Component="System.Diagnostics.TraceSource.dll" ComponentId="{BCF4CD2E-109D-4736-B693-ED5C27C37397}" Directory_="APPDIR" Attributes="0" KeyPath="System.Diagnostics.TraceSource.dll"/>
+    <ROW Component="System.Diagnostics.Tracing.dll" ComponentId="{2F9E0929-1041-428D-92AC-A166993BB66F}" Directory_="APPDIR" Attributes="0" KeyPath="System.Diagnostics.Tracing.dll"/>
+    <ROW Component="System.Drawing.Primitives.dll" ComponentId="{04150138-D664-4B7D-BCA7-D12D9271439A}" Directory_="APPDIR" Attributes="0" KeyPath="System.Drawing.Primitives.dll"/>
+    <ROW Component="System.Dynamic.Runtime.dll" ComponentId="{C1344422-9727-454D-90AC-4FC23F851184}" Directory_="APPDIR" Attributes="0" KeyPath="System.Dynamic.Runtime.dll"/>
+    <ROW Component="System.Globalization.Calendars.dll" ComponentId="{5295457C-F4D6-4414-BA5A-341C9778261E}" Directory_="APPDIR" Attributes="0" KeyPath="System.Globalization.Calendars.dll"/>
+    <ROW Component="System.Globalization.Extensions.dll" ComponentId="{E8E56965-B2DE-470F-90C1-5963E01DEE1E}" Directory_="APPDIR" Attributes="0" KeyPath="System.Globalization.Extensions.dll"/>
+    <ROW Component="System.Globalization.dll" ComponentId="{F25212F2-D798-4712-9BB9-5E4CA3273F54}" Directory_="APPDIR" Attributes="0" KeyPath="System.Globalization.dll"/>
+    <ROW Component="System.IO.Compression.ZipFile.dll" ComponentId="{1118CACF-26E4-43E4-9894-199FF05BD877}" Directory_="APPDIR" Attributes="0" KeyPath="System.IO.Compression.ZipFile.dll"/>
+    <ROW Component="System.IO.Compression.dll" ComponentId="{3F2A3DD6-AF3D-4898-9EF5-63AD621ACD07}" Directory_="APPDIR" Attributes="0" KeyPath="System.IO.Compression.dll"/>
+    <ROW Component="System.IO.FileSystem.DriveInfo.dll" ComponentId="{66402F64-97C8-43B9-86D2-897F409B6348}" Directory_="APPDIR" Attributes="0" KeyPath="System.IO.FileSystem.DriveInfo.dll"/>
+    <ROW Component="System.IO.FileSystem.Primitives.dll" ComponentId="{9086CB41-C3B9-4806-A3ED-4350E35B8871}" Directory_="APPDIR" Attributes="0" KeyPath="System.IO.FileSystem.Primitives.dll"/>
+    <ROW Component="System.IO.FileSystem.Watcher.dll" ComponentId="{A4758CDF-1F2A-457E-9ECF-BF7382BC2942}" Directory_="APPDIR" Attributes="0" KeyPath="System.IO.FileSystem.Watcher.dll"/>
+    <ROW Component="System.IO.FileSystem.dll" ComponentId="{64748004-014A-41A4-815D-684D40C3B9BB}" Directory_="APPDIR" Attributes="0" KeyPath="System.IO.FileSystem.dll"/>
+    <ROW Component="System.IO.IsolatedStorage.dll" ComponentId="{BAA41B18-2587-4686-A552-03E03E0C700D}" Directory_="APPDIR" Attributes="0" KeyPath="System.IO.IsolatedStorage.dll"/>
+    <ROW Component="System.IO.MemoryMappedFiles.dll" ComponentId="{1E7EE82A-7202-4B15-BF4F-CFF7470B494E}" Directory_="APPDIR" Attributes="0" KeyPath="System.IO.MemoryMappedFiles.dll"/>
+    <ROW Component="System.IO.Pipes.dll" ComponentId="{D80E321E-AC09-4001-96DA-5E12151F5AF5}" Directory_="APPDIR" Attributes="0" KeyPath="System.IO.Pipes.dll"/>
+    <ROW Component="System.IO.UnmanagedMemoryStream.dll" ComponentId="{0A697291-6A9A-4CD3-AABB-5F9D42164048}" Directory_="APPDIR" Attributes="0" KeyPath="System.IO.UnmanagedMemoryStream.dll"/>
+    <ROW Component="System.IO.dll" ComponentId="{FD9253D3-DE38-4A93-84EE-58FA66667160}" Directory_="APPDIR" Attributes="0" KeyPath="System.IO.dll"/>
+    <ROW Component="System.Interactive.Async.dll" ComponentId="{4F91DD8F-6794-4BAF-9A04-6A895ECC0376}" Directory_="APPDIR" Attributes="0" KeyPath="System.Interactive.Async.dll"/>
+    <ROW Component="System.Linq.Expressions.dll" ComponentId="{A04FD514-596A-4DC8-89BF-DC5D41FCE452}" Directory_="APPDIR" Attributes="0" KeyPath="System.Linq.Expressions.dll"/>
+    <ROW Component="System.Linq.Parallel.dll" ComponentId="{48E3F666-E972-4DFF-AC15-9924E5716301}" Directory_="APPDIR" Attributes="0" KeyPath="System.Linq.Parallel.dll"/>
+    <ROW Component="System.Linq.Queryable.dll" ComponentId="{5344FCC3-3F19-4743-A07B-113916940F21}" Directory_="APPDIR" Attributes="0" KeyPath="System.Linq.Queryable.dll"/>
+    <ROW Component="System.Linq.dll" ComponentId="{A8075D52-70E8-4863-B00A-E0C4692C552C}" Directory_="APPDIR" Attributes="0" KeyPath="System.Linq.dll"/>
+    <ROW Component="System.Memory.dll" ComponentId="{7CD7E5F9-FBAC-4FC7-9BC2-11DE0B1525E1}" Directory_="APPDIR" Attributes="0" KeyPath="System.Memory.dll"/>
+    <ROW Component="System.Net.Http.dll" ComponentId="{1F70C4E7-AEC3-4CD9-9D8B-9F9E0BD60993}" Directory_="APPDIR" Attributes="0" KeyPath="System.Net.Http.dll"/>
+    <ROW Component="System.Net.NameResolution.dll" ComponentId="{33251144-17FC-43E3-B7D9-8D22511AA7C1}" Directory_="APPDIR" Attributes="0" KeyPath="System.Net.NameResolution.dll"/>
+    <ROW Component="System.Net.NetworkInformation.dll" ComponentId="{619D3C78-0A15-4732-966C-CADAD30ED50A}" Directory_="APPDIR" Attributes="0" KeyPath="System.Net.NetworkInformation.dll"/>
+    <ROW Component="System.Net.Ping.dll" ComponentId="{B025999D-26F7-42E2-8BE7-A3CFD0EB83FB}" Directory_="APPDIR" Attributes="0" KeyPath="System.Net.Ping.dll"/>
+    <ROW Component="System.Net.Primitives.dll" ComponentId="{344F6561-2C2E-42A8-977F-30D185971484}" Directory_="APPDIR" Attributes="0" KeyPath="System.Net.Primitives.dll"/>
+    <ROW Component="System.Net.Requests.dll" ComponentId="{2B20F8BA-2616-4D38-8F8F-F76DFF0913D4}" Directory_="APPDIR" Attributes="0" KeyPath="System.Net.Requests.dll"/>
+    <ROW Component="System.Net.Security.dll" ComponentId="{9C438484-75EC-4D86-B687-C78861A17BE4}" Directory_="APPDIR" Attributes="0" KeyPath="System.Net.Security.dll"/>
+    <ROW Component="System.Net.Sockets.dll" ComponentId="{4DBD8A71-AF45-4045-8996-1E23F2BDBE15}" Directory_="APPDIR" Attributes="0" KeyPath="System.Net.Sockets.dll"/>
+    <ROW Component="System.Net.WebHeaderCollection.dll" ComponentId="{047D491B-C89B-426B-B188-3AE9D7FFFBF5}" Directory_="APPDIR" Attributes="0" KeyPath="System.Net.WebHeaderCollection.dll"/>
+    <ROW Component="System.Net.WebSockets.Client.dll" ComponentId="{7BD8EEFB-23E8-4B72-B99D-866629C5AF18}" Directory_="APPDIR" Attributes="0" KeyPath="System.Net.WebSockets.Client.dll"/>
+    <ROW Component="System.Net.WebSockets.dll" ComponentId="{1A4AFE0C-E492-4F82-BFA8-5FF2449E0AD9}" Directory_="APPDIR" Attributes="0" KeyPath="System.Net.WebSockets.dll"/>
+    <ROW Component="System.Numerics.Vectors.dll" ComponentId="{40586446-E400-4C6A-AC64-706AB3C04F9A}" Directory_="APPDIR" Attributes="0" KeyPath="System.Numerics.Vectors.dll"/>
+    <ROW Component="System.ObjectModel.dll" ComponentId="{B8D2C874-87EA-424E-BEE9-45F215ACEB6A}" Directory_="APPDIR" Attributes="0" KeyPath="System.ObjectModel.dll"/>
+    <ROW Component="System.Reflection.Extensions.dll" ComponentId="{9BB0587C-136D-498E-A1AA-47C6DD233B74}" Directory_="APPDIR" Attributes="0" KeyPath="System.Reflection.Extensions.dll"/>
+    <ROW Component="System.Reflection.Primitives.dll" ComponentId="{D881CF65-C068-4355-A775-ECBCF23E494B}" Directory_="APPDIR" Attributes="0" KeyPath="System.Reflection.Primitives.dll"/>
+    <ROW Component="System.Reflection.dll" ComponentId="{A07897E5-CCC7-4125-8DC7-C05C9BE290F9}" Directory_="APPDIR" Attributes="0" KeyPath="System.Reflection.dll"/>
+    <ROW Component="System.Resources.Reader.dll" ComponentId="{5490EC78-C48B-4DF2-8470-DF7D412E08EA}" Directory_="APPDIR" Attributes="0" KeyPath="System.Resources.Reader.dll"/>
+    <ROW Component="System.Resources.ResourceManager.dll" ComponentId="{B3D68F6B-31A8-4628-AAF0-A3D5A1168F70}" Directory_="APPDIR" Attributes="0" KeyPath="System.Resources.ResourceManager.dll"/>
+    <ROW Component="System.Resources.Writer.dll" ComponentId="{A9EAF984-89BB-4C2E-8ACA-52389BE42AA8}" Directory_="APPDIR" Attributes="0" KeyPath="System.Resources.Writer.dll"/>
+    <ROW Component="System.Runtime.CompilerServices.Unsafe.dll" ComponentId="{15A86BE4-48D7-43C7-A639-EBADD71AF5B6}" Directory_="APPDIR" Attributes="0" KeyPath="System.Runtime.CompilerServices.Unsafe.dll"/>
+    <ROW Component="System.Runtime.CompilerServices.VisualC.dll" ComponentId="{E42DDEC2-4CE0-4AEE-B530-C175176F698B}" Directory_="APPDIR" Attributes="0" KeyPath="System.Runtime.CompilerServices.VisualC.dll"/>
+    <ROW Component="System.Runtime.Extensions.dll" ComponentId="{FCF98466-5D1A-4E23-8F10-53F5939EDB19}" Directory_="APPDIR" Attributes="0" KeyPath="System.Runtime.Extensions.dll"/>
+    <ROW Component="System.Runtime.Handles.dll" ComponentId="{2918B5EC-D760-4A34-AD75-9CA78693B240}" Directory_="APPDIR" Attributes="0" KeyPath="System.Runtime.Handles.dll"/>
+    <ROW Component="System.Runtime.InteropServices.RuntimeInformation.dll" ComponentId="{61675E30-F6D8-42B8-BBC9-75974F89AE5A}" Directory_="APPDIR" Attributes="0" KeyPath="System.Runtime.InteropServices.RuntimeInformation.dll"/>
+    <ROW Component="System.Runtime.InteropServices.dll" ComponentId="{D824A6B5-CF91-4288-9EE1-2A01104BA8D9}" Directory_="APPDIR" Attributes="0" KeyPath="System.Runtime.InteropServices.dll"/>
+    <ROW Component="System.Runtime.Numerics.dll" ComponentId="{4B57B018-693C-4002-94A5-02CD0930FC3E}" Directory_="APPDIR" Attributes="0" KeyPath="System.Runtime.Numerics.dll"/>
+    <ROW Component="System.Runtime.Serialization.Formatters.dll" ComponentId="{D3009433-CF4C-4551-A997-756AC134CC7E}" Directory_="APPDIR" Attributes="0" KeyPath="System.Runtime.Serialization.Formatters.dll"/>
+    <ROW Component="System.Runtime.Serialization.Json.dll" ComponentId="{479B5C95-E4A7-458C-A16C-8014AE0D0B14}" Directory_="APPDIR" Attributes="0" KeyPath="System.Runtime.Serialization.Json.dll"/>
+    <ROW Component="System.Runtime.Serialization.Primitives.dll" ComponentId="{B621C8C3-1212-4160-9C6C-1FE070CF6443}" Directory_="APPDIR" Attributes="0" KeyPath="System.Runtime.Serialization.Primitives.dll"/>
+    <ROW Component="System.Runtime.Serialization.Xml.dll" ComponentId="{3A926776-30B0-44E6-AD0B-2D9488E7C2F6}" Directory_="APPDIR" Attributes="0" KeyPath="System.Runtime.Serialization.Xml.dll"/>
+    <ROW Component="System.Runtime.dll" ComponentId="{BFDAE985-EBC6-4714-AADB-AA891218EE3D}" Directory_="APPDIR" Attributes="0" KeyPath="System.Runtime.dll"/>
+    <ROW Component="System.Security.Claims.dll" ComponentId="{89E85A34-B2CC-4DA9-902B-9F6643669116}" Directory_="APPDIR" Attributes="0" KeyPath="System.Security.Claims.dll"/>
+    <ROW Component="System.Security.Cryptography.Algorithms.dll" ComponentId="{362BAB5F-9E37-4B10-8646-969AFDDA99DF}" Directory_="APPDIR" Attributes="0" KeyPath="System.Security.Cryptography.Algorithms.dll"/>
+    <ROW Component="System.Security.Cryptography.Csp.dll" ComponentId="{AC3E4974-CDBA-49B9-AC09-A834DE6D4969}" Directory_="APPDIR" Attributes="0" KeyPath="System.Security.Cryptography.Csp.dll"/>
+    <ROW Component="System.Security.Cryptography.Encoding.dll" ComponentId="{F8B56C29-6DE1-4010-BBA6-865EFBA7F198}" Directory_="APPDIR" Attributes="0" KeyPath="System.Security.Cryptography.Encoding.dll"/>
+    <ROW Component="System.Security.Cryptography.Primitives.dll" ComponentId="{3279660B-5EB3-4991-A212-35852466A233}" Directory_="APPDIR" Attributes="0" KeyPath="System.Security.Cryptography.Primitives.dll"/>
+    <ROW Component="System.Security.Cryptography.X509Certificates.dll" ComponentId="{AD1B6293-0824-482E-8336-E6A3FCA98E9F}" Directory_="APPDIR" Attributes="0" KeyPath="System.Security.Cryptography.X509Certificates.dll"/>
+    <ROW Component="System.Security.Principal.dll" ComponentId="{AD9690A0-C1E9-4F00-9E00-EBAAAF2FDA82}" Directory_="APPDIR" Attributes="0" KeyPath="System.Security.Principal.dll"/>
+    <ROW Component="System.Security.SecureString.dll" ComponentId="{400C4440-BBB3-423C-9029-0815E7ABC36A}" Directory_="APPDIR" Attributes="0" KeyPath="System.Security.SecureString.dll"/>
+    <ROW Component="System.Text.Encoding.Extensions.dll" ComponentId="{5F16CCDD-0803-470B-8FB6-DACF0FAC2D4A}" Directory_="APPDIR" Attributes="0" KeyPath="System.Text.Encoding.Extensions.dll"/>
+    <ROW Component="System.Text.Encoding.dll" ComponentId="{DF798080-3BF8-4990-A497-8FECDA2C67BB}" Directory_="APPDIR" Attributes="0" KeyPath="System.Text.Encoding.dll"/>
+    <ROW Component="System.Text.RegularExpressions.dll" ComponentId="{3C24BD0C-80B4-419D-A451-8654DDA852C3}" Directory_="APPDIR" Attributes="0" KeyPath="System.Text.RegularExpressions.dll"/>
+    <ROW Component="System.Threading.Overlapped.dll" ComponentId="{10899006-01D9-44EA-A550-E5AA50A251AE}" Directory_="APPDIR" Attributes="0" KeyPath="System.Threading.Overlapped.dll"/>
+    <ROW Component="System.Threading.Tasks.Parallel.dll" ComponentId="{F81D3286-F25C-4E3B-9E91-BC147B6F9CEA}" Directory_="APPDIR" Attributes="0" KeyPath="System.Threading.Tasks.Parallel.dll"/>
+    <ROW Component="System.Threading.Tasks.dll" ComponentId="{0A30C28D-BFB4-48CB-B13A-BACD6D254131}" Directory_="APPDIR" Attributes="0" KeyPath="System.Threading.Tasks.dll"/>
+    <ROW Component="System.Threading.Thread.dll" ComponentId="{2FB621D9-52EE-473E-89B0-239772D77A9C}" Directory_="APPDIR" Attributes="0" KeyPath="System.Threading.Thread.dll"/>
+    <ROW Component="System.Threading.ThreadPool.dll" ComponentId="{9910E971-CDC5-43DF-8E63-0A708D339B2C}" Directory_="APPDIR" Attributes="0" KeyPath="System.Threading.ThreadPool.dll"/>
+    <ROW Component="System.Threading.Timer.dll" ComponentId="{2D816CCC-08A0-4D4F-B01B-74CD0C57F8CA}" Directory_="APPDIR" Attributes="0" KeyPath="System.Threading.Timer.dll"/>
+    <ROW Component="System.Threading.dll" ComponentId="{4AE0E284-1CEC-44B5-9E9E-667CC39C8411}" Directory_="APPDIR" Attributes="0" KeyPath="System.Threading.dll"/>
+    <ROW Component="System.ValueTuple.dll" ComponentId="{03596487-19DB-4592-8765-7B76CB595B01}" Directory_="APPDIR" Attributes="0" KeyPath="System.ValueTuple.dll"/>
+    <ROW Component="System.Xml.ReaderWriter.dll" ComponentId="{F1525911-2734-431B-8B6D-E168E65A9FFC}" Directory_="APPDIR" Attributes="0" KeyPath="System.Xml.ReaderWriter.dll"/>
+    <ROW Component="System.Xml.XDocument.dll" ComponentId="{F5F7E7F4-2403-4A5F-8A84-A68BFD352116}" Directory_="APPDIR" Attributes="0" KeyPath="System.Xml.XDocument.dll"/>
+    <ROW Component="System.Xml.XPath.XDocument.dll" ComponentId="{F6BD1FCB-EF43-4BB9-BD2A-818BE923CEDE}" Directory_="APPDIR" Attributes="0" KeyPath="System.Xml.XPath.XDocument.dll"/>
+    <ROW Component="System.Xml.XPath.dll" ComponentId="{30B5E749-134D-4C08-B87C-911C0C982ADD}" Directory_="APPDIR" Attributes="0" KeyPath="System.Xml.XPath.dll"/>
+    <ROW Component="System.Xml.XmlDocument.dll" ComponentId="{40E7A6A0-6D59-4425-8817-533FC152BBCA}" Directory_="APPDIR" Attributes="0" KeyPath="System.Xml.XmlDocument.dll"/>
+    <ROW Component="System.Xml.XmlSerializer.dll" ComponentId="{3CC82580-56A8-4937-A5C7-6F6E2A45AB04}" Directory_="APPDIR" Attributes="0" KeyPath="System.Xml.XmlSerializer.dll"/>
+    <ROW Component="_" ComponentId="{1EADEFA1-0155-48C7-9916-852AFC16BEBD}" Directory_="APPDIR" Attributes="4" KeyPath="__1"/>
+    <ROW Component="camera.txt" ComponentId="{AC0C9CB7-DBEF-45C8-A876-D556F0F8E85C}" Directory_="APPDIR" Attributes="0" KeyPath="Costura.xml" Type="0"/>
+    <ROW Component="e_sqlite3.dll" ComponentId="{23E075C3-E776-4A0C-8FF9-168E8D628784}" Directory_="x64_Dir" Attributes="256" KeyPath="e_sqlite3.dll"/>
+    <ROW Component="e_sqlite3.dll_1" ComponentId="{1DE24536-610D-4158-AF4A-6A65501A3907}" Directory_="x86_Dir" Attributes="0" KeyPath="e_sqlite3.dll_1"/>
+    <ROW Component="inc.core.dll" ComponentId="{06954A18-7D90-4AB6-B70F-BC55C180901B}" Directory_="APPDIR" Attributes="0" KeyPath="inc.core.dll"/>
+    <ROW Component="inc.protocols.finsnet.dll" ComponentId="{43D18AE9-513E-4212-8FC6-CEA89B1B0FF1}" Directory_="APPDIR" Attributes="0" KeyPath="inc.protocols.finsnet.dll"/>
+    <ROW Component="netstandard.dll" ComponentId="{6910084C-A138-46A1-8814-535AF04A815D}" Directory_="APPDIR" Attributes="0" KeyPath="netstandard.dll"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatsComponent">
+    <ROW Feature="MainFeature" Title="MainFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0" Components="AI_ExePath ControlzEx.dll Costura.dll DAQ.exe Dapper.dll DataValues.json Dragablz.dll HslCommunication.dll LiveCharts.Wpf.dll LiveCharts.dll MahApps.Metro.dll MaterialDesignColors.dll MaterialDesignThemes.Wpf.dll Microsoft.Data.Sqlite.dll Microsoft.DotNet.PlatformAbstractions.dll Microsoft.EntityFrameworkCore.Abstractions.dll Microsoft.EntityFrameworkCore.Design.dll Microsoft.EntityFrameworkCore.Relational.dll Microsoft.EntityFrameworkCore.SqlServer.dll Microsoft.EntityFrameworkCore.Sqlite.dll Microsoft.EntityFrameworkCore.dll Microsoft.Extensions.Caching.Abstractions.dll Microsoft.Extensions.Caching.Memory.dll Microsoft.Extensions.Configuration.Abstractions.dll Microsoft.Extensions.Configuration.Binder.dll Microsoft.Extensions.Configuration.dll Microsoft.Extensions.DependencyInjection.Abstractions.dll Microsoft.Extensions.DependencyInjection.dll Microsoft.Extensions.DependencyModel.dll Microsoft.Extensions.Logging.Abstractions.dll Microsoft.Extensions.Logging.dll Microsoft.Extensions.Options.dll Microsoft.Extensions.Primitives.dll Microsoft.Win32.Primitives.dll Microsoft.Xaml.Behaviors.dll ModbusService.exe NModbus4.dll Newtonsoft.Json.dll ProductInformation Remotion.Linq.dll SHORTCUTDIR SQLite.Interop.dll SQLite.Interop.dll_1 SQLitePCLRaw.batteries_green.dll SQLitePCLRaw.batteries_v2.dll SQLitePCLRaw.core.dll SQLitePCLRaw.provider.e_sqlite3.dll SimpleTCP.dll Stylet.dll System.AppContext.dll System.Buffers.dll System.Collections.Concurrent.dll System.Collections.Immutable.dll System.Collections.NonGeneric.dll System.Collections.Specialized.dll System.Collections.dll System.ComponentModel.Annotations.dll System.ComponentModel.EventBasedAsync.dll System.ComponentModel.Primitives.dll System.ComponentModel.TypeConverter.dll System.ComponentModel.dll System.Console.dll System.Data.Common.dll System.Data.SQLite.dll System.Data.SqlClient.dll System.Diagnostics.Contracts.dll System.Diagnostics.Debug.dll System.Diagnostics.DiagnosticSource.dll System.Diagnostics.FileVersionInfo.dll System.Diagnostics.Process.dll System.Diagnostics.StackTrace.dll System.Diagnostics.TextWriterTraceListener.dll System.Diagnostics.Tools.dll System.Diagnostics.TraceSource.dll System.Diagnostics.Tracing.dll System.Drawing.Primitives.dll System.Dynamic.Runtime.dll System.Globalization.Calendars.dll System.Globalization.Extensions.dll System.Globalization.dll System.IO.Compression.ZipFile.dll System.IO.Compression.dll System.IO.FileSystem.DriveInfo.dll System.IO.FileSystem.Primitives.dll System.IO.FileSystem.Watcher.dll System.IO.FileSystem.dll System.IO.IsolatedStorage.dll System.IO.MemoryMappedFiles.dll System.IO.Pipes.dll System.IO.UnmanagedMemoryStream.dll System.IO.dll System.Interactive.Async.dll System.Linq.Expressions.dll System.Linq.Parallel.dll System.Linq.Queryable.dll System.Linq.dll System.Memory.dll System.Net.Http.dll System.Net.NameResolution.dll System.Net.NetworkInformation.dll System.Net.Ping.dll System.Net.Primitives.dll System.Net.Requests.dll System.Net.Security.dll System.Net.Sockets.dll System.Net.WebHeaderCollection.dll System.Net.WebSockets.Client.dll System.Net.WebSockets.dll System.Numerics.Vectors.dll System.ObjectModel.dll System.Reflection.Extensions.dll System.Reflection.Primitives.dll System.Reflection.dll System.Resources.Reader.dll System.Resources.ResourceManager.dll System.Resources.Writer.dll System.Runtime.CompilerServices.Unsafe.dll System.Runtime.CompilerServices.VisualC.dll System.Runtime.Extensions.dll System.Runtime.Handles.dll System.Runtime.InteropServices.RuntimeInformation.dll System.Runtime.InteropServices.dll System.Runtime.Numerics.dll System.Runtime.Serialization.Formatters.dll System.Runtime.Serialization.Json.dll System.Runtime.Serialization.Primitives.dll System.Runtime.Serialization.Xml.dll System.Runtime.dll System.Security.Claims.dll System.Security.Cryptography.Algorithms.dll System.Security.Cryptography.Csp.dll System.Security.Cryptography.Encoding.dll System.Security.Cryptography.Primitives.dll System.Security.Cryptography.X509Certificates.dll System.Security.Principal.dll System.Security.SecureString.dll System.Text.Encoding.Extensions.dll System.Text.Encoding.dll System.Text.RegularExpressions.dll System.Threading.Overlapped.dll System.Threading.Tasks.Parallel.dll System.Threading.Tasks.dll System.Threading.Thread.dll System.Threading.ThreadPool.dll System.Threading.Timer.dll System.Threading.dll System.ValueTuple.dll System.Xml.ReaderWriter.dll System.Xml.XDocument.dll System.Xml.XPath.XDocument.dll System.Xml.XPath.dll System.Xml.XmlDocument.dll System.Xml.XmlSerializer.dll _ camera.txt e_sqlite3.dll e_sqlite3.dll_1 inc.core.dll inc.protocols.finsnet.dll netstandard.dll"/>
+    <ATTRIBUTE name="CurrentFeature" value="MainFeature"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiFilesComponent">
+    <ROW File="ControlzEx.dll" Component_="ControlzEx.dll" FileName="CONTRO~1.DLL|ControlzEx.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\ControlzEx.dll" SelfReg="false" NextFile="ControlzEx.xml"/>
+    <ROW File="ControlzEx.xml" Component_="camera.txt" FileName="CONTRO~1.XML|ControlzEx.xml" Attributes="0" SourcePath="FastFoodSales\bin\Debug\ControlzEx.xml" SelfReg="false" NextFile="Costura.dll"/>
+    <ROW File="Costura.dll" Component_="Costura.dll" FileName="Costura.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Costura.dll" SelfReg="false" NextFile="Costura.xml"/>
+    <ROW File="Costura.xml" Component_="camera.txt" FileName="Costura.xml" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Costura.xml" SelfReg="false" NextFile="DAQ.exe"/>
+    <ROW File="DAQ.exe" Component_="DAQ.exe" FileName="DAQ.exe" Attributes="0" SourcePath="FastFoodSales\bin\Debug\DAQ.exe" SelfReg="false" NextFile="DAQ.exe.config" DigSign="true"/>
+    <ROW File="DAQ.exe.config" Component_="camera.txt" FileName="DAQEXE~1.CON|DAQ.exe.config" Attributes="0" SourcePath="FastFoodSales\bin\Debug\DAQ.exe.config" SelfReg="false" NextFile="DAQ.pdb"/>
+    <ROW File="DAQ.pdb" Component_="DAQ.exe" FileName="DAQ.pdb" Attributes="0" SourcePath="FastFoodSales\bin\Debug\DAQ.pdb" SelfReg="false" NextFile="data.db"/>
+    <ROW File="Dapper.dll" Component_="Dapper.dll" FileName="Dapper.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Dapper.dll" SelfReg="false" NextFile="Dapper.xml"/>
+    <ROW File="Dapper.xml" Component_="camera.txt" FileName="Dapper.xml" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Dapper.xml" SelfReg="false" NextFile="inc.core.dll"/>
+    <ROW File="DataValues.json" Component_="DataValues.json" FileName="DATAVA~1.JSO|DataValues.json" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Settings\DataValues.json" SelfReg="false" NextFile="SimpleTCP.dll"/>
+    <ROW File="Dragablz.dll" Component_="Dragablz.dll" FileName="Dragablz.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Dragablz.dll" SelfReg="false" NextFile="Dragablz.pdb"/>
+    <ROW File="Dragablz.pdb" Component_="Dragablz.dll" FileName="Dragablz.pdb" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Dragablz.pdb" SelfReg="false" NextFile="Dragablz.xml"/>
+    <ROW File="Dragablz.xml" Component_="camera.txt" FileName="Dragablz.xml" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Dragablz.xml" SelfReg="false" NextFile="HslCommunication.dll"/>
+    <ROW File="HslCommunication.dll" Component_="HslCommunication.dll" FileName="HSLCOM~1.DLL|HslCommunication.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\HslCommunication.dll" SelfReg="false" NextFile="HslCommunication.xml"/>
+    <ROW File="HslCommunication.xml" Component_="camera.txt" FileName="HSLCOM~1.XML|HslCommunication.xml" Attributes="0" SourcePath="FastFoodSales\bin\Debug\HslCommunication.xml" SelfReg="false" NextFile="LiveCharts.dll"/>
+    <ROW File="LiveCharts.Wpf.dll" Component_="LiveCharts.Wpf.dll" FileName="LIVECH~2.DLL|LiveCharts.Wpf.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\LiveCharts.Wpf.dll" SelfReg="false" NextFile="LiveCharts.Wpf.pdb"/>
+    <ROW File="LiveCharts.Wpf.pdb" Component_="LiveCharts.Wpf.dll" FileName="LIVECH~2.PDB|LiveCharts.Wpf.pdb" Attributes="0" SourcePath="FastFoodSales\bin\Debug\LiveCharts.Wpf.pdb" SelfReg="false" NextFile="LiveCharts.Wpf.xml"/>
+    <ROW File="LiveCharts.Wpf.xml" Component_="camera.txt" FileName="LIVECH~1.XML|LiveCharts.Wpf.xml" Attributes="0" SourcePath="FastFoodSales\bin\Debug\LiveCharts.Wpf.xml" SelfReg="false" NextFile="LiveCharts.xml"/>
+    <ROW File="LiveCharts.dll" Component_="LiveCharts.dll" FileName="LIVECH~1.DLL|LiveCharts.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\LiveCharts.dll" SelfReg="false" NextFile="LiveCharts.pdb"/>
+    <ROW File="LiveCharts.pdb" Component_="LiveCharts.dll" FileName="LIVECH~1.PDB|LiveCharts.pdb" Attributes="0" SourcePath="FastFoodSales\bin\Debug\LiveCharts.pdb" SelfReg="false" NextFile="LiveCharts.Wpf.dll"/>
+    <ROW File="LiveCharts.xml" Component_="camera.txt" FileName="LIVECH~2.XML|LiveCharts.xml" Attributes="0" SourcePath="FastFoodSales\bin\Debug\LiveCharts.xml" SelfReg="false" NextFile="MahApps.Metro.dll"/>
+    <ROW File="MahApps.Metro.dll" Component_="MahApps.Metro.dll" FileName="MAHAPP~1.DLL|MahApps.Metro.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\MahApps.Metro.dll" SelfReg="false" NextFile="MahApps.Metro.pdb"/>
+    <ROW File="MahApps.Metro.pdb" Component_="MahApps.Metro.dll" FileName="MAHAPP~1.PDB|MahApps.Metro.pdb" Attributes="0" SourcePath="FastFoodSales\bin\Debug\MahApps.Metro.pdb" SelfReg="false" NextFile="MahApps.Metro.xml"/>
+    <ROW File="MahApps.Metro.xml" Component_="camera.txt" FileName="MAHAPP~1.XML|MahApps.Metro.xml" Attributes="0" SourcePath="FastFoodSales\bin\Debug\MahApps.Metro.xml" SelfReg="false" NextFile="MaterialDesignColors.dll"/>
+    <ROW File="MaterialDesignColors.dll" Component_="MaterialDesignColors.dll" FileName="MATERI~1.DLL|MaterialDesignColors.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\MaterialDesignColors.dll" SelfReg="false" NextFile="MaterialDesignColors.pdb"/>
+    <ROW File="MaterialDesignColors.pdb" Component_="MaterialDesignColors.dll" FileName="MATERI~1.PDB|MaterialDesignColors.pdb" Attributes="0" SourcePath="FastFoodSales\bin\Debug\MaterialDesignColors.pdb" SelfReg="false" NextFile="MaterialDesignThemes.Wpf.dll"/>
+    <ROW File="MaterialDesignThemes.Wpf.dll" Component_="MaterialDesignThemes.Wpf.dll" FileName="MATERI~2.DLL|MaterialDesignThemes.Wpf.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\MaterialDesignThemes.Wpf.dll" SelfReg="false" NextFile="MaterialDesignThemes.Wpf.pdb"/>
+    <ROW File="MaterialDesignThemes.Wpf.pdb" Component_="MaterialDesignThemes.Wpf.dll" FileName="MATERI~2.PDB|MaterialDesignThemes.Wpf.pdb" Attributes="0" SourcePath="FastFoodSales\bin\Debug\MaterialDesignThemes.Wpf.pdb" SelfReg="false" NextFile="MaterialDesignThemes.Wpf.xml"/>
+    <ROW File="MaterialDesignThemes.Wpf.xml" Component_="camera.txt" FileName="MATERI~1.XML|MaterialDesignThemes.Wpf.xml" Attributes="0" SourcePath="FastFoodSales\bin\Debug\MaterialDesignThemes.Wpf.xml" SelfReg="false" NextFile="Microsoft.Data.Sqlite.dll"/>
+    <ROW File="Microsoft.Data.Sqlite.dll" Component_="Microsoft.Data.Sqlite.dll" FileName="MICROS~1.DLL|Microsoft.Data.Sqlite.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Microsoft.Data.Sqlite.dll" SelfReg="false" NextFile="Microsoft.Data.Sqlite.xml"/>
+    <ROW File="Microsoft.Data.Sqlite.xml" Component_="camera.txt" FileName="MICROS~1.XML|Microsoft.Data.Sqlite.xml" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Microsoft.Data.Sqlite.xml" SelfReg="false" NextFile="Microsoft.DotNet.PlatformAbstractions.dll"/>
+    <ROW File="Microsoft.DotNet.PlatformAbstractions.dll" Component_="Microsoft.DotNet.PlatformAbstractions.dll" FileName="MICROS~2.DLL|Microsoft.DotNet.PlatformAbstractions.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Microsoft.DotNet.PlatformAbstractions.dll" SelfReg="false" NextFile="Microsoft.EntityFrameworkCore.Abstractions.dll"/>
+    <ROW File="Microsoft.EntityFrameworkCore.Abstractions.dll" Component_="Microsoft.EntityFrameworkCore.Abstractions.dll" FileName="MICROS~3.DLL|Microsoft.EntityFrameworkCore.Abstractions.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Microsoft.EntityFrameworkCore.Abstractions.dll" SelfReg="false" NextFile="Microsoft.EntityFrameworkCore.Abstractions.xml"/>
+    <ROW File="Microsoft.EntityFrameworkCore.Abstractions.xml" Component_="camera.txt" FileName="MICROS~2.XML|Microsoft.EntityFrameworkCore.Abstractions.xml" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Microsoft.EntityFrameworkCore.Abstractions.xml" SelfReg="false" NextFile="Microsoft.EntityFrameworkCore.Design.dll"/>
+    <ROW File="Microsoft.EntityFrameworkCore.Design.dll" Component_="Microsoft.EntityFrameworkCore.Design.dll" FileName="MICROS~4.DLL|Microsoft.EntityFrameworkCore.Design.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Microsoft.EntityFrameworkCore.Design.dll" SelfReg="false" NextFile="Microsoft.EntityFrameworkCore.Design.xml"/>
+    <ROW File="Microsoft.EntityFrameworkCore.Design.xml" Component_="camera.txt" FileName="MICROS~3.XML|Microsoft.EntityFrameworkCore.Design.xml" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Microsoft.EntityFrameworkCore.Design.xml" SelfReg="false" NextFile="Microsoft.EntityFrameworkCore.dll"/>
+    <ROW File="Microsoft.EntityFrameworkCore.Relational.dll" Component_="Microsoft.EntityFrameworkCore.Relational.dll" FileName="MICROS~6.DLL|Microsoft.EntityFrameworkCore.Relational.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Microsoft.EntityFrameworkCore.Relational.dll" SelfReg="false" NextFile="Microsoft.EntityFrameworkCore.Relational.xml"/>
+    <ROW File="Microsoft.EntityFrameworkCore.Relational.xml" Component_="camera.txt" FileName="MICROS~4.XML|Microsoft.EntityFrameworkCore.Relational.xml" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Microsoft.EntityFrameworkCore.Relational.xml" SelfReg="false" NextFile="Microsoft.EntityFrameworkCore.Sqlite.dll"/>
+    <ROW File="Microsoft.EntityFrameworkCore.SqlServer.dll" Component_="Microsoft.EntityFrameworkCore.SqlServer.dll" FileName="MICROS~8.DLL|Microsoft.EntityFrameworkCore.SqlServer.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Microsoft.EntityFrameworkCore.SqlServer.dll" SelfReg="false" NextFile="Microsoft.EntityFrameworkCore.SqlServer.xml"/>
+    <ROW File="Microsoft.EntityFrameworkCore.SqlServer.xml" Component_="camera.txt" FileName="MICROS~6.XML|Microsoft.EntityFrameworkCore.SqlServer.xml" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Microsoft.EntityFrameworkCore.SqlServer.xml" SelfReg="false" NextFile="Microsoft.EntityFrameworkCore.xml"/>
+    <ROW File="Microsoft.EntityFrameworkCore.Sqlite.dll" Component_="Microsoft.EntityFrameworkCore.Sqlite.dll" FileName="MICROS~7.DLL|Microsoft.EntityFrameworkCore.Sqlite.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Microsoft.EntityFrameworkCore.Sqlite.dll" SelfReg="false" NextFile="Microsoft.EntityFrameworkCore.Sqlite.xml"/>
+    <ROW File="Microsoft.EntityFrameworkCore.Sqlite.xml" Component_="camera.txt" FileName="MICROS~5.XML|Microsoft.EntityFrameworkCore.Sqlite.xml" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Microsoft.EntityFrameworkCore.Sqlite.xml" SelfReg="false" NextFile="Microsoft.EntityFrameworkCore.SqlServer.dll"/>
+    <ROW File="Microsoft.EntityFrameworkCore.dll" Component_="Microsoft.EntityFrameworkCore.dll" FileName="MICROS~5.DLL|Microsoft.EntityFrameworkCore.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Microsoft.EntityFrameworkCore.dll" SelfReg="false" NextFile="Microsoft.EntityFrameworkCore.Relational.dll"/>
+    <ROW File="Microsoft.EntityFrameworkCore.xml" Component_="camera.txt" FileName="MICROS~7.XML|Microsoft.EntityFrameworkCore.xml" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Microsoft.EntityFrameworkCore.xml" SelfReg="false" NextFile="Microsoft.Extensions.Caching.Abstractions.dll"/>
+    <ROW File="Microsoft.Extensions.Caching.Abstractions.dll" Component_="Microsoft.Extensions.Caching.Abstractions.dll" FileName="MICROS~9.DLL|Microsoft.Extensions.Caching.Abstractions.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Microsoft.Extensions.Caching.Abstractions.dll" SelfReg="false" NextFile="Microsoft.Extensions.Caching.Abstractions.xml"/>
+    <ROW File="Microsoft.Extensions.Caching.Abstractions.xml" Component_="camera.txt" FileName="MICROS~8.XML|Microsoft.Extensions.Caching.Abstractions.xml" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Microsoft.Extensions.Caching.Abstractions.xml" SelfReg="false" NextFile="Microsoft.Extensions.Caching.Memory.dll"/>
+    <ROW File="Microsoft.Extensions.Caching.Memory.dll" Component_="Microsoft.Extensions.Caching.Memory.dll" FileName="MICRO~10.DLL|Microsoft.Extensions.Caching.Memory.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Microsoft.Extensions.Caching.Memory.dll" SelfReg="false" NextFile="Microsoft.Extensions.Caching.Memory.xml"/>
+    <ROW File="Microsoft.Extensions.Caching.Memory.xml" Component_="camera.txt" FileName="MICROS~9.XML|Microsoft.Extensions.Caching.Memory.xml" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Microsoft.Extensions.Caching.Memory.xml" SelfReg="false" NextFile="Microsoft.Extensions.Configuration.Abstractions.dll"/>
+    <ROW File="Microsoft.Extensions.Configuration.Abstractions.dll" Component_="Microsoft.Extensions.Configuration.Abstractions.dll" FileName="MICRO~11.DLL|Microsoft.Extensions.Configuration.Abstractions.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Microsoft.Extensions.Configuration.Abstractions.dll" SelfReg="false" NextFile="Microsoft.Extensions.Configuration.Abstractions.xml"/>
+    <ROW File="Microsoft.Extensions.Configuration.Abstractions.xml" Component_="camera.txt" FileName="MICRO~10.XML|Microsoft.Extensions.Configuration.Abstractions.xml" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Microsoft.Extensions.Configuration.Abstractions.xml" SelfReg="false" NextFile="Microsoft.Extensions.Configuration.Binder.dll"/>
+    <ROW File="Microsoft.Extensions.Configuration.Binder.dll" Component_="Microsoft.Extensions.Configuration.Binder.dll" FileName="MICRO~12.DLL|Microsoft.Extensions.Configuration.Binder.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Microsoft.Extensions.Configuration.Binder.dll" SelfReg="false" NextFile="Microsoft.Extensions.Configuration.Binder.xml"/>
+    <ROW File="Microsoft.Extensions.Configuration.Binder.xml" Component_="camera.txt" FileName="MICRO~11.XML|Microsoft.Extensions.Configuration.Binder.xml" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Microsoft.Extensions.Configuration.Binder.xml" SelfReg="false" NextFile="Microsoft.Extensions.Configuration.dll"/>
+    <ROW File="Microsoft.Extensions.Configuration.dll" Component_="Microsoft.Extensions.Configuration.dll" FileName="MICRO~13.DLL|Microsoft.Extensions.Configuration.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Microsoft.Extensions.Configuration.dll" SelfReg="false" NextFile="Microsoft.Extensions.Configuration.xml"/>
+    <ROW File="Microsoft.Extensions.Configuration.xml" Component_="camera.txt" FileName="MICRO~12.XML|Microsoft.Extensions.Configuration.xml" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Microsoft.Extensions.Configuration.xml" SelfReg="false" NextFile="Microsoft.Extensions.DependencyInjection.Abstractions.dll"/>
+    <ROW File="Microsoft.Extensions.DependencyInjection.Abstractions.dll" Component_="Microsoft.Extensions.DependencyInjection.Abstractions.dll" FileName="MICRO~14.DLL|Microsoft.Extensions.DependencyInjection.Abstractions.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll" SelfReg="false" NextFile="Microsoft.Extensions.DependencyInjection.Abstractions.xml"/>
+    <ROW File="Microsoft.Extensions.DependencyInjection.Abstractions.xml" Component_="camera.txt" FileName="MICRO~13.XML|Microsoft.Extensions.DependencyInjection.Abstractions.xml" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml" SelfReg="false" NextFile="Microsoft.Extensions.DependencyInjection.dll"/>
+    <ROW File="Microsoft.Extensions.DependencyInjection.dll" Component_="Microsoft.Extensions.DependencyInjection.dll" FileName="MICRO~15.DLL|Microsoft.Extensions.DependencyInjection.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Microsoft.Extensions.DependencyInjection.dll" SelfReg="false" NextFile="Microsoft.Extensions.DependencyInjection.xml"/>
+    <ROW File="Microsoft.Extensions.DependencyInjection.xml" Component_="camera.txt" FileName="MICRO~14.XML|Microsoft.Extensions.DependencyInjection.xml" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Microsoft.Extensions.DependencyInjection.xml" SelfReg="false" NextFile="Microsoft.Extensions.DependencyModel.dll"/>
+    <ROW File="Microsoft.Extensions.DependencyModel.dll" Component_="Microsoft.Extensions.DependencyModel.dll" FileName="MICRO~16.DLL|Microsoft.Extensions.DependencyModel.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Microsoft.Extensions.DependencyModel.dll" SelfReg="false" NextFile="Microsoft.Extensions.Logging.Abstractions.dll"/>
+    <ROW File="Microsoft.Extensions.Logging.Abstractions.dll" Component_="Microsoft.Extensions.Logging.Abstractions.dll" FileName="MICRO~17.DLL|Microsoft.Extensions.Logging.Abstractions.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Microsoft.Extensions.Logging.Abstractions.dll" SelfReg="false" NextFile="Microsoft.Extensions.Logging.Abstractions.xml"/>
+    <ROW File="Microsoft.Extensions.Logging.Abstractions.xml" Component_="camera.txt" FileName="MICRO~15.XML|Microsoft.Extensions.Logging.Abstractions.xml" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Microsoft.Extensions.Logging.Abstractions.xml" SelfReg="false" NextFile="Microsoft.Extensions.Logging.dll"/>
+    <ROW File="Microsoft.Extensions.Logging.dll" Component_="Microsoft.Extensions.Logging.dll" FileName="MICRO~18.DLL|Microsoft.Extensions.Logging.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Microsoft.Extensions.Logging.dll" SelfReg="false" NextFile="Microsoft.Extensions.Logging.xml"/>
+    <ROW File="Microsoft.Extensions.Logging.xml" Component_="camera.txt" FileName="MICRO~16.XML|Microsoft.Extensions.Logging.xml" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Microsoft.Extensions.Logging.xml" SelfReg="false" NextFile="Microsoft.Extensions.Options.dll"/>
+    <ROW File="Microsoft.Extensions.Options.dll" Component_="Microsoft.Extensions.Options.dll" FileName="MICRO~19.DLL|Microsoft.Extensions.Options.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Microsoft.Extensions.Options.dll" SelfReg="false" NextFile="Microsoft.Extensions.Options.xml"/>
+    <ROW File="Microsoft.Extensions.Options.xml" Component_="camera.txt" FileName="MICRO~17.XML|Microsoft.Extensions.Options.xml" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Microsoft.Extensions.Options.xml" SelfReg="false" NextFile="Microsoft.Extensions.Primitives.dll"/>
+    <ROW File="Microsoft.Extensions.Primitives.dll" Component_="Microsoft.Extensions.Primitives.dll" FileName="MICRO~20.DLL|Microsoft.Extensions.Primitives.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Microsoft.Extensions.Primitives.dll" SelfReg="false" NextFile="Microsoft.Extensions.Primitives.xml"/>
+    <ROW File="Microsoft.Extensions.Primitives.xml" Component_="camera.txt" FileName="MICRO~18.XML|Microsoft.Extensions.Primitives.xml" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Microsoft.Extensions.Primitives.xml" SelfReg="false" NextFile="Microsoft.Win32.Primitives.dll"/>
+    <ROW File="Microsoft.Win32.Primitives.dll" Component_="Microsoft.Win32.Primitives.dll" FileName="MICRO~21.DLL|Microsoft.Win32.Primitives.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Microsoft.Win32.Primitives.dll" SelfReg="false" NextFile="Microsoft.Xaml.Behaviors.dll"/>
+    <ROW File="Microsoft.Xaml.Behaviors.dll" Component_="Microsoft.Xaml.Behaviors.dll" FileName="MICRO~22.DLL|Microsoft.Xaml.Behaviors.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Microsoft.Xaml.Behaviors.dll" SelfReg="false" NextFile="Microsoft.Xaml.Behaviors.xml"/>
+    <ROW File="Microsoft.Xaml.Behaviors.xml" Component_="camera.txt" FileName="MICRO~19.XML|Microsoft.Xaml.Behaviors.xml" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Microsoft.Xaml.Behaviors.xml" SelfReg="false" NextFile="netstandard.dll"/>
+    <ROW File="ModbusService.exe" Component_="ModbusService.exe" FileName="MODBUS~1.EXE|ModbusService.exe" Attributes="0" SourcePath="FastFoodSales\bin\Debug\ModbusService.exe" SelfReg="false" NextFile="Dapper.dll" DigSign="true"/>
+    <ROW File="NModbus4.dll" Component_="NModbus4.dll" FileName="NModbus4.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\NModbus4.dll" SelfReg="false" NextFile="Remotion.Linq.dll"/>
+    <ROW File="NModbus4.xml" Component_="camera.txt" FileName="NModbus4.xml" Attributes="0" SourcePath="FastFoodSales\bin\Debug\NModbus4.xml" SelfReg="false" NextFile="System.Data.SQLite.dll"/>
+    <ROW File="Newtonsoft.Json.dll" Component_="Newtonsoft.Json.dll" FileName="NEWTON~1.DLL|Newtonsoft.Json.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Newtonsoft.Json.dll" SelfReg="false" NextFile="Newtonsoft.Json.pdb"/>
+    <ROW File="Newtonsoft.Json.pdb" Component_="Newtonsoft.Json.dll" FileName="NEWTON~1.PDB|Newtonsoft.Json.pdb" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Newtonsoft.Json.pdb" SelfReg="false" NextFile="Newtonsoft.Json.xml"/>
+    <ROW File="Newtonsoft.Json.xml" Component_="camera.txt" FileName="NEWTON~1.XML|Newtonsoft.Json.xml" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Newtonsoft.Json.xml" SelfReg="false" NextFile="NModbus4.dll"/>
+    <ROW File="Remotion.Linq.dll" Component_="Remotion.Linq.dll" FileName="REMOTI~1.DLL|Remotion.Linq.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Remotion.Linq.dll" SelfReg="false" NextFile="Remotion.Linq.xml"/>
+    <ROW File="Remotion.Linq.xml" Component_="camera.txt" FileName="REMOTI~1.XML|Remotion.Linq.xml" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Remotion.Linq.xml" SelfReg="false" NextFile="DataValues.json"/>
+    <ROW File="SQLite.Interop.dll" Component_="SQLite.Interop.dll" FileName="SQLITE~1.DLL|SQLite.Interop.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\x64\SQLite.Interop.dll" SelfReg="false" NextFile="e_sqlite3.dll_1"/>
+    <ROW File="SQLite.Interop.dll_1" Component_="SQLite.Interop.dll_1" FileName="SQLITE~1.DLL|SQLite.Interop.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\x86\SQLite.Interop.dll" SelfReg="false" NextFile="ModbusService.exe"/>
+    <ROW File="SQLitePCLRaw.batteries_green.dll" Component_="SQLitePCLRaw.batteries_green.dll" FileName="SQLITE~1.DLL|SQLitePCLRaw.batteries_green.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\SQLitePCLRaw.batteries_green.dll" SelfReg="false" NextFile="SQLitePCLRaw.batteries_v2.dll"/>
+    <ROW File="SQLitePCLRaw.batteries_v2.dll" Component_="SQLitePCLRaw.batteries_v2.dll" FileName="SQLITE~2.DLL|SQLitePCLRaw.batteries_v2.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\SQLitePCLRaw.batteries_v2.dll" SelfReg="false" NextFile="SQLitePCLRaw.core.dll"/>
+    <ROW File="SQLitePCLRaw.core.dll" Component_="SQLitePCLRaw.core.dll" FileName="SQLITE~3.DLL|SQLitePCLRaw.core.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\SQLitePCLRaw.core.dll" SelfReg="false" NextFile="SQLitePCLRaw.provider.e_sqlite3.dll"/>
+    <ROW File="SQLitePCLRaw.provider.e_sqlite3.dll" Component_="SQLitePCLRaw.provider.e_sqlite3.dll" FileName="SQLITE~4.DLL|SQLitePCLRaw.provider.e_sqlite3.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\SQLitePCLRaw.provider.e_sqlite3.dll" SelfReg="false" NextFile="Stylet.dll"/>
+    <ROW File="SimpleTCP.dll" Component_="SimpleTCP.dll" FileName="SIMPLE~1.DLL|SimpleTCP.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\SimpleTCP.dll" SelfReg="false" NextFile="SQLitePCLRaw.batteries_green.dll"/>
+    <ROW File="Stylet.dll" Component_="Stylet.dll" FileName="Stylet.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Stylet.dll" SelfReg="false" NextFile="Stylet.pdb"/>
+    <ROW File="Stylet.pdb" Component_="Stylet.dll" FileName="Stylet.pdb" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Stylet.pdb" SelfReg="false" NextFile="Stylet.xml"/>
+    <ROW File="Stylet.xml" Component_="camera.txt" FileName="Stylet.xml" Attributes="0" SourcePath="FastFoodSales\bin\Debug\Stylet.xml" SelfReg="false" NextFile="System.AppContext.dll"/>
+    <ROW File="System.AppContext.dll" Component_="System.AppContext.dll" FileName="SYSTEM~1.DLL|System.AppContext.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.AppContext.dll" SelfReg="false" NextFile="System.Buffers.dll"/>
+    <ROW File="System.Buffers.dll" Component_="System.Buffers.dll" FileName="SYSTEM~2.DLL|System.Buffers.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Buffers.dll" SelfReg="false" NextFile="System.Buffers.xml"/>
+    <ROW File="System.Buffers.xml" Component_="camera.txt" FileName="SYSTEM~1.XML|System.Buffers.xml" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Buffers.xml" SelfReg="false" NextFile="System.Collections.Concurrent.dll"/>
+    <ROW File="System.Collections.Concurrent.dll" Component_="System.Collections.Concurrent.dll" FileName="SYSTEM~3.DLL|System.Collections.Concurrent.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Collections.Concurrent.dll" SelfReg="false" NextFile="System.Collections.dll"/>
+    <ROW File="System.Collections.Immutable.dll" Component_="System.Collections.Immutable.dll" FileName="SYSTEM~5.DLL|System.Collections.Immutable.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Collections.Immutable.dll" SelfReg="false" NextFile="System.Collections.Immutable.xml"/>
+    <ROW File="System.Collections.Immutable.xml" Component_="camera.txt" FileName="SYSTEM~2.XML|System.Collections.Immutable.xml" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Collections.Immutable.xml" SelfReg="false" NextFile="System.Collections.NonGeneric.dll"/>
+    <ROW File="System.Collections.NonGeneric.dll" Component_="System.Collections.NonGeneric.dll" FileName="SYSTEM~6.DLL|System.Collections.NonGeneric.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Collections.NonGeneric.dll" SelfReg="false" NextFile="System.Collections.Specialized.dll"/>
+    <ROW File="System.Collections.Specialized.dll" Component_="System.Collections.Specialized.dll" FileName="SYSTEM~7.DLL|System.Collections.Specialized.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Collections.Specialized.dll" SelfReg="false" NextFile="System.ComponentModel.Annotations.dll"/>
+    <ROW File="System.Collections.dll" Component_="System.Collections.dll" FileName="SYSTEM~4.DLL|System.Collections.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Collections.dll" SelfReg="false" NextFile="System.Collections.Immutable.dll"/>
+    <ROW File="System.ComponentModel.Annotations.dll" Component_="System.ComponentModel.Annotations.dll" FileName="SYSTEM~8.DLL|System.ComponentModel.Annotations.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.ComponentModel.Annotations.dll" SelfReg="false" NextFile="System.ComponentModel.dll"/>
+    <ROW File="System.ComponentModel.EventBasedAsync.dll" Component_="System.ComponentModel.EventBasedAsync.dll" FileName="SYSTE~10.DLL|System.ComponentModel.EventBasedAsync.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.ComponentModel.EventBasedAsync.dll" SelfReg="false" NextFile="System.ComponentModel.Primitives.dll"/>
+    <ROW File="System.ComponentModel.Primitives.dll" Component_="System.ComponentModel.Primitives.dll" FileName="SYSTE~11.DLL|System.ComponentModel.Primitives.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.ComponentModel.Primitives.dll" SelfReg="false" NextFile="System.ComponentModel.TypeConverter.dll"/>
+    <ROW File="System.ComponentModel.TypeConverter.dll" Component_="System.ComponentModel.TypeConverter.dll" FileName="SYSTE~12.DLL|System.ComponentModel.TypeConverter.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.ComponentModel.TypeConverter.dll" SelfReg="false" NextFile="System.Console.dll"/>
+    <ROW File="System.ComponentModel.dll" Component_="System.ComponentModel.dll" FileName="SYSTEM~9.DLL|System.ComponentModel.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.ComponentModel.dll" SelfReg="false" NextFile="System.ComponentModel.EventBasedAsync.dll"/>
+    <ROW File="System.Console.dll" Component_="System.Console.dll" FileName="SYSTE~13.DLL|System.Console.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Console.dll" SelfReg="false" NextFile="System.Data.Common.dll"/>
+    <ROW File="System.Data.Common.dll" Component_="System.Data.Common.dll" FileName="SYSTE~14.DLL|System.Data.Common.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Data.Common.dll" SelfReg="false" NextFile="System.Data.SqlClient.dll"/>
+    <ROW File="System.Data.SQLite.dll" Component_="System.Data.SQLite.dll" FileName="SYST~104.DLL|System.Data.SQLite.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Data.SQLite.dll" SelfReg="false" NextFile="System.Data.SQLite.dll.config"/>
+    <ROW File="System.Data.SQLite.dll.config" Component_="camera.txt" FileName="SYSTEM~1.CON|System.Data.SQLite.dll.config" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Data.SQLite.dll.config" SelfReg="false" NextFile="System.Data.SQLite.xml"/>
+    <ROW File="System.Data.SQLite.xml" Component_="camera.txt" FileName="SYSTEM~8.XML|System.Data.SQLite.xml" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Data.SQLite.xml" SelfReg="false"/>
+    <ROW File="System.Data.SqlClient.dll" Component_="System.Data.SqlClient.dll" FileName="SYSTE~15.DLL|System.Data.SqlClient.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Data.SqlClient.dll" SelfReg="false" NextFile="System.Diagnostics.Contracts.dll"/>
+    <ROW File="System.Diagnostics.Contracts.dll" Component_="System.Diagnostics.Contracts.dll" FileName="SYSTE~16.DLL|System.Diagnostics.Contracts.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Diagnostics.Contracts.dll" SelfReg="false" NextFile="System.Diagnostics.Debug.dll"/>
+    <ROW File="System.Diagnostics.Debug.dll" Component_="System.Diagnostics.Debug.dll" FileName="SYSTE~17.DLL|System.Diagnostics.Debug.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Diagnostics.Debug.dll" SelfReg="false" NextFile="System.Diagnostics.DiagnosticSource.dll"/>
+    <ROW File="System.Diagnostics.DiagnosticSource.dll" Component_="System.Diagnostics.DiagnosticSource.dll" FileName="SYSTE~18.DLL|System.Diagnostics.DiagnosticSource.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Diagnostics.DiagnosticSource.dll" SelfReg="false" NextFile="System.Diagnostics.DiagnosticSource.xml"/>
+    <ROW File="System.Diagnostics.DiagnosticSource.xml" Component_="camera.txt" FileName="SYSTEM~3.XML|System.Diagnostics.DiagnosticSource.xml" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Diagnostics.DiagnosticSource.xml" SelfReg="false" NextFile="System.Diagnostics.FileVersionInfo.dll"/>
+    <ROW File="System.Diagnostics.FileVersionInfo.dll" Component_="System.Diagnostics.FileVersionInfo.dll" FileName="SYSTE~19.DLL|System.Diagnostics.FileVersionInfo.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Diagnostics.FileVersionInfo.dll" SelfReg="false" NextFile="System.Diagnostics.Process.dll"/>
+    <ROW File="System.Diagnostics.Process.dll" Component_="System.Diagnostics.Process.dll" FileName="SYSTE~20.DLL|System.Diagnostics.Process.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Diagnostics.Process.dll" SelfReg="false" NextFile="System.Diagnostics.StackTrace.dll"/>
+    <ROW File="System.Diagnostics.StackTrace.dll" Component_="System.Diagnostics.StackTrace.dll" FileName="SYSTE~21.DLL|System.Diagnostics.StackTrace.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Diagnostics.StackTrace.dll" SelfReg="false" NextFile="System.Diagnostics.TextWriterTraceListener.dll"/>
+    <ROW File="System.Diagnostics.TextWriterTraceListener.dll" Component_="System.Diagnostics.TextWriterTraceListener.dll" FileName="SYSTE~22.DLL|System.Diagnostics.TextWriterTraceListener.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Diagnostics.TextWriterTraceListener.dll" SelfReg="false" NextFile="System.Diagnostics.Tools.dll"/>
+    <ROW File="System.Diagnostics.Tools.dll" Component_="System.Diagnostics.Tools.dll" FileName="SYSTE~23.DLL|System.Diagnostics.Tools.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Diagnostics.Tools.dll" SelfReg="false" NextFile="System.Diagnostics.TraceSource.dll"/>
+    <ROW File="System.Diagnostics.TraceSource.dll" Component_="System.Diagnostics.TraceSource.dll" FileName="SYSTE~24.DLL|System.Diagnostics.TraceSource.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Diagnostics.TraceSource.dll" SelfReg="false" NextFile="System.Diagnostics.Tracing.dll"/>
+    <ROW File="System.Diagnostics.Tracing.dll" Component_="System.Diagnostics.Tracing.dll" FileName="SYSTE~25.DLL|System.Diagnostics.Tracing.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Diagnostics.Tracing.dll" SelfReg="false" NextFile="System.Drawing.Primitives.dll"/>
+    <ROW File="System.Drawing.Primitives.dll" Component_="System.Drawing.Primitives.dll" FileName="SYSTE~26.DLL|System.Drawing.Primitives.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Drawing.Primitives.dll" SelfReg="false" NextFile="System.Dynamic.Runtime.dll"/>
+    <ROW File="System.Dynamic.Runtime.dll" Component_="System.Dynamic.Runtime.dll" FileName="SYSTE~27.DLL|System.Dynamic.Runtime.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Dynamic.Runtime.dll" SelfReg="false" NextFile="System.Globalization.Calendars.dll"/>
+    <ROW File="System.Globalization.Calendars.dll" Component_="System.Globalization.Calendars.dll" FileName="SYSTE~28.DLL|System.Globalization.Calendars.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Globalization.Calendars.dll" SelfReg="false" NextFile="System.Globalization.dll"/>
+    <ROW File="System.Globalization.Extensions.dll" Component_="System.Globalization.Extensions.dll" FileName="SYSTE~30.DLL|System.Globalization.Extensions.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Globalization.Extensions.dll" SelfReg="false" NextFile="System.Interactive.Async.dll"/>
+    <ROW File="System.Globalization.dll" Component_="System.Globalization.dll" FileName="SYSTE~29.DLL|System.Globalization.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Globalization.dll" SelfReg="false" NextFile="System.Globalization.Extensions.dll"/>
+    <ROW File="System.IO.Compression.ZipFile.dll" Component_="System.IO.Compression.ZipFile.dll" FileName="SYSTE~33.DLL|System.IO.Compression.ZipFile.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.IO.Compression.ZipFile.dll" SelfReg="false" NextFile="System.IO.dll"/>
+    <ROW File="System.IO.Compression.dll" Component_="System.IO.Compression.dll" FileName="SYSTE~32.DLL|System.IO.Compression.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.IO.Compression.dll" SelfReg="false" NextFile="System.IO.Compression.ZipFile.dll"/>
+    <ROW File="System.IO.FileSystem.DriveInfo.dll" Component_="System.IO.FileSystem.DriveInfo.dll" FileName="SYSTE~36.DLL|System.IO.FileSystem.DriveInfo.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.IO.FileSystem.DriveInfo.dll" SelfReg="false" NextFile="System.IO.FileSystem.Primitives.dll"/>
+    <ROW File="System.IO.FileSystem.Primitives.dll" Component_="System.IO.FileSystem.Primitives.dll" FileName="SYSTE~37.DLL|System.IO.FileSystem.Primitives.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.IO.FileSystem.Primitives.dll" SelfReg="false" NextFile="System.IO.FileSystem.Watcher.dll"/>
+    <ROW File="System.IO.FileSystem.Watcher.dll" Component_="System.IO.FileSystem.Watcher.dll" FileName="SYSTE~38.DLL|System.IO.FileSystem.Watcher.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.IO.FileSystem.Watcher.dll" SelfReg="false" NextFile="System.IO.IsolatedStorage.dll"/>
+    <ROW File="System.IO.FileSystem.dll" Component_="System.IO.FileSystem.dll" FileName="SYSTE~35.DLL|System.IO.FileSystem.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.IO.FileSystem.dll" SelfReg="false" NextFile="System.IO.FileSystem.DriveInfo.dll"/>
+    <ROW File="System.IO.IsolatedStorage.dll" Component_="System.IO.IsolatedStorage.dll" FileName="SYSTE~39.DLL|System.IO.IsolatedStorage.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.IO.IsolatedStorage.dll" SelfReg="false" NextFile="System.IO.MemoryMappedFiles.dll"/>
+    <ROW File="System.IO.MemoryMappedFiles.dll" Component_="System.IO.MemoryMappedFiles.dll" FileName="SYSTE~40.DLL|System.IO.MemoryMappedFiles.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.IO.MemoryMappedFiles.dll" SelfReg="false" NextFile="System.IO.Pipes.dll"/>
+    <ROW File="System.IO.Pipes.dll" Component_="System.IO.Pipes.dll" FileName="SYSTE~41.DLL|System.IO.Pipes.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.IO.Pipes.dll" SelfReg="false" NextFile="System.IO.UnmanagedMemoryStream.dll"/>
+    <ROW File="System.IO.UnmanagedMemoryStream.dll" Component_="System.IO.UnmanagedMemoryStream.dll" FileName="SYSTE~42.DLL|System.IO.UnmanagedMemoryStream.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.IO.UnmanagedMemoryStream.dll" SelfReg="false" NextFile="System.Linq.dll"/>
+    <ROW File="System.IO.dll" Component_="System.IO.dll" FileName="SYSTE~34.DLL|System.IO.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.IO.dll" SelfReg="false" NextFile="System.IO.FileSystem.dll"/>
+    <ROW File="System.Interactive.Async.dll" Component_="System.Interactive.Async.dll" FileName="SYSTE~31.DLL|System.Interactive.Async.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Interactive.Async.dll" SelfReg="false" NextFile="System.Interactive.Async.xml"/>
+    <ROW File="System.Interactive.Async.xml" Component_="camera.txt" FileName="SYSTEM~4.XML|System.Interactive.Async.xml" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Interactive.Async.xml" SelfReg="false" NextFile="System.IO.Compression.dll"/>
+    <ROW File="System.Linq.Expressions.dll" Component_="System.Linq.Expressions.dll" FileName="SYSTE~44.DLL|System.Linq.Expressions.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Linq.Expressions.dll" SelfReg="false" NextFile="System.Linq.Parallel.dll"/>
+    <ROW File="System.Linq.Parallel.dll" Component_="System.Linq.Parallel.dll" FileName="SYSTE~45.DLL|System.Linq.Parallel.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Linq.Parallel.dll" SelfReg="false" NextFile="System.Linq.Queryable.dll"/>
+    <ROW File="System.Linq.Queryable.dll" Component_="System.Linq.Queryable.dll" FileName="SYSTE~46.DLL|System.Linq.Queryable.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Linq.Queryable.dll" SelfReg="false" NextFile="System.Memory.dll"/>
+    <ROW File="System.Linq.dll" Component_="System.Linq.dll" FileName="SYSTE~43.DLL|System.Linq.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Linq.dll" SelfReg="false" NextFile="System.Linq.Expressions.dll"/>
+    <ROW File="System.Memory.dll" Component_="System.Memory.dll" FileName="SYSTE~47.DLL|System.Memory.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Memory.dll" SelfReg="false" NextFile="System.Memory.xml"/>
+    <ROW File="System.Memory.xml" Component_="camera.txt" FileName="SYSTEM~5.XML|System.Memory.xml" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Memory.xml" SelfReg="false" NextFile="System.Net.Http.dll"/>
+    <ROW File="System.Net.Http.dll" Component_="System.Net.Http.dll" FileName="SYSTE~48.DLL|System.Net.Http.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Net.Http.dll" SelfReg="false" NextFile="System.Net.NameResolution.dll"/>
+    <ROW File="System.Net.NameResolution.dll" Component_="System.Net.NameResolution.dll" FileName="SYSTE~49.DLL|System.Net.NameResolution.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Net.NameResolution.dll" SelfReg="false" NextFile="System.Net.NetworkInformation.dll"/>
+    <ROW File="System.Net.NetworkInformation.dll" Component_="System.Net.NetworkInformation.dll" FileName="SYSTE~50.DLL|System.Net.NetworkInformation.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Net.NetworkInformation.dll" SelfReg="false" NextFile="System.Net.Ping.dll"/>
+    <ROW File="System.Net.Ping.dll" Component_="System.Net.Ping.dll" FileName="SYSTE~51.DLL|System.Net.Ping.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Net.Ping.dll" SelfReg="false" NextFile="System.Net.Primitives.dll"/>
+    <ROW File="System.Net.Primitives.dll" Component_="System.Net.Primitives.dll" FileName="SYSTE~52.DLL|System.Net.Primitives.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Net.Primitives.dll" SelfReg="false" NextFile="System.Net.Requests.dll"/>
+    <ROW File="System.Net.Requests.dll" Component_="System.Net.Requests.dll" FileName="SYSTE~53.DLL|System.Net.Requests.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Net.Requests.dll" SelfReg="false" NextFile="System.Net.Security.dll"/>
+    <ROW File="System.Net.Security.dll" Component_="System.Net.Security.dll" FileName="SYSTE~54.DLL|System.Net.Security.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Net.Security.dll" SelfReg="false" NextFile="System.Net.Sockets.dll"/>
+    <ROW File="System.Net.Sockets.dll" Component_="System.Net.Sockets.dll" FileName="SYSTE~55.DLL|System.Net.Sockets.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Net.Sockets.dll" SelfReg="false" NextFile="System.Net.WebHeaderCollection.dll"/>
+    <ROW File="System.Net.WebHeaderCollection.dll" Component_="System.Net.WebHeaderCollection.dll" FileName="SYSTE~56.DLL|System.Net.WebHeaderCollection.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Net.WebHeaderCollection.dll" SelfReg="false" NextFile="System.Net.WebSockets.Client.dll"/>
+    <ROW File="System.Net.WebSockets.Client.dll" Component_="System.Net.WebSockets.Client.dll" FileName="SYSTE~57.DLL|System.Net.WebSockets.Client.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Net.WebSockets.Client.dll" SelfReg="false" NextFile="System.Net.WebSockets.dll"/>
+    <ROW File="System.Net.WebSockets.dll" Component_="System.Net.WebSockets.dll" FileName="SYSTE~58.DLL|System.Net.WebSockets.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Net.WebSockets.dll" SelfReg="false" NextFile="System.Numerics.Vectors.dll"/>
+    <ROW File="System.Numerics.Vectors.dll" Component_="System.Numerics.Vectors.dll" FileName="SYSTE~59.DLL|System.Numerics.Vectors.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Numerics.Vectors.dll" SelfReg="false" NextFile="System.Numerics.Vectors.xml"/>
+    <ROW File="System.Numerics.Vectors.xml" Component_="camera.txt" FileName="SYSTEM~6.XML|System.Numerics.Vectors.xml" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Numerics.Vectors.xml" SelfReg="false" NextFile="System.ObjectModel.dll"/>
+    <ROW File="System.ObjectModel.dll" Component_="System.ObjectModel.dll" FileName="SYSTE~60.DLL|System.ObjectModel.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.ObjectModel.dll" SelfReg="false" NextFile="System.Reflection.dll"/>
+    <ROW File="System.Reflection.Extensions.dll" Component_="System.Reflection.Extensions.dll" FileName="SYSTE~62.DLL|System.Reflection.Extensions.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Reflection.Extensions.dll" SelfReg="false" NextFile="System.Reflection.Primitives.dll"/>
+    <ROW File="System.Reflection.Primitives.dll" Component_="System.Reflection.Primitives.dll" FileName="SYSTE~63.DLL|System.Reflection.Primitives.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Reflection.Primitives.dll" SelfReg="false" NextFile="System.Resources.Reader.dll"/>
+    <ROW File="System.Reflection.dll" Component_="System.Reflection.dll" FileName="SYSTE~61.DLL|System.Reflection.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Reflection.dll" SelfReg="false" NextFile="System.Reflection.Extensions.dll"/>
+    <ROW File="System.Resources.Reader.dll" Component_="System.Resources.Reader.dll" FileName="SYSTE~64.DLL|System.Resources.Reader.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Resources.Reader.dll" SelfReg="false" NextFile="System.Resources.ResourceManager.dll"/>
+    <ROW File="System.Resources.ResourceManager.dll" Component_="System.Resources.ResourceManager.dll" FileName="SYSTE~65.DLL|System.Resources.ResourceManager.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Resources.ResourceManager.dll" SelfReg="false" NextFile="System.Resources.Writer.dll"/>
+    <ROW File="System.Resources.Writer.dll" Component_="System.Resources.Writer.dll" FileName="SYSTE~66.DLL|System.Resources.Writer.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Resources.Writer.dll" SelfReg="false" NextFile="System.Runtime.CompilerServices.Unsafe.dll"/>
+    <ROW File="System.Runtime.CompilerServices.Unsafe.dll" Component_="System.Runtime.CompilerServices.Unsafe.dll" FileName="SYSTE~67.DLL|System.Runtime.CompilerServices.Unsafe.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll" SelfReg="false" NextFile="System.Runtime.CompilerServices.Unsafe.xml"/>
+    <ROW File="System.Runtime.CompilerServices.Unsafe.xml" Component_="camera.txt" FileName="SYSTEM~7.XML|System.Runtime.CompilerServices.Unsafe.xml" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml" SelfReg="false" NextFile="System.Runtime.CompilerServices.VisualC.dll"/>
+    <ROW File="System.Runtime.CompilerServices.VisualC.dll" Component_="System.Runtime.CompilerServices.VisualC.dll" FileName="SYSTE~68.DLL|System.Runtime.CompilerServices.VisualC.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Runtime.CompilerServices.VisualC.dll" SelfReg="false" NextFile="System.Runtime.dll"/>
+    <ROW File="System.Runtime.Extensions.dll" Component_="System.Runtime.Extensions.dll" FileName="SYSTE~70.DLL|System.Runtime.Extensions.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Runtime.Extensions.dll" SelfReg="false" NextFile="System.Runtime.Handles.dll"/>
+    <ROW File="System.Runtime.Handles.dll" Component_="System.Runtime.Handles.dll" FileName="SYSTE~71.DLL|System.Runtime.Handles.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Runtime.Handles.dll" SelfReg="false" NextFile="System.Runtime.InteropServices.dll"/>
+    <ROW File="System.Runtime.InteropServices.RuntimeInformation.dll" Component_="System.Runtime.InteropServices.RuntimeInformation.dll" FileName="SYSTE~73.DLL|System.Runtime.InteropServices.RuntimeInformation.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Runtime.InteropServices.RuntimeInformation.dll" SelfReg="false" NextFile="System.Runtime.Numerics.dll"/>
+    <ROW File="System.Runtime.InteropServices.dll" Component_="System.Runtime.InteropServices.dll" FileName="SYSTE~72.DLL|System.Runtime.InteropServices.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Runtime.InteropServices.dll" SelfReg="false" NextFile="System.Runtime.InteropServices.RuntimeInformation.dll"/>
+    <ROW File="System.Runtime.Numerics.dll" Component_="System.Runtime.Numerics.dll" FileName="SYSTE~74.DLL|System.Runtime.Numerics.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Runtime.Numerics.dll" SelfReg="false" NextFile="System.Runtime.Serialization.Formatters.dll"/>
+    <ROW File="System.Runtime.Serialization.Formatters.dll" Component_="System.Runtime.Serialization.Formatters.dll" FileName="SYSTE~75.DLL|System.Runtime.Serialization.Formatters.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Runtime.Serialization.Formatters.dll" SelfReg="false" NextFile="System.Runtime.Serialization.Json.dll"/>
+    <ROW File="System.Runtime.Serialization.Json.dll" Component_="System.Runtime.Serialization.Json.dll" FileName="SYSTE~76.DLL|System.Runtime.Serialization.Json.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Runtime.Serialization.Json.dll" SelfReg="false" NextFile="System.Runtime.Serialization.Primitives.dll"/>
+    <ROW File="System.Runtime.Serialization.Primitives.dll" Component_="System.Runtime.Serialization.Primitives.dll" FileName="SYSTE~77.DLL|System.Runtime.Serialization.Primitives.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Runtime.Serialization.Primitives.dll" SelfReg="false" NextFile="System.Runtime.Serialization.Xml.dll"/>
+    <ROW File="System.Runtime.Serialization.Xml.dll" Component_="System.Runtime.Serialization.Xml.dll" FileName="SYSTE~78.DLL|System.Runtime.Serialization.Xml.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Runtime.Serialization.Xml.dll" SelfReg="false" NextFile="System.Security.Claims.dll"/>
+    <ROW File="System.Runtime.dll" Component_="System.Runtime.dll" FileName="SYSTE~69.DLL|System.Runtime.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Runtime.dll" SelfReg="false" NextFile="System.Runtime.Extensions.dll"/>
+    <ROW File="System.Security.Claims.dll" Component_="System.Security.Claims.dll" FileName="SYSTE~79.DLL|System.Security.Claims.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Security.Claims.dll" SelfReg="false" NextFile="System.Security.Cryptography.Algorithms.dll"/>
+    <ROW File="System.Security.Cryptography.Algorithms.dll" Component_="System.Security.Cryptography.Algorithms.dll" FileName="SYSTE~80.DLL|System.Security.Cryptography.Algorithms.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Security.Cryptography.Algorithms.dll" SelfReg="false" NextFile="System.Security.Cryptography.Csp.dll"/>
+    <ROW File="System.Security.Cryptography.Csp.dll" Component_="System.Security.Cryptography.Csp.dll" FileName="SYSTE~81.DLL|System.Security.Cryptography.Csp.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Security.Cryptography.Csp.dll" SelfReg="false" NextFile="System.Security.Cryptography.Encoding.dll"/>
+    <ROW File="System.Security.Cryptography.Encoding.dll" Component_="System.Security.Cryptography.Encoding.dll" FileName="SYSTE~82.DLL|System.Security.Cryptography.Encoding.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Security.Cryptography.Encoding.dll" SelfReg="false" NextFile="System.Security.Cryptography.Primitives.dll"/>
+    <ROW File="System.Security.Cryptography.Primitives.dll" Component_="System.Security.Cryptography.Primitives.dll" FileName="SYSTE~83.DLL|System.Security.Cryptography.Primitives.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Security.Cryptography.Primitives.dll" SelfReg="false" NextFile="System.Security.Cryptography.X509Certificates.dll"/>
+    <ROW File="System.Security.Cryptography.X509Certificates.dll" Component_="System.Security.Cryptography.X509Certificates.dll" FileName="SYSTE~84.DLL|System.Security.Cryptography.X509Certificates.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Security.Cryptography.X509Certificates.dll" SelfReg="false" NextFile="System.Security.Principal.dll"/>
+    <ROW File="System.Security.Principal.dll" Component_="System.Security.Principal.dll" FileName="SYSTE~85.DLL|System.Security.Principal.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Security.Principal.dll" SelfReg="false" NextFile="System.Security.SecureString.dll"/>
+    <ROW File="System.Security.SecureString.dll" Component_="System.Security.SecureString.dll" FileName="SYSTE~86.DLL|System.Security.SecureString.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Security.SecureString.dll" SelfReg="false" NextFile="System.Text.Encoding.dll"/>
+    <ROW File="System.Text.Encoding.Extensions.dll" Component_="System.Text.Encoding.Extensions.dll" FileName="SYSTE~88.DLL|System.Text.Encoding.Extensions.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Text.Encoding.Extensions.dll" SelfReg="false" NextFile="System.Text.RegularExpressions.dll"/>
+    <ROW File="System.Text.Encoding.dll" Component_="System.Text.Encoding.dll" FileName="SYSTE~87.DLL|System.Text.Encoding.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Text.Encoding.dll" SelfReg="false" NextFile="System.Text.Encoding.Extensions.dll"/>
+    <ROW File="System.Text.RegularExpressions.dll" Component_="System.Text.RegularExpressions.dll" FileName="SYSTE~89.DLL|System.Text.RegularExpressions.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Text.RegularExpressions.dll" SelfReg="false" NextFile="System.Threading.dll"/>
+    <ROW File="System.Threading.Overlapped.dll" Component_="System.Threading.Overlapped.dll" FileName="SYSTE~91.DLL|System.Threading.Overlapped.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Threading.Overlapped.dll" SelfReg="false" NextFile="System.Threading.Tasks.dll"/>
+    <ROW File="System.Threading.Tasks.Parallel.dll" Component_="System.Threading.Tasks.Parallel.dll" FileName="SYSTE~93.DLL|System.Threading.Tasks.Parallel.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Threading.Tasks.Parallel.dll" SelfReg="false" NextFile="System.Threading.Thread.dll"/>
+    <ROW File="System.Threading.Tasks.dll" Component_="System.Threading.Tasks.dll" FileName="SYSTE~92.DLL|System.Threading.Tasks.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Threading.Tasks.dll" SelfReg="false" NextFile="System.Threading.Tasks.Parallel.dll"/>
+    <ROW File="System.Threading.Thread.dll" Component_="System.Threading.Thread.dll" FileName="SYSTE~94.DLL|System.Threading.Thread.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Threading.Thread.dll" SelfReg="false" NextFile="System.Threading.ThreadPool.dll"/>
+    <ROW File="System.Threading.ThreadPool.dll" Component_="System.Threading.ThreadPool.dll" FileName="SYSTE~95.DLL|System.Threading.ThreadPool.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Threading.ThreadPool.dll" SelfReg="false" NextFile="System.Threading.Timer.dll"/>
+    <ROW File="System.Threading.Timer.dll" Component_="System.Threading.Timer.dll" FileName="SYSTE~96.DLL|System.Threading.Timer.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Threading.Timer.dll" SelfReg="false" NextFile="System.ValueTuple.dll"/>
+    <ROW File="System.Threading.dll" Component_="System.Threading.dll" FileName="SYSTE~90.DLL|System.Threading.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Threading.dll" SelfReg="false" NextFile="System.Threading.Overlapped.dll"/>
+    <ROW File="System.ValueTuple.dll" Component_="System.ValueTuple.dll" FileName="SYSTE~97.DLL|System.ValueTuple.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.ValueTuple.dll" SelfReg="false" NextFile="System.Xml.ReaderWriter.dll"/>
+    <ROW File="System.Xml.ReaderWriter.dll" Component_="System.Xml.ReaderWriter.dll" FileName="SYSTE~98.DLL|System.Xml.ReaderWriter.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Xml.ReaderWriter.dll" SelfReg="false" NextFile="System.Xml.XDocument.dll"/>
+    <ROW File="System.Xml.XDocument.dll" Component_="System.Xml.XDocument.dll" FileName="SYSTE~99.DLL|System.Xml.XDocument.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Xml.XDocument.dll" SelfReg="false" NextFile="System.Xml.XmlDocument.dll"/>
+    <ROW File="System.Xml.XPath.XDocument.dll" Component_="System.Xml.XPath.XDocument.dll" FileName="SYST~103.DLL|System.Xml.XPath.XDocument.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Xml.XPath.XDocument.dll" SelfReg="false" NextFile="e_sqlite3.dll"/>
+    <ROW File="System.Xml.XPath.dll" Component_="System.Xml.XPath.dll" FileName="SYST~102.DLL|System.Xml.XPath.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Xml.XPath.dll" SelfReg="false" NextFile="System.Xml.XPath.XDocument.dll"/>
+    <ROW File="System.Xml.XmlDocument.dll" Component_="System.Xml.XmlDocument.dll" FileName="SYST~100.DLL|System.Xml.XmlDocument.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Xml.XmlDocument.dll" SelfReg="false" NextFile="System.Xml.XmlSerializer.dll"/>
+    <ROW File="System.Xml.XmlSerializer.dll" Component_="System.Xml.XmlSerializer.dll" FileName="SYST~101.DLL|System.Xml.XmlSerializer.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\System.Xml.XmlSerializer.dll" SelfReg="false" NextFile="System.Xml.XPath.dll"/>
+    <ROW File="data.db" Component_="camera.txt" FileName="data.db" Attributes="0" SourcePath="FastFoodSales\bin\Debug\data.db" SelfReg="false" NextFile="Dragablz.dll"/>
+    <ROW File="e_sqlite3.dll" Component_="e_sqlite3.dll" FileName="E_SQLI~1.DLL|e_sqlite3.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\x64\e_sqlite3.dll" SelfReg="false" NextFile="SQLite.Interop.dll"/>
+    <ROW File="e_sqlite3.dll_1" Component_="e_sqlite3.dll_1" FileName="E_SQLI~1.DLL|e_sqlite3.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\x86\e_sqlite3.dll" SelfReg="false" NextFile="SQLite.Interop.dll_1"/>
+    <ROW File="inc.core.dll" Component_="inc.core.dll" FileName="INCCOR~1.DLL|inc.core.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\inc.core.dll" SelfReg="false" NextFile="inc.core.pdb"/>
+    <ROW File="inc.core.pdb" Component_="inc.core.dll" FileName="INCCOR~1.PDB|inc.core.pdb" Attributes="0" SourcePath="FastFoodSales\bin\Debug\inc.core.pdb" SelfReg="false" NextFile="inc.protocols.finsnet.dll"/>
+    <ROW File="inc.protocols.finsnet.dll" Component_="inc.protocols.finsnet.dll" FileName="INCPRO~1.DLL|inc.protocols.finsnet.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\inc.protocols.finsnet.dll" SelfReg="false" NextFile="inc.protocols.finsnet.pdb"/>
+    <ROW File="inc.protocols.finsnet.pdb" Component_="inc.protocols.finsnet.dll" FileName="INCPRO~1.PDB|inc.protocols.finsnet.pdb" Attributes="0" SourcePath="FastFoodSales\bin\Debug\inc.protocols.finsnet.pdb" SelfReg="false" NextFile="NModbus4.xml"/>
+    <ROW File="netstandard.dll" Component_="netstandard.dll" FileName="NETSTA~1.DLL|netstandard.dll" Attributes="0" SourcePath="FastFoodSales\bin\Debug\netstandard.dll" SelfReg="false" NextFile="Newtonsoft.Json.dll"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.BootstrOptComponent">
+    <ROW BootstrOptKey="GlobalOptions" GeneralOptions="b" DownloadFolder="[AppDataFolder][|Manufacturer]\[|ProductName]\prerequisites" Options="2"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.BootstrapperUISequenceComponent">
+    <ROW Action="AI_DetectSoftware" Sequence="101"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.BuildComponent">
+    <ROW BuildKey="DefaultBuild" BuildName="DefaultBuild" BuildOrder="1" BuildType="0" PackageFolder="..\..\..\Desktop" Languages="en" InstallationType="4" CabsLocation="1" PackageType="1" FilesInsideExe="true" ExtractionFolder="[AppDataFolder][|Manufacturer]\[|ProductName] [|ProductVersion]\install" ExtUI="true" UseLargeSchema="true"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.DictionaryComponent">
+    <ROW Path="&lt;AI_DICTS&gt;ui.ail"/>
+    <ROW Path="&lt;AI_DICTS&gt;ui_en.ail"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.FragmentComponent">
+    <ROW Fragment="CommonUI.aip" Path="&lt;AI_FRAGS&gt;CommonUI.aip"/>
+    <ROW Fragment="FolderDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\FolderDlg.aip"/>
+    <ROW Fragment="MaintenanceTypeDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\MaintenanceTypeDlg.aip"/>
+    <ROW Fragment="MaintenanceWelcomeDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\MaintenanceWelcomeDlg.aip"/>
+    <ROW Fragment="PreparePrereqDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\PreparePrereqDlg.aip"/>
+    <ROW Fragment="PrerequisitesDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\PrerequisitesDlg.aip"/>
+    <ROW Fragment="ProgressPrereqDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\ProgressPrereqDlg.aip"/>
+    <ROW Fragment="SequenceDialogs.aip" Path="&lt;AI_THEMES&gt;classic\fragments\SequenceDialogs.aip"/>
+    <ROW Fragment="Sequences.aip" Path="&lt;AI_FRAGS&gt;Sequences.aip"/>
+    <ROW Fragment="StaticUIStrings.aip" Path="&lt;AI_FRAGS&gt;StaticUIStrings.aip"/>
+    <ROW Fragment="UI.aip" Path="&lt;AI_THEMES&gt;classic\fragments\UI.aip"/>
+    <ROW Fragment="Validation.aip" Path="&lt;AI_FRAGS&gt;Validation.aip"/>
+    <ROW Fragment="VerifyRemoveDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\VerifyRemoveDlg.aip"/>
+    <ROW Fragment="VerifyRepairDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\VerifyRepairDlg.aip"/>
+    <ROW Fragment="WelcomeDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\WelcomeDlg.aip"/>
+    <ROW Fragment="WelcomePrereqDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\WelcomePrereqDlg.aip"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiActionTextComponent">
+    <ROW Action="AI_DeleteLzma" Description="Deleting files extracted from archive" DescriptionLocId="ActionText.Description.AI_DeleteLzma" TemplateLocId="-"/>
+    <ROW Action="AI_DeleteRLzma" Description="Deleting files extracted from archive" DescriptionLocId="ActionText.Description.AI_DeleteLzma" TemplateLocId="-"/>
+    <ROW Action="AI_ExtractFiles" Description="Extracting files from archive" DescriptionLocId="ActionText.Description.AI_ExtractLzma" TemplateLocId="-"/>
+    <ROW Action="AI_ExtractLzma" Description="Extracting files from archive" DescriptionLocId="ActionText.Description.AI_ExtractLzma" TemplateLocId="-"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiAppSearchComponent">
+    <ROW Property="AI_SETUPEXEPATH" Signature_="AI_EXE_PATH_LM" Builds="DefaultBuild"/>
+    <ROW Property="AI_SETUPEXEPATH" Signature_="AI_EXE_PATH_CU" Builds="DefaultBuild"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiBinaryComponent">
+    <ROW Name="Prereq.dll" SourcePath="&lt;AI_CUSTACTS&gt;Prereq.dll"/>
+    <ROW Name="SoftwareDetector.dll" SourcePath="&lt;AI_CUSTACTS&gt;SoftwareDetector.dll"/>
+    <ROW Name="aicustact.dll" SourcePath="&lt;AI_CUSTACTS&gt;aicustact.dll"/>
+    <ROW Name="lzmaextractor.dll" SourcePath="&lt;AI_CUSTACTS&gt;lzmaextractor.dll"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiControlEventComponent">
+    <ROW Dialog_="WelcomeDlg" Control_="Next" Event="NewDialog" Argument="FolderDlg" Condition="AI_INSTALL" Ordering="1"/>
+    <ROW Dialog_="FolderDlg" Control_="Next" Event="NewDialog" Argument="VerifyReadyDlg" Condition="AI_INSTALL" Ordering="201"/>
+    <ROW Dialog_="FolderDlg" Control_="Back" Event="NewDialog" Argument="WelcomeDlg" Condition="AI_INSTALL" Ordering="1"/>
+    <ROW Dialog_="MaintenanceWelcomeDlg" Control_="Next" Event="NewDialog" Argument="MaintenanceTypeDlg" Condition="AI_MAINT" Ordering="99"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_MAINT" Ordering="198"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Back" Event="NewDialog" Argument="CustomizeDlg" Condition="AI_MAINT" Ordering="202"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_INSTALL" Ordering="197"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Back" Event="NewDialog" Argument="FolderDlg" Condition="AI_INSTALL" Ordering="201"/>
+    <ROW Dialog_="CustomizeDlg" Control_="Next" Event="NewDialog" Argument="VerifyReadyDlg" Condition="AI_MAINT" Ordering="101"/>
+    <ROW Dialog_="CustomizeDlg" Control_="Back" Event="NewDialog" Argument="MaintenanceTypeDlg" Condition="AI_MAINT" Ordering="1"/>
+    <ROW Dialog_="MaintenanceTypeDlg" Control_="ChangeButton" Event="NewDialog" Argument="CustomizeDlg" Condition="AI_MAINT" Ordering="501"/>
+    <ROW Dialog_="MaintenanceTypeDlg" Control_="Back" Event="NewDialog" Argument="MaintenanceWelcomeDlg" Condition="AI_MAINT" Ordering="1"/>
+    <ROW Dialog_="MaintenanceTypeDlg" Control_="RemoveButton" Event="NewDialog" Argument="VerifyRemoveDlg" Condition="AI_MAINT AND InstallMode=&quot;Remove&quot;" Ordering="601"/>
+    <ROW Dialog_="VerifyRemoveDlg" Control_="Back" Event="NewDialog" Argument="MaintenanceTypeDlg" Condition="AI_MAINT AND InstallMode=&quot;Remove&quot;" Ordering="1"/>
+    <ROW Dialog_="MaintenanceTypeDlg" Control_="RepairButton" Event="NewDialog" Argument="VerifyRepairDlg" Condition="AI_MAINT AND InstallMode=&quot;Repair&quot;" Ordering="601"/>
+    <ROW Dialog_="VerifyRepairDlg" Control_="Back" Event="NewDialog" Argument="MaintenanceTypeDlg" Condition="AI_MAINT AND InstallMode=&quot;Repair&quot;" Ordering="1"/>
+    <ROW Dialog_="VerifyRepairDlg" Control_="Repair" Event="EndDialog" Argument="Return" Condition="AI_MAINT AND InstallMode=&quot;Repair&quot;" Ordering="399" Options="1"/>
+    <ROW Dialog_="VerifyRemoveDlg" Control_="Remove" Event="EndDialog" Argument="Return" Condition="AI_MAINT AND InstallMode=&quot;Remove&quot;" Ordering="299" Options="1"/>
+    <ROW Dialog_="PatchWelcomeDlg" Control_="Next" Event="NewDialog" Argument="VerifyReadyDlg" Condition="AI_PATCH" Ordering="201"/>
+    <ROW Dialog_="ResumeDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_RESUME" Ordering="299"/>
+    <ROW Dialog_="WelcomePrereqDlg" Control_="Next" Event="NewDialog" Argument="PrerequisitesDlg" Condition="AI_BOOTSTRAPPER" Ordering="1"/>
+    <ROW Dialog_="PrerequisitesDlg" Control_="Next" Event="EndDialog" Argument="Return" Condition="AI_BOOTSTRAPPER" Ordering="1"/>
+    <ROW Dialog_="PrerequisitesDlg" Control_="Back" Event="NewDialog" Argument="WelcomePrereqDlg" Condition="AI_BOOTSTRAPPER" Ordering="1"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_PATCH" Ordering="199"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Back" Event="NewDialog" Argument="PatchWelcomeDlg" Condition="AI_PATCH" Ordering="203"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiCreateFolderComponent">
+    <ROW Directory_="SHORTCUTDIR" Component_="SHORTCUTDIR" ManualDelete="false"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiCustActComponent">
+    <ROW Action="AI_AppSearchEx" Type="1" Source="Prereq.dll" Target="DoAppSearchEx"/>
+    <ROW Action="AI_BACKUP_AI_SETUPEXEPATH" Type="51" Source="AI_SETUPEXEPATH_ORIGINAL" Target="[AI_SETUPEXEPATH]"/>
+    <ROW Action="AI_DATA_SETTER" Type="51" Source="AI_ExtractFiles" Target="[AI_SETUPEXEPATH]"/>
+    <ROW Action="AI_DOWNGRADE" Type="19" Target="4010"/>
+    <ROW Action="AI_DeleteCadLzma" Type="51" Source="AI_DeleteLzma" Target="[AI_SETUPEXEPATH]"/>
+    <ROW Action="AI_DeleteLzma" Type="1025" Source="lzmaextractor.dll" Target="DeleteLZMAFiles"/>
+    <ROW Action="AI_DeleteRCadLzma" Type="51" Source="AI_DeleteRLzma" Target="[AI_SETUPEXEPATH]"/>
+    <ROW Action="AI_DeleteRLzma" Type="1281" Source="lzmaextractor.dll" Target="DeleteLZMAFiles"/>
+    <ROW Action="AI_DetectSoftware" Type="257" Source="SoftwareDetector.dll" Target="OnDetectSoftware"/>
+    <ROW Action="AI_DpiContentScale" Type="1" Source="aicustact.dll" Target="DpiContentScale"/>
+    <ROW Action="AI_EnableDebugLog" Type="321" Source="aicustact.dll" Target="EnableDebugLog"/>
+    <ROW Action="AI_EstimateExtractFiles" Type="1" Source="Prereq.dll" Target="EstimateExtractFiles"/>
+    <ROW Action="AI_ExtractCadLzma" Type="51" Source="AI_ExtractLzma" Target="[AI_SETUPEXEPATH]"/>
+    <ROW Action="AI_ExtractFiles" Type="1025" Source="Prereq.dll" Target="ExtractSourceFiles" AdditionalSeq="AI_DATA_SETTER"/>
+    <ROW Action="AI_ExtractLzma" Type="1025" Source="lzmaextractor.dll" Target="ExtractLZMAFiles"/>
+    <ROW Action="AI_FindExeLzma" Type="1" Source="lzmaextractor.dll" Target="FindEXE"/>
+    <ROW Action="AI_InstallModeCheck" Type="1" Source="aicustact.dll" Target="UpdateInstallMode" WithoutSeq="true"/>
+    <ROW Action="AI_PREPARE_UPGRADE" Type="65" Source="aicustact.dll" Target="PrepareUpgrade"/>
+    <ROW Action="AI_RESTORE_AI_SETUPEXEPATH" Type="51" Source="AI_SETUPEXEPATH" Target="[AI_SETUPEXEPATH_ORIGINAL]"/>
+    <ROW Action="AI_RESTORE_LOCATION" Type="65" Source="aicustact.dll" Target="RestoreLocation"/>
+    <ROW Action="AI_ResolveKnownFolders" Type="1" Source="aicustact.dll" Target="AI_ResolveKnownFolders"/>
+    <ROW Action="AI_SHOW_LOG" Type="65" Source="aicustact.dll" Target="LaunchLogFile" WithoutSeq="true"/>
+    <ROW Action="AI_STORE_LOCATION" Type="51" Source="ARPINSTALLLOCATION" Target="[APPDIR]"/>
+    <ROW Action="ModbusService.exe" Type="3602" Source="ModbusService.exe" Target="Install"/>
+    <ROW Action="ModbusService.exe_1" Type="3602" Source="ModbusService.exe" Target="Start"/>
+    <ROW Action="ModbusService.exe_2" Type="3090" Source="ModbusService.exe" Target="Uninstall"/>
+    <ROW Action="SET_APPDIR" Type="307" Source="APPDIR" Target="[ProgramFilesFolder][Manufacturer]\[ProductName]"/>
+    <ROW Action="SET_SHORTCUTDIR" Type="307" Source="SHORTCUTDIR" Target="[ProgramMenuFolder][ProductName]"/>
+    <ROW Action="SET_TARGETDIR_TO_APPDIR" Type="51" Source="TARGETDIR" Target="[APPDIR]"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiIconsComponent">
+    <ROW Name="application.exe" SourcePath="FastFoodSales\application.ico" Index="0"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiInstExSeqComponent">
+    <ROW Action="AI_DOWNGRADE" Condition="AI_NEWERPRODUCTFOUND AND (UILevel &lt;&gt; 5)" Sequence="210"/>
+    <ROW Action="AI_RESTORE_LOCATION" Condition="APPDIR=&quot;&quot;" Sequence="749"/>
+    <ROW Action="AI_STORE_LOCATION" Condition="(Not Installed) OR REINSTALL" Sequence="1501"/>
+    <ROW Action="AI_PREPARE_UPGRADE" Condition="AI_UPGRADE=&quot;No&quot; AND (Not Installed)" Sequence="1399"/>
+    <ROW Action="AI_ResolveKnownFolders" Sequence="53"/>
+    <ROW Action="AI_EnableDebugLog" Sequence="51"/>
+    <ROW Action="AI_DetectSoftware" Sequence="103"/>
+    <ROW Action="AI_BACKUP_AI_SETUPEXEPATH" Sequence="99" Builds="DefaultBuild"/>
+    <ROW Action="AI_RESTORE_AI_SETUPEXEPATH" Condition="AI_SETUPEXEPATH_ORIGINAL" Sequence="102" Builds="DefaultBuild"/>
+    <ROW Action="AI_DeleteCadLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (AI_INSTALL_MODE&lt;&gt;&quot;Remove&quot;) AND (NOT PATCH)" Sequence="199" Builds="DefaultBuild"/>
+    <ROW Action="AI_DeleteRCadLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (AI_INSTALL_MODE&lt;&gt;&quot;Remove&quot;) AND (NOT PATCH)" Sequence="198" Builds="DefaultBuild"/>
+    <ROW Action="AI_ExtractCadLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (AI_INSTALL_MODE&lt;&gt;&quot;Remove&quot;) AND (NOT PATCH)" Sequence="197" Builds="DefaultBuild"/>
+    <ROW Action="AI_FindExeLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (AI_INSTALL_MODE&lt;&gt;&quot;Remove&quot;) AND (NOT PATCH)" Sequence="196" Builds="DefaultBuild"/>
+    <ROW Action="AI_ExtractLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (AI_INSTALL_MODE&lt;&gt;&quot;Remove&quot;) AND (NOT PATCH)" Sequence="1549" Builds="DefaultBuild"/>
+    <ROW Action="AI_DeleteRLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (AI_INSTALL_MODE&lt;&gt;&quot;Remove&quot;) AND (NOT PATCH)" Sequence="1548" Builds="DefaultBuild"/>
+    <ROW Action="AI_DeleteLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (AI_INSTALL_MODE&lt;&gt;&quot;Remove&quot;) AND (NOT PATCH)" Sequence="6599" Builds="DefaultBuild"/>
+    <ROW Action="AI_ExtractFiles" Sequence="3998" Builds="DefaultBuild"/>
+    <ROW Action="AI_DATA_SETTER" Sequence="3997"/>
+    <ROW Action="AI_EstimateExtractFiles" Sequence="3999" Builds="DefaultBuild"/>
+    <ROW Action="AI_AppSearchEx" Sequence="101"/>
+    <ROW Action="ModbusService.exe_1" Condition="( NOT Installed )" Sequence="6402"/>
+    <ROW Action="ModbusService.exe" Condition="( NOT Installed )" Sequence="6401"/>
+    <ROW Action="ModbusService.exe_2" Condition="( Installed AND ( REMOVE = &quot;ALL&quot; OR AI_INSTALL_MODE = &quot;Remove&quot; ) )" Sequence="1601"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiInstallUISequenceComponent">
+    <ROW Action="AI_RESTORE_LOCATION" Condition="APPDIR=&quot;&quot;" Sequence="749"/>
+    <ROW Action="AI_ResolveKnownFolders" Sequence="53"/>
+    <ROW Action="AI_DpiContentScale" Sequence="52"/>
+    <ROW Action="AI_EnableDebugLog" Sequence="51"/>
+    <ROW Action="AI_DetectSoftware" Sequence="103"/>
+    <ROW Action="AI_BACKUP_AI_SETUPEXEPATH" Sequence="99"/>
+    <ROW Action="AI_RESTORE_AI_SETUPEXEPATH" Condition="AI_SETUPEXEPATH_ORIGINAL" Sequence="102"/>
+    <ROW Action="AI_AppSearchEx" Sequence="101"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiLaunchConditionsComponent">
+    <ROW Condition="( Version9X OR ( NOT VersionNT64 ) OR ( VersionNT64 AND ((VersionNT64 &lt;&gt; 502) OR (ServicePackLevel &lt;&gt; 2) OR (MsiNTProductType &lt;&gt; 1)) AND ((VersionNT64 &lt;&gt; 502) OR (ServicePackLevel &lt;&gt; 2) OR (MsiNTProductType = 1)) AND ((VersionNT64 &lt;&gt; 600) OR (MsiNTProductType &lt;&gt; 1)) AND ((VersionNT64 &lt;&gt; 600) OR (MsiNTProductType = 1)) ) )" Description="[ProductName] cannot be installed on the following Windows versions: [WindowsTypeNT64Display]." DescriptionLocId="AI.LaunchCondition.NoSpecificNT64" IsPredefined="true" Builds="DefaultBuild"/>
+    <ROW Condition="( Version9X OR VersionNT64 OR ( VersionNT AND ((VersionNT &lt;&gt; 501) OR (ServicePackLevel &lt;&gt; 3)) AND ((VersionNT &lt;&gt; 502) OR (ServicePackLevel &lt;&gt; 2)) AND ((VersionNT &lt;&gt; 600) OR (MsiNTProductType &lt;&gt; 1)) AND ((VersionNT &lt;&gt; 600) OR (MsiNTProductType = 1)) ) )" Description="[ProductName] cannot be installed on the following Windows versions: [WindowsTypeNTDisplay]." DescriptionLocId="AI.LaunchCondition.NoSpecificNT" IsPredefined="true" Builds="DefaultBuild"/>
+    <ROW Condition="(VersionNT &lt;&gt; 400)" Description="[ProductName] cannot be installed on [WindowsTypeNT40Display]." DescriptionLocId="AI.LaunchCondition.NoNT40" IsPredefined="true" Builds="DefaultBuild"/>
+    <ROW Condition="(VersionNT &lt;&gt; 500)" Description="[ProductName] cannot be installed on [WindowsTypeNT50Display]." DescriptionLocId="AI.LaunchCondition.NoNT50" IsPredefined="true" Builds="DefaultBuild"/>
+    <ROW Condition="(VersionNT64 OR ((VersionNT &lt;&gt; 501) OR (ServicePackLevel = 3))) AND ((VersionNT &lt;&gt; 502) OR (ServicePackLevel = 2))" Description="[ProductName] cannot be installed on [WindowsTypeNT5XDisplay]." DescriptionLocId="AI.LaunchCondition.NoNT5X" IsPredefined="true" Builds="DefaultBuild"/>
+    <ROW Condition="AI_DETECTED_DOTNET_VERSION &gt;= AI_REQUIRED_DOTNET_VERSION" Description="[ProductName] cannot be installed on systems with .NET Framework version lower than [AI_REQUIRED_DOTNET_DISPLAY]." DescriptionLocId="AI.LaunchCondition.DotNET" IsPredefined="true" Builds="DefaultBuild"/>
+    <ROW Condition="SETUPEXEDIR OR (REMOVE=&quot;ALL&quot;)" Description="This package can only be run from a bootstrapper." DescriptionLocId="AI.LaunchCondition.RequireBootstrapper" IsPredefined="true" Builds="DefaultBuild"/>
+    <ROW Condition="VersionNT" Description="[ProductName] cannot be installed on [WindowsType9XDisplay]." DescriptionLocId="AI.LaunchCondition.No9X" IsPredefined="true" Builds="DefaultBuild"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiRegLocatorComponent">
+    <ROW Signature_="AI_EXE_PATH_CU" Root="1" Key="Software\Caphyon\Advanced Installer\LZMA\[ProductCode]\[ProductVersion]" Name="AI_ExePath" Type="2"/>
+    <ROW Signature_="AI_EXE_PATH_LM" Root="2" Key="Software\Caphyon\Advanced Installer\LZMA\[ProductCode]\[ProductVersion]" Name="AI_ExePath" Type="2"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiRegsComponent">
+    <ROW Registry="AI_ExePath" Root="-1" Key="Software\Caphyon\Advanced Installer\LZMA\[ProductCode]\[ProductVersion]" Name="AI_ExePath" Value="[AI_SETUPEXEPATH]" Component_="AI_ExePath"/>
+    <ROW Registry="Path" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Path" Value="[APPDIR]" Component_="ProductInformation"/>
+    <ROW Registry="Version" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Version" Value="[ProductVersion]" Component_="ProductInformation"/>
+    <ROW Registry="__1" Root="0" Key="Interface\{00000000-0000-0000-0000-000000000000}" Value="InterfaceName" Component_="_"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiShortsComponent">
+    <ROW Shortcut="DAQ.exe" Directory_="SHORTCUTDIR" Name="DAQ.exe" Component_="DAQ.exe" Target="[#DAQ.exe]" Description="DAQ.exe" Hotkey="0" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
+    <ROW Shortcut="DAQ.exe_1" Directory_="DesktopFolder" Name="DAQ.exe" Component_="DAQ.exe" Target="[#DAQ.exe]" Description="DAQ.exe" Hotkey="0" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
+    <ROW Shortcut="DAQ.exe_2" Directory_="StartupFolder" Name="DAQ.exe" Component_="DAQ.exe" Target="[#DAQ.exe]" Description="DAQ.exe" Hotkey="0" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiThemeComponent">
+    <ATTRIBUTE name="UsedTheme" value="classic"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiUpgradeComponent">
+    <ROW UpgradeCode="[|UpgradeCode]" VersionMin="0.0.1" VersionMax="[|ProductVersion]" Attributes="257" ActionProperty="OLDPRODUCTS"/>
+    <ROW UpgradeCode="[|UpgradeCode]" VersionMin="[|ProductVersion]" Attributes="2" ActionProperty="AI_NEWERPRODUCTFOUND"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.PreReqComponent">
+    <ROW PrereqKey="E6EF03A03ACB41E28F8D6A76831D390C" DisplayName=".NET Framework 4.6.2" SetupFileUrl="..\..\..\Downloads\NDP462-KB3151800-x86-x64-AllOS-ENU.exe" Location="0" ExactSize="0" WinNTVersions="Windows XP SP3 x86, Windows Server 2003 SP2 x86, Windows Vista x86, Windows Server 2008 x86, Windows 7 RTM x86, Windows 10 version 1607 x86, Windows 10 version 1703 x86, Windows 10 version 1709 x86, Windows 10 version 1803 x86" WinNT64Versions="Windows XP SP2 x64, Windows Server 2003 SP2 x64, Windows Vista x64, Windows Server 2008 x64, Windows 7 RTM x64, Windows Server 2008 R2 RTM x64, Windows 10 version 1607 x64, Windows 10 version 1703 x64, Windows 10 version 1709 x64, Windows 10 version 1803 x64, Windows Server 2016 x64" Operator="1" ComLine="/qb" BasicUiComLine="/qb" NoUiComLine="/qb" Options="xy" TargetName="NDP461-KB3102436-x86-x64-AllOS-ENU.exe\NDP462-KB3151800-x86-x64-AllOS-ENU.exe"/>
+    <ATTRIBUTE name="PrereqsOrder" value="E6EF03A03ACB41E28F8D6A76831D390C"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.PreReqSearchComponent">
+    <ROW SearchKey="E6EF03A03ACB41E28F8D6A76831D390CRelease" Prereq="E6EF03A03ACB41E28F8D6A76831D390C" SearchType="9" SearchString="HKLM\SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full\Release" RefContent="G394805" Order="1" Property="PreReqSearch_E6EF03A03ACB41E28F8D6A"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.SynchronizedFolderComponent">
+    <ROW Directory_="APPDIR" SourcePath="FastFoodSales\bin\Debug" Feature="MainFeature" ExcludePattern="*~|#*#|%*%|._|CVS|.cvsignore|SCCS|vssver.scc|mssccprj.scc|vssver2.scc|.svn|.DS_Store" ExcludeFlags="6"/>
+  </COMPONENT>
+</DOCUMENT>

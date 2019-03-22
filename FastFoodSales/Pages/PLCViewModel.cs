@@ -9,12 +9,9 @@ using Stylet;
 using MaterialDesignThemes.Wpf;
 namespace DAQ.Pages
 {
-    public class PLCViewModel : Screen,IMainTabViewModel
+    public class PLCViewModel : Screen, IMainTabViewModel
     {
 
-        public BindableCollection<KV<bool>> Bits { get; set; } = new BindableCollection<KV<bool>>();
-        public BindableCollection<KV<float>> Floats { get; set; } = new BindableCollection<KV<float>>();
-        public BindableCollection<string> FloatsTags = new BindableCollection<string>();
         public object Dialog { get; set; }
         [Inject]
         public DataStorage Storage { get; set; }
@@ -41,15 +38,25 @@ namespace DAQ.Pages
 
         public async void ModifyDataValue()
         {
-            var dlg = new StorageValueDialog() { DataContext = SelectedItem };
-            var result = await DialogHost.Show(dlg);
-
-            if (result is bool r && r == true)
+            var dlg = new StorageValueDialog()
             {
-                VAR v = dlg.DataContext as VAR;
-                //Storage.AddItem(v);
-                SelectedItem = v;
-                Storage.Save();
+                DataContext = new VAR()
+                {
+                    Name = SelectedItem.Name,
+                    StartIndex = SelectedItem.StartIndex,
+                    Tag = SelectedItem.Tag,
+                    Type = SelectedItem.Type,
+                    Value = SelectedItem.Value
+                }
+            };
+            var result = await DialogHost.Show(dlg);
+            lock (DataStorage.Locker)
+            {
+                if (result is bool r && r == true)
+                {
+                    VAR v = dlg.DataContext as VAR;
+                    Storage.ModifyItem(SelectedItem, v);
+                }
             }
         }
         public PLCViewModel()
@@ -59,6 +66,7 @@ namespace DAQ.Pages
         public int TabIndex { get; set; } = (int)Pages.TabIndex.VALUES;
         public PackIconKind PackIcon { get; set; } = PackIconKind.ViewSequential;
         public string Header { get; set; } = "Values";
+        public bool Visiable { get; set; } = true;
     };
 }
 public class KV<T> : PropertyChangedBase
