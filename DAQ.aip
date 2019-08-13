@@ -5,21 +5,19 @@
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiPropsComponent">
     <ROW Property="AI_BITMAP_DISPLAY_MODE" Value="0"/>
-    <ROW Property="AI_FINDEXE_TITLE" Value="Select the installation package for [|ProductName]" ValueLocId="AI.Property.FindExeTitle"/>
     <ROW Property="AI_PREDEF_LCONDS_PROPS" Value="AI_DETECTED_DOTNET_VERSION"/>
     <ROW Property="AI_REQUIRED_DOTNET_DISPLAY" MultiBuildValue="DefaultBuild:4.6.2" ValueLocId="-"/>
     <ROW Property="AI_REQUIRED_DOTNET_VERSION" MultiBuildValue="DefaultBuild:4.6.2" ValueLocId="-"/>
     <ROW Property="AI_ThemeStyle" Value="aero" MultiBuildValue="DefaultBuild:style2" MsiKey="AI_ThemeStyle"/>
     <ROW Property="ALLUSERS" Value="1"/>
     <ROW Property="ARPCOMMENTS" Value="This installer database contains the logic and data required to install [|ProductName]." ValueLocId="*"/>
-    <ROW Property="ARPNOREPAIR" MultiBuildValue="DefaultBuild:1"/>
     <ROW Property="ARPPRODUCTICON" Value="application.exe" Type="8"/>
     <ROW Property="Manufacturer" Value="Tanac"/>
     <ROW Property="ProductCode" Value="1033:{79C0D7C8-04D0-46BF-B943-3758F91F2880} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="DAQ"/>
     <ROW Property="ProductVersion" Value="1.0.0" Type="32"/>
-    <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND;AI_SETUPEXEPATH;SETUPEXEDIR"/>
+    <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{3F8B88CC-D7F2-4FA0-99E6-DA29183BC11D}"/>
     <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
     <ROW Property="WindowsType9XDisplay" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
@@ -45,7 +43,6 @@
     <ROW Directory="x86_Dir" Directory_Parent="APPDIR" DefaultDir="x86"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
-    <ROW Component="AI_ExePath" ComponentId="{1278495D-8CD4-4D43-8927-1601ACC68D43}" Directory_="APPDIR" Attributes="4" KeyPath="AI_ExePath"/>
     <ROW Component="ControlzEx.dll" ComponentId="{67AF41D4-4CD6-474F-ADA0-3C01EA934969}" Directory_="APPDIR" Attributes="0" KeyPath="ControlzEx.dll"/>
     <ROW Component="Costura.dll" ComponentId="{E889FBA0-088E-4598-BC3F-293F834EC032}" Directory_="APPDIR" Attributes="0" KeyPath="Costura.dll"/>
     <ROW Component="DAQ.exe" ComponentId="{61614750-863C-4D01-929C-E3741BB6BE97}" Directory_="APPDIR" Attributes="0" KeyPath="DAQ.exe"/>
@@ -207,7 +204,7 @@
     <ROW Component="netstandard.dll" ComponentId="{6910084C-A138-46A1-8814-535AF04A815D}" Directory_="APPDIR" Attributes="0" KeyPath="netstandard.dll"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatsComponent">
-    <ROW Feature="MainFeature" Title="MainFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0" Components="AI_ExePath ControlzEx.dll Costura.dll DAQ.exe Dapper.dll DataValues.json Dragablz.dll HslCommunication.dll LiveCharts.Wpf.dll LiveCharts.dll MahApps.Metro.dll MaterialDesignColors.dll MaterialDesignThemes.Wpf.dll Microsoft.Data.Sqlite.dll Microsoft.DotNet.PlatformAbstractions.dll Microsoft.EntityFrameworkCore.Abstractions.dll Microsoft.EntityFrameworkCore.Design.dll Microsoft.EntityFrameworkCore.Relational.dll Microsoft.EntityFrameworkCore.SqlServer.dll Microsoft.EntityFrameworkCore.Sqlite.dll Microsoft.EntityFrameworkCore.dll Microsoft.Extensions.Caching.Abstractions.dll Microsoft.Extensions.Caching.Memory.dll Microsoft.Extensions.Configuration.Abstractions.dll Microsoft.Extensions.Configuration.Binder.dll Microsoft.Extensions.Configuration.dll Microsoft.Extensions.DependencyInjection.Abstractions.dll Microsoft.Extensions.DependencyInjection.dll Microsoft.Extensions.DependencyModel.dll Microsoft.Extensions.Logging.Abstractions.dll Microsoft.Extensions.Logging.dll Microsoft.Extensions.Options.dll Microsoft.Extensions.Primitives.dll Microsoft.Win32.Primitives.dll Microsoft.Xaml.Behaviors.dll ModbusService.exe NModbus4.dll Newtonsoft.Json.dll ProductInformation Remotion.Linq.dll SHORTCUTDIR SQLite.Interop.dll SQLite.Interop.dll_1 SQLitePCLRaw.batteries_green.dll SQLitePCLRaw.batteries_v2.dll SQLitePCLRaw.core.dll SQLitePCLRaw.provider.e_sqlite3.dll SimpleTCP.dll Stylet.dll System.AppContext.dll System.Buffers.dll System.Collections.Concurrent.dll System.Collections.Immutable.dll System.Collections.NonGeneric.dll System.Collections.Specialized.dll System.Collections.dll System.ComponentModel.Annotations.dll System.ComponentModel.EventBasedAsync.dll System.ComponentModel.Primitives.dll System.ComponentModel.TypeConverter.dll System.ComponentModel.dll System.Console.dll System.Data.Common.dll System.Data.SQLite.dll System.Data.SqlClient.dll System.Diagnostics.Contracts.dll System.Diagnostics.Debug.dll System.Diagnostics.DiagnosticSource.dll System.Diagnostics.FileVersionInfo.dll System.Diagnostics.Process.dll System.Diagnostics.StackTrace.dll System.Diagnostics.TextWriterTraceListener.dll System.Diagnostics.Tools.dll System.Diagnostics.TraceSource.dll System.Diagnostics.Tracing.dll System.Drawing.Primitives.dll System.Dynamic.Runtime.dll System.Globalization.Calendars.dll System.Globalization.Extensions.dll System.Globalization.dll System.IO.Compression.ZipFile.dll System.IO.Compression.dll System.IO.FileSystem.DriveInfo.dll System.IO.FileSystem.Primitives.dll System.IO.FileSystem.Watcher.dll System.IO.FileSystem.dll System.IO.IsolatedStorage.dll System.IO.MemoryMappedFiles.dll System.IO.Pipes.dll System.IO.UnmanagedMemoryStream.dll System.IO.dll System.Interactive.Async.dll System.Linq.Expressions.dll System.Linq.Parallel.dll System.Linq.Queryable.dll System.Linq.dll System.Memory.dll System.Net.Http.dll System.Net.NameResolution.dll System.Net.NetworkInformation.dll System.Net.Ping.dll System.Net.Primitives.dll System.Net.Requests.dll System.Net.Security.dll System.Net.Sockets.dll System.Net.WebHeaderCollection.dll System.Net.WebSockets.Client.dll System.Net.WebSockets.dll System.Numerics.Vectors.dll System.ObjectModel.dll System.Reflection.Extensions.dll System.Reflection.Primitives.dll System.Reflection.dll System.Resources.Reader.dll System.Resources.ResourceManager.dll System.Resources.Writer.dll System.Runtime.CompilerServices.Unsafe.dll System.Runtime.CompilerServices.VisualC.dll System.Runtime.Extensions.dll System.Runtime.Handles.dll System.Runtime.InteropServices.RuntimeInformation.dll System.Runtime.InteropServices.dll System.Runtime.Numerics.dll System.Runtime.Serialization.Formatters.dll System.Runtime.Serialization.Json.dll System.Runtime.Serialization.Primitives.dll System.Runtime.Serialization.Xml.dll System.Runtime.dll System.Security.Claims.dll System.Security.Cryptography.Algorithms.dll System.Security.Cryptography.Csp.dll System.Security.Cryptography.Encoding.dll System.Security.Cryptography.Primitives.dll System.Security.Cryptography.X509Certificates.dll System.Security.Principal.dll System.Security.SecureString.dll System.Text.Encoding.Extensions.dll System.Text.Encoding.dll System.Text.RegularExpressions.dll System.Threading.Overlapped.dll System.Threading.Tasks.Parallel.dll System.Threading.Tasks.dll System.Threading.Thread.dll System.Threading.ThreadPool.dll System.Threading.Timer.dll System.Threading.dll System.ValueTuple.dll System.Xml.ReaderWriter.dll System.Xml.XDocument.dll System.Xml.XPath.XDocument.dll System.Xml.XPath.dll System.Xml.XmlDocument.dll System.Xml.XmlSerializer.dll _ camera.txt e_sqlite3.dll e_sqlite3.dll_1 inc.core.dll inc.protocols.finsnet.dll netstandard.dll"/>
+    <ROW Feature="MainFeature" Title="MainFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0" Components="ControlzEx.dll Costura.dll DAQ.exe Dapper.dll DataValues.json Dragablz.dll HslCommunication.dll LiveCharts.Wpf.dll LiveCharts.dll MahApps.Metro.dll MaterialDesignColors.dll MaterialDesignThemes.Wpf.dll Microsoft.Data.Sqlite.dll Microsoft.DotNet.PlatformAbstractions.dll Microsoft.EntityFrameworkCore.Abstractions.dll Microsoft.EntityFrameworkCore.Design.dll Microsoft.EntityFrameworkCore.Relational.dll Microsoft.EntityFrameworkCore.SqlServer.dll Microsoft.EntityFrameworkCore.Sqlite.dll Microsoft.EntityFrameworkCore.dll Microsoft.Extensions.Caching.Abstractions.dll Microsoft.Extensions.Caching.Memory.dll Microsoft.Extensions.Configuration.Abstractions.dll Microsoft.Extensions.Configuration.Binder.dll Microsoft.Extensions.Configuration.dll Microsoft.Extensions.DependencyInjection.Abstractions.dll Microsoft.Extensions.DependencyInjection.dll Microsoft.Extensions.DependencyModel.dll Microsoft.Extensions.Logging.Abstractions.dll Microsoft.Extensions.Logging.dll Microsoft.Extensions.Options.dll Microsoft.Extensions.Primitives.dll Microsoft.Win32.Primitives.dll Microsoft.Xaml.Behaviors.dll ModbusService.exe NModbus4.dll Newtonsoft.Json.dll ProductInformation Remotion.Linq.dll SHORTCUTDIR SQLite.Interop.dll SQLite.Interop.dll_1 SQLitePCLRaw.batteries_green.dll SQLitePCLRaw.batteries_v2.dll SQLitePCLRaw.core.dll SQLitePCLRaw.provider.e_sqlite3.dll SimpleTCP.dll Stylet.dll System.AppContext.dll System.Buffers.dll System.Collections.Concurrent.dll System.Collections.Immutable.dll System.Collections.NonGeneric.dll System.Collections.Specialized.dll System.Collections.dll System.ComponentModel.Annotations.dll System.ComponentModel.EventBasedAsync.dll System.ComponentModel.Primitives.dll System.ComponentModel.TypeConverter.dll System.ComponentModel.dll System.Console.dll System.Data.Common.dll System.Data.SQLite.dll System.Data.SqlClient.dll System.Diagnostics.Contracts.dll System.Diagnostics.Debug.dll System.Diagnostics.DiagnosticSource.dll System.Diagnostics.FileVersionInfo.dll System.Diagnostics.Process.dll System.Diagnostics.StackTrace.dll System.Diagnostics.TextWriterTraceListener.dll System.Diagnostics.Tools.dll System.Diagnostics.TraceSource.dll System.Diagnostics.Tracing.dll System.Drawing.Primitives.dll System.Dynamic.Runtime.dll System.Globalization.Calendars.dll System.Globalization.Extensions.dll System.Globalization.dll System.IO.Compression.ZipFile.dll System.IO.Compression.dll System.IO.FileSystem.DriveInfo.dll System.IO.FileSystem.Primitives.dll System.IO.FileSystem.Watcher.dll System.IO.FileSystem.dll System.IO.IsolatedStorage.dll System.IO.MemoryMappedFiles.dll System.IO.Pipes.dll System.IO.UnmanagedMemoryStream.dll System.IO.dll System.Interactive.Async.dll System.Linq.Expressions.dll System.Linq.Parallel.dll System.Linq.Queryable.dll System.Linq.dll System.Memory.dll System.Net.Http.dll System.Net.NameResolution.dll System.Net.NetworkInformation.dll System.Net.Ping.dll System.Net.Primitives.dll System.Net.Requests.dll System.Net.Security.dll System.Net.Sockets.dll System.Net.WebHeaderCollection.dll System.Net.WebSockets.Client.dll System.Net.WebSockets.dll System.Numerics.Vectors.dll System.ObjectModel.dll System.Reflection.Extensions.dll System.Reflection.Primitives.dll System.Reflection.dll System.Resources.Reader.dll System.Resources.ResourceManager.dll System.Resources.Writer.dll System.Runtime.CompilerServices.Unsafe.dll System.Runtime.CompilerServices.VisualC.dll System.Runtime.Extensions.dll System.Runtime.Handles.dll System.Runtime.InteropServices.RuntimeInformation.dll System.Runtime.InteropServices.dll System.Runtime.Numerics.dll System.Runtime.Serialization.Formatters.dll System.Runtime.Serialization.Json.dll System.Runtime.Serialization.Primitives.dll System.Runtime.Serialization.Xml.dll System.Runtime.dll System.Security.Claims.dll System.Security.Cryptography.Algorithms.dll System.Security.Cryptography.Csp.dll System.Security.Cryptography.Encoding.dll System.Security.Cryptography.Primitives.dll System.Security.Cryptography.X509Certificates.dll System.Security.Principal.dll System.Security.SecureString.dll System.Text.Encoding.Extensions.dll System.Text.Encoding.dll System.Text.RegularExpressions.dll System.Threading.Overlapped.dll System.Threading.Tasks.Parallel.dll System.Threading.Tasks.dll System.Threading.Thread.dll System.Threading.ThreadPool.dll System.Threading.Timer.dll System.Threading.dll System.ValueTuple.dll System.Xml.ReaderWriter.dll System.Xml.XDocument.dll System.Xml.XPath.XDocument.dll System.Xml.XPath.dll System.Xml.XmlDocument.dll System.Xml.XmlSerializer.dll _ camera.txt e_sqlite3.dll e_sqlite3.dll_1 inc.core.dll inc.protocols.finsnet.dll netstandard.dll"/>
     <ATTRIBUTE name="CurrentFeature" value="MainFeature"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFilesComponent">
@@ -428,7 +425,7 @@
     <ROW Action="AI_DetectSoftware" Sequence="101"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.BuildComponent">
-    <ROW BuildKey="DefaultBuild" BuildName="DefaultBuild" BuildOrder="1" BuildType="0" PackageFolder="..\..\..\Desktop" Languages="en" InstallationType="4" CabsLocation="1" PackageType="1" FilesInsideExe="true" ExtractionFolder="[AppDataFolder][|Manufacturer]\[|ProductName] [|ProductVersion]\install" ExtUI="true" UseLargeSchema="true"/>
+    <ROW BuildKey="DefaultBuild" BuildName="DefaultBuild" BuildOrder="1" BuildType="0" PackageFolder="..\..\..\Desktop" Languages="en" InstallationType="4" ExtUI="true" UseLargeSchema="true"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.DictionaryComponent">
     <ROW Path="&lt;AI_DICTS&gt;ui.ail"/>
@@ -452,21 +449,10 @@
     <ROW Fragment="WelcomeDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\WelcomeDlg.aip"/>
     <ROW Fragment="WelcomePrereqDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\WelcomePrereqDlg.aip"/>
   </COMPONENT>
-  <COMPONENT cid="caphyon.advinst.msicomp.MsiActionTextComponent">
-    <ROW Action="AI_DeleteLzma" Description="Deleting files extracted from archive" DescriptionLocId="ActionText.Description.AI_DeleteLzma" TemplateLocId="-"/>
-    <ROW Action="AI_DeleteRLzma" Description="Deleting files extracted from archive" DescriptionLocId="ActionText.Description.AI_DeleteLzma" TemplateLocId="-"/>
-    <ROW Action="AI_ExtractFiles" Description="Extracting files from archive" DescriptionLocId="ActionText.Description.AI_ExtractLzma" TemplateLocId="-"/>
-    <ROW Action="AI_ExtractLzma" Description="Extracting files from archive" DescriptionLocId="ActionText.Description.AI_ExtractLzma" TemplateLocId="-"/>
-  </COMPONENT>
-  <COMPONENT cid="caphyon.advinst.msicomp.MsiAppSearchComponent">
-    <ROW Property="AI_SETUPEXEPATH" Signature_="AI_EXE_PATH_LM" Builds="DefaultBuild"/>
-    <ROW Property="AI_SETUPEXEPATH" Signature_="AI_EXE_PATH_CU" Builds="DefaultBuild"/>
-  </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiBinaryComponent">
     <ROW Name="Prereq.dll" SourcePath="&lt;AI_CUSTACTS&gt;Prereq.dll"/>
     <ROW Name="SoftwareDetector.dll" SourcePath="&lt;AI_CUSTACTS&gt;SoftwareDetector.dll"/>
     <ROW Name="aicustact.dll" SourcePath="&lt;AI_CUSTACTS&gt;aicustact.dll"/>
-    <ROW Name="lzmaextractor.dll" SourcePath="&lt;AI_CUSTACTS&gt;lzmaextractor.dll"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiControlEventComponent">
     <ROW Dialog_="WelcomeDlg" Control_="Next" Event="NewDialog" Argument="FolderDlg" Condition="AI_INSTALL" Ordering="1"/>
@@ -501,20 +487,10 @@
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCustActComponent">
     <ROW Action="AI_AppSearchEx" Type="1" Source="Prereq.dll" Target="DoAppSearchEx"/>
     <ROW Action="AI_BACKUP_AI_SETUPEXEPATH" Type="51" Source="AI_SETUPEXEPATH_ORIGINAL" Target="[AI_SETUPEXEPATH]"/>
-    <ROW Action="AI_DATA_SETTER" Type="51" Source="AI_ExtractFiles" Target="[AI_SETUPEXEPATH]"/>
     <ROW Action="AI_DOWNGRADE" Type="19" Target="4010"/>
-    <ROW Action="AI_DeleteCadLzma" Type="51" Source="AI_DeleteLzma" Target="[AI_SETUPEXEPATH]"/>
-    <ROW Action="AI_DeleteLzma" Type="1025" Source="lzmaextractor.dll" Target="DeleteLZMAFiles"/>
-    <ROW Action="AI_DeleteRCadLzma" Type="51" Source="AI_DeleteRLzma" Target="[AI_SETUPEXEPATH]"/>
-    <ROW Action="AI_DeleteRLzma" Type="1281" Source="lzmaextractor.dll" Target="DeleteLZMAFiles"/>
     <ROW Action="AI_DetectSoftware" Type="257" Source="SoftwareDetector.dll" Target="OnDetectSoftware"/>
     <ROW Action="AI_DpiContentScale" Type="1" Source="aicustact.dll" Target="DpiContentScale"/>
     <ROW Action="AI_EnableDebugLog" Type="321" Source="aicustact.dll" Target="EnableDebugLog"/>
-    <ROW Action="AI_EstimateExtractFiles" Type="1" Source="Prereq.dll" Target="EstimateExtractFiles"/>
-    <ROW Action="AI_ExtractCadLzma" Type="51" Source="AI_ExtractLzma" Target="[AI_SETUPEXEPATH]"/>
-    <ROW Action="AI_ExtractFiles" Type="1025" Source="Prereq.dll" Target="ExtractSourceFiles" AdditionalSeq="AI_DATA_SETTER"/>
-    <ROW Action="AI_ExtractLzma" Type="1025" Source="lzmaextractor.dll" Target="ExtractLZMAFiles"/>
-    <ROW Action="AI_FindExeLzma" Type="1" Source="lzmaextractor.dll" Target="FindEXE"/>
     <ROW Action="AI_InstallModeCheck" Type="1" Source="aicustact.dll" Target="UpdateInstallMode" WithoutSeq="true"/>
     <ROW Action="AI_PREPARE_UPGRADE" Type="65" Source="aicustact.dll" Target="PrepareUpgrade"/>
     <ROW Action="AI_RESTORE_AI_SETUPEXEPATH" Type="51" Source="AI_SETUPEXEPATH" Target="[AI_SETUPEXEPATH_ORIGINAL]"/>
@@ -539,19 +515,7 @@
     <ROW Action="AI_PREPARE_UPGRADE" Condition="AI_UPGRADE=&quot;No&quot; AND (Not Installed)" Sequence="1399"/>
     <ROW Action="AI_ResolveKnownFolders" Sequence="53"/>
     <ROW Action="AI_EnableDebugLog" Sequence="51"/>
-    <ROW Action="AI_DetectSoftware" Sequence="103"/>
-    <ROW Action="AI_BACKUP_AI_SETUPEXEPATH" Sequence="99" Builds="DefaultBuild"/>
-    <ROW Action="AI_RESTORE_AI_SETUPEXEPATH" Condition="AI_SETUPEXEPATH_ORIGINAL" Sequence="102" Builds="DefaultBuild"/>
-    <ROW Action="AI_DeleteCadLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (AI_INSTALL_MODE&lt;&gt;&quot;Remove&quot;) AND (NOT PATCH)" Sequence="199" Builds="DefaultBuild"/>
-    <ROW Action="AI_DeleteRCadLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (AI_INSTALL_MODE&lt;&gt;&quot;Remove&quot;) AND (NOT PATCH)" Sequence="198" Builds="DefaultBuild"/>
-    <ROW Action="AI_ExtractCadLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (AI_INSTALL_MODE&lt;&gt;&quot;Remove&quot;) AND (NOT PATCH)" Sequence="197" Builds="DefaultBuild"/>
-    <ROW Action="AI_FindExeLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (AI_INSTALL_MODE&lt;&gt;&quot;Remove&quot;) AND (NOT PATCH)" Sequence="196" Builds="DefaultBuild"/>
-    <ROW Action="AI_ExtractLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (AI_INSTALL_MODE&lt;&gt;&quot;Remove&quot;) AND (NOT PATCH)" Sequence="1549" Builds="DefaultBuild"/>
-    <ROW Action="AI_DeleteRLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (AI_INSTALL_MODE&lt;&gt;&quot;Remove&quot;) AND (NOT PATCH)" Sequence="1548" Builds="DefaultBuild"/>
-    <ROW Action="AI_DeleteLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (AI_INSTALL_MODE&lt;&gt;&quot;Remove&quot;) AND (NOT PATCH)" Sequence="6599" Builds="DefaultBuild"/>
-    <ROW Action="AI_ExtractFiles" Sequence="3998" Builds="DefaultBuild"/>
-    <ROW Action="AI_DATA_SETTER" Sequence="3997"/>
-    <ROW Action="AI_EstimateExtractFiles" Sequence="3999" Builds="DefaultBuild"/>
+    <ROW Action="AI_DetectSoftware" Sequence="102"/>
     <ROW Action="AI_AppSearchEx" Sequence="101"/>
     <ROW Action="ModbusService.exe_1" Condition="( NOT Installed )" Sequence="6402"/>
     <ROW Action="ModbusService.exe" Condition="( NOT Installed )" Sequence="6401"/>
@@ -574,15 +538,9 @@
     <ROW Condition="(VersionNT &lt;&gt; 500)" Description="[ProductName] cannot be installed on [WindowsTypeNT50Display]." DescriptionLocId="AI.LaunchCondition.NoNT50" IsPredefined="true" Builds="DefaultBuild"/>
     <ROW Condition="(VersionNT64 OR ((VersionNT &lt;&gt; 501) OR (ServicePackLevel = 3))) AND ((VersionNT &lt;&gt; 502) OR (ServicePackLevel = 2))" Description="[ProductName] cannot be installed on [WindowsTypeNT5XDisplay]." DescriptionLocId="AI.LaunchCondition.NoNT5X" IsPredefined="true" Builds="DefaultBuild"/>
     <ROW Condition="AI_DETECTED_DOTNET_VERSION &gt;= AI_REQUIRED_DOTNET_VERSION" Description="[ProductName] cannot be installed on systems with .NET Framework version lower than [AI_REQUIRED_DOTNET_DISPLAY]." DescriptionLocId="AI.LaunchCondition.DotNET" IsPredefined="true" Builds="DefaultBuild"/>
-    <ROW Condition="SETUPEXEDIR OR (REMOVE=&quot;ALL&quot;)" Description="This package can only be run from a bootstrapper." DescriptionLocId="AI.LaunchCondition.RequireBootstrapper" IsPredefined="true" Builds="DefaultBuild"/>
     <ROW Condition="VersionNT" Description="[ProductName] cannot be installed on [WindowsType9XDisplay]." DescriptionLocId="AI.LaunchCondition.No9X" IsPredefined="true" Builds="DefaultBuild"/>
   </COMPONENT>
-  <COMPONENT cid="caphyon.advinst.msicomp.MsiRegLocatorComponent">
-    <ROW Signature_="AI_EXE_PATH_CU" Root="1" Key="Software\Caphyon\Advanced Installer\LZMA\[ProductCode]\[ProductVersion]" Name="AI_ExePath" Type="2"/>
-    <ROW Signature_="AI_EXE_PATH_LM" Root="2" Key="Software\Caphyon\Advanced Installer\LZMA\[ProductCode]\[ProductVersion]" Name="AI_ExePath" Type="2"/>
-  </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiRegsComponent">
-    <ROW Registry="AI_ExePath" Root="-1" Key="Software\Caphyon\Advanced Installer\LZMA\[ProductCode]\[ProductVersion]" Name="AI_ExePath" Value="[AI_SETUPEXEPATH]" Component_="AI_ExePath"/>
     <ROW Registry="Path" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Path" Value="[APPDIR]" Component_="ProductInformation"/>
     <ROW Registry="Version" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Version" Value="[ProductVersion]" Component_="ProductInformation"/>
     <ROW Registry="__1" Root="0" Key="Interface\{00000000-0000-0000-0000-000000000000}" Value="InterfaceName" Component_="_"/>
