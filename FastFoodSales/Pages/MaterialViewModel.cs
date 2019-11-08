@@ -13,32 +13,6 @@ using DAQ.Service;
 
 namespace DAQ.Pages
 {
-    public class RingBuffer : PropertyChangedBase
-    {
-        public string Name { get; set; }
-        public BindableCollection<string> Bcs { get; set; }
-        public int Index { get; set; }
-        int _capcity;
-        public RingBuffer(int Capcity)
-        {
-            _capcity = Capcity;
-            Bcs = new BindableCollection<string>(new string[Capcity]);
-        }
-        public void Push(string data)
-        {
-            if (Index < _capcity)
-            {
-                Bcs[Index] = data;
-            }
-            else
-            {
-                Index = 0;
-                Bcs[Index] = data;
-            }
-            Index++;
-            NotifyOfPropertyChange("Bcs");
-        }
-    }
 
     public class TBarcode
     {
@@ -79,6 +53,21 @@ namespace DAQ.Pages
         public string Shift { get; set; }
     }
 
+    public class TLaser : ISource
+    {
+        public string Source { get; set; }
+        public string BobbinCode { get; set; }
+        public string CodeQuality { get; set; }
+        public string ProductionOrder { get; set; }
+        public string Shift { get; set; }
+        public string LineNo { get; set; }
+        public string MachineNo { get; set; }
+        public string EmployeeNo { get; set; }
+        public string BobbinLotNo { get; set; }
+        public string FlyWireLotNo { get; set; }
+        public string TubeLotNo { get; set; }
+    }
+
     public class TScan : ISource
     {
         public string Source { get; set; }
@@ -86,9 +75,7 @@ namespace DAQ.Pages
         public string Shift { get; set; }
         public string ShiftName { get; set; }
         public string SpindleNo { get; set; }
-
         public string WireLotNo { get; set; }
-
     }
     public class MaterialViewModel : Screen, IHandle<string>
     {
@@ -98,7 +85,8 @@ namespace DAQ.Pages
         public int Capcity { get; set; }
         public int IPUnit { get; set; }
         public OEEViewModel OEE { get; set; } = new OEEViewModel();
-        public BindableCollection<TBarcode> Barcodes { get; set; } = new BindableCollection<TBarcode>() {
+        public BindableCollection<TBarcode> Barcodes { get; set; } = new BindableCollection<TBarcode>()
+        {
         };
         ScannerService service;
         IEventAggregator Events;
@@ -136,7 +124,7 @@ namespace DAQ.Pages
             {
                 _cntErrorBarcode++;
             }
-            ScanRate = ((_cntBarcode - _cntErrorBarcode) * 1.0 / _cntBarcode).ToString("P");
+            ScanRate = ((_cntBarcode - _cntErrorBarcode) * 1.0 / _cntBarcode).ToString("P").Replace(",","");
             Barcodes.Add(new TBarcode { Index = count + 1, Content = message });
             fileSaver.Process(new TScan()
             {

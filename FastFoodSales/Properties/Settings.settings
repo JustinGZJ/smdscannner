@@ -14,5 +14,20 @@
     <Setting Name="LineNo" Type="System.String" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
+    <Setting Name="BobbinLotNo" Type="System.String" Scope="User">
+      <Value Profile="(Default)">222</Value>
+    </Setting>
+    <Setting Name="MachineNo" Type="System.String" Scope="User">
+      <Value Profile="(Default)">111</Value>
+    </Setting>
+    <Setting Name="EmployeeNo" Type="System.String" Scope="User">
+      <Value Profile="(Default)">333</Value>
+    </Setting>
+    <Setting Name="FlyWireLotNo" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="TubeLotNo" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

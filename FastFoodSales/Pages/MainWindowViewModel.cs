@@ -40,16 +40,19 @@ namespace DAQ
 
         public void ShowSetting()
         {
-            ActivateItem(Items[(int) TabIndex.SETTING]);
+          var item= Items.SingleOrDefault(x => x.TabIndex == (int) TabIndex.SETTING);
+            ActivateItem(item);
         }
 
         public void ActiveValues()
         {
-            CurrentPage = Items[(int)TabIndex.VALUES];
+            var item = Items.SingleOrDefault(x => x.TabIndex == (int)TabIndex.VALUES);
+            CurrentPage = item;
         }
         public void ActiveMessages()
         {
-            CurrentPage = Items[(int)TabIndex.MESSAGES];
+            var item = Items.SingleOrDefault(x => x.TabIndex == (int)TabIndex.MESSAGES);
+            CurrentPage = item;
         }
     }
 }

@@ -19,22 +19,137 @@
         d:DataContext="{d:DesignInstance  local:MainWindowViewModel}"
       >
     <materialDesign:DialogHost>
-    <Grid Background="LightGray" MouseMove="Grid_MouseMove">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="97*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="10"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+        <materialDesign:DialogHost.DialogContent>
+            <StackPanel
+                Margin="16">
+                <WrapPanel Width="400">
+                    <StackPanel Width="160" Margin="10">
+                        <TextBlock>
+                             Shift
+                        </TextBlock>
+                        <TextBox
+                        Margin="0 8 0 0"
+                        HorizontalAlignment="Stretch"/>
+                    </StackPanel>
+                    <StackPanel Margin="10" Width="160">
+                        <TextBlock>
+                            Shift Name
+                        </TextBlock>
+                        <TextBox
+                            Margin="0 8 0 0"
+                            HorizontalAlignment="Stretch"
+                             />
+                    </StackPanel>
+                    <StackPanel Width="160" Margin="10">
+                        <TextBlock>
+                            Lot Number
+                        </TextBlock>
+                        <TextBox
+                            Margin="0 8 0 0"
+                            HorizontalAlignment="Stretch"
+                        />
+                    </StackPanel>
+                    <StackPanel Width="160" Margin="10">
+                        <TextBlock>
+                           Line Number
+                        </TextBlock>
+                        <TextBox
+                            Margin="0 8 0 0"
+                            HorizontalAlignment="Stretch"
+                        />
+                    </StackPanel>
+                    <StackPanel Width="160" Margin="10">
+                        <TextBlock>
+                            Bobbin Lot Number
+                        </TextBlock>
+                        <TextBox
+                            Margin="0 8 0 0"
+                            HorizontalAlignment="Stretch"
+                        />
+                    </StackPanel>
+                    <StackPanel Width="160" Margin="10">
+                        <TextBlock>
+                            Machine Number
+                        </TextBlock>
+                        <TextBox
+                            Margin="0 8 0 0"
+                            HorizontalAlignment="Stretch"
+                        />
+                    </StackPanel>
+                    <StackPanel Width="160" Margin="10">
+                        <TextBlock>
+                            Employee Number
+                        </TextBlock>
+                        <TextBox
+                            Margin="0 8 0 0"
+                            HorizontalAlignment="Stretch"
+                        />
+                    </StackPanel>
+                    <StackPanel Width="160" Margin="10">
+                        <TextBlock>
+                            Fly Wire Lot No
+                        </TextBlock>
+                        <TextBox
+                            Margin="0 8 0 0"
+                            HorizontalAlignment="Stretch"
+                        />
+                    </StackPanel>
+                    <StackPanel Width="160" Margin="10">
+                        <TextBlock>
+                            Tube Lot No
+                        </TextBlock>
+                        <TextBox
+                            Margin="0 8 0 0"
+                            HorizontalAlignment="Stretch"
+                        />
+                    </StackPanel>
+                </WrapPanel>
+                <StackPanel
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+                    <Button
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        IsDefault="True"
+                        Margin="0 8 8 0"
+                        Command="materialDesign:DialogHost.CloseDialogCommand">
+                        <Button.CommandParameter>
+                            <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                True
+                            </system:Boolean>
+                        </Button.CommandParameter>
+                        ACCEPT
+                    </Button>
+                    <Button
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        IsCancel="True"
+                        Margin="0 8 8 0"
+                        Command="materialDesign:DialogHost.CloseDialogCommand">
+                        <Button.CommandParameter>
+                            <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                False
+                            </system:Boolean>
+                        </Button.CommandParameter>
+                        CANCEL
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+        </materialDesign:DialogHost.DialogContent>
+        <Grid Background="LightGray" MouseMove="Grid_MouseMove">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="97*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-        <Grid Background="DeepSkyBlue" Grid.ColumnSpan="2" Grid.RowSpan="1" MouseDown="Grid_MouseDown"/>
-        <Grid x:Name="gdleft" Width="60" Background="#EE363636" Grid.RowSpan="2">
-            <Button HorizontalAlignment="Left" Click="Button_Click" BorderBrush="{x:Null}" Background="Transparent" Height="60" Width="59" VerticalAlignment="top">
-                <materialDesign:PackIcon HorizontalAlignment="Center" VerticalAlignment="Center"  Kind="Menu" Height="30" Width="30" Foreground="Gainsboro" />
-            </Button>
-            <ListView  x:Name="ListMenu" ItemsSource="{Binding Items}" Margin="0 100" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Foreground="Gainsboro" FontSize="16" SelectedIndex="{Binding Index}" SelectionChanged="ListView_SelectionChanged">
+            <Grid Background="DeepSkyBlue" Grid.ColumnSpan="2" Grid.RowSpan="1" MouseDown="Grid_MouseDown"/>
+            <Grid x:Name="gdleft" Width="60" Background="#EE363636" Grid.RowSpan="2">
+                <Button HorizontalAlignment="Left" Click="Button_Click" BorderBrush="{x:Null}" Background="Transparent" Height="60" Width="59" VerticalAlignment="top">
+                    <materialDesign:PackIcon HorizontalAlignment="Center" VerticalAlignment="Center"  Kind="Menu" Height="30" Width="30" Foreground="Gainsboro" />
+                </Button>
+                <ListView  x:Name="ListMenu" ItemsSource="{Binding Items}" Margin="0 100" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Foreground="Gainsboro" FontSize="16" SelectedIndex="{Binding Index}" SelectionChanged="ListView_SelectionChanged">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate >
                             <StackPanel Margin="8,0" Orientation="Horizontal" Height="30">
@@ -44,55 +159,55 @@
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ListView>
-            <materialDesign:TransitioningContent x:Name="transrect" OpeningEffect="{materialDesign:TransitionEffect Kind=SlideInFromLeft,Duration=0:0:0.2}">
-                <Grid x:Name="rect" Height="30" Width="8" HorizontalAlignment="Left" VerticalAlignment="Top" Background="SkyBlue" Margin="0,105,0,0"></Grid>
-            </materialDesign:TransitioningContent>
-        </Grid>
-        <StackPanel  Grid.Column="1" Margin="0,0,10,555" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
-            <Button  x:Name="Bell" Foreground="DarkGray" Background="{x:Null}" BorderBrush="{x:Null}" Click="Bell_Click">
-                <materialDesign:PackIcon Kind="Bell" />
-            </Button>
-            <Button x:Name="Settings" Foreground="DarkGray" Background="{x:Null}" BorderBrush="{x:Null}" Click="{s:Action ShowSetting}">
-                <materialDesign:PackIcon Kind="Settings"/>
-            </Button>
-            <Button x:Name="Power" Foreground="DarkGray" Background="{x:Null}" BorderBrush="{x:Null}" Click="Power_Click">
-                <materialDesign:PackIcon Kind="Power"/>
-            </Button>
-        </StackPanel>
-        <Grid  Margin="20,35,20,20" Grid.Column="1" Grid.Row="1" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
-            <Grid  x:Name="G_MSG" Width="0" MinHeight="60"  Grid.Column="1" >
-                <DockPanel LastChildFill="True">
-                    <materialDesign:ColorZone DockPanel.Dock="Top" 
+                <materialDesign:TransitioningContent x:Name="transrect" OpeningEffect="{materialDesign:TransitionEffect Kind=SlideInFromLeft,Duration=0:0:0.2}">
+                    <Grid x:Name="rect" Height="30" Width="8" HorizontalAlignment="Left" VerticalAlignment="Top" Background="SkyBlue" Margin="0,105,0,0"></Grid>
+                </materialDesign:TransitioningContent>
+            </Grid>
+            <StackPanel  Grid.Column="1" Margin="0,0,10,555" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+                <Button  x:Name="Bell" Foreground="DarkGray" Background="{x:Null}" BorderBrush="{x:Null}" Click="Bell_Click">
+                    <materialDesign:PackIcon Kind="Bell" />
+                </Button>
+                <Button x:Name="Settings" Foreground="DarkGray" Background="{x:Null}" BorderBrush="{x:Null}"   Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">
+                    <materialDesign:PackIcon Kind="User"/>
+                </Button>
+                <Button x:Name="Power" Foreground="DarkGray" Background="{x:Null}" BorderBrush="{x:Null}" Click="Power_Click">
+                    <materialDesign:PackIcon Kind="Power"/>
+                </Button>
+            </StackPanel>
+            <Grid  Margin="20,35,20,20" Grid.Column="1" Grid.Row="1" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid  x:Name="G_MSG" Width="0" MinHeight="60"  Grid.Column="1" >
+                    <DockPanel LastChildFill="True">
+                        <materialDesign:ColorZone DockPanel.Dock="Top" 
                            Background="{x:Null}">
-                        <StackPanel
+                            <StackPanel
                         Orientation="Horizontal"
                         Margin="2">
 
-                            <RadioButton
+                                <RadioButton
                                   Style="{StaticResource MaterialDesignTabRadioButton}"
                                   Margin="4"
                                   Command="{s:Action ActiveMessages}"
                                   IsChecked="True"
                                   Content="Messages" />
-                            <RadioButton
+                                <RadioButton
                                   Style="{StaticResource MaterialDesignTabRadioButton}"
                                   Margin="4"
                                   Command="{s:Action ActiveValues}"
                                   IsChecked="False"
                                   Content="Values" />
-                        </StackPanel>
-                    </materialDesign:ColorZone>
-                    <ContentControl x:Name="Msg" s:View.Model="{Binding CurrentPage}" MaxWidth="300"/>
-                </DockPanel>
+                            </StackPanel>
+                        </materialDesign:ColorZone>
+                        <ContentControl x:Name="Msg" s:View.Model="{Binding CurrentPage}" MaxWidth="300"/>
+                    </DockPanel>
+                </Grid>
+                <Grid>
+                    <ContentControl Grid.Column="0" x:Name="content" s:View.Model="{Binding ActiveItem}" MinWidth="500"/>
+                </Grid>
             </Grid>
-            <Grid>
-                <ContentControl Grid.Column="0" x:Name="content" s:View.Model="{Binding ActiveItem}" MinWidth="500"/>
-            </Grid>
-        </Grid>
         </Grid>
     </materialDesign:DialogHost>
 </Window>

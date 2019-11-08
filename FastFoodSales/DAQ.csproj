@@ -256,6 +256,10 @@
     <Compile Include="Pages\AlarmView.xaml.cs">
       <DependentUpon>AlarmView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\LaserView.xaml.cs">
+      <DependentUpon>LaserView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\LaserViewModel.cs" />
     <Compile Include="Pages\MsgPoster.cs" />
     <Compile Include="Pages\RunStatusCollectionView.xaml.cs">
       <DependentUpon>RunStatusCollectionView.xaml</DependentUpon>
@@ -273,6 +277,7 @@
       <DependentUpon>StatusView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\StatusViewModel.cs" />
+    <Compile Include="Service\LaserService.cs" />
     <Compile Include="Service\RunstatusService.cs" />
     <Compile Include="Pages\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
@@ -329,6 +334,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\HomeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\LaserView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -407,6 +416,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="bin\Debug\data.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="bin\Debug\Settings\DataValues.json" />
     <None Include="bin\Release\Settings\DataValues.json" />
     <None Include="packages.config" />

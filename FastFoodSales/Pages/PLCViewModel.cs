@@ -69,12 +69,5 @@ namespace DAQ.Pages
         public bool Visiable { get; set; } = true;
     };
 }
-public class KV<T> : PropertyChangedBase
-{
-    public int Index { get; set; }
-    public DateTime Time { get; set; }
-    public string Key { get; set; }
-    public T Value { get; set; }
-}
 
 

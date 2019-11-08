@@ -54,20 +54,17 @@ namespace DAQ.Service
         }
         public async void Save(string FilePath = DEFAULT_PATH)
         {
-            await Task.Run(() =>
-             {
-                 string path = Path.GetDirectoryName(FilePath);
-                 if (!Directory.Exists(path))
-                     Directory.CreateDirectory(path);
-                 var v = DataValues.Select(x => new
-                 {
-                     x.Name,
-                     x.StartIndex,
-                     x.Type,
-                     x.Tag
-                 });
-                 File.WriteAllText(FilePath, JsonConvert.SerializeObject(v));
-             });
+            string path = Path.GetDirectoryName(FilePath);
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+            var v = DataValues.Select(x => new
+            {
+                x.Name,
+                x.StartIndex,
+                x.Type,
+                x.Tag
+            });
+            File.WriteAllText(FilePath, JsonConvert.SerializeObject(v));
         }
         public DataStorage([Inject]IReadWriteNet readwriter,[Inject]IByteTransform transform,[Inject] IEventAggregator events)
         {
@@ -185,7 +182,7 @@ namespace DAQ.Service
                        Refresh();
                    }
 
-                   System.Threading.Thread.Sleep(1);
+                   System.Threading.Thread.Sleep(100);
                }
            });
         }
@@ -194,7 +191,7 @@ namespace DAQ.Service
             lock (_enable)
             {
                 DataValues.Add(var);
-            }
+            } 
             Save();
         }
         public void RemoveItem(VAR var)
@@ -214,7 +211,6 @@ namespace DAQ.Service
                 SelectedItem.StartIndex = v.StartIndex;
                 SelectedItem.Type = v.Type;
                 SelectedItem.Tag = v.Tag;
-                // DataValues=
             }
             Save();
         }
