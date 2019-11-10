@@ -28,9 +28,10 @@ namespace DAQ.Service
         {
 
             _server?.Stop();
-            _server = new SimpleTcpServer();
-            _server.Start(9004, AddressFamily.InterNetwork);
-
+            _server = new SimpleTcpServer().Start(9004,AddressFamily.InterNetwork);
+            var ips = _server.GetListeningIPs();
+            ips.ForEach(x => Events.Publish(new MsgItem
+                {Level = "D", Time = DateTime.Now, Value = "Listening IP: " + x.ToString() + ":9004"}));
             Events.Publish(new MsgItem { Level = "D", Time = DateTime.Now, Value = "Server initialize: " + IPAddress.Any.ToString() + ":9004" });
             _server.Delimiter = 0x0d;
             _server.DelimiterDataReceived -= Client_DelimiterDataReceived;
@@ -48,7 +49,7 @@ namespace DAQ.Service
             {
                 var addr = ((IPEndPoint)e.TcpClient.Client.RemoteEndPoint).Address.GetAddressBytes()[3];
                 var str = e.MessageString.Trim('\r', '\n');
-                Events.Publish(str, addr.ToString(), addr.ToString());
+                Events.Publish(str, addr.ToString());
                 Events.Publish(new MsgItem { Level = "D", Time = DateTime.Now, Value = ((IPEndPoint)e.TcpClient.Client.RemoteEndPoint).Address.ToString() + ":" + str });
             }
             catch (Exception ex)

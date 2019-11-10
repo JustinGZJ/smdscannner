@@ -11,7 +11,7 @@ namespace DAQ.Pages
     {
         public PackIconKind PackIcon { get; set; } = PackIconKind.About;
         public string Header { get; set; } = "About";
-        public bool Visiable { get; set; } = true;
+        public bool Visible { get; set; } = true;
         public int TabIndex { get; set; } = (int)Pages.TabIndex.ABOUT;
 
     }

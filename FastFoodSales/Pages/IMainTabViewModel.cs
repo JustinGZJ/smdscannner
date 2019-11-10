@@ -12,12 +12,12 @@ namespace DAQ.Pages
         int TabIndex { get; set; }
         PackIconKind PackIcon { get; set; }
         string Header { get; set; }
-        bool Visiable { get; set; }        
+        bool Visible { get; set; }        
     }
 
     public enum TabIndex
     {
-        RUNSTATUS,OEE,HISTORY,SCANNER,MESSAGES,VALUES,SETTING,ABOUT    
+        RUNSTATUS,OEE,LASER,SCANNER,MESSAGES,VALUES,SETTING,ABOUT    
     }
 
 }

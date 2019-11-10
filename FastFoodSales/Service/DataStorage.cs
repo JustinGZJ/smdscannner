@@ -52,7 +52,7 @@ namespace DAQ.Service
                 }            
             }
         }
-        public async void Save(string FilePath = DEFAULT_PATH)
+        public  void Save(string FilePath = DEFAULT_PATH)
         {
             string path = Path.GetDirectoryName(FilePath);
             if (!Directory.Exists(path))

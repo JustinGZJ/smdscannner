@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -53,37 +54,64 @@ namespace DAQ.Pages
         public string Shift { get; set; }
     }
 
-    public class TLaser : ISource
+    public class Laser
     {
-        public string Source { get; set; }
+        [DisplayName("Bobbin Code")]
         public string BobbinCode { get; set; }
+        [DisplayName("Code Quality")]
         public string CodeQuality { get; set; }
-        public string ProductionOrder { get; set; }
+        public string Production { get; set; }
+        public DateTime DateTime { get; set; } = DateTime.Now;
+        public string Order { get; set; }
+        public string Station { get; set; } = "LaserCode";
         public string Shift { get; set; }
+        public string ShiftName { get; set; }
         public string LineNo { get; set; }
         public string MachineNo { get; set; }
         public string EmployeeNo { get; set; }
         public string BobbinLotNo { get; set; }
-        public string FlyWireLotNo { get; set; }
-        public string TubeLotNo { get; set; }
+        public string BobbinToolNo { get; set; }
+        public string BobbinCavityNo { get; set; }
     }
 
-    public class TScan : ISource
+    public class Scan
     {
-        public string Source { get; set; }
+        [DisplayName("Bobbin Code")]
         public string Bobbin { get; set; }
+        [DisplayName("Production")]
+        public string Production { get; set; }
+        public DateTime DateTime { get; set; } = DateTime.Now;
+        public string Station { get; set; } = "N3";
         public string Shift { get; set; }
+        [DisplayName("Shift Name")]
         public string ShiftName { get; set; }
-        public string SpindleNo { get; set; }
-        public string WireLotNo { get; set; }
+        [DisplayName("Line No.")]
+        public string LineNo { get; set; }
+        [DisplayName("Machine No.")]
+        public string MachineNo { get; set; }
+        [DisplayName("Employee No.")]
+        public string EmployeeNo { get; set; }
+        [DisplayName("Fly Wire lot No.")]
+        public string FlyWireLotNo { get; set; }
+        [DisplayName("Tube Lot No.")]
+        public string TubeLotNo { get; set; }
     }
     public class MaterialViewModel : Screen, IHandle<string>
     {
-        MsgFileSaver<TScan> fileSaver = new MsgFileSaver<TScan>();
+        private MsgFileSaver<Scan> fileSaver;
         public int SelectedMode { get; set; }
 
         public int Capcity { get; set; }
-        public int IPUnit { get; set; }
+        private int _ipunit;
+        public int IpUnit
+        {
+            get => _ipunit;
+            set
+            {
+                Events.Subscribe(this, value.ToString());
+                _ipunit = value;
+            }
+        }
         public OEEViewModel OEE { get; set; } = new OEEViewModel();
         public BindableCollection<TBarcode> Barcodes { get; set; } = new BindableCollection<TBarcode>()
         {
@@ -92,20 +120,18 @@ namespace DAQ.Pages
         IEventAggregator Events;
         [Inject]
         public Info Info { get; set; }
-        public MaterialViewModel([Inject]IEventAggregator Events, [Inject]ScannerService service, int IPUnit, int Capcity = 12)
+        public MaterialViewModel([Inject]IEventAggregator events, [Inject] MsgFileSaver<Scan> fileSaver, [Inject]ScannerService service, int capcity = 12)
         {
-            this.Events = Events;
+            this.Events = events;
             this.service = service;
-            this.Capcity = Capcity;
-            this.IPUnit = IPUnit;
-            Events.Subscribe(this, IPUnit.ToString());
-        }
+            this.Capcity = capcity;
+            this.fileSaver = fileSaver;
 
-        public int ItemsHeight => Capcity / 4 * 35 + 20;
+        }
+        public int ItemsHeight => Capcity / 4 * 40 + 20;
         protected override void OnViewLoaded()
         {
             base.OnViewLoaded();
-
         }
         int _cntBarcode = 0;
         int _cntErrorBarcode = 0;
@@ -124,17 +150,23 @@ namespace DAQ.Pages
             {
                 _cntErrorBarcode++;
             }
-            ScanRate = ((_cntBarcode - _cntErrorBarcode) * 1.0 / _cntBarcode).ToString("P").Replace(",","");
+            ScanRate = ((_cntBarcode - _cntErrorBarcode) * 1.0 / _cntBarcode).ToString("P").Replace(",", "");
             Barcodes.Add(new TBarcode { Index = count + 1, Content = message });
-            fileSaver.Process(new TScan()
+            var settings = Properties.Settings.Default;
+            fileSaver.Process(new Scan
             {
                 Bobbin = message,
-                Shift = Properties.Settings.Default.Shift,
-                ShiftName = Properties.Settings.Default.ShiftName,
-                Source = DisplayName,
-                SpindleNo = count.ToString(),
-                WireLotNo = Properties.Settings.Default.LotNo
-            });
+                Shift = settings.Shift,
+                ShiftName = settings.ShiftName,
+                Production = settings.Production,
+                LineNo = settings.LineNo,
+                MachineNo = settings.MachineNo,
+                EmployeeNo = settings.EmployeeNo,
+                FlyWireLotNo = settings.FlyWireLotNo,
+                TubeLotNo = settings.TubeLotNo
+            }
+
+            );
 
         }
     }

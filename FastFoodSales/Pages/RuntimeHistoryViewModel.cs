@@ -175,6 +175,6 @@ namespace DAQ.Pages
         //public int TabIndex { get; set; } = (int)Pages.TabIndex.HISTORY;
         //public PackIconKind PackIcon { get; set; } = PackIconKind.History;
         //public string Header { get; set; } = "History";
-        //public bool Visiable { get; set; } = true;
+        //public bool Visible { get; set; } = true;
     }
 }

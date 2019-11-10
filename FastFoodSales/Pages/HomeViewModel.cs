@@ -68,29 +68,29 @@ namespace DAQ
 
         public string LotNo
         {
-            get => settings.LotNo; set
+            get => settings.Order; set
             {
-                settings.LotNo = value;
+                settings.Order = value;
                 settings.Save();
             }
         }
 
-        public HomeViewModel([Inject("N1")] MaterialViewModel N1,
-            [Inject("N2")] MaterialViewModel N2,
-            [Inject("N3")] MaterialViewModel N3,
-            [Inject("N4")] MaterialViewModel N4,
-            [Inject("N5")] MaterialViewModel N5,
-            [Inject("N6")] MaterialViewModel N6,
-            [Inject("N7")] MaterialViewModel N7,
-            [Inject("N8")] MaterialViewModel N8,
-            [Inject("N9")] MaterialViewModel N9,
-            [Inject("N10")] MaterialViewModel N10,
-            [Inject("N11")] MaterialViewModel N11,
-            [Inject("N12")] MaterialViewModel N12)
+        public HomeViewModel(IContainer container)
         {
             _items.Clear();
-            _items.AddRange(new[] { N1, N2, N3, N4, N5, N6, N7, N8, N9, N10, N11, N12 });
-
+            var m1 = container.Get<MaterialViewModel>();
+            var m2 = container.Get<MaterialViewModel>();
+            var m3 = container.Get<MaterialViewModel>();
+            var m4 = container.Get<MaterialViewModel>();
+            m1.DisplayName = "192.168.0.3";
+            m2.DisplayName = "192.168.0.4";
+            m3.DisplayName = "192.168.0.5";
+            m4.DisplayName = "192.168.0.6";
+            m1.IpUnit = 3;
+            m2.IpUnit = 4;
+            m3.IpUnit = 5;
+            m4.IpUnit = 6;
+            _items.AddRange(new[]{m1,m2,m3,m4});
             _radioCnt = _items.Count / _unit + (_items.Count % _unit > 0 ? 1 : 0);
             for (int i = 0; i < _radioCnt; i++)
             {
@@ -115,6 +115,6 @@ namespace DAQ
         public int TabIndex { get; set; } =(int)Pages.TabIndex.SCANNER;
         public PackIconKind PackIcon { get; set; } = PackIconKind.ViewDashboard;
         public string Header { get; set; } = "Scanner";
-        public bool Visiable { get; set; } = true;
+        public bool Visible { get; set; } = true;
     }
 }

@@ -38,33 +38,6 @@
     </UserControl.Resources>
     <md:TransitioningContent  OpeningEffect="{md:TransitionEffect Kind=SlideInFromRight, Duration=00:00:0.5}">
         <DockPanel>
-            <md:Card HorizontalAlignment="Left" Margin="30 10 10 10" Background="{x:Null}"  Foreground="DimGray"   Width="900" DockPanel.Dock="Top">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"></RowDefinition>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-
-                    <UniformGrid  Grid.Row="1" Columns="4" >
-                        <DockPanel  Margin="10 0" >
-                            <Label FontSize="20" VerticalContentAlignment="Bottom">Shift</Label>
-                            <TextBox FontSize="20" Text="{Binding Shift}"     md:HintAssist.Hint="Shift"></TextBox>
-                        </DockPanel>
-                        <DockPanel Margin="10 0">
-                            <Label FontSize="20" VerticalContentAlignment="Bottom">Shift Name</Label>
-                            <TextBox FontSize="20" Text="{Binding ShiftName}"  md:HintAssist.Hint="Shift Name"></TextBox>
-                        </DockPanel>
-                        <DockPanel Margin="10 0">
-                            <Label FontSize="20" VerticalContentAlignment="Bottom">Line No.</Label>
-                            <TextBox FontSize="20" Text="{Binding LineNo}" MaxLength="100"  md:HintAssist.Hint="Line No."></TextBox>
-                        </DockPanel>
-                        <DockPanel Margin="10 0">
-                            <Label FontSize="20" VerticalContentAlignment="Bottom">Lot No.</Label>
-                            <TextBox FontSize="20" Text="{Binding LotNo}" MaxLength="100" md:HintAssist.Hint="Wire lot No."></TextBox>
-                        </DockPanel>
-                    </UniformGrid>
-                </Grid>
-            </md:Card>
             <ListBox  HorizontalAlignment="Left" Width="900" ItemsSource="{Binding Selector}" SelectedIndex="{Binding Index}" DockPanel.Dock="Bottom" Foreground="{x:Null}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>

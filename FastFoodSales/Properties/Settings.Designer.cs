@@ -12,7 +12,7 @@ namespace DAQ.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.3.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -50,12 +50,12 @@ namespace DAQ.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("111231")]
-        public string LotNo {
+        public string Order {
             get {
-                return ((string)(this["LotNo"]));
+                return ((string)(this["Order"]));
             }
             set {
-                this["LotNo"] = value;
+                this["Order"] = value;
             }
         }
         
@@ -128,6 +128,42 @@ namespace DAQ.Properties {
             }
             set {
                 this["TubeLotNo"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Production {
+            get {
+                return ((string)(this["Production"]));
+            }
+            set {
+                this["Production"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string BobbinCavityNo {
+            get {
+                return ((string)(this["BobbinCavityNo"]));
+            }
+            set {
+                this["BobbinCavityNo"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string BobbinToolNo {
+            get {
+                return ((string)(this["BobbinToolNo"]));
+            }
+            set {
+                this["BobbinToolNo"] = value;
             }
         }
     }

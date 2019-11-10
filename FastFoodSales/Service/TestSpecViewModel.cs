@@ -2,7 +2,7 @@
 
 namespace DAQ.Service
 {
-    public class TestSpecViewModel : PropertyChangedBase,ISource
+    public class TestSpecViewModel : PropertyChangedBase
     {
         public string Source { get; set; }
         public string Name { get; set; }

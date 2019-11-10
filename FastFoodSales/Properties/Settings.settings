@@ -8,7 +8,7 @@
     <Setting Name="ShiftName" Type="System.String" Scope="User">
       <Value Profile="(Default)">102B</Value>
     </Setting>
-    <Setting Name="LotNo" Type="System.String" Scope="User">
+    <Setting Name="Order" Type="System.String" Scope="User">
       <Value Profile="(Default)">111231</Value>
     </Setting>
     <Setting Name="LineNo" Type="System.String" Scope="User">
@@ -27,6 +27,15 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="TubeLotNo" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Production" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="BobbinCavityNo" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="BobbinToolNo" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
   </Settings>

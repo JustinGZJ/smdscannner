@@ -66,7 +66,7 @@ namespace DAQ.Pages
         public int TabIndex { get; set; } = (int)Pages.TabIndex.VALUES;
         public PackIconKind PackIcon { get; set; } = PackIconKind.ViewSequential;
         public string Header { get; set; } = "Values";
-        public bool Visiable { get; set; } = true;
+        public bool Visible { get; set; } = true;
     };
 }
 

@@ -15,24 +15,31 @@ namespace DAQ.Service
         IEventAggregator Events;
         SimpleTcpClient _laserClient = null;
         private ModbusTcpNet modbusTcp = new ModbusTcpNet();
-        private bool laserFinish;
-        private MsgFileSaver<TLaser> saver = new MsgFileSaver<TLaser>();
+        private bool laserFinish=false;
+        private MsgFileSaver<Laser> _saver;
         Properties.Settings settings = Properties.Settings.Default;
-        public LaserService([Inject] IEventAggregator @event)
+        public LaserService([Inject] IEventAggregator @event,[Inject] MsgFileSaver<Laser> saver)
         {
-            CreateServer();
+            Events = @event;
+            _saver = saver;
         }
         public void CreateServer()
         {
-            modbusTcp.IpAddress = "192.168.0.240";
-            modbusTcp.Port = 4196;
-            modbusTcp.AddressStartWithZero = false;
-            _laserClient?.Disconnect();
-            _laserClient = new SimpleTcpClient();
-            _laserClient.Connect("192.168.0.239", 9004);
-          
-
-            Events.Publish(new MsgItem { Level = "D", Time = DateTime.Now, Value = "Server initialize: " + IPAddress.Any.ToString() + ":9004" });
+            try
+            {
+                modbusTcp.IpAddress = "192.168.0.240";
+                modbusTcp.Port = 502;
+                modbusTcp.AddressStartWithZero = false;
+                _laserClient?.Disconnect();
+                _laserClient = new SimpleTcpClient();
+                _laserClient.Connect("192.168.0.239", 9004);
+                Events.Publish(new MsgItem { Level = "D", Time = DateTime.Now, Value = "Server initialize: " + IPAddress.Any.ToString() + ":9004" });
+            }
+            catch (Exception EX)
+            {
+                Events.PostError(EX);
+                return;
+            }
 
             Task.Run(() =>
             {
@@ -42,8 +49,7 @@ namespace DAQ.Service
                     var result = modbusTcp.ReadCoil("1");
                     if (result.IsSuccess)
                     {
-                        var finish = laserFinish;
-                        if (finish != result.Content)
+                        if (laserFinish != result.Content)
                         {
                             if (result.Content)
                             {
@@ -51,7 +57,6 @@ namespace DAQ.Service
                                 {
                                     modbusTcp.WriteCoil("17", true);
                                     Task task = Task.Delay(500);
-
                                     Events.PostMessage($"LASER SEND:{UY01}");
                                     var m1 = _laserClient.WriteLineAndGetReply(UY01, TimeSpan.FromMilliseconds(200));
                                     if (m1 != null)
@@ -73,12 +78,17 @@ namespace DAQ.Service
                                         Events.PostMessage($"LASER RECV: {m3.MessageString}");
                                         SaveLaserLog(m3);
                                     }
-                                    modbusTcp.WriteCoil("17", false);
                                     await task;
+                                    modbusTcp.WriteCoil("17", false);
                                 });
                             }
                             laserFinish = result.Content;
                         }
+
+                    }
+                    else
+                    {
+                        Events.PostError(new Exception(result.Message));
                     }
                 }
             });
@@ -90,33 +100,47 @@ namespace DAQ.Service
             var splits = m1.MessageString.Split(',');
             if (splits.Length >= 3)
             {
-                saver.Process(new TLaser
+                if(int.TryParse(splits[1],out int result))
                 {
-                    BobbinCode = splits[2],
-                    BobbinLotNo = settings.BobbinLotNo,
-                    LineNo = settings.LineNo,
-                    Shift = settings.Shift,
-                    Source = "LaserCode",
-                    CodeQuality = "A",
-                    ProductionOrder = settings.LotNo,
-                    EmployeeNo = settings.EmployeeNo,
-                    MachineNo = settings.MachineNo,
-                    FlyWireLotNo=settings.FlyWireLotNo,
-                     TubeLotNo=settings.TubeLotNo
-                    
-                });
+                    if (result == 0)
+                    {
+                        _saver.Process(new Laser
+                        {
+                            BobbinCode = splits[2],
+                            BobbinLotNo = settings.BobbinLotNo,
+                            LineNo = settings.LineNo,
+                            Shift = settings.Shift,
+                            CodeQuality = "A",
+                            Production = settings.Production,
+                            EmployeeNo = settings.EmployeeNo,
+                            MachineNo = settings.MachineNo,
+                            BobbinCavityNo = settings.BobbinCavityNo,
+                            BobbinToolNo = settings.BobbinToolNo,
+                            Order = settings.Order,
+                            ShiftName = settings.ShiftName
+                        });
+                    }
+                    else
+                    {
+                        Events.PostError(new Exception("get laser info error.code "+ splits[2]));
+                    }
+                }
+                else
+                {
+                    Events.PostError(new Exception("Format error " + splits[2]));
+                }
+       
             }
         }
 
         public void Dispose()
         {
             _laserClient?.Disconnect();
-
         }
 
-        private string UY01 => "UY,000,000,0" + Environment.NewLine;
-        private string UY02 => "UY,000,001,0" + Environment.NewLine;
-        private string UY03 => "UY,000,002,0" + Environment.NewLine;
+        private string UY01 => "UY,009,000,0" + Environment.NewLine;
+        private string UY02 => "UY,009,001,0" + Environment.NewLine;
+        private string UY03 => "UY,009,002,0" + Environment.NewLine;
 
 
 

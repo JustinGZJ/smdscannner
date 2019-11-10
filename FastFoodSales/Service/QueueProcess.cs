@@ -4,7 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.Concurrent;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Globalization;
 using System.IO;
+using System.Linq.Expressions;
+using System.Reflection;
 using System.Threading;
 
 namespace DAQ.Service
@@ -34,10 +39,7 @@ namespace DAQ.Service
             }
             if (Interlocked.Increment(ref locker) == 1)
             {
-                task = Task.Run(() =>
-                {
-                    BatchProcess();
-                }
+                task = Task.Run(BatchProcess
                 ).ContinueWith((x) => Interlocked.Exchange(ref locker, 0));
             }
             else
@@ -55,67 +57,81 @@ namespace DAQ.Service
                 {
                     vs.Add(v);
                 }
-                Todo(vs);
+
+
+                try
+                {
+                    Todo(vs);
+                }
+                catch (Exception)
+                {
+                    foreach (var v in vs)
+                    {
+                        Msgs.Enqueue(v);
+                    }
+                    throw;
+                }
+
             }
         }
     }
 
-    public class MsgFileSaver<T> : IQueueProcesser<T> where T:ISource
+    public class MsgFileSaver<T> : IQueueProcesser<T>
     {
         QueueProcesser<T> processer;
-        public string FolderName { get; set; } = "../Data/";
+        public string RootFolder { get; set; } = "../Data/";
+        public string SubPath { get; set; } = typeof(T).Name;
+        public event EventHandler<Exception> ProcessError;
         public MsgFileSaver()
         {
             processer = new QueueProcesser<T>((s) =>
               {
-                  string fullpath = Path.GetFullPath(FolderName);
-                  List<Task> tasks = new List<Task>();
-
-                  var groups = s.GroupBy(x => x.Source);
-                  foreach (var group in groups)
+                  try
                   {
-  
+                      string fullpath = Path.GetFullPath(RootFolder);
+                      string path = Path.Combine(fullpath, SubPath);
+                      if (!Directory.Exists(path))
+                          Directory.CreateDirectory(path);
+                      var fileName = Path.Combine(path, DateTime.Today.ToString("yyyy-M-d") + ".csv");
+                      var propertyInfos = typeof(T).GetProperties();
+                      if (!File.Exists(fileName))
                       {
-                          string path = Path.Combine(fullpath, DateTime.Today.ToString("yyyyMMdd"));
-                          if (!Directory.Exists(path))
-                              Directory.CreateDirectory(path);
-                          var fileName = Path.Combine(path, group.Key + ".csv");
-                          Console.WriteLine(fileName);
-                          if (!File.Exists(fileName))
+                          StringBuilder stringBuilder = new StringBuilder();
+                          foreach (var p in propertyInfos)
                           {
-                              StringBuilder stringBuilder = new StringBuilder();
-                              var propertyInfos = typeof(T).GetProperties();
-                              stringBuilder.Append("Date Time,");
-                              foreach (var p in propertyInfos)
-                              {
-                                  if (p.Name == "Source")
-                                      stringBuilder.Append($"Station,");
-                                  else
-                                      stringBuilder.Append($"{p.Name},");
-                              }
-                              stringBuilder.AppendLine();
-                              File.AppendAllText(fileName, stringBuilder.ToString());
+                              var names = p.GetCustomAttributes(typeof(DisplayNameAttribute), true);
+                              stringBuilder.Append(names.Length >= 1
+                                  ? (names[0] as DisplayNameAttribute)?.DisplayName + ","
+                                  : p.Name + ",");
                           }
-
-                          StringBuilder sb = new StringBuilder();
-                          foreach (var v in group)
-                          {
-                              sb.Append($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}," +        
-                                  $"{string.Join(",", v.GetType().GetProperties().Select(x => x.GetValue(v, null) ?? ""))}");
-                              sb.AppendLine();
-                          }
-                          File.AppendAllText(fileName, sb.ToString());
+                          stringBuilder.AppendLine();
+                          File.AppendAllText(fileName, stringBuilder.ToString());
                       }
-                    //));
+                      StringBuilder sb = new StringBuilder();
+                      foreach (var v in s)
+                      {
+                          sb.Append($"{string.Join(",", v.GetType().GetProperties().Select(x => x.GetValue(v, null) ?? ""))}");
+                          sb.AppendLine();
+                      }
+                      File.AppendAllText(fileName, sb.ToString());
                   }
-             //     Task.WaitAll(tasks.ToArray());
+                  catch (Exception ex)
+                  {
+                      OnProcessError(ex);
+                  }
               });
         }
         public void Process(T msg)
         {
             processer.Process(msg);
         }
+
+        protected virtual void OnProcessError(Exception e)
+        {
+            ProcessError?.Invoke(this, e);
+        }
     }
+
     public class SaveMsg<T>
     {
         public string Source { get; set; }
@@ -127,8 +143,5 @@ namespace DAQ.Service
             return m;
         }
     }
-    public interface ISource
-    {
-        string Source { get; set; }
-    }
+
 }

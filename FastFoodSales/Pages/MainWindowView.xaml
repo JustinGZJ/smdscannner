@@ -27,7 +27,7 @@
                         <TextBlock>
                              Shift
                         </TextBlock>
-                        <TextBox
+                        <TextBox Text="{Binding Shift}"
                         Margin="0 8 0 0"
                         HorizontalAlignment="Stretch"/>
                     </StackPanel>
@@ -35,7 +35,7 @@
                         <TextBlock>
                             Shift Name
                         </TextBlock>
-                        <TextBox
+                        <TextBox Text="{Binding ShiftName}"
                             Margin="0 8 0 0"
                             HorizontalAlignment="Stretch"
                              />
@@ -44,7 +44,7 @@
                         <TextBlock>
                             Lot Number
                         </TextBlock>
-                        <TextBox
+                        <TextBox Text="{Binding LineNo}"
                             Margin="0 8 0 0"
                             HorizontalAlignment="Stretch"
                         />
@@ -53,7 +53,7 @@
                         <TextBlock>
                            Line Number
                         </TextBlock>
-                        <TextBox
+                        <TextBox Text="{Binding LineNo}"
                             Margin="0 8 0 0"
                             HorizontalAlignment="Stretch"
                         />
@@ -62,7 +62,7 @@
                         <TextBlock>
                             Bobbin Lot Number
                         </TextBlock>
-                        <TextBox
+                        <TextBox Text="{Binding BobbinLotNo}"
                             Margin="0 8 0 0"
                             HorizontalAlignment="Stretch"
                         />
@@ -71,7 +71,7 @@
                         <TextBlock>
                             Machine Number
                         </TextBlock>
-                        <TextBox
+                        <TextBox Text="{Binding MachineNo}"
                             Margin="0 8 0 0"
                             HorizontalAlignment="Stretch"
                         />
@@ -80,7 +80,7 @@
                         <TextBlock>
                             Employee Number
                         </TextBlock>
-                        <TextBox
+                        <TextBox Text="{Binding EmployeeNo}"
                             Margin="0 8 0 0"
                             HorizontalAlignment="Stretch"
                         />
@@ -89,7 +89,7 @@
                         <TextBlock>
                             Fly Wire Lot No
                         </TextBlock>
-                        <TextBox
+                        <TextBox Text="{Binding FlyWireLotNo}"
                             Margin="0 8 0 0"
                             HorizontalAlignment="Stretch"
                         />
@@ -98,9 +98,46 @@
                         <TextBlock>
                             Tube Lot No
                         </TextBlock>
-                        <TextBox
+                        <TextBox Text="{Binding TubeLotNo}"
                             Margin="0 8 0 0"
                             HorizontalAlignment="Stretch"
+                        />
+                    </StackPanel>
+                    <StackPanel Width="160" Margin="10">
+                        <TextBlock>
+                            Bobbin Cavity No
+                        </TextBlock>
+                        <TextBox Text="{Binding BobbinCavityNo}"
+                                 Margin="0 8 0 0"
+                                 HorizontalAlignment="Stretch"
+                        />
+                    </StackPanel>
+                    <StackPanel Width="160" Margin="10">
+                        <TextBlock>
+                            Bobbin Tool No
+                        </TextBlock>
+                        <TextBox Text="{Binding BobbinToolNo}"
+                                 Margin="0 8 0 0"
+                                 HorizontalAlignment="Stretch"
+                        />
+                    </StackPanel>
+                    <StackPanel Width="160" Margin="10">
+                        <TextBlock>
+                            Order
+                        </TextBlock>
+                        <TextBox Text="{Binding Order}"
+                                 Margin="0 8 0 0"
+                                 HorizontalAlignment="Stretch"
+                        />
+                    </StackPanel>
+
+                    <StackPanel Width="160" Margin="10">
+                        <TextBlock>
+                            Production
+                        </TextBlock>
+                        <TextBox Text="{Binding Production}"
+                                 Margin="0 8 0 0"
+                                 HorizontalAlignment="Stretch"
                         />
                     </StackPanel>
                 </WrapPanel>
