@@ -11,6 +11,8 @@ using System.IO;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading;
+using DAQ.Pages;
+using Stylet;
 
 namespace DAQ.Service
 {
@@ -76,72 +78,141 @@ namespace DAQ.Service
         }
     }
 
-    public class MsgFileSaver<T> : IQueueProcesser<T>
+    public class FileSaver<T>
     {
-        QueueProcesser<T> processer;
-        public string RootFolder { get; set; } = "../Data/";
-        public string SubPath { get; set; } = typeof(T).Name;
+        public string RootFolder { get; set; }
+        public string SubPath { get; set; }
         public event EventHandler<Exception> ProcessError;
-        public MsgFileSaver()
-        {
-            processer = new QueueProcesser<T>((s) =>
-              {
-                  try
-                  {
-                      string fullpath = Path.GetFullPath(RootFolder);
-                      string path = Path.Combine(fullpath, SubPath);
-                      if (!Directory.Exists(path))
-                          Directory.CreateDirectory(path);
-                      var fileName = Path.Combine(path, DateTime.Today.ToString("yyyy-M-d") + ".csv");
-                      var propertyInfos = typeof(T).GetProperties();
-                      if (!File.Exists(fileName))
-                      {
-                          StringBuilder stringBuilder = new StringBuilder();
-                          foreach (var p in propertyInfos)
-                          {
-                              var names = p.GetCustomAttributes(typeof(DisplayNameAttribute), true);
-                              stringBuilder.Append(names.Length >= 1
-                                  ? (names[0] as DisplayNameAttribute)?.DisplayName + ","
-                                  : p.Name + ",");
-                          }
-                          stringBuilder.AppendLine();
-                          File.AppendAllText(fileName, stringBuilder.ToString());
-                      }
-                      StringBuilder sb = new StringBuilder();
-                      foreach (var v in s)
-                      {
-                          sb.Append($"{string.Join(",", v.GetType().GetProperties().Select(x => x.GetValue(v, null) ?? ""))}");
-                          sb.AppendLine();
-                      }
-                      File.AppendAllText(fileName, sb.ToString());
-                  }
-                  catch (Exception ex)
-                  {
-                      OnProcessError(ex);
-                  }
-              });
-        }
-        public void Process(T msg)
-        {
-            processer.Process(msg);
-        }
+        public string FileName { get; set; }
 
+        public void Save<T>(T v)
+        {
+            try
+            {
+                string fullpath = Path.GetFullPath(RootFolder);
+                string path = Path.Combine(fullpath, SubPath);
+                if (!Directory.Exists(path))
+                    Directory.CreateDirectory(path);
+                var fileName = Path.Combine(path, FileName);
+                var propertyInfos = typeof(T).GetProperties();
+                if (!File.Exists(fileName))
+                {
+                    StringBuilder stringBuilder = new StringBuilder();
+                    foreach (var p in propertyInfos)
+                    {
+                        var names = p.GetCustomAttributes(typeof(DisplayNameAttribute), true);
+                        stringBuilder.Append(names.Length >= 1
+                            ? (names[0] as DisplayNameAttribute)?.DisplayName + ","
+                            : p.Name + ",");
+                    }
+                    stringBuilder.AppendLine();
+                    stringBuilder.Append($"{string.Join(",", v.GetType().GetProperties().Select(x => x.GetValue(v, null) ?? ""))}");
+                    stringBuilder.AppendLine();
+                    File.AppendAllText(fileName, stringBuilder.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                OnProcessError(ex);
+            }
+        }
         protected virtual void OnProcessError(Exception e)
         {
             ProcessError?.Invoke(this, e);
         }
     }
-
-    public class SaveMsg<T>
+    
+    public class FileSaverFactory
     {
-        public string Source { get; set; }
-        public T Msg { get; set; }
+        private readonly IEventAggregator _event;
 
-        public static SaveMsg<T> Create(string source, T msg)
+        public FileSaverFactory(IEventAggregator @event)
         {
-            var m = new SaveMsg<T>() { Msg = msg, Source = source };
-            return m;
+            _event = @event;
+        }
+        private string _rootPath = @"\\10.101.30.5\SumidaFile\Monitor";
+
+        public  FileSaver<T> GetFileSaver<T>(string tag)
+        {
+            var saver = new FileSaver<T>()
+            {
+                RootFolder = _rootPath,
+            };
+            saver.ProcessError += Saver_ProcessError;
+            if (typeof(T).IsDefined(typeof(SubFilePathAttribute), false))
+            {
+                SubFilePathAttribute attribute =
+                    (SubFilePathAttribute) Attribute.GetCustomAttribute(typeof(T), typeof(SubFilePathAttribute));
+                saver.SubPath = Properties.Settings.Default.LineNo + "_" + attribute.Name;
+                var s = DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + Properties.Settings.Default.LineNo+"_"+attribute.Name;
+                saver.FileName = string.IsNullOrEmpty(tag) ? s + ".csv" : s + "_"+tag + ".csv";
+                return saver;
+            }
+            else
+                return null;
+        }
+
+        private void Saver_ProcessError(object sender, Exception e)
+        {
+            this._event.PostError(e);
         }
     }
+
+    //public class MsgFileSaver<T> : IQueueProcesser<T>
+    //{
+    //    QueueProcesser<T> processer;
+    //    public string RootFolder { get; set; } = "../Data/";
+    //    public string SubPath { get; set; } = typeof(T).Name;
+    //    public event EventHandler<Exception> ProcessError;
+    //    public MsgFileSaver()
+    //    {
+    //        processer = new QueueProcesser<T>((s) =>
+    //          {
+    //              try
+    //              {
+    //                  string fullpath = Path.GetFullPath(RootFolder);
+    //                  string path = Path.Combine(fullpath, SubPath);
+    //                  if (!Directory.Exists(path))
+    //                      Directory.CreateDirectory(path);
+    //                  var fileName = Path.Combine(path, DateTime.Today.ToString("yyyy-M-d") + ".csv");
+    //                  var propertyInfos = typeof(T).GetProperties();
+    //                  if (!File.Exists(fileName))
+    //                  {
+    //                      StringBuilder stringBuilder = new StringBuilder();
+    //                      foreach (var p in propertyInfos)
+    //                      {
+    //                          var names = p.GetCustomAttributes(typeof(DisplayNameAttribute), true);
+    //                          stringBuilder.Append(names.Length >= 1
+    //                              ? (names[0] as DisplayNameAttribute)?.DisplayName + ","
+    //                              : p.Name + ",");
+    //                      }
+    //                      stringBuilder.AppendLine();
+    //                      File.AppendAllText(fileName, stringBuilder.ToString());
+    //                  }
+    //                  StringBuilder sb = new StringBuilder();
+    //                  foreach (var v in s)
+    //                  {
+    //                      sb.Append($"{string.Join(",", v.GetType().GetProperties().Select(x => x.GetValue(v, null) ?? ""))}");
+    //                      sb.AppendLine();
+    //                  }
+    //                  File.AppendAllText(fileName, sb.ToString());
+    //              }
+    //              catch (Exception ex)
+    //              {
+    //                  OnProcessError(ex);
+    //              }
+    //          });
+    //    }
+    //    public void Process(T msg)
+    //    {
+    //        processer.Process(msg);
+    //    }
+
+    //    protected virtual void OnProcessError(Exception e)
+    //    {
+    //        ProcessError?.Invoke(this, e);
+    //    }
+    //}
+
 
 }

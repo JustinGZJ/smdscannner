@@ -21,6 +21,16 @@ namespace DAQ.Pages
             {
                 laser?.CreateServer();
             }));
+            _laser.LaserHandler += _laser_LaserHandler;
+        }
+
+        public BindableCollection<Laser> Lasers { get; } = new BindableCollection<Laser>();
+
+        private void _laser_LaserHandler(object sender, Laser e)
+        {
+            if (Lasers.Count > 1000)
+                Lasers.RemoveAt(0);
+            Lasers.Add(e);
         }
         public int TabIndex { get; set; } = (int)Pages.TabIndex.LASER;
         public PackIconKind PackIcon { get; set; } = PackIconKind.FlashCircle;

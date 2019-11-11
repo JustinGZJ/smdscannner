@@ -53,7 +53,7 @@ namespace DAQ.Pages
         public string Product { get; set; }
         public string Shift { get; set; }
     }
-
+    [SubFilePath("Laser")]
     public class Laser
     {
         [DisplayName("Bobbin Code")]
@@ -73,7 +73,17 @@ namespace DAQ.Pages
         public string BobbinToolNo { get; set; }
         public string BobbinCavityNo { get; set; }
     }
+    [AttributeUsage(AttributeTargets.Class, Inherited = false)]
+    public class SubFilePathAttribute : Attribute  //类名是特性的名称
+    {
+        public string Name { get; }
 
+        public SubFilePathAttribute(string name) //name为定位参数
+        {
+            this.Name = name;
+        }
+    }
+    [SubFilePath("N3")]
     public class Scan
     {
         [DisplayName("Bobbin Code")]
@@ -98,7 +108,6 @@ namespace DAQ.Pages
     }
     public class MaterialViewModel : Screen, IHandle<string>
     {
-        private MsgFileSaver<Scan> fileSaver;
         public int SelectedMode { get; set; }
 
         public int Capcity { get; set; }
@@ -118,14 +127,16 @@ namespace DAQ.Pages
         };
         ScannerService service;
         IEventAggregator Events;
+        private readonly FileSaverFactory _factory;
+
         [Inject]
         public Info Info { get; set; }
-        public MaterialViewModel([Inject]IEventAggregator events, [Inject] MsgFileSaver<Scan> fileSaver, [Inject]ScannerService service, int capcity = 12)
+        public MaterialViewModel([Inject]IEventAggregator events, [Inject] FileSaverFactory factory, [Inject]ScannerService service, int capcity = 12)
         {
             this.Events = events;
+            _factory = factory;
             this.service = service;
             this.Capcity = capcity;
-            this.fileSaver = fileSaver;
 
         }
         public int ItemsHeight => Capcity / 4 * 40 + 20;
@@ -153,7 +164,7 @@ namespace DAQ.Pages
             ScanRate = ((_cntBarcode - _cntErrorBarcode) * 1.0 / _cntBarcode).ToString("P").Replace(",", "");
             Barcodes.Add(new TBarcode { Index = count + 1, Content = message });
             var settings = Properties.Settings.Default;
-            fileSaver.Process(new Scan
+            _factory.GetFileSaver<Scan>((IpUnit - 2).ToString()).Save(new Scan
             {
                 Bobbin = message,
                 Shift = settings.Shift,
@@ -164,10 +175,12 @@ namespace DAQ.Pages
                 EmployeeNo = settings.EmployeeNo,
                 FlyWireLotNo = settings.FlyWireLotNo,
                 TubeLotNo = settings.TubeLotNo
-            }
+            });
+        }
 
-            );
-
+        public void TestSave()
+        {
+            Handle("Helloworldfs");
         }
     }
 }
