@@ -12,6 +12,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading;
 using DAQ.Pages;
+using DAQ.Properties;
 using Stylet;
 
 namespace DAQ.Service
@@ -59,8 +60,6 @@ namespace DAQ.Service
                 {
                     vs.Add(v);
                 }
-
-
                 try
                 {
                     Todo(vs);
@@ -98,15 +97,21 @@ namespace DAQ.Service
                 if (!File.Exists(fileName))
                 {
                     StringBuilder stringBuilder = new StringBuilder();
-                    foreach (var p in propertyInfos)
-                    {
-                        var names = p.GetCustomAttributes(typeof(DisplayNameAttribute), true);
-                        stringBuilder.Append(names.Length >= 1
-                            ? (names[0] as DisplayNameAttribute)?.DisplayName + ","
-                            : p.Name + ",");
-                    }
+                    var ms = propertyInfos.Select(p =>
+                     {
+                         var ns = p.GetCustomAttributes(typeof(DisplayNameAttribute), true);
+                         var name = ns.Length > 0 ? (ns[0] as DisplayNameAttribute)?.DisplayName : p.Name;
+                         return name;
+                     });
+                    stringBuilder.AppendLine(string.Join(",", ms));
+                    stringBuilder.Append($"{string.Join(",", propertyInfos.Select(x => x.GetValue(v, null) ?? ""))}");
                     stringBuilder.AppendLine();
-                    stringBuilder.Append($"{string.Join(",", v.GetType().GetProperties().Select(x => x.GetValue(v, null) ?? ""))}");
+                    File.AppendAllText(fileName, stringBuilder.ToString());
+                }
+                else
+                {
+                    StringBuilder stringBuilder = new StringBuilder();
+                    stringBuilder.Append($"{string.Join(",", propertyInfos.Select(x => x.GetValue(v, null) ?? ""))}");
                     stringBuilder.AppendLine();
                     File.AppendAllText(fileName, stringBuilder.ToString());
                 }
@@ -121,7 +126,7 @@ namespace DAQ.Service
             ProcessError?.Invoke(this, e);
         }
     }
-    
+
     public class FileSaverFactory
     {
         private readonly IEventAggregator _event;
@@ -130,89 +135,38 @@ namespace DAQ.Service
         {
             _event = @event;
         }
-        private string _rootPath = @"\\10.101.30.5\SumidaFile\Monitor";
+        private string _rootPath = Settings.Default.SaveRootPath;
 
-        public  FileSaver<T> GetFileSaver<T>(string tag)
+        public FileSaver<T> GetFileSaver<T>(string tag, string rootpath)
         {
             var saver = new FileSaver<T>()
             {
-                RootFolder = _rootPath,
+                RootFolder = rootpath,
             };
             saver.ProcessError += Saver_ProcessError;
             if (typeof(T).IsDefined(typeof(SubFilePathAttribute), false))
             {
                 SubFilePathAttribute attribute =
-                    (SubFilePathAttribute) Attribute.GetCustomAttribute(typeof(T), typeof(SubFilePathAttribute));
+                    (SubFilePathAttribute)Attribute.GetCustomAttribute(typeof(T), typeof(SubFilePathAttribute));
                 saver.SubPath = Properties.Settings.Default.LineNo + "_" + attribute.Name;
-                var s = DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + Properties.Settings.Default.LineNo+"_"+attribute.Name;
-                saver.FileName = string.IsNullOrEmpty(tag) ? s + ".csv" : s + "_"+tag + ".csv";
+                var s = DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + Properties.Settings.Default.LineNo + "_" + attribute.Name;
+                saver.FileName = string.IsNullOrEmpty(tag) ? s + ".csv" : s + "_" + tag + ".csv";
                 return saver;
             }
             else
                 return null;
         }
 
+        public FileSaver<T> GetFileSaver<T>(string tag)
+        {
+            return GetFileSaver<T>(tag, Settings.Default.SaveRootPath);
+        }
         private void Saver_ProcessError(object sender, Exception e)
         {
             this._event.PostError(e);
         }
     }
 
-    //public class MsgFileSaver<T> : IQueueProcesser<T>
-    //{
-    //    QueueProcesser<T> processer;
-    //    public string RootFolder { get; set; } = "../Data/";
-    //    public string SubPath { get; set; } = typeof(T).Name;
-    //    public event EventHandler<Exception> ProcessError;
-    //    public MsgFileSaver()
-    //    {
-    //        processer = new QueueProcesser<T>((s) =>
-    //          {
-    //              try
-    //              {
-    //                  string fullpath = Path.GetFullPath(RootFolder);
-    //                  string path = Path.Combine(fullpath, SubPath);
-    //                  if (!Directory.Exists(path))
-    //                      Directory.CreateDirectory(path);
-    //                  var fileName = Path.Combine(path, DateTime.Today.ToString("yyyy-M-d") + ".csv");
-    //                  var propertyInfos = typeof(T).GetProperties();
-    //                  if (!File.Exists(fileName))
-    //                  {
-    //                      StringBuilder stringBuilder = new StringBuilder();
-    //                      foreach (var p in propertyInfos)
-    //                      {
-    //                          var names = p.GetCustomAttributes(typeof(DisplayNameAttribute), true);
-    //                          stringBuilder.Append(names.Length >= 1
-    //                              ? (names[0] as DisplayNameAttribute)?.DisplayName + ","
-    //                              : p.Name + ",");
-    //                      }
-    //                      stringBuilder.AppendLine();
-    //                      File.AppendAllText(fileName, stringBuilder.ToString());
-    //                  }
-    //                  StringBuilder sb = new StringBuilder();
-    //                  foreach (var v in s)
-    //                  {
-    //                      sb.Append($"{string.Join(",", v.GetType().GetProperties().Select(x => x.GetValue(v, null) ?? ""))}");
-    //                      sb.AppendLine();
-    //                  }
-    //                  File.AppendAllText(fileName, sb.ToString());
-    //              }
-    //              catch (Exception ex)
-    //              {
-    //                  OnProcessError(ex);
-    //              }
-    //          });
-    //    }
-    //    public void Process(T msg)
-    //    {
-    //        processer.Process(msg);
-    //    }
-
-    //    protected virtual void OnProcessError(Exception e)
-    //    {
-    //        ProcessError?.Invoke(this, e);
-    //    }
-    //}
 
 
 }

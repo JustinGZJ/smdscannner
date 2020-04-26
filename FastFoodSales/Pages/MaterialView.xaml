@@ -72,8 +72,6 @@
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
                     </Grid>
-
-
                 </DockPanel>
 
             </md:Card>

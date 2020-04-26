@@ -1,0 +1,160 @@
+﻿<UserControl x:Class="DAQ.Pages.MaterialManagerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DAQ.Pages"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             >
+    <StackPanel>
+
+
+    <WrapPanel Margin="10" Width="720">
+        <StackPanel Width="160" Margin="10">
+            <TextBlock>
+                             FlyWire1
+            </TextBlock>
+            <TextBox Text="{Binding Manager.FlyWires[0]}"
+                        Margin="0 8 0 0"
+                        HorizontalAlignment="Stretch"/>
+        </StackPanel>
+        <StackPanel Margin="10" Width="160">
+            <TextBlock>FlyWire2
+            </TextBlock>
+            <TextBox Text="{Binding Manager.FlyWires[1]}"
+                            Margin="0 8 0 0"
+                            HorizontalAlignment="Stretch"
+                             />
+        </StackPanel>
+        <StackPanel Width="160" Margin="10">
+            <TextBlock>
+                FlyWire3
+            </TextBlock>
+            <TextBox Text="{Binding Manager.FlyWires[2]}"
+                            Margin="0 8 0 0"
+                            HorizontalAlignment="Stretch"
+                        />
+        </StackPanel>
+        <StackPanel Width="160" Margin="10">
+            <TextBlock>
+                FlyWire4
+            </TextBlock>
+            <TextBox Text="{Binding Manager.FlyWires[3]}"
+                            Margin="0 8 0 0"
+                            HorizontalAlignment="Stretch"
+                        />
+        </StackPanel>
+        <StackPanel Width="160" Margin="10">
+            <TextBlock>
+                FlyWire5
+            </TextBlock>
+            <TextBox Text="{Binding Manager.FlyWires[4]}"
+                            Margin="0 8 0 0"
+                            HorizontalAlignment="Stretch"
+                        />
+        </StackPanel>
+        <StackPanel Width="160" Margin="10">
+            <TextBlock>
+                FlyWire6
+            </TextBlock>
+            <TextBox Text="{Binding Manager.FlyWires[5]}"
+                            Margin="0 8 0 0"
+                            HorizontalAlignment="Stretch"
+                        />
+        </StackPanel>
+        <StackPanel Width="160" Margin="10">
+            <TextBlock>
+                FlyWire7
+            </TextBlock>
+            <TextBox Text="{Binding Manager.FlyWires[6]}"
+                            Margin="0 8 0 0"
+                            HorizontalAlignment="Stretch"
+                        />
+        </StackPanel>
+        <StackPanel Width="160" Margin="10">
+            <TextBlock>
+                FlyWire8
+            </TextBlock>
+            <TextBox Text="{Binding Manager.FlyWires[7]}"
+                            Margin="0 8 0 0"
+                            HorizontalAlignment="Stretch"
+                        />
+        </StackPanel>
+        <StackPanel Width="160" Margin="10">
+            <TextBlock>
+                          Tube1
+            </TextBlock>
+            <TextBox Text="{Binding Manager.Tubes[0]}"
+                            Margin="0 8 0 0"
+                            HorizontalAlignment="Stretch"
+                        />
+        </StackPanel>
+        <StackPanel Width="160" Margin="10">
+            <TextBlock>
+                Tube2
+            </TextBlock>
+            <TextBox Text="{Binding Manager.Tubes[1]}"
+                                 Margin="0 8 0 0"
+                                 HorizontalAlignment="Stretch"
+                        />
+        </StackPanel>
+        <StackPanel Width="160" Margin="10">
+            <TextBlock>
+                Tube3
+            </TextBlock>
+            <TextBox Text="{Binding Manager.Tubes[2]}"
+                     Margin="0 8 0 0"
+                     HorizontalAlignment="Stretch"
+            />
+        </StackPanel>
+        <StackPanel Width="160" Margin="10">
+            <TextBlock>
+                Tube4
+            </TextBlock>
+            <TextBox Text="{Binding Manager.Tubes[3]}"
+                     Margin="0 8 0 0"
+                     HorizontalAlignment="Stretch"
+            />
+        </StackPanel>
+        <StackPanel Width="160" Margin="10">
+            <TextBlock>
+                Tube5
+            </TextBlock>
+            <TextBox Text="{Binding Manager.Tubes[4]}"
+                     Margin="0 8 0 0"
+                     HorizontalAlignment="Stretch"
+            />
+        </StackPanel>
+        <StackPanel Width="160" Margin="10">
+            <TextBlock>
+                Tube6
+            </TextBlock>
+            <TextBox Text="{Binding Manager.Tubes[5]}"
+                     Margin="0 8 0 0"
+                     HorizontalAlignment="Stretch"
+            />
+        </StackPanel>
+        <StackPanel Width="160" Margin="10">
+            <TextBlock>
+                Tube7
+            </TextBlock>
+            <TextBox Text="{Binding Manager.Tubes[6]}"
+                     Margin="0 8 0 0"
+                     HorizontalAlignment="Stretch"
+            />
+        </StackPanel>
+        <StackPanel Width="160" Margin="10">
+            <TextBlock>
+                Tube8
+            </TextBlock>
+            <TextBox Text="{Binding Manager.Tubes[7]}"
+                     Margin="0 8 0 0"
+                     HorizontalAlignment="Stretch"
+            />
+        </StackPanel>
+    </WrapPanel>
+        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">Accept</Button>
+    </StackPanel>
+</UserControl>

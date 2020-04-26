@@ -11,7 +11,7 @@ using MaterialDesignThemes.Wpf;
 
 namespace DAQ
 {
-    public class HomeViewModel : Conductor<MaterialViewModel>.Collection.AllActive,IMainTabViewModel
+    public class HomeViewModel : Conductor<MaterialViewModel>.Collection.AllActive, IMainTabViewModel
     {
         Properties.Settings settings = Properties.Settings.Default;
         public int SelectedIndex { get; set; }
@@ -48,6 +48,8 @@ namespace DAQ
                 Items.AddRange(l);
             }
         }
+
+        [Inject] public MaterialManager materialManager { get; set; }
         public string Shift
         {
             get => settings.Shift; set
@@ -90,11 +92,11 @@ namespace DAQ
             m2.IpUnit = 4;
             m3.IpUnit = 5;
             m4.IpUnit = 6;
-            _items.AddRange(new[]{m1,m2,m3,m4});
+            _items.AddRange(new[] { m1, m2, m3, m4 });
             _radioCnt = _items.Count / _unit + (_items.Count % _unit > 0 ? 1 : 0);
             for (int i = 0; i < _radioCnt; i++)
             {
-                Selector.Add(new OeeCollectionViewModel.Ts(){Selected = (i==0)});
+                Selector.Add(new OeeCollectionViewModel.Ts() { Selected = (i == 0) });
             }
             var l = _items.Skip(Index * _unit).Take(_unit);
             Items.Clear();
@@ -112,9 +114,20 @@ namespace DAQ
             Items.AddRange(l);
         }
 
-        public int TabIndex { get; set; } =(int)Pages.TabIndex.SCANNER;
+        public int TabIndex { get; set; } = (int)Pages.TabIndex.SCANNER;
         public PackIconKind PackIcon { get; set; } = PackIconKind.ViewDashboard;
         public string Header { get; set; } = "Scanner";
         public bool Visible { get; set; } = true;
+
+        public async Task ShowSettingDialog()
+        {
+            var vm = new MaterialManagerViewModel(materialManager);
+            var dialog = new MaterialManagerView()
+            {
+                DataContext = vm
+            };
+            await DialogHost.Show(dialog, "root", ((sender, args) => { }),
+                ((sender, args) => { vm.Manager.Save(); }));
+        }
     }
 }

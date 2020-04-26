@@ -18,159 +18,8 @@
         mc:Ignorable="d" Height="700" Width="1200" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None"       
         d:DataContext="{d:DesignInstance  local:MainWindowViewModel}"
       >
-    <materialDesign:DialogHost>
-        <materialDesign:DialogHost.DialogContent>
-            <StackPanel
-                Margin="16">
-                <WrapPanel Width="400">
-                    <StackPanel Width="160" Margin="10">
-                        <TextBlock>
-                             Shift
-                        </TextBlock>
-                        <TextBox Text="{Binding Shift}"
-                        Margin="0 8 0 0"
-                        HorizontalAlignment="Stretch"/>
-                    </StackPanel>
-                    <StackPanel Margin="10" Width="160">
-                        <TextBlock>
-                            Shift Name
-                        </TextBlock>
-                        <TextBox Text="{Binding ShiftName}"
-                            Margin="0 8 0 0"
-                            HorizontalAlignment="Stretch"
-                             />
-                    </StackPanel>
-                    <StackPanel Width="160" Margin="10">
-                        <TextBlock>
-                            Lot Number
-                        </TextBlock>
-                        <TextBox Text="{Binding LineNo}"
-                            Margin="0 8 0 0"
-                            HorizontalAlignment="Stretch"
-                        />
-                    </StackPanel>
-                    <StackPanel Width="160" Margin="10">
-                        <TextBlock>
-                           Line Number
-                        </TextBlock>
-                        <TextBox Text="{Binding LineNo}"
-                            Margin="0 8 0 0"
-                            HorizontalAlignment="Stretch"
-                        />
-                    </StackPanel>
-                    <StackPanel Width="160" Margin="10">
-                        <TextBlock>
-                            Bobbin Lot Number
-                        </TextBlock>
-                        <TextBox Text="{Binding BobbinLotNo}"
-                            Margin="0 8 0 0"
-                            HorizontalAlignment="Stretch"
-                        />
-                    </StackPanel>
-                    <StackPanel Width="160" Margin="10">
-                        <TextBlock>
-                            Machine Number
-                        </TextBlock>
-                        <TextBox Text="{Binding MachineNo}"
-                            Margin="0 8 0 0"
-                            HorizontalAlignment="Stretch"
-                        />
-                    </StackPanel>
-                    <StackPanel Width="160" Margin="10">
-                        <TextBlock>
-                            Employee Number
-                        </TextBlock>
-                        <TextBox Text="{Binding EmployeeNo}"
-                            Margin="0 8 0 0"
-                            HorizontalAlignment="Stretch"
-                        />
-                    </StackPanel>
-                    <StackPanel Width="160" Margin="10">
-                        <TextBlock>
-                            Fly Wire Lot No
-                        </TextBlock>
-                        <TextBox Text="{Binding FlyWireLotNo}"
-                            Margin="0 8 0 0"
-                            HorizontalAlignment="Stretch"
-                        />
-                    </StackPanel>
-                    <StackPanel Width="160" Margin="10">
-                        <TextBlock>
-                            Tube Lot No
-                        </TextBlock>
-                        <TextBox Text="{Binding TubeLotNo}"
-                            Margin="0 8 0 0"
-                            HorizontalAlignment="Stretch"
-                        />
-                    </StackPanel>
-                    <StackPanel Width="160" Margin="10">
-                        <TextBlock>
-                            Bobbin Cavity No
-                        </TextBlock>
-                        <TextBox Text="{Binding BobbinCavityNo}"
-                                 Margin="0 8 0 0"
-                                 HorizontalAlignment="Stretch"
-                        />
-                    </StackPanel>
-                    <StackPanel Width="160" Margin="10">
-                        <TextBlock>
-                            Bobbin Tool No
-                        </TextBlock>
-                        <TextBox Text="{Binding BobbinToolNo}"
-                                 Margin="0 8 0 0"
-                                 HorizontalAlignment="Stretch"
-                        />
-                    </StackPanel>
-                    <StackPanel Width="160" Margin="10">
-                        <TextBlock>
-                            Order
-                        </TextBlock>
-                        <TextBox Text="{Binding Order}"
-                                 Margin="0 8 0 0"
-                                 HorizontalAlignment="Stretch"
-                        />
-                    </StackPanel>
+    <materialDesign:DialogHost Identifier="root">
 
-                    <StackPanel Width="160" Margin="10">
-                        <TextBlock>
-                            Production
-                        </TextBlock>
-                        <TextBox Text="{Binding Production}"
-                                 Margin="0 8 0 0"
-                                 HorizontalAlignment="Stretch"
-                        />
-                    </StackPanel>
-                </WrapPanel>
-                <StackPanel
-                    Orientation="Horizontal"
-                    HorizontalAlignment="Right">
-                    <Button
-                        Style="{StaticResource MaterialDesignFlatButton}"
-                        IsDefault="True"
-                        Margin="0 8 8 0"
-                        Command="materialDesign:DialogHost.CloseDialogCommand">
-                        <Button.CommandParameter>
-                            <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
-                                True
-                            </system:Boolean>
-                        </Button.CommandParameter>
-                        ACCEPT
-                    </Button>
-                    <Button
-                        Style="{StaticResource MaterialDesignFlatButton}"
-                        IsCancel="True"
-                        Margin="0 8 8 0"
-                        Command="materialDesign:DialogHost.CloseDialogCommand">
-                        <Button.CommandParameter>
-                            <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
-                                False
-                            </system:Boolean>
-                        </Button.CommandParameter>
-                        CANCEL
-                    </Button>
-                </StackPanel>
-            </StackPanel>
-        </materialDesign:DialogHost.DialogContent>
         <Grid Background="LightGray" MouseMove="Grid_MouseMove">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
@@ -204,12 +53,16 @@
                 <Button  x:Name="Bell" Foreground="DarkGray" Background="{x:Null}" BorderBrush="{x:Null}" Click="Bell_Click">
                     <materialDesign:PackIcon Kind="Bell" />
                 </Button>
-                <Button x:Name="Settings" Foreground="DarkGray" Background="{x:Null}" BorderBrush="{x:Null}"   Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">
+                <Button x:Name="materials" ToolTip="设置绕线材料信息" Foreground="DarkGray" Background="{x:Null}" BorderBrush="{x:Null}"   Command="{s:Action ShowSettingDialog}">
+                    <materialDesign:PackIcon Kind="Settings"/>
+                </Button>
+                <Button x:Name="Settings" ToolTip="设置工单及用户信息" Foreground="DarkGray" Background="{x:Null}" BorderBrush="{x:Null}"   Command="{s:Action ShowUserSetting}">
                     <materialDesign:PackIcon Kind="User"/>
                 </Button>
                 <Button x:Name="Power" Foreground="DarkGray" Background="{x:Null}" BorderBrush="{x:Null}" Click="Power_Click">
                     <materialDesign:PackIcon Kind="Power"/>
                 </Button>
+                
             </StackPanel>
             <Grid  Margin="20,35,20,20" Grid.Column="1" Grid.Row="1" >
                 <Grid.ColumnDefinitions>

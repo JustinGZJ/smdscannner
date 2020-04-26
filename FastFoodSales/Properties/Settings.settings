@@ -29,13 +29,34 @@
     <Setting Name="TubeLotNo" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Production" Type="System.String" Scope="User">
+    <Setting Name="ProductionOrder" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="BobbinCavityNo" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="BobbinToolNo" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="LaserLoc1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">16.126,18.642,0</Value>
+    </Setting>
+    <Setting Name="LaserLoc2" Type="System.String" Scope="User">
+      <Value Profile="(Default)">-44.424,-6.808,0</Value>
+    </Setting>
+    <Setting Name="LaserLoc3" Type="System.String" Scope="User">
+      <Value Profile="(Default)">-19.794,9.612,0</Value>
+    </Setting>
+    <Setting Name="SaveRootPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\\10.101.30.5\SumidaFile\Monitor</Value>
+    </Setting>
+    <Setting Name="BobbinPartName" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MarkingNo" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">9</Value>
+    </Setting>
+    <Setting Name="Materials" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
   </Settings>

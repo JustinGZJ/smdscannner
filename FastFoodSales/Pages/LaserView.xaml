@@ -5,8 +5,40 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DAQ.Pages"
              mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance local:LaserViewModel}"
+             xmlns:s="https://github.com/canton7/Stylet"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Margin="10">
-        <DataGrid ItemsSource="{Binding Lasers}"></DataGrid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Label>Maring No: </Label>
+            <TextBox Margin="5 0"  IsReadOnly="True" Text="{Binding markingNo,Mode=OneWay}" Width="50"></TextBox>
+            <Button Margin="5 0" Command="{s:Action GetMarkingNo}" Style="{StaticResource MaterialDesignFlatButton}" >Sync.</Button>
+            <Button Margin="5 0"  Command="{s:Action DoSaveData}" Style="{StaticResource MaterialDesignFlatButton}" >Trig</Button>
+        </StackPanel>
+        <ListView Grid.Row="2" ItemsSource="{Binding Lasers}" Foreground="Black" Background="Transparent">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Bobbin Code" DisplayMemberBinding="{Binding BobbinCode }"></GridViewColumn>
+                    <GridViewColumn Header="CodeQuality" DisplayMemberBinding="{Binding CodeQuality }"></GridViewColumn>
+                    <GridViewColumn Header="Production Order" DisplayMemberBinding="{Binding ProductionOrder}"></GridViewColumn>
+                    <GridViewColumn Header="DateTime" DisplayMemberBinding="{Binding DateTime}"></GridViewColumn>
+                    <GridViewColumn Header="Station" DisplayMemberBinding="{Binding Station}"></GridViewColumn>
+                    <GridViewColumn Header="Shift" DisplayMemberBinding="{Binding Shift}"></GridViewColumn>
+                    <GridViewColumn Header="Shift Name" DisplayMemberBinding="{Binding ShiftName}"></GridViewColumn>
+                    <GridViewColumn Header="Line No." DisplayMemberBinding="{Binding LineNo}"></GridViewColumn>
+                    <GridViewColumn Header="Machine No." DisplayMemberBinding="{Binding MachineNo}"></GridViewColumn>
+                    <GridViewColumn Header="Employee No." DisplayMemberBinding="{Binding EmployeeNo}"></GridViewColumn>
+                    <GridViewColumn Header="Bobbin Lot No." DisplayMemberBinding="{Binding BobbinLotNo}"></GridViewColumn>
+                    <GridViewColumn Header="Bobbin Part Name" DisplayMemberBinding="{Binding BobbinPartName}"></GridViewColumn>
+                    <GridViewColumn Header="Bobbin Tool No." DisplayMemberBinding="{Binding BobbinToolNo}"></GridViewColumn>
+                    <GridViewColumn Header="Bobbin Cavity No" DisplayMemberBinding="{Binding BobbinCavityNo}"></GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </UserControl>

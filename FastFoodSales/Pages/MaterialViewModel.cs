@@ -53,26 +53,7 @@ namespace DAQ.Pages
         public string Product { get; set; }
         public string Shift { get; set; }
     }
-    [SubFilePath("Laser")]
-    public class Laser
-    {
-        [DisplayName("Bobbin Code")]
-        public string BobbinCode { get; set; }
-        [DisplayName("Code Quality")]
-        public string CodeQuality { get; set; }
-        public string Production { get; set; }
-        public DateTime DateTime { get; set; } = DateTime.Now;
-        public string Order { get; set; }
-        public string Station { get; set; } = "LaserCode";
-        public string Shift { get; set; }
-        public string ShiftName { get; set; }
-        public string LineNo { get; set; }
-        public string MachineNo { get; set; }
-        public string EmployeeNo { get; set; }
-        public string BobbinLotNo { get; set; }
-        public string BobbinToolNo { get; set; }
-        public string BobbinCavityNo { get; set; }
-    }
+
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     public class SubFilePathAttribute : Attribute  //类名是特性的名称
     {
@@ -86,9 +67,11 @@ namespace DAQ.Pages
     [SubFilePath("N3")]
     public class Scan
     {
+        [DisplayName("No.")]
+        public int No { get; set; } = 1;
         [DisplayName("Bobbin Code")]
         public string Bobbin { get; set; }
-        [DisplayName("Production")]
+        [DisplayName("ProductionOrder")]
         public string Production { get; set; }
         public DateTime DateTime { get; set; } = DateTime.Now;
         public string Station { get; set; } = "N3";
@@ -131,13 +114,17 @@ namespace DAQ.Pages
 
         [Inject]
         public Info Info { get; set; }
-        public MaterialViewModel([Inject]IEventAggregator events, [Inject] FileSaverFactory factory, [Inject]ScannerService service, int capcity = 12)
+        public MaterialViewModel([Inject]IEventAggregator events,
+            [Inject] FileSaverFactory factory,
+            [Inject]ScannerService service,
+            [Inject] MaterialManager materialManager,
+            int capcity = 12)
         {
             this.Events = events;
             _factory = factory;
             this.service = service;
             this.Capcity = capcity;
-
+            _materialManager = materialManager;
         }
         public int ItemsHeight => Capcity / 4 * 40 + 20;
         protected override void OnViewLoaded()
@@ -146,36 +133,47 @@ namespace DAQ.Pages
         }
         int _cntBarcode = 0;
         int _cntErrorBarcode = 0;
+        private MaterialManager _materialManager;
 
         public string ScanRate { get; set; } = "100.00%";
         public void Handle(string message)
         {
-            var count = Barcodes.Count;
-            if (count >= Capcity)
+            var splits=message.Split(',',':');
+            if (splits.Length >= 2)
             {
-                Barcodes.Clear();
-                count = 0;
+                for (int i = 0; i < 2; i++)
+                {
+                    int mIndex = (IpUnit - 3) * 2 + i ;
+                    var count = Barcodes.Count;
+                    if (count >= Capcity)
+                    {
+                        Barcodes.Clear();
+                        count = 0;
+                    }
+                    _cntBarcode++;
+                    if (message.ToUpper().Contains("ERROR"))
+                    {
+                        _cntErrorBarcode++;
+                    }
+                    ScanRate = ((_cntBarcode - _cntErrorBarcode) * 1.0 / _cntBarcode).ToString("P").Replace(",", "");
+                    Barcodes.Add(new TBarcode { Index = count + 1, Content = splits[i] });
+                    var settings = Properties.Settings.Default;
+                    var scan = new Scan
+                    {
+                        Bobbin = splits[i],
+                        Shift = settings.Shift,
+                        ShiftName = settings.ShiftName,
+                        Production = settings.ProductionOrder,
+                        LineNo = settings.LineNo,
+                        MachineNo = settings.MachineNo,
+                        EmployeeNo = settings.EmployeeNo,
+                        FlyWireLotNo = this._materialManager.FlyWires[mIndex],
+                        TubeLotNo = this._materialManager.Tubes[mIndex]
+                    };
+                    _factory.GetFileSaver<Scan>((mIndex+1).ToString()).Save(scan);
+                    _factory.GetFileSaver<Scan>((mIndex+1).ToString(), @"D:\\SumidaFile\Monitor").Save(scan);
+                }
             }
-            _cntBarcode++;
-            if (message.ToUpper().Contains("ERROR"))
-            {
-                _cntErrorBarcode++;
-            }
-            ScanRate = ((_cntBarcode - _cntErrorBarcode) * 1.0 / _cntBarcode).ToString("P").Replace(",", "");
-            Barcodes.Add(new TBarcode { Index = count + 1, Content = message });
-            var settings = Properties.Settings.Default;
-            _factory.GetFileSaver<Scan>((IpUnit - 2).ToString()).Save(new Scan
-            {
-                Bobbin = message,
-                Shift = settings.Shift,
-                ShiftName = settings.ShiftName,
-                Production = settings.Production,
-                LineNo = settings.LineNo,
-                MachineNo = settings.MachineNo,
-                EmployeeNo = settings.EmployeeNo,
-                FlyWireLotNo = settings.FlyWireLotNo,
-                TubeLotNo = settings.TubeLotNo
-            });
         }
 
         public void TestSave()

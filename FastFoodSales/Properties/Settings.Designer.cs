@@ -134,12 +134,12 @@ namespace DAQ.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Production {
+        public string ProductionOrder {
             get {
-                return ((string)(this["Production"]));
+                return ((string)(this["ProductionOrder"]));
             }
             set {
-                this["Production"] = value;
+                this["ProductionOrder"] = value;
             }
         }
         
@@ -164,6 +164,90 @@ namespace DAQ.Properties {
             }
             set {
                 this["BobbinToolNo"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("16.126,18.642,0")]
+        public string LaserLoc1 {
+            get {
+                return ((string)(this["LaserLoc1"]));
+            }
+            set {
+                this["LaserLoc1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-44.424,-6.808,0")]
+        public string LaserLoc2 {
+            get {
+                return ((string)(this["LaserLoc2"]));
+            }
+            set {
+                this["LaserLoc2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-19.794,9.612,0")]
+        public string LaserLoc3 {
+            get {
+                return ((string)(this["LaserLoc3"]));
+            }
+            set {
+                this["LaserLoc3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("\\\\10.101.30.5\\SumidaFile\\Monitor")]
+        public string SaveRootPath {
+            get {
+                return ((string)(this["SaveRootPath"]));
+            }
+            set {
+                this["SaveRootPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string BobbinPartName {
+            get {
+                return ((string)(this["BobbinPartName"]));
+            }
+            set {
+                this["BobbinPartName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("9")]
+        public int MarkingNo {
+            get {
+                return ((int)(this["MarkingNo"]));
+            }
+            set {
+                this["MarkingNo"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Materials {
+            get {
+                return ((string)(this["Materials"]));
+            }
+            set {
+                this["Materials"] = value;
             }
         }
     }

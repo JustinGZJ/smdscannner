@@ -37,51 +37,57 @@
         </Style>
     </UserControl.Resources>
     <md:TransitioningContent  OpeningEffect="{md:TransitionEffect Kind=SlideInFromRight, Duration=00:00:0.5}">
-        <DockPanel>
-            <ListBox  HorizontalAlignment="Left" Width="900" ItemsSource="{Binding Selector}" SelectedIndex="{Binding Index}" DockPanel.Dock="Bottom" Foreground="{x:Null}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel HorizontalAlignment="Center"></WrapPanel>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem">
-                        <Setter Property="Background" Value="{x:Null}" />
-                        <Setter Property="BorderThickness" Value="0"></Setter>
-                        <Setter Property="BorderBrush" Value="Transparent"></Setter>
-                        <Setter Property="Foreground" Value="Transparent"></Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Trigger.Setters>
-                                    <Setter Property="Focusable" Value="False"></Setter>
-                                </Trigger.Setters>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </ItemsControl.ItemContainerStyle>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <CheckBox IsChecked="{ Binding Selected}" IsEnabled="False"></CheckBox>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ListBox>
-            <ScrollViewer>
-                <ItemsControl ItemsSource="{Binding Items}">
+        <Grid>
+            <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+            <DockPanel Grid.Row="1">
+                <ListBox  HorizontalAlignment="Left" Width="900" ItemsSource="{Binding Selector}" SelectedIndex="{Binding Index}" DockPanel.Dock="Bottom" Foreground="{x:Null}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <WrapPanel></WrapPanel>
+                            <WrapPanel HorizontalAlignment="Center"></WrapPanel>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Background" Value="{x:Null}" />
+                            <Setter Property="BorderThickness" Value="0"></Setter>
+                            <Setter Property="BorderBrush" Value="Transparent"></Setter>
+                            <Setter Property="Foreground" Value="Transparent"></Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Trigger.Setters>
+                                        <Setter Property="Focusable" Value="False"></Setter>
+                                    </Trigger.Setters>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ItemsControl.ItemContainerStyle>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <md:TransitioningContent Margin="10" OpeningEffect="{md:TransitionEffect Kind=SlideInFromRight, Duration=00:00:0.5}">
-                                <ContentControl HorizontalAlignment="Center" s:View.Model="{Binding}" ></ContentControl>
-                            </md:TransitioningContent>
+                            <CheckBox IsChecked="{ Binding Selected}" IsEnabled="False"></CheckBox>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </ScrollViewer>
-        </DockPanel>
+                </ListBox>
+                <ScrollViewer>
+                    <ItemsControl ItemsSource="{Binding Items}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel></WrapPanel>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <md:TransitioningContent Margin="10" OpeningEffect="{md:TransitionEffect Kind=SlideInFromRight, Duration=00:00:0.5}">
+                                    <ContentControl HorizontalAlignment="Center" s:View.Model="{Binding}" ></ContentControl>
+                                </md:TransitioningContent>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </DockPanel>
+        </Grid>
     </md:TransitioningContent>
 
 </UserControl>

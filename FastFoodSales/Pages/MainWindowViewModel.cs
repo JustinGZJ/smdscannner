@@ -7,6 +7,8 @@ using Stylet;
 using StyletIoC;
 using DAQ.Pages;
 using DAQ.Properties;
+using DAQ.Service;
+using MaterialDesignThemes.Wpf;
 
 namespace DAQ
 {
@@ -40,10 +42,20 @@ namespace DAQ
 
         public string BobbinCavityNo
         {
-            get=>settings.BobbinCavityNo;
+            get => settings.BobbinCavityNo;
             set
             {
                 settings.BobbinCavityNo = value;
+                settings.Save();
+            }
+        }
+
+        public string BobbinPartName
+        {
+            get=>settings.BobbinPartName;
+            set
+            {
+                settings.BobbinPartName = value;
                 settings.Save();
             }
         }
@@ -74,22 +86,12 @@ namespace DAQ
                 settings.Save();
             }
         }
-
-        public string Order
+        public string ProductionOrder
         {
-            get => settings.Order;
+            get => settings.ProductionOrder;
             set
             {
-                settings.Order = value;
-                settings.Save();
-            }
-        }
-        public string Production
-        {
-            get => settings.Production;
-            set
-            {
-                settings.Production = value;
+                settings.ProductionOrder = value;
                 settings.Save();
             }
         }
@@ -151,8 +153,62 @@ namespace DAQ
                 settings.Save();
             }
         }
+ 
+        public string LaserLoc1
+        {
+            get => settings.LaserLoc1;
+            set
+            {
+                settings.LaserLoc1 = value;
+                settings.Save();
+            }
+        }
+        public string LaserLoc2
+        {
+            get => settings.LaserLoc2;
+            set
+            {
+                settings.LaserLoc2 = value;
+                settings.Save();
+            }
+        }
 
+        public string LaserLoc3
+        {
+            get => settings.LaserLoc3;
+            set
+            {
+                settings.LaserLoc3 = value;
+                settings.Save();
+            }
+        }
+        public string SaveRootPath
+        {
+            get => settings.SaveRootPath;
+            set
+            {
+                settings.SaveRootPath = value;
+                settings.Save();
+            }
+        }
 
+        public async Task ShowSettingDialog()
+        {
+            var vm = new MaterialManagerViewModel(MaterialManager.Load());
+            var dialog = new MaterialManagerView()
+            {
+                DataContext = vm
+            };
+            await DialogHost.Show(dialog, "root", ((sender, args) => { }),
+                ((sender, args) => { vm.Manager.Save(); }));
+        }
+
+        public async Task ShowUserSetting()
+        {
+            var dialog=new materialdialog();
+            dialog.DataContext = this;
+            await DialogHost.Show(dialog);
+        }
 
 
 

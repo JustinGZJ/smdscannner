@@ -24,16 +24,15 @@ namespace DAQ.Pages
         {
             try
             {
-                Items.Insert(0, message);
-                if (Items.Count > 20)
+                if (Items.Count > 100)
                 {
-                    Items.RemoveAt(Items.Count - 1);
+                    Items.RemoveAt(0);
                 }
+                Items.Add(message);
             }
             catch (Exception ex)
             {
-
-            //    throw;
+                //    throw;
             }
         }
 
