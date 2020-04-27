@@ -107,12 +107,27 @@ namespace DAQ.Service
             _ioService.SetOutput(0, true);
             for (int i = 0; i < 3; i++)
             {
-                string cmd = $"UY,{settings.MarkingNo.ToString().PadLeft(3, '0')},{(i).ToString().PadLeft(3, '0')},0{Environment.NewLine}";
-                Events.PostMessage($"LASER SEND: {cmd}");
-                var reply = _laserClient.WriteLineAndGetReply(cmd, TimeSpan.FromMilliseconds(2000));
-                if (reply == null) return;
-                Events.PostMessage($"LASER RECV: {reply.MessageString}");
-                SaveLaserLog2(reply, i+1);
+                var r=false;
+                int cnt = 0;
+                do
+                {
+                    string cmd = $"UY,{settings.MarkingNo.ToString().PadLeft(3, '0')},{(i).ToString().PadLeft(3, '0')},0{Environment.NewLine}";
+                    Events.PostMessage($"LASER SEND: {cmd}");
+                    var reply = _laserClient.WriteLineAndGetReply(cmd, TimeSpan.FromMilliseconds(2000));
+                    if (reply == null || !reply.MessageString.Contains("UY,0"))
+                    {
+                        //    Events.PostMessage($"LASER RECV: {reply.MessageString}");
+                        Events.PostMessage($"LASER RECV: {reply?.MessageString}");
+                        Events.PostMessage($"RETRY");
+                    }
+                    else
+                    {
+                        r = true;
+                        Events.PostMessage($"LASER RECV: {reply.MessageString}");
+                        SaveLaserLog2(reply, i + 1);
+                    }
+                } while ((r==false)&&(++cnt<3));
+
             }
 
             //if (false)  //读取二维码等级
@@ -202,30 +217,38 @@ namespace DAQ.Service
             {
                 if (int.TryParse(splits[1], out int result))
                 {
-                    if (result == 0)
+                    if (result != 0)
                     {
-                        var laser = new Laser
-                        {
-                            BobbinCode = splits[2].Trim('\r', '\n'),
-                            BobbinLotNo = settings.BobbinLotNo,
-                            LineNo = settings.LineNo,
-                            Shift = settings.Shift,
-                            CodeQuality = "A",
-                            ProductionOrder = settings.ProductionOrder,
-                            EmployeeNo = settings.EmployeeNo,
-                            MachineNo = settings.MachineNo,
-                            BobbinPartName = settings.BobbinPartName,
-                            BobbinCavityNo = settings.BobbinCavityNo,
-                            BobbinToolNo = settings.BobbinToolNo,
-                            ShiftName = settings.ShiftName
-                        };
-                        OnLaserHandler(laser);
-                        _factory.GetFileSaver<Laser>((nunit).ToString()).Save(laser);
-                        _factory.GetFileSaver<Laser>((nunit).ToString(), @"D:\\SumidaFile\Monitor").Save(laser);
+                        Events.PostError(new Exception("get laser info error.code " + splits[2]));
                     }
                     else
                     {
-                        Events.PostError(new Exception("get laser info error.code " + splits[2]));
+                        if (splits[2].Length > 5)
+                        {
+                            if (!int.TryParse(splits[2].Substring(splits[2].Length - 5), out int value)) return;
+                            var code = splits[2].Substring(0, splits[2].Length - 6) + (value-2).ToString().PadLeft(5, '0');
+                            var laser = new Laser
+                            {
+                                BobbinCode = code.Trim('\r', '\n'),
+                                BobbinLotNo = settings.BobbinLotNo,
+                                LineNo = settings.LineNo,
+                                Shift = settings.Shift,
+                                CodeQuality = "A",
+                                ProductionOrder = settings.ProductionOrder,
+                                EmployeeNo = settings.EmployeeNo,
+                                MachineNo = settings.MachineNo,
+                                BobbinPartName = settings.BobbinPartName,
+                                BobbinCavityNo = settings.BobbinCavityNo,
+                                BobbinToolNo = settings.BobbinToolNo,
+                                ShiftName = settings.ShiftName
+                            };
+                            OnLaserHandler(laser);
+                            _factory.GetFileSaver<Laser>((nunit).ToString()).Save(laser);
+                            _factory.GetFileSaver<Laser>((nunit).ToString(), @"D:\\SumidaFile\Monitor").Save(laser);
+                        }
+                        else
+                        {
+                        }
                     }
                 }
                 else
