@@ -14,58 +14,8 @@ using DAQ.Service;
 
 namespace DAQ.Pages
 {
-
-    public class TBarcode
-    {
-        static readonly string[] axisString = {
-            "Fisrt Axis",
-            "Second Axis",
-            "Third Axis",
-            "Fourth Axis",
-            "Fifth Axis",
-            "Sixth Axis",
-            "Seventh Axis",
-            "Eighth Axis",
-            "Ninth Axis",
-            "Tenth Axis",
-            "Eleventh Axis",
-            "Twelfth Axis",
-            "Thirteenth Axis",
-            "Fourteenth Axis",
-            "Fifteenth Axis"};
-        public int Index { get; set; }
-        public string Axis
-        {
-            get
-            {
-                if (Index < 15)
-                    return axisString[Index - 1];
-                else
-                    return (Index).ToString() + "th Axis ";
-            }
-        }
-        public string Content { get; set; }
-    }
-
-    public class Info : PropertyChangedBase
-    {
-        public string Name { get; set; }
-        public string Product { get; set; }
-        public string Shift { get; set; }
-    }
-
-    [AttributeUsage(AttributeTargets.Class, Inherited = false)]
-    public class SubFilePathAttribute : Attribute  //类名是特性的名称
-    {
-        public string Name { get; }
-
-        public SubFilePathAttribute(string name) //name为定位参数
-        {
-            this.Name = name;
-        }
-    }
     [SubFilePath("N3")]
-    public class Scan
+    internal class Scan
     {
         [DisplayName("No.")]
         public int No { get; set; } = 1;
@@ -138,47 +88,53 @@ namespace DAQ.Pages
         public string ScanRate { get; set; } = "100.00%";
         public void Handle(string message)
         {
-            var splits=message.Split(',',':');
-            if (splits.Length >= 2)
+            var splits=message.Split(',');
+            if (splits.Length < 2) return;
+            for (int i = 0; i < 2; i++)
             {
-                for (int i = 0; i < 2; i++)
+                var mSplit = splits[i].Split(':');
+                int mIndex;
+                string code;
+                //code:location 如果返回的数据带索引就从返回数据中获取。
+                if (mSplit.Length >= 2&&int.TryParse(mSplit[1],out var locResult)&&(locResult>0)&&(locResult<2))
                 {
-                    int mIndex = (IpUnit - 3) * 2 + i ;
-                    var count = Barcodes.Count;
-                    if (count >= Capcity)
-                    {
-                        Barcodes.Clear();
-                        count = 0;
-                    }
-                    _cntBarcode++;
-                    if (message.ToUpper().Contains("ERROR"))
-                    {
-                        _cntErrorBarcode++;
-                    }
-                    ScanRate = ((_cntBarcode - _cntErrorBarcode) * 1.0 / _cntBarcode).ToString("P").Replace(",", "");
-                    Barcodes.Add(new TBarcode { Index = count + 1, Content = splits[i] });
-                    var settings = Properties.Settings.Default;
-                    var scan = new Scan
-                    {
-                        Bobbin = splits[i],
-                        Shift = settings.Shift,
-                        ShiftName = settings.ShiftName,
-                        Production = settings.ProductionOrder,
-                        LineNo = settings.LineNo,
-                        MachineNo = settings.MachineNo,
-                        EmployeeNo = settings.EmployeeNo,
-                        FlyWireLotNo = this._materialManager.FlyWires[mIndex],
-                        TubeLotNo = this._materialManager.Tubes[mIndex]
-                    };
-                    _factory.GetFileSaver<Scan>((mIndex+1).ToString()).Save(scan);
-                    _factory.GetFileSaver<Scan>((mIndex+1).ToString(), @"D:\\SumidaFile\Monitor").Save(scan);
+                    mIndex = (IpUnit - 3) * 2 + locResult - 1;
+                    code = mSplit[0];
                 }
+                else
+                {
+                    mIndex = (IpUnit - 3) * 2 + i;
+                    code = splits[i];
+                }
+                var count = Barcodes.Count;
+                if (count >= Capcity)
+                {
+                    Barcodes.Clear();
+                    count = 0;
+                }
+                _cntBarcode++;
+                if (message.ToUpper().Contains("ERROR"))
+                {
+                    _cntErrorBarcode++;
+                }
+                ScanRate = ((_cntBarcode - _cntErrorBarcode) * 1.0 / _cntBarcode).ToString("P").Replace(",", "");
+                Barcodes.Add(new TBarcode { Index = count + 1, Content = code });
+                var settings = Properties.Settings.Default;
+                var scan = new Scan
+                {
+                    Bobbin = code,
+                    Shift = settings.Shift,
+                    ShiftName = settings.ShiftName,
+                    Production = settings.ProductionOrder,
+                    LineNo = settings.LineNo,
+                    MachineNo = settings.MachineNo,
+                    EmployeeNo = settings.EmployeeNo,
+                    FlyWireLotNo = this._materialManager.FlyWires[mIndex],
+                    TubeLotNo = this._materialManager.Tubes[mIndex]
+                };
+                _factory.GetFileSaver<Scan>((mIndex+1).ToString()).Save(scan);
+                _factory.GetFileSaver<Scan>((mIndex+1).ToString(), @"D:\\SumidaFile\Monitor").Save(scan);
             }
-        }
-
-        public void TestSave()
-        {
-            Handle("Helloworldfs");
         }
     }
 }

@@ -84,7 +84,7 @@ namespace DAQ.Service
         public event EventHandler<Exception> ProcessError;
         public string FileName { get; set; }
 
-        public void Save<T>(T v)
+        public void Save(T v)
         {
             try
             {
@@ -148,8 +148,9 @@ namespace DAQ.Service
             {
                 SubFilePathAttribute attribute =
                     (SubFilePathAttribute)Attribute.GetCustomAttribute(typeof(T), typeof(SubFilePathAttribute));
-                saver.SubPath = Properties.Settings.Default.LineNo + "_" + attribute.Name;
-                var s = DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + Properties.Settings.Default.LineNo + "_" + attribute.Name;
+                saver.SubPath ="Line"+ Properties.Settings.Default.LineNo + "_" + attribute.Name;
+                var s = DateTime.Now.ToString("yyyyMMddHHmmss") + "_Line" + Properties.Settings.Default.LineNo + "_" +
+                        attribute.Name;
                 saver.FileName = string.IsNullOrEmpty(tag) ? s + ".csv" : s + "_" + tag + ".csv";
                 return saver;
             }
