@@ -67,12 +67,7 @@ namespace DAQ.Service
                 _laserClient?.Disconnect();
                 _laserClient = new SimpleTcpClient();
                 _laserClient.Connect("192.168.0.239", 9004);
-                Events.Publish(new MsgItem
-                {
-                    Level = "D",
-                    Time = DateTime.Now,
-                    Value = "Server initialize: " + IPAddress.Any.ToString() + ":9004"
-                });
+                Events.Publish(new MsgItem { Level = "D", Time = DateTime.Now, Value = "Server initialize: " + IPAddress.Any.ToString() + ":9004" });
             }
             catch (Exception EX)
             {
@@ -105,61 +100,34 @@ namespace DAQ.Service
         public void GetLaserData()
         {
             _ioService.SetOutput(0, true);
-            for (int i = 0; i < 3; i++)
+
+            if (true)  //读取二维码等级
             {
-                var r=false;
-                int cnt = 0;
-                do
+                string cmd = $"WX,Check2DCode=1,{settings.LaserLoc1}{Environment.NewLine}";
+                Events.PostMessage($"LASER SEND:{cmd}");
+                var m1 = _laserClient.WriteLineAndGetReply(cmd, TimeSpan.FromMilliseconds(3000));
+                if (m1 != null)
                 {
-                    string cmd = $"UY,{settings.MarkingNo.ToString().PadLeft(3, '0')},{(i).ToString().PadLeft(3, '0')},0{Environment.NewLine}";
-                    Events.PostMessage($"LASER SEND: {cmd}");
-                    var reply = _laserClient.WriteLineAndGetReply(cmd, TimeSpan.FromMilliseconds(2000));
-                    if (reply == null || !reply.MessageString.Contains("UY,0"))
-                    {
-                        //    Events.PostMessage($"LASER RECV: {reply.MessageString}");
-                        Events.PostMessage($"LASER RECV: {reply?.MessageString}");
-                        Events.PostMessage($"RETRY");
-                    }
-                    else
-                    {
-                        r = true;
-                        Events.PostMessage($"LASER RECV: {reply.MessageString}");
-                        SaveLaserLog2(reply, i + 1);
-                    }
-                } while ((r==false)&&(++cnt<3));
-
+                    Events.PostMessage($"LASER RECV: {m1.MessageString}");
+                    SaveLaserLog(m1, 1);
+                }
+                cmd = $"WX,Check2DCode=1,{settings.LaserLoc2}{Environment.NewLine}";
+                Events.PostMessage($"LASER SEND:{cmd}");
+                var m2 = _laserClient.WriteLineAndGetReply(cmd, TimeSpan.FromMilliseconds(3000));
+                if (m2 != null)
+                {
+                    Events.PostMessage($"LASER RECV: {m2.MessageString}");
+                    SaveLaserLog(m2, 2);
+                }
+                cmd = $"WX,Check2DCode=1,{settings.LaserLoc3}{Environment.NewLine}";
+                Events.PostMessage($"LASER SEND:{cmd}");
+                var m3 = _laserClient.WriteLineAndGetReply(cmd, TimeSpan.FromMilliseconds(3000));
+                if (m3 != null)
+                {
+                    Events.PostMessage($"LASER RECV: {m3.MessageString}");
+                    SaveLaserLog(m3, 3);
+                }
             }
-
-            //if (false)  //读取二维码等级
-            //{
-            //    string cmd = $"CO,1,{settings.LaserLoc1}{Environment.NewLine}";
-            //    Events.PostMessage($"LASER SEND:{cmd}");
-            //    var m1 = _laserClient.WriteLineAndGetReply(cmd, TimeSpan.FromMilliseconds(2000));
-            //    if (m1 != null)
-            //    {
-            //        Events.PostMessage($"LASER RECV: {m1.MessageString}");
-            //        SaveLaserLog(m1, 1);
-            //    }
-
-            //    cmd = $"CO,1,{settings.LaserLoc2}{Environment.NewLine}";
-            //    Events.PostMessage($"LASER SEND:{cmd}");
-            //    var m2 = _laserClient.WriteLineAndGetReply(cmd, TimeSpan.FromMilliseconds(2000));
-            //    if (m2 != null)
-            //    {
-            //        Events.PostMessage($"LASER RECV: {m2.MessageString}");
-            //        SaveLaserLog(m2, 2);
-            //    }
-
-            //    cmd = $"CO,1,{settings.LaserLoc3}{Environment.NewLine}";
-            //    Events.PostMessage($"LASER SEND:{cmd}");
-            //    var m3 = _laserClient.WriteLineAndGetReply(cmd, TimeSpan.FromMilliseconds(2000));
-            //    if (m3 != null)
-            //    {
-            //        Events.PostMessage($"LASER RECV: {m3.MessageString}");
-            //        SaveLaserLog(m3, 3);
-            //    }
-
-            //}
             _ioService.SetOutput(0, false);
 
         }
@@ -170,44 +138,42 @@ namespace DAQ.Service
             var splits = m1.MessageString.Split(',');
             if (splits.Length >= 3)
             {
-                if (int.TryParse(splits[1], out int result))
+                if (m1.MessageString.ToUpper().Contains("WX,OK"))
                 {
-                    if (result == 0)
+                    var laser = new Laser
                     {
-                        var laser = new Laser
-                        {
-                            BobbinCode = splits[3].Trim('\r', '\n'),
-                            BobbinLotNo = settings.BobbinLotNo,
-                            LineNo = settings.LineNo,
-                            Shift = settings.Shift,
-                            CodeQuality = splits[2],
-                            ProductionOrder = settings.ProductionOrder,
-                            EmployeeNo = settings.EmployeeNo,
-                            MachineNo = settings.MachineNo,
-                            BobbinCavityNo = settings.BobbinCavityNo,
-                            BobbinToolNo = settings.BobbinToolNo,
-                            ShiftName = settings.ShiftName
-                        };
-                        OnLaserHandler(laser);
-                        _factory.GetFileSaver<Laser>((nunit).ToString()).Save(laser);
-                        _factory.GetFileSaver<Laser>((nunit).ToString(), @"D:\\SumidaFile\Monitor").Save(laser);
-                    }
-                    else
-                    {
-                        string cmd = $"UY,{settings.MarkingNo.ToString().PadLeft(3, '0')},{(nunit - 1).ToString().PadLeft(3, '0')},0{Environment.NewLine}";
-                        Events.PostMessage($"LASER SEND: {cmd}");
-                        var reply = _laserClient.WriteLineAndGetReply(cmd, TimeSpan.FromMilliseconds(2000));
-                        if (reply == null) return;
-                        Events.PostMessage($"LASER RECV: {reply.MessageString}");
-                        SaveLaserLog2(reply, nunit);
-                    }
+                        BobbinCode = splits[3].Trim('\r', '\n'),
+                        BobbinLotNo = settings.BobbinLotNo,
+                        LineNo = settings.LineNo,
+                        Shift = settings.Shift,
+                        CodeQuality = splits[2],
+                        ProductionOrder = settings.ProductionOrder,
+                        EmployeeNo = settings.EmployeeNo,
+                        MachineNo = settings.MachineNo,
+                        BobbinCavityNo = settings.BobbinCavityNo,
+                        BobbinToolNo = settings.BobbinToolNo,
+                        ShiftName = settings.ShiftName
+                    };
+                    OnLaserHandler(laser);
+                    _factory.GetFileSaver<Laser>((nunit).ToString()).Save(laser);
+                    _factory.GetFileSaver<Laser>((nunit).ToString(), @"D:\\SumidaFile\Monitor").Save(laser);
                 }
                 else
                 {
-                    Events.PostError(new Exception("Format error " + splits[2]));
+                    string cmd = $"UY,{settings.MarkingNo.ToString().PadLeft(3, '0')},{(nunit - 1).ToString().PadLeft(3, '0')},0{Environment.NewLine}";
+                    Events.PostMessage($"LASER SEND: {cmd}");
+                    var reply = _laserClient.WriteLineAndGetReply(cmd, TimeSpan.FromMilliseconds(2000));
+                    if (reply == null) return;
+                    Events.PostMessage($"LASER RECV: {reply.MessageString}");
+                    SaveLaserLog2(reply, nunit);
                 }
             }
+            else
+            {
+                Events.PostError(new Exception("Format error " + splits[2]));
+            }
         }
+
 
         private void SaveLaserLog2(Message m1, int nunit)
         {
@@ -226,14 +192,14 @@ namespace DAQ.Service
                         if (splits[2].Length > 5)
                         {
                             if (!int.TryParse(splits[2].Substring(splits[2].Length - 5), out int value)) return;
-                            var code = splits[2].Substring(0, splits[2].Length - 6) + (value-2).ToString().PadLeft(5, '0');
+                            var code = splits[2].Substring(0, splits[2].Length - 6) + (value - 2).ToString().PadLeft(5, '0');
                             var laser = new Laser
                             {
                                 BobbinCode = code.Trim('\r', '\n'),
                                 BobbinLotNo = settings.BobbinLotNo,
                                 LineNo = settings.LineNo,
                                 Shift = settings.Shift,
-                                CodeQuality = "A",
+                                CodeQuality = "E",
                                 ProductionOrder = settings.ProductionOrder,
                                 EmployeeNo = settings.EmployeeNo,
                                 MachineNo = settings.MachineNo,
