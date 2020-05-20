@@ -23,7 +23,8 @@ namespace DAQ.Pages
         {
             DisplayName = "报警信息";
             using (var db = new OeedbContext())  
-            {              
+            {
+                db.Database.EnsureCreated();
                 if (db.AlarmInfos.Any())
                 {
                     var e = db.AlarmInfos.Select(x => x.StationId);

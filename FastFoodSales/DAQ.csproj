@@ -446,9 +446,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="bin\Debug\data.db">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="bin\Debug\Settings\DataValues.json" />
     <None Include="bin\Release\Settings\DataValues.json" />
     <None Include="packages.config" />

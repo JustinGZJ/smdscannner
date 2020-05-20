@@ -148,6 +148,7 @@ namespace DAQ.Service
                         Shift = settings.Shift,
                         CodeQuality = splits[2],
                         ProductionOrder = settings.ProductionOrder,
+                        BobbinPartName = settings.BobbinPartName,
                         EmployeeNo = settings.EmployeeNo,
                         MachineNo = settings.MachineNo,
                         BobbinCavityNo = settings.BobbinCavityNo,

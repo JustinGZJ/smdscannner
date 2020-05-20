@@ -39,7 +39,7 @@ namespace DAQ.Service
             MaterialManager m;
             try
             {
-                m = JsonConvert.DeserializeObject<MaterialManager>(Settings.Default.Materials);
+                m = JsonConvert.DeserializeObject<MaterialManager>(Settings.Default.Materials)?? new MaterialManager();
             }
             catch (Exception e)
             {

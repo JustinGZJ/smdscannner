@@ -96,7 +96,7 @@ namespace DAQ.Pages
                 int mIndex;
                 string code;
                 //code:location 如果返回的数据带索引就从返回数据中获取。
-                if (mSplit.Length >= 2&&int.TryParse(mSplit[1],out var locResult)&&(locResult>0)&&(locResult<2))
+                if (mSplit.Length >= 2&&int.TryParse(mSplit[1],out var locResult)&&(locResult>0)&&(locResult<=2))
                 {
                     mIndex = (IpUnit - 3) * 2 + locResult - 1;
                     code = mSplit[0];
