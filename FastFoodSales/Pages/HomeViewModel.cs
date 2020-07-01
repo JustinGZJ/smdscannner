@@ -116,7 +116,7 @@ namespace DAQ
 
         public int TabIndex { get; set; } = (int)Pages.TabIndex.SCANNER;
         public PackIconKind PackIcon { get; set; } = PackIconKind.ViewDashboard;
-        public string Header { get; set; } = "Scanner";
+        public string Header { get; set; } = "扫码";
         public bool Visible { get; set; } = true;
 
         public async Task ShowSettingDialog()

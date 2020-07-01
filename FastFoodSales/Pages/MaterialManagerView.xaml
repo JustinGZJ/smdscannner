@@ -13,14 +13,14 @@
     <WrapPanel Margin="10" Width="720">
         <StackPanel Width="160" Margin="10">
             <TextBlock>
-                             FlyWire1
+                            飞线1 FlyWire1
             </TextBlock>
             <TextBox Text="{Binding Manager.FlyWires[0]}"
                         Margin="0 8 0 0"
                         HorizontalAlignment="Stretch"/>
         </StackPanel>
         <StackPanel Margin="10" Width="160">
-            <TextBlock>FlyWire2
+            <TextBlock>飞线2 FlyWire2
             </TextBlock>
             <TextBox Text="{Binding Manager.FlyWires[1]}"
                             Margin="0 8 0 0"
@@ -28,7 +28,7 @@
                              />
         </StackPanel>
         <StackPanel Width="160" Margin="10">
-            <TextBlock>
+            <TextBlock> 飞线3 
                 FlyWire3
             </TextBlock>
             <TextBox Text="{Binding Manager.FlyWires[2]}"
@@ -37,7 +37,7 @@
                         />
         </StackPanel>
         <StackPanel Width="160" Margin="10">
-            <TextBlock>
+            <TextBlock> 飞线4 
                 FlyWire4
             </TextBlock>
             <TextBox Text="{Binding Manager.FlyWires[3]}"
@@ -46,7 +46,7 @@
                         />
         </StackPanel>
         <StackPanel Width="160" Margin="10">
-            <TextBlock>
+            <TextBlock> 飞线5
                 FlyWire5
             </TextBlock>
             <TextBox Text="{Binding Manager.FlyWires[4]}"
@@ -55,7 +55,7 @@
                         />
         </StackPanel>
         <StackPanel Width="160" Margin="10">
-            <TextBlock>
+            <TextBlock> 飞线6
                 FlyWire6
             </TextBlock>
             <TextBox Text="{Binding Manager.FlyWires[5]}"
@@ -64,7 +64,7 @@
                         />
         </StackPanel>
         <StackPanel Width="160" Margin="10">
-            <TextBlock>
+            <TextBlock>飞线7
                 FlyWire7
             </TextBlock>
             <TextBox Text="{Binding Manager.FlyWires[6]}"
@@ -73,7 +73,7 @@
                         />
         </StackPanel>
         <StackPanel Width="160" Margin="10">
-            <TextBlock>
+            <TextBlock> 飞线8
                 FlyWire8
             </TextBlock>
             <TextBox Text="{Binding Manager.FlyWires[7]}"
@@ -82,7 +82,7 @@
                         />
         </StackPanel>
         <StackPanel Width="160" Margin="10">
-            <TextBlock>
+            <TextBlock>套管1
                           Tube1
             </TextBlock>
             <TextBox Text="{Binding Manager.Tubes[0]}"
@@ -91,7 +91,7 @@
                         />
         </StackPanel>
         <StackPanel Width="160" Margin="10">
-            <TextBlock>
+            <TextBlock>套管2
                 Tube2
             </TextBlock>
             <TextBox Text="{Binding Manager.Tubes[1]}"
@@ -100,7 +100,7 @@
                         />
         </StackPanel>
         <StackPanel Width="160" Margin="10">
-            <TextBlock>
+            <TextBlock>套管3
                 Tube3
             </TextBlock>
             <TextBox Text="{Binding Manager.Tubes[2]}"
@@ -109,7 +109,7 @@
             />
         </StackPanel>
         <StackPanel Width="160" Margin="10">
-            <TextBlock>
+            <TextBlock>套管4
                 Tube4
             </TextBlock>
             <TextBox Text="{Binding Manager.Tubes[3]}"
@@ -118,7 +118,7 @@
             />
         </StackPanel>
         <StackPanel Width="160" Margin="10">
-            <TextBlock>
+                <TextBlock>套管5
                 Tube5
             </TextBlock>
             <TextBox Text="{Binding Manager.Tubes[4]}"
@@ -127,7 +127,7 @@
             />
         </StackPanel>
         <StackPanel Width="160" Margin="10">
-            <TextBlock>
+                <TextBlock> 套管6
                 Tube6
             </TextBlock>
             <TextBox Text="{Binding Manager.Tubes[5]}"
@@ -136,7 +136,7 @@
             />
         </StackPanel>
         <StackPanel Width="160" Margin="10">
-            <TextBlock>
+                <TextBlock> 套管7
                 Tube7
             </TextBlock>
             <TextBox Text="{Binding Manager.Tubes[6]}"
@@ -145,7 +145,7 @@
             />
         </StackPanel>
         <StackPanel Width="160" Margin="10">
-            <TextBlock>
+                <TextBlock>套管8
                 Tube8
             </TextBlock>
             <TextBox Text="{Binding Manager.Tubes[7]}"
@@ -155,6 +155,6 @@
         </StackPanel>
     </WrapPanel>
         <Button Style="{StaticResource MaterialDesignFlatButton}"
-                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">Accept</Button>
+                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">应用</Button>
     </StackPanel>
 </UserControl>

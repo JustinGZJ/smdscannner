@@ -98,7 +98,7 @@ namespace DAQ.Pages
 
         public int TabIndex { get; set; } = (int)Pages.TabIndex.OEE;
         public PackIconKind PackIcon { get; set; } = PackIconKind.Home;
-        public string Header { get; set; } = "OEE";
+        public string Header { get; set; } = "设备综合效率";
         public bool Visible { get; set; } = false;
     }
 }

@@ -20,7 +20,7 @@ namespace DAQ
         }
         public int TabIndex { get; set; } = (int)Pages.TabIndex.SETTING;
         public PackIconKind PackIcon { get; set; } = PackIconKind.Settings;
-        public string Header { get; set; } = "Settings";
+        public string Header { get; set; } = "设置";
         public bool Visible { get; set; } = true;
     }
 }

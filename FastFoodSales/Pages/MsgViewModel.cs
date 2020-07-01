@@ -37,7 +37,7 @@ namespace DAQ.Pages
         }
 
         public PackIconKind PackIcon { get; set; } = PackIconKind.Message;
-        public string Header { get; set; } = "Message";
+        public string Header { get; set; } = "消息";
         public bool Visible { get; set; } = true;
         public int TabIndex { get; set; } = (int)Pages.TabIndex.MESSAGES;
     }

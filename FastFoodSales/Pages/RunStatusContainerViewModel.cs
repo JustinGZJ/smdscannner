@@ -9,7 +9,7 @@ namespace DAQ.Pages
        
         public int TabIndex { get; set; } = (int)Pages.TabIndex.RUNSTATUS;
         public PackIconKind PackIcon { get; set; } = PackIconKind.Home;
-        public string Header { get; set; } = "Status";
+        public string Header { get; set; } = "状态";
         public bool Visible { get; set; } = true;
         private RunStatusCollectionViewModel _status;
         

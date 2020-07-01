@@ -15,28 +15,28 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Label>Maring No: </Label>
+            <Label>镭射模板编号: </Label>
             <TextBox Margin="5 0"  IsReadOnly="True" Text="{Binding markingNo,Mode=OneWay}" Width="50"></TextBox>
-            <Button Margin="5 0" Command="{s:Action GetMarkingNo}" Style="{StaticResource MaterialDesignFlatButton}" >Sync.</Button>
-            <Button Margin="5 0"  Command="{s:Action DoSaveData}" Style="{StaticResource MaterialDesignFlatButton}" >Trig</Button>
+            <Button Margin="5 0" Command="{s:Action GetMarkingNo}" Style="{StaticResource MaterialDesignFlatButton}" >获取</Button>
+            <Button Margin="5 0"  Command="{s:Action DoSaveData}" Style="{StaticResource MaterialDesignFlatButton}" >触发</Button>
         </StackPanel>
         <ListView Grid.Row="2" ItemsSource="{Binding Lasers}" Foreground="Black" Background="Transparent">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Bobbin Code" DisplayMemberBinding="{Binding BobbinCode }"></GridViewColumn>
-                    <GridViewColumn Header="CodeQuality" DisplayMemberBinding="{Binding CodeQuality }"></GridViewColumn>
-                    <GridViewColumn Header="Production Order" DisplayMemberBinding="{Binding ProductionOrder}"></GridViewColumn>
-                    <GridViewColumn Header="DateTime" DisplayMemberBinding="{Binding DateTime}"></GridViewColumn>
-                    <GridViewColumn Header="Station" DisplayMemberBinding="{Binding Station}"></GridViewColumn>
-                    <GridViewColumn Header="Shift" DisplayMemberBinding="{Binding Shift}"></GridViewColumn>
-                    <GridViewColumn Header="Shift Name" DisplayMemberBinding="{Binding ShiftName}"></GridViewColumn>
-                    <GridViewColumn Header="Line No." DisplayMemberBinding="{Binding LineNo}"></GridViewColumn>
-                    <GridViewColumn Header="Machine No." DisplayMemberBinding="{Binding MachineNo}"></GridViewColumn>
-                    <GridViewColumn Header="Employee No." DisplayMemberBinding="{Binding EmployeeNo}"></GridViewColumn>
-                    <GridViewColumn Header="Bobbin Lot No." DisplayMemberBinding="{Binding BobbinLotNo}"></GridViewColumn>
-                    <GridViewColumn Header="Bobbin Part Name" DisplayMemberBinding="{Binding BobbinPartName}"></GridViewColumn>
-                    <GridViewColumn Header="Bobbin Tool No." DisplayMemberBinding="{Binding BobbinToolNo}"></GridViewColumn>
-                    <GridViewColumn Header="Bobbin Cavity No" DisplayMemberBinding="{Binding BobbinCavityNo}"></GridViewColumn>
+                    <GridViewColumn Header="骨架码 Bobbin Code" DisplayMemberBinding="{Binding BobbinCode }"></GridViewColumn>
+                    <GridViewColumn Header="二维码质量 CodeQuality" DisplayMemberBinding="{Binding CodeQuality }"></GridViewColumn>
+                    <GridViewColumn Header="工单号 Production Order" DisplayMemberBinding="{Binding ProductionOrder}"></GridViewColumn>
+                    <GridViewColumn Header="时间 DateTime" DisplayMemberBinding="{Binding DateTime}"></GridViewColumn>
+                    <GridViewColumn Header="站位 Station" DisplayMemberBinding="{Binding Station}"></GridViewColumn>
+                    <GridViewColumn Header="班别 Shift" DisplayMemberBinding="{Binding Shift}"></GridViewColumn>
+                    <GridViewColumn Header="班别名称 Shift Name" DisplayMemberBinding="{Binding ShiftName}"></GridViewColumn>
+                    <GridViewColumn Header="线别 Line No." DisplayMemberBinding="{Binding LineNo}"></GridViewColumn>
+                    <GridViewColumn Header="机器号 Machine No." DisplayMemberBinding="{Binding MachineNo}"></GridViewColumn>
+                    <GridViewColumn Header="工号 Employee No." DisplayMemberBinding="{Binding EmployeeNo}"></GridViewColumn>
+                    <GridViewColumn Header="骨架批号 Bobbin Lot No." DisplayMemberBinding="{Binding BobbinLotNo}"></GridViewColumn>
+                    <GridViewColumn Header="骨架部件名称 Bobbin Part Name" DisplayMemberBinding="{Binding BobbinPartName}"></GridViewColumn>
+                    <GridViewColumn Header="骨架工具编号 Bobbin Tool No." DisplayMemberBinding="{Binding BobbinToolNo}"></GridViewColumn>
+                    <GridViewColumn Header="骨架空穴编号 Bobbin Cavity No" DisplayMemberBinding="{Binding BobbinCavityNo}"></GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>

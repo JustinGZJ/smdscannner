@@ -11,107 +11,98 @@
         <StackPanel
                 Margin="16">
             <WrapPanel Width="800">
-                <StackPanel Width="160" Margin="10">
+                <StackPanel Margin="10">
                     <TextBlock>
-                             Shift
+                         班别 Shift
                     </TextBlock>
                     <TextBox Text="{Binding Shift}"
                         Margin="0 8 0 0"
                         HorizontalAlignment="Stretch"/>
                 </StackPanel>
-                <StackPanel Margin="10" Width="160">
+                <StackPanel Margin="10">
                     <TextBlock>
-                            Shift Name
+                          班别名称 Shift Name
                     </TextBlock>
                     <TextBox Text="{Binding ShiftName}"
                             Margin="0 8 0 0"
                             HorizontalAlignment="Stretch"
                              />
                 </StackPanel>
-                <StackPanel Width="160" Margin="10">
+                <StackPanel Margin="10">
                     <TextBlock>
-                           Tube Lot Number
+                          套管批号 Tube Lot Number
                     </TextBlock>
                     <TextBox Text="{Binding TubeLotNo}"
                             Margin="0 8 0 0"
                             HorizontalAlignment="Stretch"
                         />
                 </StackPanel>
-                <StackPanel Width="160" Margin="10">
+                <StackPanel Margin="10">
                     <TextBlock>
-                           Line Number
+                          线别 Line Number
                     </TextBlock>
                     <TextBox Text="{Binding LineNo}"
                             Margin="0 8 0 0"
                             HorizontalAlignment="Stretch"
                         />
                 </StackPanel>
-                <StackPanel Width="160" Margin="10">
+                <StackPanel Margin="10">
                     <TextBlock>
-                            Bobbin Lot Number
+                           骨架批号 Bobbin Lot Number
                     </TextBlock>
                     <TextBox Text="{Binding BobbinLotNo}"
                             Margin="0 8 0 0"
                             HorizontalAlignment="Stretch"
                         />
                 </StackPanel>
-                <StackPanel Width="160" Margin="10">
+                <StackPanel Margin="10">
                     <TextBlock>
-                            Machine Number
+                          机器号  Machine Number
                     </TextBlock>
                     <TextBox Text="{Binding MachineNo}"
                             Margin="0 8 0 0"
                             HorizontalAlignment="Stretch"
                         />
                 </StackPanel>
-                <StackPanel Width="160" Margin="10">
+                <StackPanel Margin="10">
                     <TextBlock>
-                            Employee Number
+                           工号 Employee Number
                     </TextBlock>
                     <TextBox Text="{Binding EmployeeNo}"
                             Margin="0 8 0 0"
                             HorizontalAlignment="Stretch"
                         />
                 </StackPanel>
-                <StackPanel Width="160" Margin="10">
+                <StackPanel Margin="10">
                     <TextBlock>
-                            Fly Wire Lot No
+                           飞线批号 Fly Wire Lot No
                     </TextBlock>
                     <TextBox Text="{Binding FlyWireLotNo}"
                             Margin="0 8 0 0"
                             HorizontalAlignment="Stretch"
                         />
                 </StackPanel>
-                <StackPanel Width="160" Margin="10">
+                <StackPanel Margin="10">
                     <TextBlock>
-                            Tube Lot No
-                    </TextBlock>
-                    <TextBox Text="{Binding TubeLotNo}"
-                            Margin="0 8 0 0"
-                            HorizontalAlignment="Stretch"
-                        />
-                </StackPanel>
-                <StackPanel Width="160" Margin="10">
-                    <TextBlock>
-                            Bobbin Cavity No
+                          骨架空穴号 Bobbin Cavity No
                     </TextBlock>
                     <TextBox Text="{Binding BobbinCavityNo}"
                                  Margin="0 8 0 0"
                                  HorizontalAlignment="Stretch"
                         />
                 </StackPanel>
-                <StackPanel Width="160" Margin="10">
+                <StackPanel Margin="10">
                     <TextBlock>
-                            Bobbin Part Name
+                          骨架部件名称  Bobbin Part Name
                     </TextBlock>
                     <TextBox Text="{Binding BobbinPartName}"
                                  Margin="0 8 0 0"
                                  HorizontalAlignment="Stretch"
                         />
                 </StackPanel>
-                <StackPanel Width="160" Margin="10">
+                <StackPanel Margin="10">
                     <TextBlock>
-                            Bobbin Tool No
+                           骨架磨具号 Bobbin Tool No
                     </TextBlock>
                     <TextBox Text="{Binding BobbinToolNo}"
                                  Margin="0 8 0 0"
@@ -119,45 +110,45 @@
                         />
                 </StackPanel>
 
-                <StackPanel Width="160" Margin="10">
+                <StackPanel Margin="10">
                     <TextBlock>
-                            Production Order
+                          工单号  Production Order
                     </TextBlock>
                     <TextBox Text="{Binding ProductionOrder}"
                                  Margin="0 8 0 0"
                                  HorizontalAlignment="Stretch"
                         />
                 </StackPanel>
-                <StackPanel Width="160" Margin="10">
+                <StackPanel Margin="10">
                     <TextBlock>
-                            Laser Location 1
+                           二维码1坐标 Laser Location 1
                     </TextBlock>
                     <TextBox Text="{Binding LaserLoc1}"
                                  Margin="0 8 0 0"
                                  HorizontalAlignment="Stretch"
                         />
                 </StackPanel>
-                <StackPanel Width="160" Margin="10">
+                <StackPanel Margin="10">
                     <TextBlock>
-                            Laser Location 2
+                          二维码2坐标  Laser Location 2
                     </TextBlock>
                     <TextBox Text="{Binding LaserLoc2}"
                                  Margin="0 8 0 0"
                                  HorizontalAlignment="Stretch"
                         />
                 </StackPanel>
-                <StackPanel Width="160" Margin="10">
+                <StackPanel Margin="10">
                     <TextBlock>
-                            Laser Location 3
+                          二维码3坐标  Laser Location 3
                     </TextBlock>
                     <TextBox Text="{Binding LaserLoc3}"
                                  Margin="0 8 0 0"
                                  HorizontalAlignment="Stretch"
                         />
                 </StackPanel>
-                <StackPanel Width="260" Margin="10">
+                <StackPanel Margin="10">
                     <TextBlock>
-                             Server Path
+                            服务器路径 Server Path
                     </TextBlock>
                     <TextBox Text="{Binding SaveRootPath}"
                                  Margin="0 8 0 0"
@@ -178,7 +169,7 @@
                             True
                         </system:Boolean>
                     </Button.CommandParameter>
-                    ACCEPT
+                    应用
                 </Button>
             </StackPanel>
         </StackPanel>

@@ -40,7 +40,7 @@ namespace DAQ.Pages
         }
         public int TabIndex { get; set; } = (int)Pages.TabIndex.LASER;
         public PackIconKind PackIcon { get; set; } = PackIconKind.FlashCircle;
-        public string Header { get; set; } = "Laser";
+        public string Header { get; set; } = "镭射";
         public bool Visible { get; set; } = true;
 
         public int markingNo { get; set; } = Settings.Default.MarkingNo;

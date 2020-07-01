@@ -18,7 +18,7 @@
                         <Grid>
                             <TextBlock VerticalAlignment="Center" FontSize="20" Text="{Binding DisplayName}"></TextBlock>
                             <StackPanel Margin="20,0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                                <TextBlock  >scan success rate:</TextBlock>
+                                <TextBlock  >扫码成功率:</TextBlock>
                                 <TextBlock  Text="{Binding ScanRate}"></TextBlock>
                             </StackPanel>
                         </Grid>
@@ -48,7 +48,7 @@
                             </StackPanel>
                         </WrapPanel>
                     </StackPanel>-->
-                    <TextBlock  DockPanel.Dock="Top" Margin="30 0 0 0" Text="BOBBINS" FontSize="16"/>
+                    <TextBlock  DockPanel.Dock="Top" Margin="30 0 0 0" Text="骨架二维码" FontSize="16"/>
                     <Grid Height="{Binding ItemsHeight}">
                         <ItemsControl VerticalAlignment="Top" Margin="30 10" ItemsSource="{Binding Barcodes}">
                             <ItemsControl.ItemsPanel>

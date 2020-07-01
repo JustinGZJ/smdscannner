@@ -10,7 +10,7 @@ namespace DAQ.Pages
     public class AboutViewModel : IMainTabViewModel
     {
         public PackIconKind PackIcon { get; set; } = PackIconKind.About;
-        public string Header { get; set; } = "About";
+        public string Header { get; set; } = "关于";
         public bool Visible { get; set; } = true;
         public int TabIndex { get; set; } = (int)Pages.TabIndex.ABOUT;
 
