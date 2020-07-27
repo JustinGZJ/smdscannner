@@ -6,156 +6,172 @@
              xmlns:local="clr-namespace:DAQ.Pages"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Margin="20">
-        <StackPanel
-                Margin="16">
-            <WrapPanel Width="800">
-                <StackPanel Margin="10">
-                    <TextBlock>
-                         班别 Shift
-                    </TextBlock>
-                    <TextBox Text="{Binding Shift}"
-                        Margin="0 8 0 0"
-                        HorizontalAlignment="Stretch"/>
-                </StackPanel>
-                <StackPanel Margin="10">
-                    <TextBlock>
+             d:DesignHeight="450" d:DesignWidth="850">
+    <Grid Margin="20" Width="850">
+        <StackPanel>
+            <TabControl Background="Transparent">
+                <TabItem Header="参数信息" Background="Transparent">
+                    <UniformGrid Columns="4">
+                        <StackPanel Margin="10">
+                            <TextBlock>
                           班别名称 Shift Name
-                    </TextBlock>
-                    <TextBox Text="{Binding ShiftName}"
+                            </TextBlock>
+                            <TextBox Text="{Binding ShiftName}"
                             Margin="0 8 0 0"
                             HorizontalAlignment="Stretch"
                              />
-                </StackPanel>
-                <StackPanel Margin="10">
-                    <TextBlock>
+                        </StackPanel>
+                        <StackPanel Margin="10">
+                            <TextBlock>
                           套管批号 Tube Lot Number
-                    </TextBlock>
-                    <TextBox Text="{Binding TubeLotNo}"
+                            </TextBlock>
+                            <TextBox Text="{Binding TubeLotNo}"
                             Margin="0 8 0 0"
                             HorizontalAlignment="Stretch"
                         />
-                </StackPanel>
-                <StackPanel Margin="10">
-                    <TextBlock>
-                          线别 Line Number
-                    </TextBlock>
-                    <TextBox Text="{Binding LineNo}"
-                            Margin="0 8 0 0"
-                            HorizontalAlignment="Stretch"
-                        />
-                </StackPanel>
-                <StackPanel Margin="10">
-                    <TextBlock>
-                           骨架批号 Bobbin Lot Number
-                    </TextBlock>
-                    <TextBox Text="{Binding BobbinLotNo}"
-                            Margin="0 8 0 0"
-                            HorizontalAlignment="Stretch"
-                        />
-                </StackPanel>
-                <StackPanel Margin="10">
-                    <TextBlock>
-                          机器号  Machine Number
-                    </TextBlock>
-                    <TextBox Text="{Binding MachineNo}"
-                            Margin="0 8 0 0"
-                            HorizontalAlignment="Stretch"
-                        />
-                </StackPanel>
-                <StackPanel Margin="10">
-                    <TextBlock>
-                           工号 Employee Number
-                    </TextBlock>
-                    <TextBox Text="{Binding EmployeeNo}"
-                            Margin="0 8 0 0"
-                            HorizontalAlignment="Stretch"
-                        />
-                </StackPanel>
-                <StackPanel Margin="10">
-                    <TextBlock>
-                           飞线批号 Fly Wire Lot No
-                    </TextBlock>
-                    <TextBox Text="{Binding FlyWireLotNo}"
-                            Margin="0 8 0 0"
-                            HorizontalAlignment="Stretch"
-                        />
-                </StackPanel>
-                <StackPanel Margin="10">
-                    <TextBlock>
-                          骨架空穴号 Bobbin Cavity No
-                    </TextBlock>
-                    <TextBox Text="{Binding BobbinCavityNo}"
-                                 Margin="0 8 0 0"
-                                 HorizontalAlignment="Stretch"
-                        />
-                </StackPanel>
-                <StackPanel Margin="10">
-                    <TextBlock>
-                          骨架部件名称  Bobbin Part Name
-                    </TextBlock>
-                    <TextBox Text="{Binding BobbinPartName}"
-                                 Margin="0 8 0 0"
-                                 HorizontalAlignment="Stretch"
-                        />
-                </StackPanel>
-                <StackPanel Margin="10">
-                    <TextBlock>
-                           骨架磨具号 Bobbin Tool No
-                    </TextBlock>
-                    <TextBox Text="{Binding BobbinToolNo}"
-                                 Margin="0 8 0 0"
-                                 HorizontalAlignment="Stretch"
-                        />
-                </StackPanel>
+                        </StackPanel>
 
-                <StackPanel Margin="10">
-                    <TextBlock>
+                        <StackPanel Margin="10">
+                            <TextBlock>
+                           骨架批号 Bobbin Lot Number
+                            </TextBlock>
+                            <TextBox Text="{Binding BobbinLotNo}"
+                            Margin="0 8 0 0"
+                            HorizontalAlignment="Stretch"
+                        />
+                        </StackPanel>
+
+                        <StackPanel Margin="10">
+                            <TextBlock>
+                           工号 Employee Number
+                            </TextBlock>
+                            <TextBox Text="{Binding EmployeeNo}"
+                            Margin="0 8 0 0"
+                            HorizontalAlignment="Stretch"
+                        />
+                        </StackPanel>
+                        <StackPanel Margin="10">
+                            <TextBlock>
+                           飞线批号 Fly Wire Lot No
+                            </TextBlock>
+                            <TextBox Text="{Binding FlyWireLotNo}"
+                            Margin="0 8 0 0"
+                            HorizontalAlignment="Stretch"
+                        />
+                        </StackPanel>
+                        <StackPanel Margin="10">
+                            <TextBlock>
+                          骨架空穴号 Bobbin Cavity No
+                            </TextBlock>
+                            <TextBox Text="{Binding BobbinCavityNo}"
+                                 Margin="0 8 0 0"
+                                 HorizontalAlignment="Stretch"
+                        />
+                        </StackPanel>
+                        <StackPanel Margin="10">
+                            <TextBlock>
+                          骨架部件名称  Bobbin Part Name
+                            </TextBlock>
+                            <ComboBox Text="{Binding BobbinPartName}"
+                                 Margin="0 8 0 0"
+                                 HorizontalAlignment="Stretch"                        >
+                                <ComboBoxItem>BASE-ERX1815/CE-8P+LT (LOTES)</ComboBoxItem>
+                                <ComboBoxItem>BASE-ERX1815/CE-8P+EVW (EVERWIN)</ComboBoxItem>
+                                <ComboBoxItem>BASE-ERX1815/CE-8P+LY (LYT)</ComboBoxItem>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Margin="10">
+                            <TextBlock>
+                           骨架磨具号 Bobbin Tool No
+                            </TextBlock>
+                            <TextBox Text="{Binding BobbinToolNo}"
+                                 Margin="0 8 0 0"
+                                 HorizontalAlignment="Stretch"
+                        />
+                        </StackPanel>
+
+                        <StackPanel Margin="10">
+                            <TextBlock>
                           工单号  Production Order
-                    </TextBlock>
-                    <TextBox Text="{Binding ProductionOrder}"
+                            </TextBlock>
+                            <TextBox Text="{Binding ProductionOrder}"
                                  Margin="0 8 0 0"
                                  HorizontalAlignment="Stretch"
                         />
-                </StackPanel>
-                <StackPanel Margin="10">
-                    <TextBlock>
+                        </StackPanel>
+
+
+                    </UniformGrid>
+                </TabItem>
+                <TabItem Header="其他" Background="Transparent">
+                    <UniformGrid Columns="3">
+                        <StackPanel Margin="10">
+                            <TextBlock>
+                                  班别 Shift
+                            </TextBlock>
+                            <TextBox Text="{Binding Shift}"
+                        Margin="0 8 0 0"
+                        HorizontalAlignment="Stretch"/>
+                        </StackPanel>
+                        <StackPanel Margin="10">
+                            <TextBlock>
+                                线别 Line Number
+                            </TextBlock>
+                            <TextBox Text="{Binding LineNo}"
+                            Margin="0 8 0 0"
+                            HorizontalAlignment="Stretch"
+                        />
+                        </StackPanel>
+                        <StackPanel Margin="10">
+                            <TextBlock>
+                                 机器号  Machine Number
+                            </TextBlock>
+                            <TextBox Text="{Binding MachineNo}"
+                            Margin="0 8 0 0"
+                            HorizontalAlignment="Stretch"
+                        />
+                        </StackPanel>
+                        <StackPanel Margin="10">
+                            <TextBlock>
+                                
                            二维码1坐标 Laser Location 1
-                    </TextBlock>
-                    <TextBox Text="{Binding LaserLoc1}"
+                            </TextBlock>
+                            <TextBox Text="{Binding LaserLoc1}"
                                  Margin="0 8 0 0"
                                  HorizontalAlignment="Stretch"
                         />
-                </StackPanel>
-                <StackPanel Margin="10">
-                    <TextBlock>
+                        </StackPanel>
+                        <StackPanel Margin="10">
+                            <TextBlock>
                           二维码2坐标  Laser Location 2
-                    </TextBlock>
-                    <TextBox Text="{Binding LaserLoc2}"
+                            </TextBlock>
+                            <TextBox Text="{Binding LaserLoc2}"
                                  Margin="0 8 0 0"
                                  HorizontalAlignment="Stretch"
                         />
-                </StackPanel>
-                <StackPanel Margin="10">
-                    <TextBlock>
+                        </StackPanel>
+                        <StackPanel Margin="10">
+                            <TextBlock>
                           二维码3坐标  Laser Location 3
-                    </TextBlock>
-                    <TextBox Text="{Binding LaserLoc3}"
+                            </TextBlock>
+                            <TextBox Text="{Binding LaserLoc3}"
                                  Margin="0 8 0 0"
                                  HorizontalAlignment="Stretch"
                         />
-                </StackPanel>
-                <StackPanel Margin="10">
-                    <TextBlock>
+                        </StackPanel>
+                        <StackPanel Margin="10">
+                            <TextBlock>
                             服务器路径 Server Path
-                    </TextBlock>
-                    <TextBox Text="{Binding SaveRootPath}"
+                            </TextBlock>
+                            <TextBox Text="{Binding SaveRootPath}"
                                  Margin="0 8 0 0"
                                  HorizontalAlignment="Stretch"
                         />
-                </StackPanel>
-            </WrapPanel>
+                        </StackPanel>
+                    </UniformGrid>
+                </TabItem>
+            </TabControl>
+
             <StackPanel
                     Orientation="Horizontal"
                     HorizontalAlignment="Right">

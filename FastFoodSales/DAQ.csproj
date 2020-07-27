@@ -503,8 +503,8 @@
     <Error Condition="!Exists('..\packages\SQLitePCLRaw.lib.e_sqlite3.osx.1.1.12\build\net35\SQLitePCLRaw.lib.e_sqlite3.osx.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SQLitePCLRaw.lib.e_sqlite3.osx.1.1.12\build\net35\SQLitePCLRaw.lib.e_sqlite3.osx.targets'))" />
     <Error Condition="!Exists('..\packages\SQLitePCLRaw.lib.e_sqlite3.v110_xp.1.1.12\build\net35\SQLitePCLRaw.lib.e_sqlite3.v110_xp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SQLitePCLRaw.lib.e_sqlite3.v110_xp.1.1.12\build\net35\SQLitePCLRaw.lib.e_sqlite3.v110_xp.targets'))" />
     <Error Condition="!Exists('..\packages\Microsoft.EntityFrameworkCore.Design.2.2.2\build\net461\Microsoft.EntityFrameworkCore.Design.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.EntityFrameworkCore.Design.2.2.2\build\net461\Microsoft.EntityFrameworkCore.Design.props'))" />
-    <Error Condition="!Exists('..\packages\Fody.6.2.0\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.6.2.0\build\Fody.targets'))" />
     <Error Condition="!Exists('..\packages\Costura.Fody.4.1.0\build\Costura.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Costura.Fody.4.1.0\build\Costura.Fody.props'))" />
+    <Error Condition="!Exists('..\packages\Fody.6.1.1\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.6.1.1\build\Fody.targets'))" />
     <Error Condition="!Exists('..\packages\PropertyChanged.Fody.3.2.8\build\PropertyChanged.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\PropertyChanged.Fody.3.2.8\build\PropertyChanged.Fody.props'))" />
   </Target>
   <Import Project="..\packages\SQLitePCLRaw.lib.e_sqlite3.linux.1.1.12\build\net35\SQLitePCLRaw.lib.e_sqlite3.linux.targets" Condition="Exists('..\packages\SQLitePCLRaw.lib.e_sqlite3.linux.1.1.12\build\net35\SQLitePCLRaw.lib.e_sqlite3.linux.targets')" />
@@ -515,5 +515,5 @@
       <UserProperties bin_4debug_4settings_4datavalues_1json__JsonSchema="http://json.schemastore.org/appveyor" />
     </VisualStudio>
   </ProjectExtensions>
-  <Import Project="..\packages\Fody.6.2.0\build\Fody.targets" Condition="Exists('..\packages\Fody.6.2.0\build\Fody.targets')" />
+  <Import Project="..\packages\Fody.6.1.1\build\Fody.targets" Condition="Exists('..\packages\Fody.6.1.1\build\Fody.targets')" />
 </Project>
