@@ -119,15 +119,15 @@ namespace DAQ
         public string Header { get; set; } = "扫码";
         public bool Visible { get; set; } = true;
 
-        public async Task ShowSettingDialog()
-        {
-            var vm = new MaterialManagerViewModel(materialManager);
-            var dialog = new MaterialManagerView()
-            {
-                DataContext = vm
-            };
-            await DialogHost.Show(dialog, "root", ((sender, args) => { }),
-                ((sender, args) => { vm.Manager.Save(); }));
-        }
+        //public async Task ShowSettingDialog()
+        //{
+        //    var vm = new MaterialManagerViewModel(materialManager);
+        //    var dialog = new MaterialManagerView()
+        //    {
+        //        DataContext = vm
+        //    };
+        //    await DialogHost.Show(dialog, "root", ((sender, args) => { }),
+        //        ((sender, args) => { vm.Manager.Save(); }));
+        //}
     }
 }

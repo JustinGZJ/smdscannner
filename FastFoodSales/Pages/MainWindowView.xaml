@@ -53,11 +53,8 @@
                 <Button  x:Name="Bell" Foreground="DarkGray" Background="{x:Null}" BorderBrush="{x:Null}" Click="Bell_Click">
                     <materialDesign:PackIcon Kind="Bell" />
                 </Button>
-                <Button x:Name="materials" ToolTip="设置绕线材料信息" Foreground="DarkGray" Background="{x:Null}" BorderBrush="{x:Null}"   Command="{s:Action ShowSettingDialog}">
+                <Button x:Name="Settings" ToolTip="设置" Foreground="DarkGray" Background="{x:Null}" BorderBrush="{x:Null}"   Command="{s:Action ShowUserSetting}">
                     <materialDesign:PackIcon Kind="Settings"/>
-                </Button>
-                <Button x:Name="Settings" ToolTip="设置工单及用户信息" Foreground="DarkGray" Background="{x:Null}" BorderBrush="{x:Null}"   Command="{s:Action ShowUserSetting}">
-                    <materialDesign:PackIcon Kind="User"/>
                 </Button>
                 <Button x:Name="Power" Foreground="DarkGray" Background="{x:Null}" BorderBrush="{x:Null}" Click="Power_Click">
                     <materialDesign:PackIcon Kind="Power"/>

@@ -10,7 +10,7 @@
     <StackPanel>
 
 
-    <WrapPanel Margin="10" Width="720">
+    <UniformGrid Grid.Column="4" Width="800">
         <StackPanel Width="160" Margin="10">
             <TextBlock>
                             飞线1 FlyWire1
@@ -153,8 +153,7 @@
                      HorizontalAlignment="Stretch"
             />
         </StackPanel>
-    </WrapPanel>
-        <Button Style="{StaticResource MaterialDesignFlatButton}"
-                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">应用</Button>
+    </UniformGrid>
+
     </StackPanel>
 </UserControl>

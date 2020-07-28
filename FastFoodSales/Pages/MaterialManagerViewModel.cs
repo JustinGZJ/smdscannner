@@ -13,9 +13,9 @@ namespace DAQ.Pages
     {
         public MaterialManager Manager { get; }
 
-        public MaterialManagerViewModel([Inject] MaterialManager materialManager)
+        public MaterialManagerViewModel()
         {
-            Manager = materialManager;
+            Manager = MaterialManager.Load();
         }
 
     }

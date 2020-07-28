@@ -191,23 +191,23 @@ namespace DAQ
                 settings.Save();
             }
         }
-
+        public MaterialManagerViewModel MaterialManager =>new MaterialManagerViewModel();
         public async Task ShowSettingDialog()
         {
-            var vm = new MaterialManagerViewModel(MaterialManager.Load());
+
             var dialog = new MaterialManagerView()
             {
-                DataContext = vm
+                DataContext = MaterialManager
             };
             await DialogHost.Show(dialog, "root", ((sender, args) => { }),
-                ((sender, args) => { vm.Manager.Save(); }));
+                ((sender, args) => { MaterialManager.Manager.Save(); }));
         }
 
         public async Task ShowUserSetting()
         {
             var dialog=new materialdialog();
             dialog.DataContext = this;
-            await DialogHost.Show(dialog);
+            await DialogHost.Show(dialog,closingEventHandler:(s,e)=>MaterialManager.Manager.Save());
         }
 
 
