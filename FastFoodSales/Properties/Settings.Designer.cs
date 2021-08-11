@@ -12,7 +12,7 @@ namespace DAQ.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.3.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -248,6 +248,42 @@ namespace DAQ.Properties {
             }
             set {
                 this["Materials"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("16.126,18.642,0")]
+        public string LaserLoc4 {
+            get {
+                return ((string)(this["LaserLoc4"]));
+            }
+            set {
+                this["LaserLoc4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("16.126,18.642,0")]
+        public string LaserLoc5 {
+            get {
+                return ((string)(this["LaserLoc5"]));
+            }
+            set {
+                this["LaserLoc5"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("16.126,18.642,0")]
+        public string LaserLoc6 {
+            get {
+                return ((string)(this["LaserLoc6"]));
+            }
+            set {
+                this["LaserLoc6"] = value;
             }
         }
     }

@@ -182,6 +182,36 @@ namespace DAQ
                 settings.Save();
             }
         }
+
+
+        public string LaserLoc4
+        {
+            get => settings.LaserLoc4;
+            set
+            {
+                settings.LaserLoc4 = value;
+                settings.Save();
+            }
+        }
+        public string LaserLoc5
+        {
+            get => settings.LaserLoc5;
+            set
+            {
+                settings.LaserLoc5 = value;
+                settings.Save();
+            }
+        }
+
+        public string LaserLoc6
+        {
+            get => settings.LaserLoc6;
+            set
+            {
+                settings.LaserLoc6 = value;
+                settings.Save();
+            }
+        }
         public string SaveRootPath
         {
             get => settings.SaveRootPath;

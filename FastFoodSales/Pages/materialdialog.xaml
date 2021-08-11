@@ -175,6 +175,34 @@
                         </StackPanel>
                         <StackPanel Margin="10">
                             <TextBlock>
+                                
+                           二维码4坐标 Laser Location 4
+                            </TextBlock>
+                            <TextBox Text="{Binding LaserLoc4}"
+                                 Margin="0 8 0 0"
+                                 HorizontalAlignment="Stretch"
+                        />
+                        </StackPanel>
+                        <StackPanel Margin="10">
+                            <TextBlock>
+                          二维码5坐标  Laser Location 25
+                            </TextBlock>
+                            <TextBox Text="{Binding LaserLoc5}"
+                                 Margin="0 8 0 0"
+                                 HorizontalAlignment="Stretch"
+                        />
+                        </StackPanel>
+                        <StackPanel Margin="10">
+                            <TextBlock>
+                          二维码6坐标  Laser Location 6
+                            </TextBlock>
+                            <TextBox Text="{Binding LaserLoc6}"
+                                 Margin="0 8 0 0"
+                                 HorizontalAlignment="Stretch"
+                        />
+                        </StackPanel>
+                        <StackPanel Margin="10">
+                            <TextBlock>
                             服务器路径 Server Path
                             </TextBlock>
                             <TextBox Text="{Binding SaveRootPath}"

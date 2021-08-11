@@ -1,29 +1,35 @@
 ﻿using System.Threading.Tasks;
 using HslCommunication.ModBus;
+using System.Linq;
+using System.Threading;
 
 namespace DAQ.Service
 {
     public class IoService : IIoService
     {
         private ModbusTcpNet modbusTcp;
-        private bool[] _inputs = new bool[4];
-        private bool[] _outputs = new bool[4];
+        private bool[] _inputs = new bool[24];
+        private bool[] _outputs = new bool[8] { false,false,false,false,false,false,false,false};
         public bool IsConnected { get; private set; }
 
         public IoService()
         {
-            modbusTcp = new ModbusTcpNet { IpAddress = "192.168.0.240", Port = 502, AddressStartWithZero = false };
+            
+            modbusTcp = new ModbusTcpNet { IpAddress = "192.168.0.240", Port = 502};
             modbusTcp.ConnectServer();
             Task.Run(() =>
             {
                 while (true)
                 {
-                    var r1 = modbusTcp.ReadCoil("1");
+                    var r1 = modbusTcp.ReadCoil("0", 24);
                     IsConnected = r1.IsSuccess;
                     if (r1.IsSuccess)
                     {
-                        _inputs[0] = r1.Content;
-                        modbusTcp.WriteCoil("17", _outputs[0]);
+                        for (var i = 0; i < 24; i++)
+                        {
+                            _inputs[i] = r1.Content[i];
+                        }
+                         var r2= modbusTcp.WriteCoil("16", _outputs);
                     }
                 }
             });
@@ -31,12 +37,12 @@ namespace DAQ.Service
 
         public bool GetInput(uint index)
         {
-            return index < 4 && _inputs[index];
+            return index < 24 && _inputs[index];
         }
 
         public void SetOutput(uint index, bool value)
         {
-            if (index < (_outputs.Length - 1))
+            if (index <= (_outputs.Length - 1))
                 _outputs[index] = value;
         }
     }

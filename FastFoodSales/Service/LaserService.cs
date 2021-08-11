@@ -78,7 +78,7 @@ namespace DAQ.Service
 
             Task.Run(async () =>
             {
-                _ioService.SetOutput(0, false);
+             //   _ioService.SetOutput(0, false);
                 while (true)
                 {
                     if (!_ioService.IsConnected)
@@ -100,11 +100,16 @@ namespace DAQ.Service
 
         public void GetLaserData()
         {
-            _ioService.SetOutput(0, true);
-            var locations = new string[] { settings.LaserLoc1, settings.LaserLoc2, settings.LaserLoc3 };
+            var locations = new string[] { settings.LaserLoc1, settings.LaserLoc2, settings.LaserLoc3, settings.LaserLoc4, settings.LaserLoc5, settings.LaserLoc6 };
+            for (uint i = 0; i < 8; i++)
+            {
+                _ioService.SetOutput(i, false);
+            }
+            _ioService.SetOutput(7, true);
             if (true)  //读取二维码等级
             {
-                for(int i=0;i<3;i++)
+
+                for (int i = 0; i < 6; i++)
                 {
                     for (int j = 0; j < 2; j++)
                     {
@@ -124,6 +129,7 @@ namespace DAQ.Service
                                     {
                                         continue;
                                     }
+                                    _ioService.SetOutput((uint)(i ), true);
                                     var laser = new Laser
                                     {
                                         BobbinCode = splits[3].Trim('\r', '\n'),
@@ -139,7 +145,7 @@ namespace DAQ.Service
                                         BobbinToolNo = settings.BobbinToolNo,
                                         ShiftName = settings.ShiftName
                                     };
-                                     OnLaserHandler(laser);
+                                    OnLaserHandler(laser);
                                     _factory.GetFileSaver<Laser>((nunit).ToString()).Save(laser);
                                     _factory.GetFileSaver<Laser>((nunit).ToString(), @"D:\\SumidaFile\Monitor").Save(laser);
                                     break;
@@ -162,18 +168,18 @@ namespace DAQ.Service
                             }
                         }
                     }
-  
-                    
+
+
                 }
             }
-            _ioService.SetOutput(0, false);
+            _ioService.SetOutput(7, false);
 
         }
 
         private void SaveLaserLog(Message m1, int nunit)
         {
 
- 
+
         }
 
 
