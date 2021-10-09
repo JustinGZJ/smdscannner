@@ -8,6 +8,10 @@ using DAQ.Properties;
 using SimpleTCP;
 using Stylet;
 using StyletIoC;
+using MongoDB.Driver;
+using MongoDB.Bson;
+using System.Linq;
+
 
 namespace DAQ.Service
 {
@@ -23,6 +27,7 @@ namespace DAQ.Service
         IEventAggregator Events;
         private readonly FileSaverFactory _factory;
         SimpleTcpClient _laserClient = null;
+        LaserRecordsManager LaserRecordsManager;
 
         private bool laserFinish = false;
         Properties.Settings settings = Settings.Default;
@@ -34,6 +39,7 @@ namespace DAQ.Service
             Events = @event;
             _factory = factory;
             _ioService = ioService;
+            LaserRecordsManager = new LaserRecordsManager();
         }
 
         public int GetMarkingNo()
@@ -78,7 +84,7 @@ namespace DAQ.Service
 
             Task.Run(async () =>
             {
-             //   _ioService.SetOutput(0, false);
+                //   _ioService.SetOutput(0, false);
                 while (true)
                 {
                     if (!_ioService.IsConnected)
@@ -106,9 +112,10 @@ namespace DAQ.Service
                 _ioService.SetOutput(i, false);
             }
             _ioService.SetOutput(7, true);
-            if (true)  //读取二维码等级
-            {
 
+
+            try
+            {
                 for (int i = 0; i < 6; i++)
                 {
                     for (int j = 0; j < 2; j++)
@@ -129,7 +136,7 @@ namespace DAQ.Service
                                     {
                                         continue;
                                     }
-                                    _ioService.SetOutput((uint)(i ), true);
+                                    _ioService.SetOutput((uint)(i), true);
                                     var laser = new Laser
                                     {
                                         BobbinCode = splits[3].Trim('\r', '\n'),
@@ -145,9 +152,32 @@ namespace DAQ.Service
                                         BobbinToolNo = settings.BobbinToolNo,
                                         ShiftName = settings.ShiftName
                                     };
+                                    var laserpoco = new LaserPoco
+                                    {
+                                        BobbinCode = laser.BobbinCode,
+                                        BobbinLotNo = settings.BobbinLotNo,
+                                        LineNo = settings.LineNo,
+                                        Shift = settings.Shift,
+                                        CodeQuality = "E",
+                                        ProductionOrder = settings.ProductionOrder,
+                                        EmployeeNo = settings.EmployeeNo,
+                                        MachineNo = settings.MachineNo,
+                                        BobbinPartName = settings.BobbinPartName,
+                                        BobbinCavityNo = settings.BobbinCavityNo,
+                                        BobbinToolNo = settings.BobbinToolNo,
+                                        ShiftName = settings.ShiftName
+                                    };
                                     OnLaserHandler(laser);
                                     _factory.GetFileSaver<Laser>((nunit).ToString()).Save(laser);
                                     _factory.GetFileSaver<Laser>((nunit).ToString(), @"D:\\SumidaFile\Monitor").Save(laser);
+                                    var qr = LaserRecordsManager.Find(laser.BobbinCode);
+                                    if (qr != null)
+                                    {
+                                        Events.PostWarn($"{qr.BobbinCode} {qr.DateTime} 镭射过了");
+                                        _ioService.SetOutput((uint)(i), false);
+                                        _ioService.SetOutput((uint)(6), true);
+                                    }
+                                    LaserRecordsManager.Insert(laserpoco);
                                     break;
                                 }
                                 else
@@ -170,7 +200,12 @@ namespace DAQ.Service
                     }
 
 
+
                 }
+            }
+            catch (Exception ex)
+            {
+                Events.PostError(ex.Message + "\n" + ex.StackTrace);
             }
             _ioService.SetOutput(7, false);
 
@@ -216,9 +251,13 @@ namespace DAQ.Service
                                 BobbinToolNo = settings.BobbinToolNo,
                                 ShiftName = settings.ShiftName
                             };
+      
+
+
                             OnLaserHandler(laser);
                             _factory.GetFileSaver<Laser>((nunit).ToString()).Save(laser);
-                            _factory.GetFileSaver<Laser>((nunit).ToString(), @"D:\\SumidaFile\Monitor").Save(laser);
+
+
                         }
                         else
                         {
@@ -240,6 +279,32 @@ namespace DAQ.Service
         protected virtual void OnLaserHandler(Laser e)
         {
             LaserHandler?.Invoke(this, e);
+        }
+    }
+
+
+    public class LaserRecordsManager
+    {
+        private readonly string connStr;
+        MongoClient client;
+        IMongoDatabase database;
+        IMongoCollection<LaserPoco> collection;
+        public LaserRecordsManager(string connStr = "mongodb://127.0.0.1:27017")
+        {
+            this.connStr = connStr;
+            client = new MongoClient(connStr);
+            database = client.GetDatabase("smd");
+            collection = database.GetCollection<LaserPoco>("laser");
+        }
+
+        public void Insert(LaserPoco laser)
+        {
+            collection.InsertOne(laser);
+        }
+
+        public LaserPoco Find(string code)
+        {
+            return collection.AsQueryable().FirstOrDefault(x => x.BobbinCode == code);
         }
     }
 }

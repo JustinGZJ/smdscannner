@@ -68,5 +68,8 @@
     <Setting Name="LaserLoc6" Type="System.String" Scope="User">
       <Value Profile="(Default)">16.126,18.642,0</Value>
     </Setting>
+    <Setting Name="Station" Type="System.String" Scope="User">
+      <Value Profile="(Default)">LASER</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

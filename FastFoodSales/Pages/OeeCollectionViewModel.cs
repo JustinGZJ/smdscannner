@@ -11,7 +11,7 @@ using StyletIoC;
 namespace DAQ.Pages
 {
 
-    public class OeeCollectionViewModel:IMainTabViewModel
+    public class OeeCollectionViewModel
     {
         public class Ts:PropertyChangedBase
         {

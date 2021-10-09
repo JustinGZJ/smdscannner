@@ -16,23 +16,31 @@ namespace DAQ.Service
         {
             
             modbusTcp = new ModbusTcpNet { IpAddress = "192.168.0.240", Port = 502};
-            modbusTcp.ConnectServer();
-            Task.Run(() =>
+           var con= modbusTcp.ConnectServer();
+            if (con.IsSuccess)
             {
-                while (true)
+                Task.Run(() =>
                 {
-                    var r1 = modbusTcp.ReadCoil("0", 24);
-                    IsConnected = r1.IsSuccess;
-                    if (r1.IsSuccess)
+                    while (true)
                     {
-                        for (var i = 0; i < 24; i++)
+                        var r1 = modbusTcp.ReadCoil("0", 24);
+                        IsConnected = r1.IsSuccess;
+                        if (r1.IsSuccess)
                         {
-                            _inputs[i] = r1.Content[i];
+                            for (var i = 0; i < 24; i++)
+                            {
+                                _inputs[i] = r1.Content[i];
+                            }
+                            var r2 = modbusTcp.WriteCoil("16", _outputs);
                         }
-                         var r2= modbusTcp.WriteCoil("16", _outputs);
                     }
-                }
-            });
+                });
+            }
+            else
+            {
+                throw new System.Exception(con.ToMessageShowString()) ;
+            }
+  
         }
 
         public bool GetInput(uint index)

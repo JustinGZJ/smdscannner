@@ -11,7 +11,7 @@ using MaterialDesignThemes.Wpf;
 
 namespace DAQ
 {
-    public class HomeViewModel : Conductor<MaterialViewModel>.Collection.AllActive, IMainTabViewModel
+    public class HomeViewModel : Conductor<MaterialViewModel>.Collection.AllActive
     {
         Properties.Settings settings = Properties.Settings.Default;
         public int SelectedIndex { get; set; }

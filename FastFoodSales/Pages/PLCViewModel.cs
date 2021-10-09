@@ -9,7 +9,7 @@ using Stylet;
 using MaterialDesignThemes.Wpf;
 namespace DAQ.Pages
 {
-    public class PLCViewModel : Screen, IMainTabViewModel
+    public class PLCViewModel : Screen
     {
 
         public object Dialog { get; set; }

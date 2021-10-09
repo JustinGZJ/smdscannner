@@ -286,5 +286,17 @@ namespace DAQ.Properties {
                 this["LaserLoc6"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("LASER")]
+        public string Station {
+            get {
+                return ((string)(this["Station"]));
+            }
+            set {
+                this["Station"] = value;
+            }
+        }
     }
 }

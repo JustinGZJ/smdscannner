@@ -153,7 +153,18 @@ namespace DAQ
                 settings.Save();
             }
         }
- 
+
+        public string Station
+        {
+            get => settings.Station;
+            set
+            {
+                settings.Station = value;
+                settings.Save();
+            }
+        }
+
+
         public string LaserLoc1
         {
             get => settings.LaserLoc1;

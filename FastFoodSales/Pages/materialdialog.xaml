@@ -37,6 +37,16 @@
 
                         <StackPanel Margin="10">
                             <TextBlock>
+                           站位 Station
+                            </TextBlock>
+                            <TextBox Text="{Binding Station}"
+                            Margin="0 8 0 0"
+                            HorizontalAlignment="Stretch"
+                        />
+                        </StackPanel>
+
+                        <StackPanel Margin="10">
+                            <TextBlock>
                            骨架批号 Bobbin Lot Number
                             </TextBlock>
                             <TextBox Text="{Binding BobbinLotNo}"
@@ -76,20 +86,10 @@
                             <TextBlock>
                           骨架部件名称  Bobbin Part Name
                             </TextBlock>
-                            <ComboBox  Margin="0 8 0 0"  IsEditable="True"
-                                 HorizontalAlignment="Stretch"                        >
-                                <ComboBoxItem>BASE-ERX1815/CE-8P+LT (LOTES)</ComboBoxItem>
-                                <ComboBoxItem>BASE-ERX1815/CE-8P+EVW (EVERWIN)</ComboBoxItem>
-                                <ComboBoxItem>BASE-ERX1815/CE-8P+LY (LYT)</ComboBoxItem>
-                                <ComboBox.Text>
-                                        <Binding Path="BobbinPartName" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
-                                         <Binding.ValidationRules>
-                                          <rules:BarcodeRule/>
-                                          </Binding.ValidationRules>
-                                           
-                                      </Binding>
-                                </ComboBox.Text>
-                            </ComboBox>
+                            <TextBox Text="{Binding BobbinPartName}"
+                                 Margin="0 8 0 0"
+                                 HorizontalAlignment="Stretch"
+                             />
                         </StackPanel>
                         <StackPanel Margin="10">
                             <TextBlock>

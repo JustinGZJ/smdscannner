@@ -4,7 +4,7 @@ using StyletIoC;
 
 namespace DAQ.Pages
 {
-    public class RunStatusContainerViewModel :Conductor<object>.StackNavigation, IMainTabViewModel,IHandle<StatusViewModel>,IHandle<string>
+    public class RunStatusContainerViewModel :Conductor<object>.StackNavigation,IHandle<StatusViewModel>,IHandle<string>
     {
        
         public int TabIndex { get; set; } = (int)Pages.TabIndex.RUNSTATUS;
