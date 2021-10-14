@@ -118,7 +118,9 @@ namespace DAQ.Service
             {
                 for (int i = 0; i < 6; i++)
                 {
-                    for (int j = 0; j < 2; j++)
+                    int ngCount=0;  //ABB模式  OK X X PASS | NG OK OK PASS | NG NG X FAIL'
+                    int okCount=0;
+                    for (int j = 0; j < 3; j++)
                     {
                         string cmd = $"WX,Check2DCode=1,{locations[i]}{Environment.NewLine}";
                         Events.PostMessage($"LASER SEND:{cmd}");
@@ -128,15 +130,44 @@ namespace DAQ.Service
                             Events.PostMessage($"LASER RECV: {m1.MessageString}");
                             var splits = m1.MessageString.Split(',');
                             var nunit = i + 1;
+                            
                             if (splits.Length >= 3)
                             {
                                 if (m1.MessageString.ToUpper().Contains("WX,OK"))
                                 {
                                     if (!(splits[2].Contains("A") || splits[2].Contains("B")))
-                                    {
-                                        continue;
+                                    {   
+                                        ngCount++;
+                                        Events.PostMessage($"扫码等级不合格：{ngCount}");
                                     }
-                                    _ioService.SetOutput((uint)(i), true);
+                                    else
+                                    {
+                                        okCount++;
+                                    }
+                                    Events.PostMessage($"OK次数{okCount},NG次数{ngCount}");
+                                    bool judge=false;
+                                    if (ngCount == 1)
+                                    {
+                                        if(okCount<2)
+                                        {
+                                            Events.PostMessage($"重新扫码");
+                                            continue;
+                                        }
+                                        else
+                                        {
+                                            judge=true;
+                                        }
+                                    }
+                                    if (ngCount > 1)
+                                    {
+                                        judge=false;
+                                    }
+                                    if (ngCount == 0 && okCount > 0)
+                                    {
+                                        judge=true;
+                                    }  
+                                    Events.PostMessage($"扫码判定：{judge}");
+                                    _ioService.SetOutput((uint)(i), judge);  
                                     var laser = new Laser
                                     {
                                         BobbinCode = splits[3].Trim('\r', '\n'),
@@ -158,7 +189,7 @@ namespace DAQ.Service
                                         BobbinLotNo = settings.BobbinLotNo,
                                         LineNo = settings.LineNo,
                                         Shift = settings.Shift,
-                                        CodeQuality = "E",
+                                        CodeQuality = laser.CodeQuality,
                                         ProductionOrder = settings.ProductionOrder,
                                         EmployeeNo = settings.EmployeeNo,
                                         MachineNo = settings.MachineNo,
@@ -211,11 +242,6 @@ namespace DAQ.Service
 
         }
 
-        private void SaveLaserLog(Message m1, int nunit)
-        {
-
-
-        }
 
 
         private void SaveLaserLog2(Message m1, int nunit)

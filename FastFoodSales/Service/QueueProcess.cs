@@ -89,7 +89,7 @@ namespace DAQ.Service
             try
             {
                 string fullpath = Path.GetFullPath(RootFolder);
-                string path = Path.Combine(fullpath, SubPath);
+                string path = fullpath;
                 if (!Directory.Exists(path))
                     Directory.CreateDirectory(path);
                 var fileName = Path.Combine(path, FileName);
