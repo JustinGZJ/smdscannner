@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Stylet;
-using SimpleTCP;
 using StyletIoC;
-using System.Threading;
-using System.Net.Sockets;
-using System.Net;
 using DAQ.Service;
 
 namespace DAQ.Pages
@@ -133,7 +125,7 @@ namespace DAQ.Pages
                     TubeLotNo = this._materialManager.Tubes[mIndex]
                 };
                 _factory.GetFileSaver<Scan>((mIndex+1).ToString()).Save(scan);
-                _factory.GetFileSaver<Scan>((mIndex+1).ToString(), @"D:\\SumidaFile\Monitor").Save(scan);
+                _factory.GetFileSaver<Scan>((mIndex+1).ToString(), @"D:\\SumidaFile\Monitor\Scan").Save(scan);
             }
         }
     }

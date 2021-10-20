@@ -12,7 +12,7 @@ using MaterialDesignThemes.Wpf;
 
 namespace DAQ
 {
-    public class SettingsViewModel : Conductor<Screen>.Collection.OneActive,IMainTabViewModel
+    public class SettingsViewModel : Conductor<Screen>.Collection.OneActive
     {
         public SettingsViewModel()
         {

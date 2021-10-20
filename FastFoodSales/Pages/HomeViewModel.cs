@@ -11,7 +11,7 @@ using MaterialDesignThemes.Wpf;
 
 namespace DAQ
 {
-    public class HomeViewModel : Conductor<MaterialViewModel>.Collection.AllActive
+    public class HomeViewModel : Conductor<MaterialViewModel>.Collection.AllActive,IMainTabViewModel
     {
         Properties.Settings settings = Properties.Settings.Default;
         public int SelectedIndex { get; set; }
@@ -80,19 +80,14 @@ namespace DAQ
         public HomeViewModel(IContainer container)
         {
             _items.Clear();
-            var m1 = container.Get<MaterialViewModel>();
-            var m2 = container.Get<MaterialViewModel>();
-            var m3 = container.Get<MaterialViewModel>();
-            var m4 = container.Get<MaterialViewModel>();
-            m1.DisplayName = "192.168.0.3";
-            m2.DisplayName = "192.168.0.4";
-            m3.DisplayName = "192.168.0.5";
-            m4.DisplayName = "192.168.0.6";
-            m1.IpUnit = 3;
-            m2.IpUnit = 4;
-            m3.IpUnit = 5;
-            m4.IpUnit = 6;
-            _items.AddRange(new[] { m1, m2, m3, m4 });
+            for (int i = 0; i < 15; i++)
+            {
+                var unit = i + 3; 
+                var m=container.Get<MaterialViewModel>();
+                m.DisplayName = $"192.168.0.{unit}";
+                m.IpUnit = unit;
+                _items.Add(m);
+            }
             _radioCnt = _items.Count / _unit + (_items.Count % _unit > 0 ? 1 : 0);
             for (int i = 0; i < _radioCnt; i++)
             {

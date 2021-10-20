@@ -13,7 +13,8 @@ using Timer=System.Timers.Timer;
 
 namespace DAQ.Pages
 {
-    public class LaserViewModel : Screen, IMainTabViewModel
+    // public class LaserViewModel : Screen, IMainTabViewModel
+    public class LaserViewModel : Screen
     {
         private LaserService _laser;
         private IIoService _ioService;
