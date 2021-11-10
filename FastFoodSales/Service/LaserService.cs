@@ -198,17 +198,27 @@ namespace DAQ.Service
                                         BobbinToolNo = settings.BobbinToolNo,
                                         ShiftName = settings.ShiftName
                                     };
-                                    OnLaserHandler(laser);
-                                    _factory.GetFileSaver<Laser>((nunit).ToString()).Save(laser);
-                                    _factory.GetFileSaver<Laser>((nunit).ToString(), @"D:\\SumidaFile\Monitor").Save(laser);
-                                    var qr = LaserRecordsManager.Find(laser.BobbinCode);
-                                    if (qr != null)
+     
+
+                                    if (judge)
                                     {
-                                        Events.PostWarn($"{qr.BobbinCode} {qr.DateTime} 镭射过了");
-                                        _ioService.SetOutput((uint)(i), false);
-                                        _ioService.SetOutput((uint)(6), true);
+                           
+                                        var qr = LaserRecordsManager.Find(laser.BobbinCode);
+                                        if (qr != null)
+                                        {
+                                            Events.PostWarn($"{qr.BobbinCode} {qr.DateTime} 镭射过了");
+                                            _ioService.SetOutput((uint)(i), false);
+                                            _ioService.SetOutput((uint)(6), true);
+                                        }
+                                        else
+                                        {
+                                            OnLaserHandler(laser);
+                                            _factory.GetFileSaver<Laser>((nunit).ToString()).Save(laser);
+                                            _factory.GetFileSaver<Laser>((nunit).ToString(), @"D:\\SumidaFile\Monitor").Save(laser);
+                                        }
+                                        LaserRecordsManager.Insert(laserpoco);
                                     }
-                                    LaserRecordsManager.Insert(laserpoco);
+
                                     break;
                                 }
                                 else
