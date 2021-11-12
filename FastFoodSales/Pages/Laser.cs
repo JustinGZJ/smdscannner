@@ -11,6 +11,8 @@ namespace DAQ.Pages
         [DisplayName("No.")] public int No { get; set; } = 1;
         [DisplayName("Bobbin Code")]
         public string BobbinCode { get; set; }
+        [DisplayName("Code Quality")]
+        public string CodeQuality { get; set; }
         [DisplayName("Production Order")]
         public string ProductionOrder { get; set; }
         public DateTime DateTime { get; set; } = DateTime.Now;
@@ -32,8 +34,7 @@ namespace DAQ.Pages
         public string BobbinToolNo { get; set; }
         [DisplayName("Bobbin cavity number")]
         public string BobbinCavityNo { get; set; }
-        [DisplayName("1st Barcode Quality")]
-        public string CodeQuality { get; set; }
+
     }
 
 
