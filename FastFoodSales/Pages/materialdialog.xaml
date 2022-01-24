@@ -86,10 +86,18 @@
                             <TextBlock>
                           骨架部件名称  Bobbin Part Name
                             </TextBlock>
-                            <TextBox Text="{Binding BobbinPartName}"
+                            <TextBox 
                                  Margin="0 8 0 0"
                                  HorizontalAlignment="Stretch"
-                             />
+                             >
+                                <TextBox.Text >
+                                    <Binding Path="BobbinPartName" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <rules:BobinPartRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                         </StackPanel>
                         <StackPanel Margin="10">
                             <TextBlock>
