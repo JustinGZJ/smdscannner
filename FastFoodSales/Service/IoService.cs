@@ -38,7 +38,7 @@ namespace DAQ.Service
             }
             else
             {
-                throw new System.Exception(con.ToMessageShowString()) ;
+            //    throw new System.Exception(con.ToMessageShowString()) ;
             }
   
         }

@@ -28,4 +28,25 @@ namespace DAQ.Rules
             return new ValidationResult(true, null);
         }
     }
+
+    public class BobinPartNameRule : ValidationRule
+    {
+
+        string[] barcodes = new string[] { "BASE-NFC9015/CE-4P+LS"};
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            if (value == null)
+                return new ValidationResult(false, "不能为空值！");
+            if (string.IsNullOrEmpty(value.ToString()))
+                return new ValidationResult(false, "不能为空字符串！");
+            if (value is string v)
+            {
+                if (!barcodes.Any(x => v.Contains(x)))
+                {
+                    return new ValidationResult(false, "数据不匹配 BASE-NFC9518/CE-4P+LS");
+                }
+            }
+            return new ValidationResult(true, null);
+        }
+    }
 }
