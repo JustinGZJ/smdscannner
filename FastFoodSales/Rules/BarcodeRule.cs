@@ -11,7 +11,8 @@ namespace DAQ.Rules
     public class BarcodeRule : ValidationRule
     {
 
-        string[] barcodes = new string[] { "BASE-ERX1815/CE-8P+LT (LOTES)", "BASE-ERX1815/CE-8P+EVW (EVERWIN)", "BASE-ERX1815/CE-8P+LY (LYT)" };
+        //   string[] barcodes = new string[] { "BASE-ERX1815/CE-8P+LT (LOTES)", "BASE-ERX1815/CE-8P+EVW (EVERWIN)", "BASE-ERX1815/CE-8P+LY (LYT)" };
+        string[] barcodes = new string[] { "base-nfc9618/ce-4p+ls" };
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
             if (value == null)
@@ -20,7 +21,7 @@ namespace DAQ.Rules
                 return new ValidationResult(false, "不能为空字符串！");
             if (value is string v)
             {
-                if (!barcodes.Any(x => v.Contains(x)))
+                if (!barcodes.Any(x => v.ToUpper().Contains(x.ToUpper())))
                 {
                     return new ValidationResult(false, "数据不匹配");
                 }
