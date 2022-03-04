@@ -7,7 +7,7 @@ using DAQ.Service;
 namespace DAQ.Pages
 {
     [SubFilePath("N3")]
-    internal class Scan
+    public class Scan
     {
         [DisplayName("No.")]
         public int No { get; set; } = 1;

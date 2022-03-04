@@ -10,7 +10,9 @@ using System.Linq;
 using System.Windows.Media;
 using DAQ.Properties;
 using Newtonsoft.Json;
-
+using DAQ.Pages;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace DAQ.Service
 {
@@ -39,7 +41,7 @@ namespace DAQ.Service
             MaterialManager m;
             try
             {
-                m = JsonConvert.DeserializeObject<MaterialManager>(Settings.Default.Materials)?? new MaterialManager();
+                m = JsonConvert.DeserializeObject<MaterialManager>(Settings.Default.Materials) ?? new MaterialManager();
             }
             catch (Exception e)
             {
@@ -49,14 +51,20 @@ namespace DAQ.Service
         }
     }
 
-    public class ScannerService : IDisposable
+    public class ScannerService
     {
         IEventAggregator Events;
+        private readonly MaterialManager _materialManager;
+        private readonly IIoService ioService;
+        private readonly FileSaverFactory _factory;
         SimpleTcpServer _server = null;
 
-        public ScannerService([Inject] IEventAggregator @event)
+        public ScannerService([Inject] IEventAggregator @event, [Inject] MaterialManager materialManager, [Inject]IIoService ioService, [Inject] FileSaverFactory factory)
         {
             Events = @event;
+            this._materialManager = materialManager;
+            this.ioService = ioService;
+            this._factory = factory;
             CreateServer();
         }
 
@@ -67,11 +75,12 @@ namespace DAQ.Service
         {
 
             _server?.Stop();
-            _server = new SimpleTcpServer().Start(9004, AddressFamily.InterNetwork);
+            _server = new SimpleTcpServer().Start(9005, AddressFamily.InterNetwork);
+
             var ips = _server.GetListeningIPs();
             ips.ForEach(x => Events.Publish(new MsgItem
-            { Level = "D", Time = DateTime.Now, Value = "Listening IP: " + x.ToString() + ":9004" }));
-            Events.Publish(new MsgItem { Level = "D", Time = DateTime.Now, Value = "Server initialize: " + IPAddress.Any.ToString() + ":9004" });
+            { Level = "D", Time = DateTime.Now, Value = "Listening IP: " + x.ToString() + ":9005" }));
+            Events.Publish(new MsgItem { Level = "D", Time = DateTime.Now, Value = "Server initialize: " + IPAddress.Any.ToString() + ":9005" });
             _server.Delimiter = 0x0d;
             _server.DelimiterDataReceived -= Client_DelimiterDataReceived;
             _server.DelimiterDataReceived += Client_DelimiterDataReceived;
@@ -84,17 +93,51 @@ namespace DAQ.Service
 
         private void Client_DelimiterDataReceived(object sender, Message e)
         {
-            try
+            int mIndex = -1;
+
+            for (int i = 0; i < 6; i++)
             {
-                var addr = ((IPEndPoint)e.TcpClient.Client.RemoteEndPoint).Address.GetAddressBytes()[3];
-                var str = e.MessageString.Trim('\r', '\n');
-                Events.Publish(str, addr.ToString());
-                Events.Publish(new MsgItem { Level = "D", Time = DateTime.Now, Value = ((IPEndPoint)e.TcpClient.Client.RemoteEndPoint).Address.ToString() + ":" + str });
+                if (ioService.GetInput((uint)i))
+                {
+                    mIndex = i;
+                }
             }
-            catch (Exception ex)
+            Events.PostInfo("n3 scanner:" + e.MessageString);
+            if (mIndex == -1)
             {
-                Events.Publish(new MsgItem { Level = "E", Time = DateTime.Now, Value = ex.Message });
+                Events.PostError("G4 轴号未指定");
+                ioService.SetOutput(0, false);
+
+                return;
             }
+            if (e.MessageString.Contains("ERROR"))
+            {
+                Events.PostError("扫码错误");
+                ioService.SetOutput(0, false);
+                return;
+            }
+
+            ioService.SetOutput(0, true);
+            var settings = Settings.Default;
+            var scan = new Scan
+            {
+                Bobbin = e.MessageString,
+                Shift = settings.Shift1,
+                ShiftName = settings.ShiftName1,
+                Production = settings.ProductionOrder1,
+                LineNo = settings.LineNo1,
+                MachineNo = settings.MachineNo1,
+                EmployeeNo = settings.EmployeeNo1,
+                FlyWireLotNo = this._materialManager.FlyWires[mIndex],
+                TubeLotNo = this._materialManager.Tubes[mIndex]
+            };
+
+            Events.PublishOnUIThread(scan);
+            _factory.GetFileSaver<Scan>((mIndex + 1).ToString(),settings.SaveRootPath1).Save(scan);
+            _factory.GetFileSaver<Scan>((mIndex + 1).ToString(), @"D:\\SumidaFile\Monitor\Scan").Save(scan);
+            ioService.SetOutput(1, true);
+            Thread.Sleep(500);
+            ioService.SetOutput(1, false);
         }
 
     }

@@ -165,70 +165,139 @@ namespace DAQ
         }
 
 
-        public string LaserLoc1
+        public string BobbinCavityNo1
         {
-            get => settings.LaserLoc1;
+            get => settings.BobbinCavityNo1;
             set
             {
-                settings.LaserLoc1 = value;
-                settings.Save();
-            }
-        }
-        public string LaserLoc2
-        {
-            get => settings.LaserLoc2;
-            set
-            {
-                settings.LaserLoc2 = value;
+                settings.BobbinCavityNo1 = value;
                 settings.Save();
             }
         }
 
-        public string LaserLoc3
+        public string BobbinPartName1
         {
-            get => settings.LaserLoc3;
+            get => settings.BobbinPartName1;
             set
             {
-                settings.LaserLoc3 = value;
+                settings.BobbinPartName1 = value;
+                settings.Save();
+            }
+        }
+        public string BobbinToolNo1
+        {
+            get => settings.BobbinToolNo1;
+            set
+            {
+                settings.BobbinToolNo1 = value;
+                settings.Save();
+            }
+        }
+        public string BobbinLotNo1
+        {
+            get => settings.BobbinLotNo;
+            set
+            {
+                settings.BobbinLotNo1 = value;
+                settings.Save();
+            }
+        }
+        public string EmployeeNo1
+        {
+            get => settings.EmployeeNo1;
+            set
+            {
+                settings.EmployeeNo1 = value;
+                settings.Save();
+            }
+        }
+        public string ProductionOrder1
+        {
+            get => settings.ProductionOrder1;
+            set
+            {
+                settings.ProductionOrder1 = value;
+                settings.Save();
+            }
+        }
+        public string ShiftName1
+        {
+            get => settings.ShiftName1;
+            set
+            {
+                settings.ShiftName1 = value;
+                settings.Save();
+            }
+        }
+
+        public string LineNo1
+        {
+            get => settings.LineNo1;
+            set
+            {
+                settings.LineNo1 = value;
+                settings.Save();
+            }
+        }
+
+        public string FlyWireLotNo1
+        {
+            get => settings.FlyWireLotNo1;
+            set
+            {
+                settings.FlyWireLotNo1 = value;
+                settings.Save();
+            }
+        }
+
+        public string MachineNo1
+        {
+            get => settings.MachineNo1;
+            set
+            {
+                settings.MachineNo1 = value;
+                settings.Save();
+            }
+        }
+
+        public string Shift1
+        {
+            get => settings.Shift;
+            set
+            {
+                settings.Shift = value;
+                settings.Save();
+            }
+        }
+        public string TubeLotNo1
+        {
+            get => settings.TubeLotNo;
+            set
+            {
+                settings.TubeLotNo = value;
+                settings.Save();
+            }
+        }
+
+        public string Station1
+        {
+            get => settings.Station;
+            set
+            {
+                settings.Station = value;
                 settings.Save();
             }
         }
 
 
-        public string LaserLoc4
-        {
-            get => settings.LaserLoc4;
-            set
-            {
-                settings.LaserLoc4 = value;
-                settings.Save();
-            }
-        }
-        public string LaserLoc5
-        {
-            get => settings.LaserLoc5;
-            set
-            {
-                settings.LaserLoc5 = value;
-                settings.Save();
-            }
-        }
 
-        public string LaserLoc6
+
+        public string SaveRootPath1
         {
-            get => settings.LaserLoc6;
+            get => settings.SaveRootPath1;
             set
             {
-                settings.LaserLoc6 = value;
-                settings.Save();
-            }
-        }
-        public string SaveRootPath
-        {
-            get => settings.SaveRootPath;
-            set
-            {
-                settings.SaveRootPath = value;
+                settings.SaveRootPath1 = value;
                 settings.Save();
             }
         }

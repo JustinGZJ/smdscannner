@@ -12,82 +12,30 @@
              d:DesignHeight="600" d:DesignWidth="1000"
               d:DataContext="{d:DesignInstance  local:HomeViewModel}"
              >
-    <UserControl.Resources>
-        <Style TargetType="{x:Type CheckBox}" >
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type CheckBox}">
-
-                        <Ellipse  Width="10" Height="10" x:Name="Marker" Fill="Black" StrokeThickness="0"></Ellipse>
-
-                        <!--If item is checked, trigger the visibility of the mark-->
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsChecked" Value="true">
-                                <!--If item is checked, trigger the visibility of the mark and change the color of the selected bullet into a darker gray for better highlighting-->
-                                <Setter TargetName="Marker" Property="Opacity" Value="0.5"></Setter>
-                            </Trigger>
-                            <Trigger Property="IsChecked" Value="False">
-                                <!--If item is checked, trigger the visibility of the mark and change the color of the selected bullet into a darker gray for better highlighting-->
-                                <Setter TargetName="Marker" Property="Opacity" Value="0.2"></Setter>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </UserControl.Resources>
-    <md:TransitioningContent  OpeningEffect="{md:TransitionEffect Kind=SlideInFromRight, Duration=00:00:0.5}">
-        <Grid>
-            <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                </Grid.RowDefinitions>
-            <DockPanel Grid.Row="1">
-                <ListBox  HorizontalAlignment="Left" Width="900" ItemsSource="{Binding Selector}" SelectedIndex="{Binding Index}" DockPanel.Dock="Bottom" Foreground="{x:Null}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel HorizontalAlignment="Center"></WrapPanel>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemContainerStyle>
-                        <Style TargetType="ListBoxItem">
-                            <Setter Property="Background" Value="{x:Null}" />
-                            <Setter Property="BorderThickness" Value="0"></Setter>
-                            <Setter Property="BorderBrush" Value="Transparent"></Setter>
-                            <Setter Property="Foreground" Value="Transparent"></Setter>
-                            <Style.Triggers>
-                                <Trigger Property="IsSelected" Value="True">
-                                    <Trigger.Setters>
-                                        <Setter Property="Focusable" Value="False"></Setter>
-                                    </Trigger.Setters>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </ItemsControl.ItemContainerStyle>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <CheckBox IsChecked="{ Binding Selected}" IsEnabled="False"></CheckBox>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ListBox>
-                <ScrollViewer>
-                    <ItemsControl ItemsSource="{Binding Items}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel></WrapPanel>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <md:TransitioningContent Margin="10" OpeningEffect="{md:TransitionEffect Kind=SlideInFromRight, Duration=00:00:0.5}">
-                                    <ContentControl HorizontalAlignment="Center" s:View.Model="{Binding}" ></ContentControl>
-                                </md:TransitioningContent>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </ScrollViewer>
-            </DockPanel>
-        </Grid>
-    </md:TransitioningContent>
-
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <ListView Grid.Row="2" ItemsSource="{Binding Items}" Foreground="Black" Background="Transparent">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="骨架码 Bobbin Code" DisplayMemberBinding="{Binding Bobbin }"></GridViewColumn>
+                    <GridViewColumn Header="工单号 Production Order" DisplayMemberBinding="{Binding Production}"></GridViewColumn>
+                    <GridViewColumn Header="时间 DateTime" DisplayMemberBinding="{Binding DateTime}"></GridViewColumn>
+                    <GridViewColumn Header="站位 Station" DisplayMemberBinding="{Binding Station}"></GridViewColumn>
+                    <GridViewColumn Header="班别 Shift" DisplayMemberBinding="{Binding Shift}"></GridViewColumn>
+                    <GridViewColumn Header="班别名称 Shift Name" DisplayMemberBinding="{Binding ShiftName}"></GridViewColumn>
+                    <GridViewColumn Header="线别 Line No." DisplayMemberBinding="{Binding LineNo}"></GridViewColumn>
+                    <GridViewColumn Header="机器号 Machine No." DisplayMemberBinding="{Binding MachineNo}"></GridViewColumn>
+                    <GridViewColumn Header="工号 Employee No." DisplayMemberBinding="{Binding EmployeeNo}"></GridViewColumn>
+                    <!--<GridViewColumn Header="骨架批号 Bobbin Lot No." DisplayMemberBinding="{Binding BO}"></GridViewColumn>-->
+                    <GridViewColumn Header="F飞线号 FlyWireLotNo" DisplayMemberBinding="{Binding  FlyWireLotNo}"></GridViewColumn>
+                    <GridViewColumn Header="套管号 TubeLotNo" DisplayMemberBinding="{Binding TubeLotNo}"></GridViewColumn>
+                    <GridViewColumn Header="骨架空穴编号 Bobbin Cavity No" DisplayMemberBinding="{Binding BobbinCavityNo}"></GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
 </UserControl>
