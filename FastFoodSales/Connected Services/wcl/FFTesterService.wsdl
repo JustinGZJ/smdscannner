@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="FFTesterService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/Flex.FFTester.Utilities" />
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/System.Collections.Generic" />
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/Flex.FFTester.Utilities.Models" />
+      <xs:element name="GetUnitInfo">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="serialNumber" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="stationName" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="extraData" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetUnitInfoResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Flex.FFTester.Utilities" minOccurs="0" name="GetUnitInfoResult" nillable="true" type="q1:FFTesterResponse" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SaveResult">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="ffTesterXmlRequest" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="stationName" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="extraData" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SaveResultResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Flex.FFTester.Utilities" minOccurs="0" name="SaveResultResult" nillable="true" type="q2:FFTesterResponse" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ExecuteGenericFunction">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="functionName" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="spInputParameter" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="stationName" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="output" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="errorDescription" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ExecuteGenericFunctionResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Flex.FFTester.Utilities" minOccurs="0" name="ExecuteGenericFunctionResult" nillable="true" type="q3:FFTesterResponse" />
+            <xs:element minOccurs="0" name="output" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="errorDescription" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetOfflineTests">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/System.Collections.Generic" minOccurs="0" name="conditions" nillable="true" type="q4:ArrayOfKeyValuePairOfstringstring" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetOfflineTestsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Flex.FFTester.Utilities.Models" minOccurs="0" name="GetOfflineTestsResult" nillable="true" type="q5:GetOfflineTestsResponse" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetProductStructure">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="partNumber" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="revision" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetProductStructureResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Flex.FFTester.Utilities" minOccurs="0" name="GetProductStructureResult" nillable="true" type="q6:FFTesterResponse" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="anyType" nillable="true" type="xs:anyType" />
+      <xs:element name="anyURI" nillable="true" type="xs:anyURI" />
+      <xs:element name="base64Binary" nillable="true" type="xs:base64Binary" />
+      <xs:element name="boolean" nillable="true" type="xs:boolean" />
+      <xs:element name="byte" nillable="true" type="xs:byte" />
+      <xs:element name="dateTime" nillable="true" type="xs:dateTime" />
+      <xs:element name="decimal" nillable="true" type="xs:decimal" />
+      <xs:element name="double" nillable="true" type="xs:double" />
+      <xs:element name="float" nillable="true" type="xs:float" />
+      <xs:element name="int" nillable="true" type="xs:int" />
+      <xs:element name="long" nillable="true" type="xs:long" />
+      <xs:element name="QName" nillable="true" type="xs:QName" />
+      <xs:element name="short" nillable="true" type="xs:short" />
+      <xs:element name="string" nillable="true" type="xs:string" />
+      <xs:element name="unsignedByte" nillable="true" type="xs:unsignedByte" />
+      <xs:element name="unsignedInt" nillable="true" type="xs:unsignedInt" />
+      <xs:element name="unsignedLong" nillable="true" type="xs:unsignedLong" />
+      <xs:element name="unsignedShort" nillable="true" type="xs:unsignedShort" />
+      <xs:element name="char" nillable="true" type="tns:char" />
+      <xs:simpleType name="char">
+        <xs:restriction base="xs:int" />
+      </xs:simpleType>
+      <xs:element name="duration" nillable="true" type="tns:duration" />
+      <xs:simpleType name="duration">
+        <xs:restriction base="xs:duration">
+          <xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?" />
+          <xs:minInclusive value="-P10675199DT2H48M5.4775808S" />
+          <xs:maxInclusive value="P10675199DT2H48M5.4775807S" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="guid" nillable="true" type="tns:guid" />
+      <xs:simpleType name="guid">
+        <xs:restriction base="xs:string">
+          <xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:attribute name="FactoryType" type="xs:QName" />
+      <xs:attribute name="Id" type="xs:ID" />
+      <xs:attribute name="Ref" type="xs:IDREF" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Flex.FFTester.Utilities" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Flex.FFTester.Utilities" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="FFTesterResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="FFPartID" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="FFTestID" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="FFUnitID" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="Id" type="xs:long" />
+          <xs:element minOccurs="0" name="Value" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="FFTesterResponse" nillable="true" type="tns:FFTesterResponse" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/System.Collections.Generic" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/System.Collections.Generic" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xs:complexType name="ArrayOfKeyValuePairOfstringstring">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="KeyValuePairOfstringstring" type="tns:KeyValuePairOfstringstring" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfKeyValuePairOfstringstring" nillable="true" type="tns:ArrayOfKeyValuePairOfstringstring" />
+      <xs:complexType name="KeyValuePairOfstringstring">
+        <xs:annotation>
+          <xs:appinfo>
+            <GenericType Name="KeyValuePairOf{0}{1}{#}" Namespace="http://schemas.datacontract.org/2004/07/System.Collections.Generic" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+              <GenericParameter Name="string" Namespace="http://www.w3.org/2001/XMLSchema" />
+              <GenericParameter Name="string" Namespace="http://www.w3.org/2001/XMLSchema" />
+            </GenericType>
+            <IsValueType xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsValueType>
+          </xs:appinfo>
+        </xs:annotation>
+        <xs:sequence>
+          <xs:element name="key" nillable="true" type="xs:string" />
+          <xs:element name="value" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="KeyValuePairOfstringstring" nillable="true" type="tns:KeyValuePairOfstringstring" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Flex.FFTester.Utilities.Models" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Flex.FFTester.Utilities.Models" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/Flex.FFTester.Utilities.FlexFlowXmlSignal" />
+      <xs:complexType name="GetOfflineTestsResponse">
+        <xs:sequence>
+          <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Flex.FFTester.Utilities.FlexFlowXmlSignal" minOccurs="0" name="SearchResult" nillable="true" type="q1:ArrayOfFLEXFLOW" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="GetOfflineTestsResponse" nillable="true" type="tns:GetOfflineTestsResponse" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Flex.FFTester.Utilities.FlexFlowXmlSignal" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Flex.FFTester.Utilities.FlexFlowXmlSignal" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="ArrayOfFLEXFLOW">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="FLEXFLOW" nillable="true" type="tns:FLEXFLOW" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfFLEXFLOW" nillable="true" type="tns:ArrayOfFLEXFLOW" />
+      <xs:complexType name="FLEXFLOW">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="DUT" nillable="true" type="tns:ArrayOfDUT" />
+          <xs:element minOccurs="0" name="EXTRA" nillable="true" type="tns:ArrayOfEXTRA" />
+          <xs:element minOccurs="0" name="FACTORY" nillable="true" type="tns:FACTORY" />
+          <xs:element minOccurs="0" name="GROUP" nillable="true" type="tns:ArrayOfGROUP" />
+          <xs:element minOccurs="0" name="PANEL" nillable="true" type="tns:PANEL" />
+          <xs:element minOccurs="0" name="REFS" nillable="true" type="tns:REFS" />
+          <xs:element minOccurs="0" name="TEST" nillable="true" type="tns:ArrayOfTEST" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="FLEXFLOW" nillable="true" type="tns:FLEXFLOW" />
+      <xs:complexType name="ArrayOfDUT">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="DUT" nillable="true" type="tns:DUT" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfDUT" nillable="true" type="tns:ArrayOfDUT" />
+      <xs:complexType name="DUT">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="COMMENT" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ENDTIME" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ID" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PANELIDX" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PARTID" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="SOCKET" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="STATUS" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TESTID" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TESTTIME" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TIMESTAMP" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="UID" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="UNITID" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="DUT" nillable="true" type="tns:DUT" />
+      <xs:complexType name="ArrayOfEXTRA">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="EXTRA" nillable="true" type="tns:EXTRA" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfEXTRA" nillable="true" type="tns:ArrayOfEXTRA" />
+      <xs:complexType name="EXTRA">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="FOR" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PID" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TAG" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="VAL" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="EXTRA" nillable="true" type="tns:EXTRA" />
+      <xs:complexType name="FACTORY">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="FIXTURE" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="NAME" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="SYSTEMTYPE" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TESTCATEGORY" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TESTER" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="USER" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="FACTORY" nillable="true" type="tns:FACTORY" />
+      <xs:complexType name="ArrayOfGROUP">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="GROUP" nillable="true" type="tns:GROUP" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfGROUP" nillable="true" type="tns:ArrayOfGROUP" />
+      <xs:complexType name="GROUP">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="COMMENT" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="DESCR" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="DUT" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ENDTIME" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="GROUPIDX" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="LOOPIDX" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="MODULETIME" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="NAME" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PARENT" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RESOURCE" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="STATUS" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="STEPGROUP" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TIMESTAMP" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TOTALTIME" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TYPE" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="UID" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="GROUP" nillable="true" type="tns:GROUP" />
+      <xs:complexType name="PANEL">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="COMMENT" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ID" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RUNMODE" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="STATUS" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TESTTIME" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TIMESTAMP" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="WAITTIME" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="PANEL" nillable="true" type="tns:PANEL" />
+      <xs:complexType name="REFS">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CFG_REF" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FTS_REF" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="SEQ_REF" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="REFS" nillable="true" type="tns:REFS" />
+      <xs:complexType name="ArrayOfTEST">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="TEST" nillable="true" type="tns:TEST" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfTEST" nillable="true" type="tns:ArrayOfTEST" />
+      <xs:complexType name="TEST">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="DATATYPE" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="DESCRIPTION" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="DUT" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FAILURECODE" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="GROUP" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="HILIM" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="LOLIM" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="NAME" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="REMARK" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RULE" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="STATUS" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TARGET" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TIMESTAMP" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TOTALTIME" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="UID" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="UNIT" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="VALUE" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="TEST" nillable="true" type="tns:TEST" />
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="IFFTesterService_GetUnitInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUnitInfo" />
+  </wsdl:message>
+  <wsdl:message name="IFFTesterService_GetUnitInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUnitInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFFTesterService_SaveResult_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveResult" />
+  </wsdl:message>
+  <wsdl:message name="IFFTesterService_SaveResult_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveResultResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFFTesterService_ExecuteGenericFunction_InputMessage">
+    <wsdl:part name="parameters" element="tns:ExecuteGenericFunction" />
+  </wsdl:message>
+  <wsdl:message name="IFFTesterService_ExecuteGenericFunction_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ExecuteGenericFunctionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFFTesterService_GetOfflineTests_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOfflineTests" />
+  </wsdl:message>
+  <wsdl:message name="IFFTesterService_GetOfflineTests_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOfflineTestsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFFTesterService_GetProductStructure_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductStructure" />
+  </wsdl:message>
+  <wsdl:message name="IFFTesterService_GetProductStructure_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProductStructureResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IFFTesterService">
+    <wsdl:operation name="GetUnitInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFFTesterService/GetUnitInfo" message="tns:IFFTesterService_GetUnitInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFFTesterService/GetUnitInfoResponse" message="tns:IFFTesterService_GetUnitInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveResult">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFFTesterService/SaveResult" message="tns:IFFTesterService_SaveResult_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFFTesterService/SaveResultResponse" message="tns:IFFTesterService_SaveResult_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteGenericFunction">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFFTesterService/ExecuteGenericFunction" message="tns:IFFTesterService_ExecuteGenericFunction_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFFTesterService/ExecuteGenericFunctionResponse" message="tns:IFFTesterService_ExecuteGenericFunction_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOfflineTests">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFFTesterService/GetOfflineTests" message="tns:IFFTesterService_GetOfflineTests_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFFTesterService/GetOfflineTestsResponse" message="tns:IFFTesterService_GetOfflineTests_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductStructure">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFFTesterService/GetProductStructure" message="tns:IFFTesterService_GetProductStructure_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFFTesterService/GetProductStructureResponse" message="tns:IFFTesterService_GetProductStructure_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IFFTesterService" type="tns:IFFTesterService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetUnitInfo">
+      <soap:operation soapAction="http://tempuri.org/IFFTesterService/GetUnitInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveResult">
+      <soap:operation soapAction="http://tempuri.org/IFFTesterService/SaveResult" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteGenericFunction">
+      <soap:operation soapAction="http://tempuri.org/IFFTesterService/ExecuteGenericFunction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOfflineTests">
+      <soap:operation soapAction="http://tempuri.org/IFFTesterService/GetOfflineTests" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductStructure">
+      <soap:operation soapAction="http://tempuri.org/IFFTesterService/GetProductStructure" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="FFTesterService">
+    <wsdl:port name="BasicHttpBinding_IFFTesterService" binding="tns:BasicHttpBinding_IFFTesterService">
+      <soap:address location="http://donnt103:9911/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

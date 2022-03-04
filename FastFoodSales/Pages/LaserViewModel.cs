@@ -52,7 +52,7 @@ namespace DAQ.Pages
           Settings.Default.Save();
         }
 
-        public async void DoSaveData()
+        public  void DoSaveData()
         {
             _ioService.SetOutput(7, true);
             //   await Task.Run(() => { _laser.GetLaserData(); });
