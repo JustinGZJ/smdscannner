@@ -336,6 +336,7 @@
       <DependentUpon>RuntimeHistoryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\RuntimeHistoryViewModel.cs" />
+    <Compile Include="Pages\Scan.cs" />
     <Compile Include="Pages\StatusView.xaml.cs">
       <DependentUpon>StatusView.xaml</DependentUpon>
     </Compile>

@@ -12,8 +12,8 @@ namespace DAQ.Service
         private  static bool[] _outputs = new bool[8] { false,false,false,false,false,false,false,false};
         public bool IsConnected { get; private set; }
 
-        //   ModbusTcpNet   modbusTcp = new ModbusTcpNet { IpAddress = "192.168.0.240", Port = 502};
-        ModbusTcpNet modbusTcp = new ModbusTcpNet { IpAddress = "127.0.0.1", Port = 502 };
+           ModbusTcpNet   modbusTcp = new ModbusTcpNet { IpAddress = "192.168.0.240", Port = 502};
+    //    ModbusTcpNet modbusTcp = new ModbusTcpNet { IpAddress = "127.0.0.1", Port = 502 };
     public IoService()
         {
 

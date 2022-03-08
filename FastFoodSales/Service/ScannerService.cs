@@ -19,8 +19,8 @@ namespace DAQ.Service
     public class MaterialManager
     {
 
-        public string[] FlyWires { get; set; } = new string[8];
-        public string[] Tubes { get; set; } = new string[8];
+        public string[] FlyWires { get; set; } = Enumerable.Repeat("",8).ToArray();
+        public string[] Tubes { get; set; } = Enumerable.Repeat("", 8).ToArray();
 
         public MaterialManager Save()
         {
@@ -41,7 +41,8 @@ namespace DAQ.Service
             MaterialManager m;
             try
             {
-                m = JsonConvert.DeserializeObject<MaterialManager>(Settings.Default.Materials) ?? new MaterialManager();
+                  m = JsonConvert.DeserializeObject<MaterialManager>(Settings.Default.Materials) ?? new MaterialManager();
+               // m = new MaterialManager();
             }
             catch (Exception e)
             {
@@ -93,51 +94,59 @@ namespace DAQ.Service
 
         private void Client_DelimiterDataReceived(object sender, Message e)
         {
-            int mIndex = -1;
-
-            for (int i = 0; i < 6; i++)
+            try
             {
-                if (ioService.GetInput((uint)i))
+                int mIndex = -1;
+
+                for (int i = 0; i < 6; i++)
                 {
-                    mIndex = i;
+                    if (ioService.GetInput((uint)i))
+                    {
+                        mIndex = i;
+                    }
                 }
-            }
-            Events.PostInfo("n3 scanner:" + e.MessageString);
-            if (mIndex == -1)
-            {
-                Events.PostError("G4 轴号未指定");
-                ioService.SetOutput(0, false);
+                Events.PostInfo($"N3 Scanner:{mIndex}" + e.MessageString);
+                if (mIndex == -1)
+                {
+                    Events.PostError("G4 轴号未指定");
+                    ioService.SetOutput(0, false);
 
-                return;
+                    return;
+                }
+                if (e.MessageString.Contains("ERROR"))
+                {
+                    Events.PostError("扫码错误");
+                    ioService.SetOutput(0, false);
+                    return;
+                }
+
+                ioService.SetOutput(0, true);
+                var settings = Settings.Default;
+                var scan = new Scan
+                {
+                    Bobbin = e.MessageString,
+                    Shift = settings.Shift1,
+                    ShiftName = settings.ShiftName1,
+                    Production = settings.ProductionOrder1,
+                    LineNo = settings.LineNo1,
+                    MachineNo = settings.MachineNo1,
+                    EmployeeNo = settings.EmployeeNo1,
+                    FlyWireLotNo = this._materialManager.FlyWires[mIndex],
+                    TubeLotNo = this._materialManager.Tubes[mIndex]
+                };
+
+                Events.PublishOnUIThread(scan);
+                _factory.GetFileSaver<Scan>((mIndex + 1).ToString(), settings.SaveRootPath1).Save(scan);
+                _factory.GetFileSaver<Scan>((mIndex + 1).ToString(), @"D:\\SumidaFile\Monitor\Scan").Save(scan);
             }
-            if (e.MessageString.Contains("ERROR"))
+            finally
             {
-                Events.PostError("扫码错误");
-                ioService.SetOutput(0, false);
-                return;
+                ioService.SetOutput(1, true);
+                Thread.Sleep(500);
+                ioService.SetOutput(1, false);
             }
 
-            ioService.SetOutput(0, true);
-            var settings = Settings.Default;
-            var scan = new Scan
-            {
-                Bobbin = e.MessageString,
-                Shift = settings.Shift1,
-                ShiftName = settings.ShiftName1,
-                Production = settings.ProductionOrder1,
-                LineNo = settings.LineNo1,
-                MachineNo = settings.MachineNo1,
-                EmployeeNo = settings.EmployeeNo1,
-                FlyWireLotNo = this._materialManager.FlyWires[mIndex],
-                TubeLotNo = this._materialManager.Tubes[mIndex]
-            };
 
-            Events.PublishOnUIThread(scan);
-            _factory.GetFileSaver<Scan>((mIndex + 1).ToString(),settings.SaveRootPath1).Save(scan);
-            _factory.GetFileSaver<Scan>((mIndex + 1).ToString(), @"D:\\SumidaFile\Monitor\Scan").Save(scan);
-            ioService.SetOutput(1, true);
-            Thread.Sleep(500);
-            ioService.SetOutput(1, false);
         }
 
     }

@@ -258,7 +258,9 @@
 
                     </UniformGrid>
                 </TabItem>
-                <TabItem Header="线材信息" Background="Transparent"/>
+                <TabItem Header="线材信息" Background="Transparent">
+                    <ContentControl stylet:View.Model="{Binding MaterialManager}"></ContentControl>
+                </TabItem>
             </TabControl>
 
             <StackPanel

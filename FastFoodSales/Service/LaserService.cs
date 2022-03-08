@@ -126,7 +126,7 @@ namespace DAQ.Service
         private void _server_DelimiterDataReceived(object sender, Message e)
         {
             Events.PostMessage($"LASER RECV: {e.MessageString}");
-            Regex rgx = new Regex(@"([\w\d]+)(,([\w]))?");
+            Regex rgx = new Regex(@"([\w\d]+)(:([\w]))?");
             var match=rgx.Match(e.MessageString);
             string  code="",degree = "E";
 

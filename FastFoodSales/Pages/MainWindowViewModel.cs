@@ -164,6 +164,15 @@ namespace DAQ
             }
         }
 
+        public string SaveRootPath
+        {
+            get => settings.SaveRootPath;
+            set
+            {
+                settings.SaveRootPath= value;
+                settings.Save();
+            }
+        }
 
         public string BobbinCavityNo1
         {
@@ -195,7 +204,7 @@ namespace DAQ
         }
         public string BobbinLotNo1
         {
-            get => settings.BobbinLotNo;
+            get => settings.BobbinLotNo1;
             set
             {
                 settings.BobbinLotNo1 = value;
@@ -262,29 +271,29 @@ namespace DAQ
 
         public string Shift1
         {
-            get => settings.Shift;
+            get => settings.Shift1;
             set
             {
-                settings.Shift = value;
+                settings.Shift1 = value;
                 settings.Save();
             }
         }
         public string TubeLotNo1
         {
-            get => settings.TubeLotNo;
+            get => settings.TubeLotNo1;
             set
             {
-                settings.TubeLotNo = value;
+                settings.TubeLotNo1 = value;
                 settings.Save();
             }
         }
 
         public string Station1
         {
-            get => settings.Station;
+            get => settings.Station1;
             set
             {
-                settings.Station = value;
+                settings.Station1 = value;
                 settings.Save();
             }
         }
