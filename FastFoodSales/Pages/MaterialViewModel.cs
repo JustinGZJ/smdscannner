@@ -1,36 +1,9 @@
-﻿using System;
-using System.ComponentModel;
-using Stylet;
+﻿using Stylet;
 using StyletIoC;
 using DAQ.Service;
 
 namespace DAQ.Pages
 {
-    [SubFilePath("N3")]
-    internal class Scan
-    {
-        [DisplayName("No.")]
-        public int No { get; set; } = 1;
-        [DisplayName("Bobbin Code")]
-        public string Bobbin { get; set; }
-        [DisplayName("ProductionOrder")]
-        public string Production { get; set; }
-        public DateTime DateTime { get; set; } = DateTime.Now;
-        public string Station { get; set; } = "N3";
-        public string Shift { get; set; }
-        [DisplayName("Shift Name")]
-        public string ShiftName { get; set; }
-        [DisplayName("Line No.")]
-        public string LineNo { get; set; }
-        [DisplayName("Machine No.")]
-        public string MachineNo { get; set; }
-        [DisplayName("Employee No.")]
-        public string EmployeeNo { get; set; }
-        [DisplayName("Fly Wire lot No.")]
-        public string FlyWireLotNo { get; set; }
-        [DisplayName("Tube Lot No.")]
-        public string TubeLotNo { get; set; }
-    }
     public class MaterialViewModel : Screen, IHandle<string>
     {
         public int SelectedMode { get; set; }
@@ -111,16 +84,15 @@ namespace DAQ.Pages
                 }
                 ScanRate = ((_cntBarcode - _cntErrorBarcode) * 1.0 / _cntBarcode).ToString("P").Replace(",", "");
                 Barcodes.Add(new TBarcode { Index = count + 1, Content = code });
-                var settings = Properties.Settings.Default;
-                var scan = new Scan
+                Scan scan = new Scan
                 {
                     Bobbin = code,
-                    Shift = settings.Shift,
-                    ShiftName = settings.ShiftName,
-                    Production = settings.ProductionOrder,
-                    LineNo = settings.LineNo,
-                    MachineNo = settings.MachineNo,
-                    EmployeeNo = settings.EmployeeNo,
+                    Shift = Properties.Settings.Default.Shift,
+                    ShiftName = Properties.Settings.Default.ShiftName,
+                    Production = Properties.Settings.Default.ProductionOrder,
+                    LineNo = Properties.Settings.Default.LineNo,
+                    MachineNo = Properties.Settings.Default.MachineNo,
+                    EmployeeNo = Properties.Settings.Default.EmployeeNo,
                     FlyWireLotNo = this._materialManager.FlyWires[mIndex],
                     TubeLotNo = this._materialManager.Tubes[mIndex]
                 };

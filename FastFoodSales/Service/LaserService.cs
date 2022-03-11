@@ -25,7 +25,7 @@ namespace DAQ.Service
         bool IsConnected { get; }
     }
 
-    public class LaserService : IDisposable
+    public class LaserService 
     {
         IEventAggregator Events;
         private readonly FileSaverFactory _factory;
@@ -44,6 +44,7 @@ namespace DAQ.Service
             _factory = factory;
             _ioService = ioService;
             LaserRecordsManager = new LaserRecordsManager();
+
         }
 
         public int GetMarkingNo()
@@ -86,6 +87,9 @@ namespace DAQ.Service
                 _scanner.Delimiter = 0x0d;
                 _scanner.Connect("192.168.0.2", 9004);
                 Events.Publish(new MsgItem { Level = "D", Time = DateTime.Now, Value = "Server initialize: " + IPAddress.Any.ToString() + ":9004" });
+                _server.Delimiter = 0x0d;
+                _server.DelimiterDataReceived -= _server_DelimiterDataReceived;
+                _server.DelimiterDataReceived += _server_DelimiterDataReceived;
             }
             catch (Exception EX)
             {
@@ -94,10 +98,10 @@ namespace DAQ.Service
             }
 
 
-            Task.Run(async () =>
-            {
-                bool input;
-                //   _ioService.SetOutput(0, false);
+            //Task.Run(async () =>
+            //{
+            //    bool input;
+            //    //   _ioService.SetOutput(0, false);
 
                 while (true)
                 {
@@ -412,23 +416,7 @@ namespace DAQ.Service
                             _factory.GetFileSaver<Laser>((nunit).ToString()).Save(laser);
 
 
-                        }
-                        else
-                        {
-                        }
-                    }
-                }
-                else
-                {
-                    Events.PostError(new Exception("Format error " + splits[2]));
-                }
-            }
-        }
 
-        public void Dispose()
-        {
-            _laserClient?.Disconnect();
-        }
 
         protected virtual void OnLaserHandler(Laser e)
         {

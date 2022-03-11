@@ -38,17 +38,8 @@
     <Setting Name="BobbinToolNo" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="LaserLoc1" Type="System.String" Scope="User">
-      <Value Profile="(Default)">16.126,18.642,0</Value>
-    </Setting>
-    <Setting Name="LaserLoc2" Type="System.String" Scope="User">
-      <Value Profile="(Default)">-44.424,-6.808,0</Value>
-    </Setting>
-    <Setting Name="LaserLoc3" Type="System.String" Scope="User">
-      <Value Profile="(Default)">-19.794,9.612,0</Value>
-    </Setting>
     <Setting Name="SaveRootPath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">\\10.101.30.5\SumidaFile\Monitor</Value>
+      <Value Profile="(Default)">Z:\LASER</Value>
     </Setting>
     <Setting Name="BobbinPartName" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
@@ -59,17 +50,53 @@
     <Setting Name="Materials" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="LaserLoc4" Type="System.String" Scope="User">
-      <Value Profile="(Default)">16.126,18.642,0</Value>
-    </Setting>
-    <Setting Name="LaserLoc5" Type="System.String" Scope="User">
-      <Value Profile="(Default)">16.126,18.642,0</Value>
-    </Setting>
-    <Setting Name="LaserLoc6" Type="System.String" Scope="User">
-      <Value Profile="(Default)">16.126,18.642,0</Value>
-    </Setting>
     <Setting Name="Station" Type="System.String" Scope="User">
       <Value Profile="(Default)">LASER</Value>
+    </Setting>
+    <Setting Name="Shift1" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ShiftName1" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Order1" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="LineNo1" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="BobbinLotNo1" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MachineNo1" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="EmployeeNo1" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="FlyWireLotNo1" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="TubeLotNo1" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ProductionOrder1" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="BobbinCavityNo1" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="BobbinToolNo1" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="SaveRootPath1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Z:\N3</Value>
+    </Setting>
+    <Setting Name="BobbinPartName1" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Station1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">N3</Value>
     </Setting>
   </Settings>
 </SettingsFile>

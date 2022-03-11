@@ -169,43 +169,7 @@ namespace DAQ.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("16.126,18.642,0")]
-        public string LaserLoc1 {
-            get {
-                return ((string)(this["LaserLoc1"]));
-            }
-            set {
-                this["LaserLoc1"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-44.424,-6.808,0")]
-        public string LaserLoc2 {
-            get {
-                return ((string)(this["LaserLoc2"]));
-            }
-            set {
-                this["LaserLoc2"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-19.794,9.612,0")]
-        public string LaserLoc3 {
-            get {
-                return ((string)(this["LaserLoc3"]));
-            }
-            set {
-                this["LaserLoc3"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\\\\10.101.30.5\\SumidaFile\\Monitor")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Z:\\LASER")]
         public string SaveRootPath {
             get {
                 return ((string)(this["SaveRootPath"]));
@@ -253,42 +217,6 @@ namespace DAQ.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("16.126,18.642,0")]
-        public string LaserLoc4 {
-            get {
-                return ((string)(this["LaserLoc4"]));
-            }
-            set {
-                this["LaserLoc4"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("16.126,18.642,0")]
-        public string LaserLoc5 {
-            get {
-                return ((string)(this["LaserLoc5"]));
-            }
-            set {
-                this["LaserLoc5"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("16.126,18.642,0")]
-        public string LaserLoc6 {
-            get {
-                return ((string)(this["LaserLoc6"]));
-            }
-            set {
-                this["LaserLoc6"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("LASER")]
         public string Station {
             get {
@@ -296,6 +224,186 @@ namespace DAQ.Properties {
             }
             set {
                 this["Station"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Shift1 {
+            get {
+                return ((string)(this["Shift1"]));
+            }
+            set {
+                this["Shift1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ShiftName1 {
+            get {
+                return ((string)(this["ShiftName1"]));
+            }
+            set {
+                this["ShiftName1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Order1 {
+            get {
+                return ((string)(this["Order1"]));
+            }
+            set {
+                this["Order1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LineNo1 {
+            get {
+                return ((string)(this["LineNo1"]));
+            }
+            set {
+                this["LineNo1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string BobbinLotNo1 {
+            get {
+                return ((string)(this["BobbinLotNo1"]));
+            }
+            set {
+                this["BobbinLotNo1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string MachineNo1 {
+            get {
+                return ((string)(this["MachineNo1"]));
+            }
+            set {
+                this["MachineNo1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string EmployeeNo1 {
+            get {
+                return ((string)(this["EmployeeNo1"]));
+            }
+            set {
+                this["EmployeeNo1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string FlyWireLotNo1 {
+            get {
+                return ((string)(this["FlyWireLotNo1"]));
+            }
+            set {
+                this["FlyWireLotNo1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string TubeLotNo1 {
+            get {
+                return ((string)(this["TubeLotNo1"]));
+            }
+            set {
+                this["TubeLotNo1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ProductionOrder1 {
+            get {
+                return ((string)(this["ProductionOrder1"]));
+            }
+            set {
+                this["ProductionOrder1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string BobbinCavityNo1 {
+            get {
+                return ((string)(this["BobbinCavityNo1"]));
+            }
+            set {
+                this["BobbinCavityNo1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string BobbinToolNo1 {
+            get {
+                return ((string)(this["BobbinToolNo1"]));
+            }
+            set {
+                this["BobbinToolNo1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Z:\\N3")]
+        public string SaveRootPath1 {
+            get {
+                return ((string)(this["SaveRootPath1"]));
+            }
+            set {
+                this["SaveRootPath1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string BobbinPartName1 {
+            get {
+                return ((string)(this["BobbinPartName1"]));
+            }
+            set {
+                this["BobbinPartName1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("N3")]
+        public string Station1 {
+            get {
+                return ((string)(this["Station1"]));
+            }
+            set {
+                this["Station1"] = value;
             }
         }
     }

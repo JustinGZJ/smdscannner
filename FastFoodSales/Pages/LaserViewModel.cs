@@ -54,7 +54,7 @@ namespace DAQ.Pages
 
         public  void DoSaveData()
         {
-            _ioService.SetOutput(7, true);
+         //   _ioService.SetOutput(7, true);
             //   await Task.Run(() => { _laser.GetLaserData(); });
            // await Task.Delay(2000);
          //   _ioService.SetOutput(7, false);
