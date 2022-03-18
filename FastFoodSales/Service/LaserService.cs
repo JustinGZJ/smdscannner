@@ -25,7 +25,7 @@ namespace DAQ.Service
         bool IsConnected { get; }
     }
 
-    public class LaserService 
+    public class LaserService :IDisposable
     {
         IEventAggregator Events;
         private readonly FileSaverFactory _factory;
@@ -38,11 +38,11 @@ namespace DAQ.Service
         private IIoService _ioService;
         public event EventHandler<Laser> LaserHandler;
 
-        public LaserService([Inject] IEventAggregator @event, [Inject] IIoService ioService, [Inject] FileSaverFactory factory)
+        public LaserService([Inject] IEventAggregator @event, [Inject] FileSaverFactory factory)
         {
             Events = @event;
             _factory = factory;
-            _ioService = ioService;
+            _ioService = new IoService("192.168.0.240");
             LaserRecordsManager = new LaserRecordsManager();
 
         }
@@ -86,10 +86,7 @@ namespace DAQ.Service
                 _scanner = new SimpleTcpClient();
                 _scanner.Delimiter = 0x0d;
                 _scanner.Connect("192.168.0.2", 9004);
-                Events.Publish(new MsgItem { Level = "D", Time = DateTime.Now, Value = "Server initialize: " + IPAddress.Any.ToString() + ":9004" });
-                _server.Delimiter = 0x0d;
-                _server.DelimiterDataReceived -= _server_DelimiterDataReceived;
-                _server.DelimiterDataReceived += _server_DelimiterDataReceived;
+
             }
             catch (Exception EX)
             {
@@ -98,10 +95,10 @@ namespace DAQ.Service
             }
 
 
-            //Task.Run(async () =>
-            //{
-            //    bool input;
-            //    //   _ioService.SetOutput(0, false);
+            Task.Run(async () =>
+            {
+                bool input;
+                //   _ioService.SetOutput(0, false);
 
                 while (true)
                 {
@@ -160,7 +157,7 @@ namespace DAQ.Service
                 string output = "", error = "";
                 string[] code = new string[3];
                 _ioService.SetOutput(1, false);
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < 1; i++)
                 {
                     var resp = serviceClient.ExecuteGenericFunction("GetTransformerSN", "", settings.Station, settings.EmployeeNo, ref output, ref error);
                     if (resp.Id == 0)
@@ -175,7 +172,8 @@ namespace DAQ.Service
                     }
                 }
                 serviceClient.Close();
-                string data = $"C2,0,0,{code[0]},1,{code[1]},2,{code[2]}";
+                //    string data = $"C2,0,0,{code[0]},1,{code[1]},2,{code[2]}";
+                string data = $"C2,0,0,{code[0]}";
                 Events.PostInfo("PC->LASER:" + data);
                 var m = _laserClient.WriteLineAndGetReply(data, TimeSpan.FromSeconds(1));
 
@@ -280,6 +278,10 @@ namespace DAQ.Service
 
                     var ret = SaveToMes(DateTime.Now.ToString("yyyy:MM:dd HH:mm:ss"), DateTime.Now.ToString("yyyy:MM:dd HH:mm:ss"), laser.Station, laser.Shift, laser.BobbinCode, laser.LineNo);
                     Events.PostWarn("SHOPFLOW返回值" + ret.ToString());
+                    if (ret != 0)
+                    {
+                        _ioService.SetOutput((uint)0, false);
+                    }
                     //  tester.SaveResult(
 
                 }
@@ -414,7 +416,23 @@ namespace DAQ.Service
                             };
                             OnLaserHandler(laser);
                             _factory.GetFileSaver<Laser>((nunit).ToString()).Save(laser);
+                        }
+                        else
+                        {
+                        }
+                    }
+                }
+                else
+                {
+                    Events.PostError(new Exception("Format error " + splits[2]));
+                }
+            }
+        }
 
+        public void Dispose()
+        {
+            _laserClient?.Disconnect();
+        }
 
 
 

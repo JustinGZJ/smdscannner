@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MaterialDesignThemes.Wpf;
+using Serilog;
 using Stylet;
 using StyletIoC;
 
@@ -12,6 +13,9 @@ namespace DAQ.Pages
 {
     public class MsgViewModel : IHandle<MsgItem>, IMainTabViewModel
     {
+        ILogger log = new LoggerConfiguration()
+.WriteTo.File("./log/log.txt", rollingInterval: RollingInterval.Day, retainedFileCountLimit: 7)
+.CreateLogger();
         public MsgViewModel(IEventAggregator @event)
         {
             @event.Subscribe(this);
@@ -29,6 +33,8 @@ namespace DAQ.Pages
                     Items.RemoveAt(0);
                 }
                 Items.Add(message);
+                log.Information(message.Value);
+
             }
             catch (Exception ex)
             {

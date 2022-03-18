@@ -9,14 +9,14 @@ namespace DAQ.Service
     {
       //  private ModbusTcpNet modbusTcp;
         private bool[] _inputs = new bool[24];
-        private  static bool[] _outputs = new bool[8] { false,false,false,false,false,false,false,false};
+        private   bool[] _outputs = new bool[8] { false,false,false,false,false,false,false,false};
         public bool IsConnected { get; private set; }
 
-           ModbusTcpNet   modbusTcp = new ModbusTcpNet { IpAddress = "192.168.0.240", Port = 502};
+        ModbusTcpNet modbusTcp;
     //    ModbusTcpNet modbusTcp = new ModbusTcpNet { IpAddress = "127.0.0.1", Port = 502 };
-    public IoService()
+    public IoService(string ip)
         {
-
+            modbusTcp =new ModbusTcpNet { IpAddress = ip   , Port = 502 };
             var con= modbusTcp.ConnectServer();
             if (con.IsSuccess)
             {

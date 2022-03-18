@@ -17,11 +17,11 @@ namespace DAQ.Pages
     public class LaserViewModel : Screen, IMainTabViewModel
     {
         private LaserService _laser;
-        private IIoService _ioService;
-        public LaserViewModel([Inject]LaserService laser,[Inject]IIoService ioService)
+
+        public LaserViewModel([Inject]LaserService laser)
         {
             _laser = laser;
-            _ioService = ioService;
+
             Task.Run((() =>
             {
                 laser?.CreateServer();
