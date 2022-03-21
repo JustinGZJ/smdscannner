@@ -164,9 +164,9 @@ namespace DAQ.Service
                     BobbinToolNo = settings.BobbinToolNo,
                     ShiftName = settings.ShiftName
                 };
-                OnLaserHandler(laserpoco);
                 _factory.GetFileSaver<Laser>((1).ToString()).Save(laser);
                 _factory.GetFileSaver<Laser>((1).ToString(), @"D:\\SumidaFile\Monitor").Save(laser);
+                OnLaserHandler(laserpoco);
                 LaserRecordsManager.Insert(laserpoco);
 
             }

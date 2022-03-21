@@ -13,7 +13,7 @@ namespace DAQ.Pages
         [DisplayName("Bobbin Code")]
         public string Bobbin { get; set; }
         public DateTime DateTime { get; set; } = DateTime.Now;
-        public string Station { get; set; } = "N3";
+        public string Station { get; set; } = "N5";
         public string Shift { get; set; }
         [DisplayName("Shift Name")]
         public string ShiftName { get; set; }

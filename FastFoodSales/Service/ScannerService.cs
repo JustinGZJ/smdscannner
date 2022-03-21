@@ -127,6 +127,7 @@ namespace DAQ.Service
                     Bobbin = e.MessageString,
                     Shift = settings.Shift1,
                     ShiftName = settings.ShiftName1,
+                    Station=settings.Station1,
                     Production = settings.ProductionOrder1,
                     LineNo = settings.LineNo1,
                     MachineNo = settings.MachineNo1,

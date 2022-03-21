@@ -12,7 +12,7 @@ namespace DAQ.Rules
     {
 
         //   string[] barcodes = new string[] { "BASE-ERX1815/CE-8P+LT (LOTES)", "BASE-ERX1815/CE-8P+EVW (EVERWIN)", "BASE-ERX1815/CE-8P+LY (LYT)" };
-        string[] barcodes = new string[] { "base-nfc9618/ce-4p+ls" };
+        string[] barcodes = new string[] { "BASE-PQH2019C/CE-6P+LT" };
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
             if (value == null)

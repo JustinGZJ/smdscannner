@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.IO;
+using System.Windows;
 
 namespace DAQ.Pages
 {
@@ -100,6 +101,11 @@ namespace DAQ.Pages
             }
             save();
         }
+        public void test()
+        {
+            _laser_LaserHandler(null, new LaserPoco() { CodeQuality = "A" });
+            
+        }
 
         private void save()
         {
@@ -114,24 +120,28 @@ namespace DAQ.Pages
 
         private void _laser_LaserHandler(object sender, LaserPoco e)
         {
-            var series = SeriesCollection.FirstOrDefault(x => x.Title == e.CodeQuality);
-            if (series != null)
+            Application.Current.Dispatcher.Invoke(() =>
             {
-                foreach (var value in series.Values.Cast<ObservableValue>())
+                var series = SeriesCollection.FirstOrDefault(x => e.CodeQuality.Contains(x.Title));
+                if (series != null)
                 {
-                    value.Value += 1;
+                    foreach (var value in series.Values.Cast<ObservableValue>())
+                    {
+                        value.Value += 1;
+                    }
                 }
-            }
-            else
-            {
-                SeriesCollection.Add(new PieSeries
+                else
                 {
-                    Title = e.CodeQuality,
-                    Values = new ChartValues<ObservableValue> { new ObservableValue(1) },
-                    DataLabels = true
-                });
-            }
-            save();
+                    SeriesCollection.Add(new PieSeries
+                    {
+                        Title = e.CodeQuality,
+                        Values = new ChartValues<ObservableValue> { new ObservableValue(1) },
+                        DataLabels = true
+                    });
+                }
+                save();
+            });
+
         }
     }
 }

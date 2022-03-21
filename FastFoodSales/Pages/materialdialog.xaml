@@ -146,7 +146,7 @@
 
                     </UniformGrid>
                 </TabItem>
-                <TabItem Header="N3参数" Background="Transparent" Width="57" Margin="0">
+                <TabItem Header="N5参数" Background="Transparent" Width="57" Margin="0">
                     <UniformGrid Columns="4">
                         <StackPanel Margin="10">
                             <TextBlock><Run Text="班别名称 Shift Name"/></TextBlock>
