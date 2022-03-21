@@ -31,7 +31,7 @@
                     <GridViewColumn Header="机器号 Machine No." DisplayMemberBinding="{Binding MachineNo}"></GridViewColumn>
                     <GridViewColumn Header="工号 Employee No." DisplayMemberBinding="{Binding EmployeeNo}"></GridViewColumn>
                     <!--<GridViewColumn Header="骨架批号 Bobbin Lot No." DisplayMemberBinding="{Binding BO}"></GridViewColumn>-->
-                    <GridViewColumn Header="F飞线号 FlyWireLotNo" DisplayMemberBinding="{Binding  FlyWireLotNo}"></GridViewColumn>
+                    <GridViewColumn Header="飞线号 FlyWireLotNo" DisplayMemberBinding="{Binding  FlyWireLotNo}"></GridViewColumn>
                     <GridViewColumn Header="套管号 TubeLotNo" DisplayMemberBinding="{Binding TubeLotNo}"></GridViewColumn>
                     <GridViewColumn Header="骨架空穴编号 Bobbin Cavity No" DisplayMemberBinding="{Binding BobbinCavityNo}"></GridViewColumn>
                 </GridView>

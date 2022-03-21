@@ -303,15 +303,12 @@
       <DependentUpon>AboutView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\AboutViewModel.cs" />
-    <Compile Include="Pages\AlarmInfoSettingsView.xaml.cs">
-      <DependentUpon>AlarmInfoSettingsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\AlarmInfoSettingsViewModel.cs" />
-    <Compile Include="Pages\AlarmView.xaml.cs">
-      <DependentUpon>AlarmView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\Info.cs" />
     <Compile Include="Pages\Laser.cs" />
+    <Compile Include="Pages\LaserStaticView.xaml.cs">
+      <DependentUpon>LaserStaticView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\LaserStaticViewModel.cs" />
     <Compile Include="Pages\LaserView.xaml.cs">
       <DependentUpon>LaserView.xaml</DependentUpon>
     </Compile>
@@ -324,23 +321,7 @@
     </Compile>
     <Compile Include="Pages\MaterialManagerViewModel.cs" />
     <Compile Include="Pages\MsgPoster.cs" />
-    <Compile Include="Pages\RunStatusCollectionView.xaml.cs">
-      <DependentUpon>RunStatusCollectionView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\RunStatusCollectionViewModel.cs" />
-    <Compile Include="Pages\RunStatusContainerView.xaml.cs">
-      <DependentUpon>RunStatusContainerView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\RunStatusContainerViewModel.cs" />
-    <Compile Include="Pages\RuntimeHistoryView.xaml.cs">
-      <DependentUpon>RuntimeHistoryView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\RuntimeHistoryViewModel.cs" />
     <Compile Include="Pages\Scan.cs" />
-    <Compile Include="Pages\StatusView.xaml.cs">
-      <DependentUpon>StatusView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\StatusViewModel.cs" />
     <Compile Include="Pages\SubFilePathAttribute.cs" />
     <Compile Include="Pages\TBarcode.cs" />
     <Compile Include="Rules\BarcodeRule.cs" />
@@ -354,34 +335,11 @@
     <Compile Include="Pages\HomeViewModel.cs" />
     <Compile Include="Pages\IMainTabViewModel.cs" />
     <Compile Include="Pages\MainWindowViewModel.cs" />
-    <Compile Include="Pages\MaterialView.xaml.cs">
-      <DependentUpon>MaterialView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\MaterialViewModel.cs" />
     <Compile Include="Pages\MsgItem.cs" />
     <Compile Include="Pages\MsgView.xaml.cs">
       <DependentUpon>MsgView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\MsgViewModel.cs" />
-    <Compile Include="Pages\OeeCollectionView.xaml.cs">
-      <DependentUpon>OeeCollectionView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\OeeCollectionViewModel.cs" />
-    <Compile Include="Pages\OEEView.xaml.cs">
-      <DependentUpon>OEEView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\OEEViewModel.cs" />
-    <Compile Include="Pages\PLCView.xaml.cs">
-      <DependentUpon>PLCView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\PLCViewModel.cs" />
-    <Compile Include="Pages\SettingsView.xaml.cs">
-      <DependentUpon>SettingsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\SettingsViewModel.cs" />
-    <Compile Include="Pages\StorageValueDialog.xaml.cs">
-      <DependentUpon>StorageValueDialog.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Service\DataStorage.cs" />
     <Compile Include="Service\IModbusService.cs" />
     <Compile Include="Service\IMsgSaver.cs" />
@@ -394,15 +352,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\AlarmInfoSettingsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\AlarmView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\HomeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\LaserStaticView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -430,47 +384,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\MaterialView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\MsgView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\OeeCollectionView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\OEEView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pages\PLCView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\RunStatusCollectionView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\RunStatusContainerView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\RuntimeHistoryView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\SettingsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\StatusView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\StorageValueDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
