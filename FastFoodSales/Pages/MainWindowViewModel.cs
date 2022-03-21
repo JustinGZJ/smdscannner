@@ -35,11 +35,16 @@ namespace DAQ
 
 
         Settings settings = Properties.Settings.Default;
-        public MainWindowViewModel([Inject]IEnumerable<IMainTabViewModel> mainTabs)
+        private readonly LaserStaticViewModel laserStatic;
+
+        public MainWindowViewModel([Inject]IEnumerable<IMainTabViewModel> mainTabs,[Inject] MaterialManagerViewModel materialManager,[Inject] LaserStaticViewModel laserStatic)
         {
             Items.AddRange(mainTabs.Where(x=>x.Visible==true).OrderBy(x=>x.TabIndex));
+            this.MaterialManager = materialManager;
+            this.laserStatic = laserStatic;
         }
 
+        #region settings
         public string BobbinCavityNo
         {
             get => settings.BobbinCavityNo;
@@ -52,7 +57,7 @@ namespace DAQ
 
         public string BobbinPartName
         {
-            get=>settings.BobbinPartName;
+            get => settings.BobbinPartName;
             set
             {
                 settings.BobbinPartName = value;
@@ -169,7 +174,7 @@ namespace DAQ
             get => settings.SaveRootPath;
             set
             {
-                settings.SaveRootPath= value;
+                settings.SaveRootPath = value;
                 settings.Save();
             }
         }
@@ -297,10 +302,6 @@ namespace DAQ
                 settings.Save();
             }
         }
-
-
-
-
         public string SaveRootPath1
         {
             get => settings.SaveRootPath1;
@@ -309,8 +310,9 @@ namespace DAQ
                 settings.SaveRootPath1 = value;
                 settings.Save();
             }
-        }
-        public MaterialManagerViewModel MaterialManager =>new MaterialManagerViewModel();
+        } 
+        #endregion
+        public  MaterialManagerViewModel MaterialManager { get; set; }
         public async Task ShowSettingDialog()
         {
 
@@ -333,7 +335,8 @@ namespace DAQ
 
         protected override void OnInitialActivate()
         {
-            ActiveMessages();
+            //   ActiveMessages();
+            ActiveValues();
             base.OnInitialActivate();
         }
 
@@ -345,8 +348,8 @@ namespace DAQ
 
         public void ActiveValues()
         {
-            var item = Items.SingleOrDefault(x => x.TabIndex == (int)TabIndex.VALUES);
-            CurrentPage = item;
+            //var item = Items.SingleOrDefault(x => x.TabIndex == (int)TabIndex.VALUES);
+            CurrentPage = laserStatic;
         }
         public void ActiveMessages()
         {

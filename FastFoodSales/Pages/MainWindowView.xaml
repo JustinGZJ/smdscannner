@@ -78,14 +78,14 @@
                                   Style="{StaticResource MaterialDesignTabRadioButton}"
                                   Margin="4"
                                   Command="{s:Action ActiveMessages}"
-                                  IsChecked="True"
-                                  Content="Messages" />
+                                  IsChecked="False"
+                                  Content="信息" />
                                 <RadioButton
                                   Style="{StaticResource MaterialDesignTabRadioButton}"
                                   Margin="4"
                                   Command="{s:Action ActiveValues}"
-                                  IsChecked="False"
-                                  Content="Values" />
+                                  IsChecked="True"
+                                  Content="统计" />
                             </StackPanel>
                         </materialDesign:ColorZone>
                         <ContentControl x:Name="Msg" s:View.Model="{Binding CurrentPage}" MaxWidth="300"/>

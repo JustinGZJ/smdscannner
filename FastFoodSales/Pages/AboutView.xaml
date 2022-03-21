@@ -12,7 +12,7 @@
     <Grid>
         <StackPanel>
 
-                <TextBlock  Margin="0 30" FontSize="30" HorizontalAlignment="Center">浙江田中精机精髓</TextBlock>
+                <TextBlock  Margin="0 30" FontSize="30" HorizontalAlignment="Center">浙江田中精机股份有限公司</TextBlock>
 
             <TextBlock FontStyle="Italic" Margin="120,0,120,50" TextWrapping="WrapWithOverflow" HorizontalAlignment="Center" TextAlignment="Center">在TANAC开发并开始销售第一台绕线机以来，奠定了田中精机在绕线机行业鼻祖的地位。以后经过数十年不断的创新积累，我们逐步的涉及到消费电子产业（3C）、汽车产业、家电产业等等相关领域，使其成为当之无愧的定制化解决方案的领导者。</TextBlock>
 

@@ -131,6 +131,7 @@ namespace DAQ.Service
                     LineNo = settings.LineNo1,
                     MachineNo = settings.MachineNo1,
                     EmployeeNo = settings.EmployeeNo1,
+                    SpindleNo=(mIndex+1).ToString(),
                     FlyWireLotNo = this._materialManager.FlyWires[mIndex],
                     TubeLotNo = this._materialManager.Tubes[mIndex]
                 };

@@ -34,7 +34,7 @@ namespace DAQ.Service
 
         Settings settings = Settings.Default;
         private IIoService _ioService;
-        public event EventHandler<Laser> LaserHandler;
+        public event EventHandler<LaserPoco> LaserHandler;
 
         public LaserService([Inject] IEventAggregator @event, [Inject] IIoService ioService, [Inject] FileSaverFactory factory)
         {
@@ -143,13 +143,10 @@ namespace DAQ.Service
                     BobbinLotNo = settings.BobbinLotNo,
                     LineNo = settings.LineNo,
                     Shift = settings.Shift,
-                    CodeQuality = degree,
+                 //   CodeQuality = degree,
                     ProductionOrder = settings.ProductionOrder,
-                    BobbinPartName = settings.BobbinPartName,
                     EmployeeNo = settings.EmployeeNo,
                     MachineNo = settings.MachineNo,
-                    BobbinCavityNo = settings.BobbinCavityNo,
-                    BobbinToolNo = settings.BobbinToolNo,
                     ShiftName = settings.ShiftName
                 };
                 var laserpoco = new LaserPoco
@@ -158,7 +155,7 @@ namespace DAQ.Service
                     BobbinLotNo = settings.BobbinLotNo,
                     LineNo = settings.LineNo,
                     Shift = settings.Shift,
-                    CodeQuality = laser.CodeQuality,
+                    CodeQuality = degree,
                     ProductionOrder = settings.ProductionOrder,
                     EmployeeNo = settings.EmployeeNo,
                     MachineNo = settings.MachineNo,
@@ -167,7 +164,7 @@ namespace DAQ.Service
                     BobbinToolNo = settings.BobbinToolNo,
                     ShiftName = settings.ShiftName
                 };
-                OnLaserHandler(laser);
+                OnLaserHandler(laserpoco);
                 _factory.GetFileSaver<Laser>((1).ToString()).Save(laser);
                 _factory.GetFileSaver<Laser>((1).ToString(), @"D:\\SumidaFile\Monitor").Save(laser);
                 LaserRecordsManager.Insert(laserpoco);
@@ -178,7 +175,7 @@ namespace DAQ.Service
 
 
 
-        protected virtual void OnLaserHandler(Laser e)
+        protected virtual void OnLaserHandler(LaserPoco e)
         {
             LaserHandler?.Invoke(this, e);
         }

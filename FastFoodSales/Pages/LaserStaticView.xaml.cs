@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace DAQ.Pages
 {
     /// <summary>
-    /// OEEView.xaml 的交互逻辑
+    /// LaserStaticView.xaml 的交互逻辑
     /// </summary>
-    public partial class OEEView : UserControl
+    public partial class LaserStaticView : UserControl
     {
-        public OEEView()
+        public LaserStaticView()
         {
             InitializeComponent();
         }
