@@ -31,9 +31,9 @@ namespace DAQ.Pages
 
 
 
-        public BindableCollection<Laser> Lasers { get; } = new BindableCollection<Laser>(){};
+        public BindableCollection<LaserPoco> Lasers { get; } = new BindableCollection<LaserPoco>(){};
 
-        private void _laser_LaserHandler(object sender, Laser e)
+        private void _laser_LaserHandler(object sender, LaserPoco e)
         {
             if (Lasers.Count > 20)
                 Lasers.RemoveAt(0);

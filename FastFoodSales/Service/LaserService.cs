@@ -32,7 +32,7 @@ namespace DAQ.Service
 
         Settings settings = Settings.Default;
         private IIoService _ioService;
-        public event EventHandler<Laser> LaserHandler;
+        public event EventHandler<LaserPoco> LaserHandler;
 
         public LaserService([Inject] IEventAggregator @event, [Inject] IIoService ioService, [Inject] FileSaverFactory factory)
         {
@@ -160,13 +160,11 @@ namespace DAQ.Service
                         BobbinLotNo = settings.BobbinLotNo,
                         LineNo = settings.LineNo,
                         Shift = settings.Shift,
-                        CodeQuality = judgecode,
+
                         ProductionOrder = settings.ProductionOrder,
-                        BobbinPartName = settings.BobbinPartName,
+         
                         EmployeeNo = settings.EmployeeNo,
                         MachineNo = settings.MachineNo,
-                        BobbinCavityNo = settings.BobbinCavityNo,
-                        BobbinToolNo = settings.BobbinToolNo,
                         ShiftName = settings.ShiftName
                     };
                     var laserpoco = new LaserPoco
@@ -175,7 +173,7 @@ namespace DAQ.Service
                         BobbinLotNo = settings.BobbinLotNo,
                         LineNo = settings.LineNo,
                         Shift = settings.Shift,
-                        CodeQuality = laser.CodeQuality,
+                        CodeQuality = judgecode,
                         ProductionOrder = settings.ProductionOrder,
                         EmployeeNo = settings.EmployeeNo,
                         MachineNo = settings.MachineNo,
@@ -184,7 +182,7 @@ namespace DAQ.Service
                         BobbinToolNo = settings.BobbinToolNo,
                         ShiftName = settings.ShiftName
                     };
-                    OnLaserHandler(laser);
+                    OnLaserHandler(laserpoco);
                     _factory.GetFileSaver<Laser>((i + 3 * index + 1).ToString()).Save(laser);
                     _factory.GetFileSaver<Laser>((i + 3 * index + 1).ToString(), @"D:\\SumidaFile\Monitor").Save(laser);
                     var qr = LaserRecordsManager.Find(laser.BobbinCode);
@@ -215,65 +213,13 @@ namespace DAQ.Service
 
 
 
-        private void SaveLaserLog2(Message m1, int nunit)
-        {
-
-            var splits = m1.MessageString.Split(',');
-            if (splits.Length >= 3)
-            {
-                if (int.TryParse(splits[1], out int result))
-                {
-                    if (result != 0)
-                    {
-                        Events.PostError(new Exception("get laser info error.code " + splits[2]));
-                    }
-                    else
-                    {
-                        if (splits[2].Length > 5)
-                        {
-                            if (!int.TryParse(splits[2].Substring(splits[2].Length - 5), out int value)) return;
-                            var code = splits[2].Substring(0, splits[2].Length - 6) + (value - 2).ToString().PadLeft(5, '0');
-                            var laser = new Laser
-                            {
-                                BobbinCode = code.Trim('\r', '\n'),
-                                BobbinLotNo = settings.BobbinLotNo,
-                                LineNo = settings.LineNo,
-                                Shift = settings.Shift,
-                                CodeQuality = "E",
-                                ProductionOrder = settings.ProductionOrder,
-                                EmployeeNo = settings.EmployeeNo,
-                                MachineNo = settings.MachineNo,
-                                BobbinPartName = settings.BobbinPartName,
-                                BobbinCavityNo = settings.BobbinCavityNo,
-                                BobbinToolNo = settings.BobbinToolNo,
-                                ShiftName = settings.ShiftName
-                            };
-
-
-
-                            OnLaserHandler(laser);
-                            _factory.GetFileSaver<Laser>((nunit).ToString()).Save(laser);
-
-
-                        }
-                        else
-                        {
-                        }
-                    }
-                }
-                else
-                {
-                    Events.PostError(new Exception("Format error " + splits[2]));
-                }
-            }
-        }
 
         public void Dispose()
         {
             _laserClient?.Disconnect();
         }
 
-        protected virtual void OnLaserHandler(Laser e)
+        protected virtual void OnLaserHandler(LaserPoco e)
         {
             LaserHandler?.Invoke(this, e);
         }
