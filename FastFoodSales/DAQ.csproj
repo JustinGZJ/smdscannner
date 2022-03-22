@@ -326,7 +326,9 @@
     <Compile Include="Pages\TBarcode.cs" />
     <Compile Include="Rules\BarcodeRule.cs" />
     <Compile Include="Service\IoService.cs" />
+    <Compile Include="Service\LaserRecordsManager.cs" />
     <Compile Include="Service\LaserService.cs" />
+    <Compile Include="Service\MaterialManager.cs" />
     <Compile Include="Service\PostMsg.cs" />
     <Compile Include="Service\RunstatusService.cs" />
     <Compile Include="Pages\HomeView.xaml.cs">

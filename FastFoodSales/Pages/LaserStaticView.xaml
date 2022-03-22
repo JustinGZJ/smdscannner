@@ -12,6 +12,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <Button   Command="{s:Action resetcnt}" Padding="10 0">
@@ -21,5 +22,6 @@
         <lvc:PieChart Name="Chart" Grid.Row="1" Series="{Binding SeriesCollection}" 
                       LegendLocation="Bottom"   Margin="0 15">
         </lvc:PieChart>
+        <DataGrid Grid.Row="2" ItemsSource="{Binding Statistics}"></DataGrid>
     </Grid>
 </UserControl>

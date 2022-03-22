@@ -22,11 +22,22 @@ namespace DAQ.Pages
             public string key { get; set; }
             public double value { get; set; }
         }
+        public class kvp
+        {
+            public string 项目 { get; set; }
+            public double 数量 { get; set; }
+            public double 总数 { get; set; }
+            public string 比率 { get; set; }
+        }
+        public Func<ChartPoint, string> PointLabel { get; set; }
         private readonly LaserService laser;
         private string filename = "LaserStatic.json";
+        private BindableCollection<kvp> statistics=new BindableCollection<kvp>();
+
         public LaserStaticViewModel([Inject] LaserService laser)
         {
             this.laser = laser;
+            PointLabel = (p) => string.Format("{0} ({1:P})", p.Y, p.Participation);
             laser.LaserHandler += _laser_LaserHandler;
             if (File.Exists(filename))
             {
@@ -39,9 +50,11 @@ namespace DAQ.Pages
                     {
                         Title = kv.key,
                         Values = new ChartValues<ObservableValue> { new ObservableValue(kv.value) },
-                        DataLabels = true
-                    });
+                        DataLabels = true,
+                        LabelPoint = PointLabel
+                    }) ;
                 }
+
             }
             else
             {
@@ -50,24 +63,28 @@ namespace DAQ.Pages
                 {
                     Title = "A",
                     Values = new ChartValues<ObservableValue> { new ObservableValue(1) },
+                     LabelPoint = PointLabel,
                     DataLabels = true
                 },
                 new PieSeries
                 {
                     Title = "B",
                     Values = new ChartValues<ObservableValue> { new ObservableValue(0) },
+                      LabelPoint = PointLabel,
                     DataLabels = true
                 },
                 new PieSeries
                 {
                     Title = "C",
                     Values = new ChartValues<ObservableValue> { new ObservableValue(0) },
+                      LabelPoint = PointLabel,
                     DataLabels = true
                 },
                 new PieSeries
                 {
                     Title = "D",
                     Values = new ChartValues<ObservableValue> { new ObservableValue(0) },
+                      LabelPoint = PointLabel,
                     DataLabels = true
                 }
                 ,
@@ -75,16 +92,19 @@ namespace DAQ.Pages
                 {
                     Title = "E",
                     Values = new ChartValues<ObservableValue> { new ObservableValue(0) },
+                      LabelPoint = PointLabel,
                     DataLabels = true
                 },
                 new PieSeries
                 {
                     Title = "F",
                     Values = new ChartValues<ObservableValue> { new ObservableValue(0) },
+                    LabelPoint = PointLabel,
                     DataLabels = true
                 }
             };
             }
+            getStatistic();
         }
 
         public SeriesCollection SeriesCollection { get; set; }
@@ -104,7 +124,7 @@ namespace DAQ.Pages
         public void test()
         {
             _laser_LaserHandler(null, new LaserPoco() { CodeQuality = "A" });
-            
+
         }
 
         private void save()
@@ -117,6 +137,24 @@ namespace DAQ.Pages
            }).ToList();
             File.WriteAllText(filename, JsonConvert.SerializeObject(q));
         }
+
+
+        private void getStatistic()
+        {
+            var sum = SeriesCollection.Sum(x => x.Values.Cast<ObservableValue>().First().Value);
+            var q = SeriesCollection.Select(x =>
+           new kvp
+           {
+               项目 = x.Title,
+               数量 = x.Values.Cast<ObservableValue>().First().Value,
+               总数 = sum,
+               比率 = (x.Values.Cast<ObservableValue>().First().Value / sum).ToString("P")
+           }).ToList();
+            statistics.Clear();
+            statistics.AddRange(q);
+        }
+
+       public BindableCollection<kvp> Statistics { get => statistics; set => statistics = value; }
 
         private void _laser_LaserHandler(object sender, LaserPoco e)
         {
@@ -140,6 +178,7 @@ namespace DAQ.Pages
                     });
                 }
                 save();
+                getStatistic();
             });
 
         }

@@ -6,51 +6,14 @@ using Stylet;
 using StyletIoC;
 using System.Net.Sockets;
 using System.Diagnostics;
-using System.Linq;
 using System.Windows.Media;
 using DAQ.Properties;
-using Newtonsoft.Json;
 using DAQ.Pages;
 using System.Threading.Tasks;
 using System.Threading;
 
 namespace DAQ.Service
 {
-    public class MaterialManager
-    {
-
-        public string[] FlyWires { get; set; } = Enumerable.Repeat("",8).ToArray();
-        public string[] Tubes { get; set; } = Enumerable.Repeat("", 8).ToArray();
-
-        public MaterialManager Save()
-        {
-            Settings.Default.Materials = JsonConvert.SerializeObject(this);
-            Settings.Default.Save();
-            return this;
-        }
-
-        public (string, string) GetMaterial(int index)
-        {
-            if (index > 7 || index < 0)
-                throw new OutOfMemoryException("index mush be between 0 and 7");
-            return (FlyWires[index], Tubes[index]);
-        }
-
-        public static MaterialManager Load()
-        {
-            MaterialManager m;
-            try
-            {
-                  m = JsonConvert.DeserializeObject<MaterialManager>(Settings.Default.Materials) ?? new MaterialManager();
-               // m = new MaterialManager();
-            }
-            catch (Exception e)
-            {
-                m = new MaterialManager();
-            }
-            return m;
-        }
-    }
 
     public class ScannerService
     {
@@ -59,6 +22,7 @@ namespace DAQ.Service
         private readonly IIoService ioService;
         private readonly FileSaverFactory _factory;
         SimpleTcpServer _server = null;
+        LaserRecordsManager LaserRecordsManager = new LaserRecordsManager();
 
         public ScannerService([Inject] IEventAggregator @event, [Inject] MaterialManager materialManager, [Inject]IIoService ioService, [Inject] FileSaverFactory factory)
         {
@@ -105,7 +69,7 @@ namespace DAQ.Service
                         mIndex = i;
                     }
                 }
-                Events.PostInfo($"N3 Scanner:{mIndex}" + e.MessageString);
+                Events.PostInfo($"N5 Scanner:{mIndex}" + e.MessageString);
                 if (mIndex == -1)
                 {
                     Events.PostError("G4 轴号未指定");
@@ -116,6 +80,13 @@ namespace DAQ.Service
                 if (e.MessageString.Contains("ERROR"))
                 {
                     Events.PostError("扫码错误");
+                    ioService.SetOutput(0, false);
+                    return;
+                }
+                LaserPoco data = LaserRecordsManager.Find(e.MessageString);
+                if (data!= null)
+                {
+                    Events.PostError($"{data.BobbinCode} :{data.DateTime.ToString("G")} 扫过了。 ");
                     ioService.SetOutput(0, false);
                     return;
                 }
@@ -136,7 +107,7 @@ namespace DAQ.Service
                     FlyWireLotNo = this._materialManager.FlyWires[mIndex],
                     TubeLotNo = this._materialManager.Tubes[mIndex]
                 };
-
+                LaserRecordsManager.Insert(new LaserPoco() { BobbinCode = scan.Bobbin });
                 Events.PublishOnUIThread(scan);
                 _factory.GetFileSaver<Scan>((mIndex + 1).ToString(), settings.SaveRootPath1).Save(scan);
                 _factory.GetFileSaver<Scan>((mIndex + 1).ToString(), @"D:\\SumidaFile\Monitor\Scan").Save(scan);

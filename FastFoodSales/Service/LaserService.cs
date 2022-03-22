@@ -8,9 +8,7 @@ using DAQ.Properties;
 using SimpleTCP;
 using Stylet;
 using StyletIoC;
-using MongoDB.Driver;
 using MongoDB.Bson;
-using System.Linq;
 using System.Net.Sockets;
 using System.Text.RegularExpressions;
 
@@ -178,32 +176,6 @@ namespace DAQ.Service
         protected virtual void OnLaserHandler(LaserPoco e)
         {
             LaserHandler?.Invoke(this, e);
-        }
-    }
-
-
-    public class LaserRecordsManager
-    {
-        private readonly string connStr;
-        MongoClient client;
-        IMongoDatabase database;
-        IMongoCollection<LaserPoco> collection;
-        public LaserRecordsManager(string connStr = "mongodb://127.0.0.1:27017")
-        {
-            this.connStr = connStr;
-            client = new MongoClient(connStr);
-            database = client.GetDatabase("smd");
-            collection = database.GetCollection<LaserPoco>("laser");
-        }
-
-        public void Insert(LaserPoco laser)
-        {
-            collection.InsertOne(laser);
-        }
-
-        public LaserPoco Find(string code)
-        {
-            return collection.AsQueryable().FirstOrDefault(x => x.BobbinCode == code);
         }
     }
 }
