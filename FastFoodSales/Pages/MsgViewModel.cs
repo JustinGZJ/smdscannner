@@ -30,7 +30,7 @@ namespace DAQ.Pages
                 }
                 Items.Add(message);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //    throw;
             }

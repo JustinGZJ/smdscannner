@@ -26,13 +26,14 @@ namespace DAQ.Pages
         {
             public string 项目 { get; set; }
             public double 数量 { get; set; }
-            public double 总数 { get; set; }
+
             public string 比率 { get; set; }
         }
         public Func<ChartPoint, string> PointLabel { get; set; }
         private readonly LaserService laser;
         private string filename = "LaserStatic.json";
-        private BindableCollection<kvp> statistics=new BindableCollection<kvp>();
+        private BindableCollection<kvp> statistics = new BindableCollection<kvp>();
+        private int total;
 
         public LaserStaticViewModel([Inject] LaserService laser)
         {
@@ -52,7 +53,7 @@ namespace DAQ.Pages
                         Values = new ChartValues<ObservableValue> { new ObservableValue(kv.value) },
                         DataLabels = true,
                         LabelPoint = PointLabel
-                    }) ;
+                    });
                 }
 
             }
@@ -138,7 +139,7 @@ namespace DAQ.Pages
             File.WriteAllText(filename, JsonConvert.SerializeObject(q));
         }
 
-
+        public int Total { get => total; set => SetAndNotify(ref total, value); }
         private void getStatistic()
         {
             var sum = SeriesCollection.Sum(x => x.Values.Cast<ObservableValue>().First().Value);
@@ -147,14 +148,14 @@ namespace DAQ.Pages
            {
                项目 = x.Title,
                数量 = x.Values.Cast<ObservableValue>().First().Value,
-               总数 = sum,
                比率 = (x.Values.Cast<ObservableValue>().First().Value / sum).ToString("P")
            }).ToList();
+            Total = (int)sum;
             statistics.Clear();
             statistics.AddRange(q);
         }
 
-       public BindableCollection<kvp> Statistics { get => statistics; set => statistics = value; }
+        public BindableCollection<kvp> Statistics { get => statistics; set => statistics = value; }
 
         private void _laser_LaserHandler(object sender, LaserPoco e)
         {

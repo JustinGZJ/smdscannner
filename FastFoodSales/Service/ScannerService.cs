@@ -86,7 +86,7 @@ namespace DAQ.Service
                 LaserPoco data = LaserRecordsManager.Find(e.MessageString);
                 if (data!= null)
                 {
-                    Events.PostError($"{data.BobbinCode} :{data.DateTime.ToString("G")} 扫过了。 ");
+                    Events.PostError($"{data.BobbinCode} :{data.DateTime:G} 扫过了。 ");
                     ioService.SetOutput(0, false);
                     return;
                 }
@@ -115,8 +115,8 @@ namespace DAQ.Service
             finally
             {
                 ioService.SetOutput(1, true);
-                Thread.Sleep(500);
-                ioService.SetOutput(1, false);
+                SpinWait.SpinUntil(()=>ioService.GetInput(7));
+                 ioService.SetOutput(1, false);
             }
 
 

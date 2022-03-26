@@ -126,11 +126,11 @@ namespace DAQ.Service
             Events.PostMessage($"LASER RECV: {e.MessageString}");
             Regex rgx = new Regex(@"([\w\d]+)(:([\w]))?");
             var match=rgx.Match(e.MessageString);
-            string  code="",degree = "E";
+            string degree = "E";
 
             if (match.Success)
             {
-                code = match.Groups[1].Value;
+                string code = match.Groups[1].Value;
                 if (match.Groups.Count == 4)
                 {
                     degree = match.Groups[3].Value;
@@ -165,7 +165,7 @@ namespace DAQ.Service
                 _factory.GetFileSaver<Laser>((1).ToString()).Save(laser);
                 _factory.GetFileSaver<Laser>((1).ToString(), @"D:\\SumidaFile\Monitor").Save(laser);
                 OnLaserHandler(laserpoco);
-                LaserRecordsManager.Insert(laserpoco);
+              //  LaserRecordsManager.Insert(laserpoco);
 
             }
            
