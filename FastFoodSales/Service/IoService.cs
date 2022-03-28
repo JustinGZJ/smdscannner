@@ -20,7 +20,7 @@ namespace DAQ.Service
             var con= modbusTcp.ConnectServer();
             if (con.IsSuccess)
             {
-                Task.Run(() =>
+                Task.Factory.StartNew(() =>
                 {
                     while (true)
                     {
@@ -34,8 +34,9 @@ namespace DAQ.Service
                             }
                             var r2 = modbusTcp.WriteCoil("16", _outputs);
                         }
+                        Thread.Sleep(1);
                     }
-                });
+                },TaskCreationOptions.LongRunning);
             }
             else
             {

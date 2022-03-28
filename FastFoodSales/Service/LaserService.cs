@@ -95,7 +95,7 @@ namespace DAQ.Service
             }
 
 
-            Task.Run(async () =>
+            Task.Factory.StartNew(async () =>
             {
                 bool input;
                 //   _ioService.SetOutput(0, false);
@@ -122,8 +122,8 @@ namespace DAQ.Service
 
                     await Task.Delay(10);
                 }
-            });
-            Task.Run(async () =>
+            },TaskCreationOptions.LongRunning);
+            Task.Factory.StartNew(async () =>
             {
                 bool input;
                 //   _ioService.SetOutput(0, false);
@@ -136,17 +136,19 @@ namespace DAQ.Service
                         //  GetCode(1);
                         if (SetLaserCode() != 0)
                         {
+                            //
                             _ioService.SetOutput(2, false);
                         }
                         else
                         {
+                            //
                             _ioService.SetOutput(2, true);
                         }
                         SpinWait.SpinUntil(() => _ioService.GetInput(1) == false);
                     }
                     await Task.Delay(10);
                 }
-            });
+            },TaskCreationOptions.LongRunning);
         }
 
         public int SetLaserCode()
