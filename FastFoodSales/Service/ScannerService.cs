@@ -24,7 +24,7 @@ namespace DAQ.Service
         SimpleTcpServer _server = null;
         LaserRecordsManager LaserRecordsManager = new LaserRecordsManager();
 
-        public ScannerService([Inject] IEventAggregator @event, [Inject] MaterialManager materialManager, [Inject]IIoService ioService, [Inject] FileSaverFactory factory)
+        public ScannerService([Inject] IEventAggregator @event, [Inject] MaterialManager materialManager, [Inject] IIoService ioService, [Inject] FileSaverFactory factory)
         {
             Events = @event;
             this._materialManager = materialManager;
@@ -74,28 +74,19 @@ namespace DAQ.Service
                 {
                     Events.PostError("G4 轴号未指定");
                     ioService.SetOutput(0, false);
-                ioService.SetOutput(1, true);
-                SpinWait.SpinUntil(()=>ioService.GetInput(7));
-                 ioService.SetOutput(1, false);
                     return;
                 }
                 if (e.MessageString.Contains("ERROR"))
                 {
                     Events.PostError("扫码错误");
                     ioService.SetOutput(0, false);
-                                    ioService.SetOutput(1, true);
-                SpinWait.SpinUntil(()=>ioService.GetInput(7));
-                 ioService.SetOutput(1, false);
                     return;
                 }
                 LaserPoco data = LaserRecordsManager.Find(e.MessageString);
-                if (data!= null)
+                if (data != null)
                 {
                     Events.PostError($"{data.BobbinCode} :{data.DateTime:G} 扫过了。 ");
                     ioService.SetOutput(0, false);
-                ioService.SetOutput(1, true);
-                SpinWait.SpinUntil(()=>ioService.GetInput(7));
-                 ioService.SetOutput(1, false);
                     return;
                 }
 
@@ -106,12 +97,12 @@ namespace DAQ.Service
                     Bobbin = e.MessageString,
                     Shift = settings.Shift1,
                     ShiftName = settings.ShiftName1,
-                    Station=settings.Station1,
+                    Station = settings.Station1,
                     Production = settings.ProductionOrder1,
                     LineNo = settings.LineNo1,
                     MachineNo = settings.MachineNo1,
                     EmployeeNo = settings.EmployeeNo1,
-                    SpindleNo=(mIndex+1).ToString(),
+                    SpindleNo = (mIndex + 1).ToString(),
                     FlyWireLotNo = this._materialManager.FlyWires[mIndex],
                     TubeLotNo = this._materialManager.Tubes[mIndex]
                 };
@@ -123,8 +114,8 @@ namespace DAQ.Service
             finally
             {
                 ioService.SetOutput(1, true);
-                SpinWait.SpinUntil(()=>ioService.GetInput(7));
-                 ioService.SetOutput(1, false);
+                SpinWait.SpinUntil(() => ioService.GetInput(7),5000);
+                ioService.SetOutput(1, false);
             }
 
 
