@@ -74,13 +74,18 @@ namespace DAQ.Service
                 {
                     Events.PostError("G4 轴号未指定");
                     ioService.SetOutput(0, false);
-
+                ioService.SetOutput(1, true);
+                SpinWait.SpinUntil(()=>ioService.GetInput(7));
+                 ioService.SetOutput(1, false);
                     return;
                 }
                 if (e.MessageString.Contains("ERROR"))
                 {
                     Events.PostError("扫码错误");
                     ioService.SetOutput(0, false);
+                                    ioService.SetOutput(1, true);
+                SpinWait.SpinUntil(()=>ioService.GetInput(7));
+                 ioService.SetOutput(1, false);
                     return;
                 }
                 LaserPoco data = LaserRecordsManager.Find(e.MessageString);
@@ -88,6 +93,9 @@ namespace DAQ.Service
                 {
                     Events.PostError($"{data.BobbinCode} :{data.DateTime:G} 扫过了。 ");
                     ioService.SetOutput(0, false);
+                ioService.SetOutput(1, true);
+                SpinWait.SpinUntil(()=>ioService.GetInput(7));
+                 ioService.SetOutput(1, false);
                     return;
                 }
 
