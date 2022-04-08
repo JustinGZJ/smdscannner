@@ -231,8 +231,8 @@ namespace DAQ.Service
                 if (mIndex == -1)
                 {
                     Events.PostError("G4 轴号未指定");
-                    ioService.SetOutput(N5SCAN_RES_OUT, false);
-
+                    //ioService.SetOutput(N5SCAN_RES_OUT, false);
+                    mIndex = 0;
                     return;
                 }
                 if (e.MessageString.Contains("ERROR"))
@@ -269,7 +269,7 @@ namespace DAQ.Service
             finally
             {
                 ioService.SetOutput(N5SCAN_DONE_OUT, true);
-                Thread.Sleep(500);
+                Thread.Sleep(1000);
                 ioService.SetOutput(N5SCAN_DONE_OUT, false);
             }
 
