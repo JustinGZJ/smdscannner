@@ -27,6 +27,13 @@ namespace DAQ.Service
 
     public class LaserService :IDisposable
     {
+        private const int LASER_REQ = 0;
+        private const int STARTLASER_REQ = 1;
+        private const int SCAN_RES_OUT = 2;
+        private const int LASERSCAN_RES_OUT = 0;
+        private const int LASERSCAN_BUSY_OUT = 7;
+        private const int LASERSCAN_DUMPLICATE = 6;
+        private const int LASER_BUSY_OUT = 1;
         IEventAggregator Events;
         private readonly FileSaverFactory _factory;
         SimpleTcpClient _laserClient = null;
@@ -107,19 +114,12 @@ namespace DAQ.Service
                         Events.PostError("远程IO未连接");
                         await Task.Delay(500);
                     }
-                    input = _ioService.GetInput(0);
+                    input = _ioService.GetInput(LASER_REQ);
                     if (input)
                     {
                         GetCode(0);
-                        SpinWait.SpinUntil(() => _ioService.GetInput(0) == false);
+                        SpinWait.SpinUntil(() => _ioService.GetInput(LASER_REQ) == false);
                     }
-                    input = _ioService.GetInput(1);
-                    if (input)
-                    {
-
-                        SpinWait.SpinUntil(() => _ioService.GetInput(1) == false);
-                    }
-
                     await Task.Delay(10);
                 }
             },TaskCreationOptions.LongRunning);
@@ -130,21 +130,21 @@ namespace DAQ.Service
 
                 while (true)
                 {
-                    input = _ioService.GetInput(1);
+                    input = _ioService.GetInput(STARTLASER_REQ);
                     if (input)
                     {
                         //  GetCode(1);
                         if (SetLaserCode() != 0)
                         {
                             //
-                            _ioService.SetOutput(2, false);
+                            _ioService.SetOutput(SCAN_RES_OUT, false);
                         }
                         else
                         {
                             //
-                            _ioService.SetOutput(2, true);
+                            _ioService.SetOutput(SCAN_RES_OUT, true);
                         }
-                        SpinWait.SpinUntil(() => _ioService.GetInput(1) == false);
+                        SpinWait.SpinUntil(() => _ioService.GetInput(STARTLASER_REQ) == false);
                     }
                     await Task.Delay(10);
                 }
@@ -158,7 +158,7 @@ namespace DAQ.Service
                 DAQ.wcl.FFTesterServiceClient serviceClient = new wcl.FFTesterServiceClient();
                 string output = "", error = "";
                 string[] code = new string[3];
-                _ioService.SetOutput(1, false);
+                _ioService.SetOutput(LASER_BUSY_OUT, false);
                 for (int i = 0; i < 1; i++)
                 {
                     var resp = serviceClient.ExecuteGenericFunction("GetTransformerSN", "", settings.Station, settings.EmployeeNo, ref output, ref error);
@@ -216,7 +216,7 @@ namespace DAQ.Service
             finally
             {
 
-                _ioService.SetOutput(1, true);
+                _ioService.SetOutput(LASER_BUSY_OUT, true);
             }
         }
 
@@ -224,16 +224,16 @@ namespace DAQ.Service
         {
             try
             {
-                _ioService.SetOutput(0, false);
-                _ioService.SetOutput(6, false);
-                _ioService.SetOutput(7, false);
+                _ioService.SetOutput(LASERSCAN_RES_OUT, false);
+                _ioService.SetOutput(LASERSCAN_DUMPLICATE, false);
+                _ioService.SetOutput(LASERSCAN_BUSY_OUT, false);
                 string cmd = $"LON";
                 Events.PostMessage($"SCANNER SEND:{cmd}");
                 var m1 = _scanner.WriteLineAndGetReply(cmd, TimeSpan.FromMilliseconds(3000));
                 Events.PostMessage($"LASER RECV: {m1.MessageString}");
                 if (m1 != null && !m1.MessageString.Contains("ERROR"))
                 {
-                    _ioService.SetOutput(0, true);
+                    _ioService.SetOutput(LASERSCAN_RES_OUT, true);
                     var laser = new Laser
                     {
                         BobbinCode = m1.MessageString.Trim(),
@@ -270,8 +270,8 @@ namespace DAQ.Service
                     if (qr != null)
                     {
                         Events.PostWarn($"{qr.BobbinCode} {qr.DateTime} 镭射过了");
-                        _ioService.SetOutput((uint)0, false);
-                        _ioService.SetOutput((uint)(6), true);
+                        _ioService.SetOutput((uint)LASERSCAN_RES_OUT, false);
+                        _ioService.SetOutput((uint)LASERSCAN_DUMPLICATE, true);
                     }
                     else
                     {
@@ -282,14 +282,14 @@ namespace DAQ.Service
                     Events.PostWarn("SHOPFLOW返回值" + ret.ToString());
                     if (ret != 0)
                     {
-                        _ioService.SetOutput((uint)0, false);
+                        _ioService.SetOutput((uint)LASERSCAN_RES_OUT, false);
                     }
                     //  tester.SaveResult(
 
                 }
                 else
                 {
-                    _ioService.SetOutput(0, false);
+                    _ioService.SetOutput(LASERSCAN_RES_OUT, false);
                 }
 
             }
@@ -301,7 +301,7 @@ namespace DAQ.Service
             finally
             {
                 Thread.Sleep(200);
-                _ioService.SetOutput(7, true);
+                _ioService.SetOutput(LASERSCAN_BUSY_OUT, true);
             }
         }
 

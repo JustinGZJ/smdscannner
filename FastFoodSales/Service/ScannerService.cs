@@ -56,6 +56,8 @@ namespace DAQ.Service
 
     public class ScannerService
     {
+        private const int N5SCAN_RES_OUT = 0;
+        private const int N5SCAN_DONE_OUT = 1;
         IEventAggregator Events;
         private readonly MaterialManager _materialManager;
         private readonly IIoService ioService;
@@ -225,22 +227,22 @@ namespace DAQ.Service
                         mIndex = i;
                     }
                 }
-                Events.PostInfo($"N3 Scanner:{mIndex}" + e.MessageString);
+                Events.PostInfo($"N5 Scanner:{mIndex}" + e.MessageString);
                 if (mIndex == -1)
                 {
                     Events.PostError("G4 轴号未指定");
-                    ioService.SetOutput(0, false);
+                    ioService.SetOutput(N5SCAN_RES_OUT, false);
 
                     return;
                 }
                 if (e.MessageString.Contains("ERROR"))
                 {
                     Events.PostError("扫码错误");
-                    ioService.SetOutput(0, false);
+                    ioService.SetOutput(N5SCAN_RES_OUT, false);
                     return;
                 }
 
-                ioService.SetOutput(0, true);
+                ioService.SetOutput(N5SCAN_RES_OUT, true);
                 var settings = Settings.Default;
                 var scan = new Scan
                 {
@@ -258,7 +260,7 @@ namespace DAQ.Service
                 var ret = SaveToMes(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), "FlyWireWindingN5(A)_E201", scan.Shift, scan.Bobbin, "E201", (mIndex + 1).ToString());
                 if (ret != 0)
                 {
-                    ioService.SetOutput(0, false);
+                    ioService.SetOutput(N5SCAN_RES_OUT, false);
                 }
                 Events.PublishOnUIThread(scan);
                 _factory.GetFileSaver<Scan>((mIndex + 1).ToString(), settings.SaveRootPath1).Save(scan);
@@ -266,9 +268,9 @@ namespace DAQ.Service
             }
             finally
             {
-                ioService.SetOutput(1, true);
+                ioService.SetOutput(N5SCAN_DONE_OUT, true);
                 Thread.Sleep(500);
-                ioService.SetOutput(1, false);
+                ioService.SetOutput(N5SCAN_DONE_OUT, false);
             }
 
 
