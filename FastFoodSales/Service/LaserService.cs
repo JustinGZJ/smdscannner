@@ -153,13 +153,6 @@ namespace DAQ.Service
                     var code = CodeWithQualitySplits[0];
                     var judgecode = CodeWithQualitySplits[1].Split('/')[0];
                     var judgeSplits = CodeWithQualitySplits[1].Split('/').Take(1);
-                    var judge = judgecode.ToUpper().Contains("A") || judgecode.ToUpper().Contains("B");
-                    if (!judge)
-                    {
-                        Events.PostWarn($"{CodeWithQuality} 等级不符合");
-                        _ioService.SetOutput((uint)(i + 3 * index), false);
-                        continue;
-                    }
                     _ioService.SetOutput((uint)(i + 3 * index), true);
                     var laser = new Laser
                     {
@@ -192,17 +185,15 @@ namespace DAQ.Service
                         ShiftName = settings.ShiftName
                     };
                     OnLaserHandler(laser);
+                    _factory.GetFileSaver<Laser>((i + 3 * index + 1).ToString()).Save(laser);
+                    _factory.GetFileSaver<Laser>((i + 3 * index + 1).ToString(), @"D:\\SumidaFile\Monitor").Save(laser);
                     var qr = LaserRecordsManager.Find(laser.BobbinCode);
                     if (qr != null)
                     {
                         Events.PostWarn($"{qr.BobbinCode} {qr.DateTime} 镭射过了");
                         _ioService.SetOutput((uint)(i + 3 * index), false);
                         _ioService.SetOutput((uint)(6), true);
-                        continue;
                     }
-                    _factory.GetFileSaver<Laser>((i + 3 * index + 1).ToString()).Save(laser);
-                    _factory.GetFileSaver<Laser>((i + 3 * index + 1).ToString(), @"D:\\SumidaFile\Monitor").Save(laser);
-
                     LaserRecordsManager.Insert(laserpoco);
                 }
             }

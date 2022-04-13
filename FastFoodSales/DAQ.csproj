@@ -312,6 +312,10 @@
     </Compile>
     <Compile Include="Pages\Info.cs" />
     <Compile Include="Pages\Laser.cs" />
+    <Compile Include="Pages\LaserStaticView.xaml.cs">
+      <DependentUpon>LaserStaticView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\LaserStaticViewModel.cs" />
     <Compile Include="Pages\LaserView.xaml.cs">
       <DependentUpon>LaserView.xaml</DependentUpon>
     </Compile>
@@ -402,6 +406,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\HomeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\LaserStaticView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

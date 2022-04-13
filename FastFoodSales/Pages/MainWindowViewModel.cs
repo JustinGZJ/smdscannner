@@ -35,9 +35,10 @@ namespace DAQ
 
 
         Settings settings = Properties.Settings.Default;
-        public MainWindowViewModel([Inject]IEnumerable<IMainTabViewModel> mainTabs)
+        public MainWindowViewModel([Inject]IEnumerable<IMainTabViewModel> mainTabs,[Inject] LaserStaticViewModel laserStatic)
         {
             Items.AddRange(mainTabs.Where(x=>x.Visible==true).OrderBy(x=>x.TabIndex));
+            LaserStatic = laserStatic;
         }
 
         public string BobbinCavityNo
@@ -164,75 +165,20 @@ namespace DAQ
             }
         }
 
-
-        public string LaserLoc1
-        {
-            get => settings.LaserLoc1;
-            set
-            {
-                settings.LaserLoc1 = value;
-                settings.Save();
-            }
-        }
-        public string LaserLoc2
-        {
-            get => settings.LaserLoc2;
-            set
-            {
-                settings.LaserLoc2 = value;
-                settings.Save();
-            }
-        }
-
-        public string LaserLoc3
-        {
-            get => settings.LaserLoc3;
-            set
-            {
-                settings.LaserLoc3 = value;
-                settings.Save();
-            }
-        }
-
-
-        public string LaserLoc4
-        {
-            get => settings.LaserLoc4;
-            set
-            {
-                settings.LaserLoc4 = value;
-                settings.Save();
-            }
-        }
-        public string LaserLoc5
-        {
-            get => settings.LaserLoc5;
-            set
-            {
-                settings.LaserLoc5 = value;
-                settings.Save();
-            }
-        }
-
-        public string LaserLoc6
-        {
-            get => settings.LaserLoc6;
-            set
-            {
-                settings.LaserLoc6 = value;
-                settings.Save();
-            }
-        }
         public string SaveRootPath
         {
             get => settings.SaveRootPath;
             set
             {
-                settings.SaveRootPath = value;
+                settings.SaveRootPath= value;
                 settings.Save();
             }
         }
+
         public MaterialManagerViewModel MaterialManager =>new MaterialManagerViewModel();
+
+        public LaserStaticViewModel LaserStatic { get; }
+
         public async Task ShowSettingDialog()
         {
 
@@ -267,8 +213,8 @@ namespace DAQ
 
         public void ActiveValues()
         {
-            var item = Items.SingleOrDefault(x => x.TabIndex == (int)TabIndex.VALUES);
-            CurrentPage = item;
+          //  var item = Items.SingleOrDefault(x => x.TabIndex == (int)TabIndex.VALUES);
+            CurrentPage = LaserStatic;
         }
         public void ActiveMessages()
         {
