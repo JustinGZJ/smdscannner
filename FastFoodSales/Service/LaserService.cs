@@ -185,14 +185,19 @@ namespace DAQ.Service
                         ShiftName = settings.ShiftName
                     };
                     OnLaserHandler(laser);
-                    _factory.GetFileSaver<Laser>((i + 3 * index + 1).ToString()).Save(laser);
-                    _factory.GetFileSaver<Laser>((i + 3 * index + 1).ToString(), @"D:\\SumidaFile\Monitor").Save(laser);
+
                     var qr = LaserRecordsManager.Find(laser.BobbinCode);
                     if (qr != null)
                     {
                         Events.PostWarn($"{qr.BobbinCode} {qr.DateTime} 镭射过了");
                         _ioService.SetOutput((uint)(i + 3 * index), false);
                         _ioService.SetOutput((uint)(6), true);
+
+                    }
+                    else
+                    {
+                        _factory.GetFileSaver<Laser>((i + 3 * index + 1).ToString()).Save(laser);
+                        _factory.GetFileSaver<Laser>((i + 3 * index + 1).ToString(), @"D:\\SumidaFile\Monitor").Save(laser);
                     }
                     LaserRecordsManager.Insert(laserpoco);
                 }
