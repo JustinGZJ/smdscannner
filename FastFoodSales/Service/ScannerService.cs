@@ -218,14 +218,16 @@ namespace DAQ.Service
         {
             try
             {
-                int mIndex = -1;
 
-                for (int i = 0; i < 6; i++)
+                int mIndex=-1;
+                for (int i = 0; i < 3; i++)
                 {
-                    if (ioService.GetInput((uint)i))
+                   mIndex= getSpindle();
+                    if (mIndex !=-1)
                     {
-                        mIndex = i;
+                        break;
                     }
+                    Thread.Sleep(100);
                 }
                 Events.PostInfo($"N5 Scanner:{mIndex}" + e.MessageString);
                 if (mIndex == -1)
@@ -233,16 +235,15 @@ namespace DAQ.Service
                     Events.PostError("G4 轴号未指定");
                     //ioService.SetOutput(N5SCAN_RES_OUT, false);
                     mIndex = 0;
-                    return;
+                    //   return;
                 }
                 if (e.MessageString.Contains("ERROR"))
                 {
-                    Events.PostError("扫码错误");
+                    Events.PostError("N5扫码错误");
                     ioService.SetOutput(N5SCAN_RES_OUT, false);
                     return;
                 }
 
-                ioService.SetOutput(N5SCAN_RES_OUT, true);
                 var settings = Settings.Default;
                 var scan = new Scan
                 {
@@ -260,21 +261,41 @@ namespace DAQ.Service
                 var ret = SaveToMes(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), "FlyWireWindingN5(A)_E201", scan.Shift, scan.Bobbin, "E201", (mIndex + 1).ToString());
                 if (ret != 0)
                 {
+                    Events.PostError("MES上传错误");
                     ioService.SetOutput(N5SCAN_RES_OUT, false);
                 }
+                else
+                {
+                    Events.PostInfo("N5设置扫码结果 1");
+                    ioService.SetOutput(N5SCAN_RES_OUT, true);
+                }
                 Events.PublishOnUIThread(scan);
-                _factory.GetFileSaver<Scan>((mIndex + 1).ToString(), settings.SaveRootPath1).Save(scan);
-                _factory.GetFileSaver<Scan>((mIndex + 1).ToString(), @"D:\\SumidaFile\Monitor\Scan").Save(scan);
             }
             finally
             {
+                Events.PostInfo("N5设置完成信号 1");
                 ioService.SetOutput(N5SCAN_DONE_OUT, true);
                 Thread.Sleep(1000);
+                Events.PostInfo("N5设置完成信号 0");
                 ioService.SetOutput(N5SCAN_DONE_OUT, false);
             }
 
 
         }
 
+        private int getSpindle()
+        {
+            int mIndex = -1;
+
+            for (int i = 0; i < 6; i++)
+            {
+                if (ioService.GetInput((uint)i))
+                {
+                    mIndex = i;
+                }
+            }
+
+            return mIndex;
+        }
     }
 }

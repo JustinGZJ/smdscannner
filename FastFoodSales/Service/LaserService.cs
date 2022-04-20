@@ -27,7 +27,7 @@ namespace DAQ.Service
 
     public class LaserService :IDisposable
     {
-        private const int LASER_REQ = 0;
+        private const int LASERSCAN_REQ = 0;
         private const int STARTLASER_REQ = 1;
         private const int SCAN_RES_OUT = 2;
         private const int LASERSCAN_RES_OUT = 0;
@@ -114,11 +114,14 @@ namespace DAQ.Service
                         Events.PostError("远程IO未连接");
                         await Task.Delay(500);
                     }
-                    input = _ioService.GetInput(LASER_REQ);
+                    input = _ioService.GetInput(LASERSCAN_REQ);
                     if (input)
                     {
+                        Events.PostInfo("开始扫码");
                         GetCode(0);
-                        SpinWait.SpinUntil(() => _ioService.GetInput(LASER_REQ) == false);
+                        Events.PostInfo("等待扫码信号关闭");
+                        SpinWait.SpinUntil(() => _ioService.GetInput(LASERSCAN_REQ) == false);
+                        Events.PostInfo("扫码信号关闭");
                     }
                     await Task.Delay(10);
                 }
@@ -131,20 +134,23 @@ namespace DAQ.Service
                 while (true)
                 {
                     input = _ioService.GetInput(STARTLASER_REQ);
+                 
                     if (input)
                     {
-                        //  GetCode(1);
+                        Events.PostInfo("N1 开始镭射");
                         if (SetLaserCode() != 0)
                         {
-                            //
+                            Events.PostInfo("N1 设置镭射结果为 0");
                             _ioService.SetOutput(SCAN_RES_OUT, false);
                         }
                         else
                         {
-                            //
+                            Events.PostInfo("N1 设置镭射结果为 1");
                             _ioService.SetOutput(SCAN_RES_OUT, true);
                         }
+                        Events.PostInfo("N1 等待镭射请求关闭");
                         SpinWait.SpinUntil(() => _ioService.GetInput(STARTLASER_REQ) == false);
+                        Events.PostInfo("N1 镭射完成");
                     }
                     await Task.Delay(10);
                 }
@@ -158,6 +164,7 @@ namespace DAQ.Service
                 DAQ.wcl.FFTesterServiceClient serviceClient = new wcl.FFTesterServiceClient();
                 string output = "", error = "";
                 string[] code = new string[3];
+                Events.PostInfo("N1 设置镭射完成信号 0");
                 _ioService.SetOutput(LASER_BUSY_OUT, false);
                 for (int i = 0; i < 1; i++)
                 {
@@ -215,7 +222,7 @@ namespace DAQ.Service
             }
             finally
             {
-
+                Events.PostInfo("N1 设置镭射完成信号 1");
                 _ioService.SetOutput(LASER_BUSY_OUT, true);
             }
         }
@@ -228,11 +235,12 @@ namespace DAQ.Service
                 _ioService.SetOutput(LASERSCAN_DUMPLICATE, false);
                 _ioService.SetOutput(LASERSCAN_BUSY_OUT, false);
                 string cmd = $"LON";
-                Events.PostMessage($"SCANNER SEND:{cmd}");
+                Events.PostMessage($"N1 SCANNER SEND:{cmd}");
                 var m1 = _scanner.WriteLineAndGetReply(cmd, TimeSpan.FromMilliseconds(3000));
-                Events.PostMessage($"LASER RECV: {m1.MessageString}");
+                Events.PostMessage($"N1 SCANNER RECV: {m1.MessageString}");
                 if (m1 != null && !m1.MessageString.Contains("ERROR"))
                 {
+                    Events.PostMessage("N1 设置扫码结果信号为 1");
                     _ioService.SetOutput(LASERSCAN_RES_OUT, true);
                     var laser = new Laser
                     {
@@ -270,7 +278,9 @@ namespace DAQ.Service
                     if (qr != null)
                     {
                         Events.PostWarn($"{qr.BobbinCode} {qr.DateTime} 镭射过了");
+                        Events.PostMessage("N1 设置扫码结果信号为 0");
                         _ioService.SetOutput((uint)LASERSCAN_RES_OUT, false);
+                        Events.PostMessage("N1 设置扫码重码信号为 1");
                         _ioService.SetOutput((uint)LASERSCAN_DUMPLICATE, true);
                     }
                     else
@@ -279,9 +289,10 @@ namespace DAQ.Service
                     }
 
                     var ret = SaveToMes(DateTime.Now.ToString("yyyy:MM:dd HH:mm:ss"), DateTime.Now.ToString("yyyy:MM:dd HH:mm:ss"), laser.Station, laser.Shift, laser.BobbinCode, laser.LineNo);
-                    Events.PostWarn("SHOPFLOW返回值" + ret.ToString());
+                    Events.PostWarn("N1 SHOPFLOW返回值" + ret.ToString());
                     if (ret != 0)
                     {
+                        Events.PostMessage("N1 设置扫码结果信号为 0");
                         _ioService.SetOutput((uint)LASERSCAN_RES_OUT, false);
                     }
                     //  tester.SaveResult(
@@ -289,6 +300,7 @@ namespace DAQ.Service
                 }
                 else
                 {
+                    Events.PostMessage("N1 设置扫码结果信号为 0");
                     _ioService.SetOutput(LASERSCAN_RES_OUT, false);
                 }
 
