@@ -118,131 +118,111 @@ namespace DAQ.Service
             {
                 for (int i = 0; i < 6; i++)
                 {
-                    int ngCount=0;  //ABB模式  OK X X PASS | NG OK OK PASS | NG NG X FAIL'
-                    int okCount=0;
-                    for (int j = 0; j < 3; j++)
+                    int ngCount = 0;  //ABB模式  OK X X PASS | NG OK OK PASS | NG NG X FAIL'
+                    int okCount = 0;
+                    //for (int j = 0; j < 3; j++)
+                    //{
+                    string cmd = $"WX,Check2DCode=1,{locations[i]}{Environment.NewLine}";
+                    Events.PostMessage($"LASER SEND:{cmd}");
+                    var m1 = _laserClient.WriteLineAndGetReply(cmd, TimeSpan.FromMilliseconds(3000));
+                    if (m1 != null)
                     {
-                        string cmd = $"WX,Check2DCode=1,{locations[i]}{Environment.NewLine}";
-                        Events.PostMessage($"LASER SEND:{cmd}");
-                        var m1 = _laserClient.WriteLineAndGetReply(cmd, TimeSpan.FromMilliseconds(3000));
-                        if (m1 != null)
+                        Events.PostMessage($"LASER RECV: {m1.MessageString}");
+                        var splits = m1.MessageString.Split(',');
+                        var nunit = i + 1;
+
+                        if (splits.Length >= 3)
                         {
-                            Events.PostMessage($"LASER RECV: {m1.MessageString}");
-                            var splits = m1.MessageString.Split(',');
-                            var nunit = i + 1;
-                            
-                            if (splits.Length >= 3)
+                            if (m1.MessageString.ToUpper().Contains("WX,OK"))
                             {
-                                if (m1.MessageString.ToUpper().Contains("WX,OK"))
+                                //if (!(splits[2].Contains("A") || splits[2].Contains("B")))
+                                //{
+                                //    ngCount++;
+                                //    Events.PostMessage($"扫码等级不合格：{ngCount}");
+                                //}
+                                //else
+                                //{
+                                //    okCount++;
+                                //}
+                                //Events.PostMessage($"OK次数{okCount},NG次数{ngCount}");
+                                bool judge = true;
+                                Events.PostMessage($"扫码判定：{judge}");
+                                _ioService.SetOutput((uint)(i), judge);
+                                var laser = new Laser
                                 {
-                                    if (!(splits[2].Contains("A") || splits[2].Contains("B")))
-                                    {   
-                                        ngCount++;
-                                        Events.PostMessage($"扫码等级不合格：{ngCount}");
+                                    BobbinCode = splits[3].Trim('\r', '\n'),
+                                    BobbinLotNo = settings.BobbinLotNo,
+                                    LineNo = settings.LineNo,
+                                    Shift = settings.Shift,
+                                    CodeQuality = splits[2],
+                                    ProductionOrder = settings.ProductionOrder,
+                                    BobbinPartName = settings.BobbinPartName,
+                                    EmployeeNo = settings.EmployeeNo,
+                                    MachineNo = settings.MachineNo,
+                                    BobbinCavityNo = settings.BobbinCavityNo,
+                                    BobbinToolNo = settings.BobbinToolNo,
+                                    ShiftName = settings.ShiftName
+                                };
+                                var laserpoco = new LaserPoco
+                                {
+                                    BobbinCode = laser.BobbinCode,
+                                    BobbinLotNo = settings.BobbinLotNo,
+                                    LineNo = settings.LineNo,
+                                    Shift = settings.Shift,
+                                    CodeQuality = laser.CodeQuality,
+                                    ProductionOrder = settings.ProductionOrder,
+                                    EmployeeNo = settings.EmployeeNo,
+                                    MachineNo = settings.MachineNo,
+                                    BobbinPartName = settings.BobbinPartName,
+                                    BobbinCavityNo = settings.BobbinCavityNo,
+                                    BobbinToolNo = settings.BobbinToolNo,
+                                    ShiftName = settings.ShiftName
+                                };
+
+
+                                if (judge)
+                                {
+
+                                    var qr = LaserRecordsManager.Find(laser.BobbinCode);
+                                    if (qr != null)
+                                    {
+                                        Events.PostWarn($"{qr.BobbinCode} {qr.DateTime} 镭射过了");
+                                        _ioService.SetOutput((uint)(i), false);
+                                        _ioService.SetOutput((uint)(6), true);
                                     }
                                     else
                                     {
-                                        okCount++;
+                                        OnLaserHandler(laser);
+                                        _factory.GetFileSaver<Laser>((nunit).ToString()).Save(laser);
+                                        _factory.GetFileSaver<Laser>((nunit).ToString(), @"D:\\SumidaFile\Monitor").Save(laser);
                                     }
-                                    Events.PostMessage($"OK次数{okCount},NG次数{ngCount}");
-                                    bool judge=false;
-                                    if (ngCount == 1)
-                                    {
-                                        if(okCount<2)
-                                        {
-                                            Events.PostMessage($"重新扫码");
-                                            continue;
-                                        }
-                                        else
-                                        {
-                                            judge=true;
-                                        }
-                                    }
-                                    if (ngCount > 1)
-                                    {
-                                        judge=false;
-                                    }
-                                    if (ngCount == 0 && okCount > 0)
-                                    {
-                                        judge=true;
-                                    }  
-                                    Events.PostMessage($"扫码判定：{judge}");
-                                    _ioService.SetOutput((uint)(i), judge);  
-                                    var laser = new Laser
-                                    {
-                                        BobbinCode = splits[3].Trim('\r', '\n'),
-                                        BobbinLotNo = settings.BobbinLotNo,
-                                        LineNo = settings.LineNo,
-                                        Shift = settings.Shift,
-                                        CodeQuality = splits[2],
-                                        ProductionOrder = settings.ProductionOrder,
-                                        BobbinPartName = settings.BobbinPartName,
-                                        EmployeeNo = settings.EmployeeNo,
-                                        MachineNo = settings.MachineNo,
-                                        BobbinCavityNo = settings.BobbinCavityNo,
-                                        BobbinToolNo = settings.BobbinToolNo,
-                                        ShiftName = settings.ShiftName
-                                    };
-                                    var laserpoco = new LaserPoco
-                                    {
-                                        BobbinCode = laser.BobbinCode,
-                                        BobbinLotNo = settings.BobbinLotNo,
-                                        LineNo = settings.LineNo,
-                                        Shift = settings.Shift,
-                                        CodeQuality = laser.CodeQuality,
-                                        ProductionOrder = settings.ProductionOrder,
-                                        EmployeeNo = settings.EmployeeNo,
-                                        MachineNo = settings.MachineNo,
-                                        BobbinPartName = settings.BobbinPartName,
-                                        BobbinCavityNo = settings.BobbinCavityNo,
-                                        BobbinToolNo = settings.BobbinToolNo,
-                                        ShiftName = settings.ShiftName
-                                    };
-     
-
-                                    if (judge)
-                                    {
-                           
-                                        var qr = LaserRecordsManager.Find(laser.BobbinCode);
-                                        if (qr != null)
-                                        {
-                                            Events.PostWarn($"{qr.BobbinCode} {qr.DateTime} 镭射过了");
-                                            _ioService.SetOutput((uint)(i), false);
-                                            _ioService.SetOutput((uint)(6), true);
-                                        }
-                                        else
-                                        {
-                                            OnLaserHandler(laser);
-                                            _factory.GetFileSaver<Laser>((nunit).ToString()).Save(laser);
-                                            _factory.GetFileSaver<Laser>((nunit).ToString(), @"D:\\SumidaFile\Monitor").Save(laser);
-                                        }
-                                        LaserRecordsManager.Insert(laserpoco);
-                                    }
-
-                                    break;
+                                    LaserRecordsManager.Insert(laserpoco);
                                 }
-                                else
-                                {
-                                    cmd = $"UY,{settings.MarkingNo.ToString().PadLeft(3, '0')},{(nunit - 1).ToString().PadLeft(3, '0')},0{Environment.NewLine}";
-                                    Events.PostMessage($"LASER SEND: {cmd}");
-                                    var reply = _laserClient.WriteLineAndGetReply(cmd, TimeSpan.FromMilliseconds(2000));
-                                    if (reply == null) return;
-                                    Events.PostMessage($"LASER RECV: {reply.MessageString}");
-                                    SaveLaserLog2(reply, nunit);
-                                    break;
-                                }
+
+                                break;
                             }
                             else
                             {
-                                Events.PostError(new Exception("Format error " + splits[2]));
+                                cmd = $"UY,{settings.MarkingNo.ToString().PadLeft(3, '0')},{(nunit - 1).ToString().PadLeft(3, '0')},0{Environment.NewLine}";
+                                Events.PostMessage($"LASER SEND: {cmd}");
+                                var reply = _laserClient.WriteLineAndGetReply(cmd, TimeSpan.FromMilliseconds(2000));
+                                if (reply == null) return;
+                                Events.PostMessage($"LASER RECV: {reply.MessageString}");
+                                SaveLaserLog2(reply, nunit);
                                 break;
                             }
                         }
+                        else
+                        {
+                            Events.PostError(new Exception("Format error " + splits[2]));
+                            break;
+                        }
                     }
-
-
-
                 }
+
+
+
+                //   }
             }
             catch (Exception ex)
             {
@@ -287,7 +267,7 @@ namespace DAQ.Service
                                 BobbinToolNo = settings.BobbinToolNo,
                                 ShiftName = settings.ShiftName
                             };
-      
+
 
 
                             OnLaserHandler(laser);
