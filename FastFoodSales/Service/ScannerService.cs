@@ -72,10 +72,6 @@ namespace DAQ.Service
             this.ioService = new IoService("192.168.0.241");
             this._factory = factory;
             CreateServer();
-            for (int i = 0; i < 2; i++)
-            {
-                this.ioService.SetOutput((uint)i, false);
-            }
         }
 
 
@@ -277,17 +273,11 @@ namespace DAQ.Service
             }
             finally
             {
-                Events.PostInfo("N5等待 DI7 OFF");
-                SpinWait.SpinUntil(() => !ioService.GetInput(7));
-                Events.PostInfo("N5设置完成信号 ON");
+                Events.PostInfo("N5设置完成信号 1");
                 ioService.SetOutput(N5SCAN_DONE_OUT, true);
-                Events.PostInfo("N5等待 DI7 ON");
-                SpinWait.SpinUntil(() => ioService.GetInput(7));
-                Events.PostInfo("N5设置完成信号 OFF");
+                Thread.Sleep(1000);
+                Events.PostInfo("N5设置完成信号 0");
                 ioService.SetOutput(N5SCAN_DONE_OUT, false);
-                Events.PostInfo("N5等待 DI7 OFF");
-                SpinWait.SpinUntil(() => !ioService.GetInput(7));
-                Events.PostInfo("N5完成");
             }
 
 
