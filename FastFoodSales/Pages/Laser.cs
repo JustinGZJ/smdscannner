@@ -8,7 +8,7 @@ namespace DAQ.Pages
     [SubFilePath("Laser")]
     public class Laser
     {
-        [DisplayName("No.")] public int No { get; set; } = 1;
+        [DisplayName("No.")] public int No { get; set; } = 0;
         [DisplayName("Bobbin Code")]
         public string BobbinCode { get; set; }
         [DisplayName("Code Quality")]
