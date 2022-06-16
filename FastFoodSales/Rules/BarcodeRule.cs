@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,11 +29,31 @@ namespace DAQ.Rules
             return new ValidationResult(true, null);
         }
     }
+    public class AppConfig
+    {
+        public string[] BobinPartRule { get; set; } = new string[] { "BASE-PTS2817/CE-4P+LT" };
+    }
+
+
 
     public class BobinPartNameRule : ValidationRule
     {
+        IConfigureFile config;
+        public BobinPartNameRule()
+        {
 
-        string[] barcodes = new string[] { "BASE-NFC9015/CE-4P+LS"};
+            config = new ConfigureFile().Load();
+            if (config.GetValue<AppConfig>(nameof(AppConfig)) == null)
+            {
+                config.SetValue<AppConfig>(nameof(AppConfig), new AppConfig());
+            }
+            this.barcodes = config.GetValue<AppConfig>(nameof(AppConfig)).BobinPartRule;
+            //  config.GetValue<>
+        }
+
+        string[] barcodes = new string[] { "BASE-PTS2817/CE-4P+LT" };
+        private readonly IConfigureFile configure;
+
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
             if (value == null)
@@ -43,7 +64,7 @@ namespace DAQ.Rules
             {
                 if (!barcodes.Any(x => v.Contains(x)))
                 {
-                    return new ValidationResult(false, "数据不匹配 BASE-NFC9518/CE-4P+LS");
+                    return new ValidationResult(false, $"数据不匹配,{string.Join(",", barcodes)}");
                 }
             }
             return new ValidationResult(true, null);

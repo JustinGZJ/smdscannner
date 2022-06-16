@@ -30,10 +30,10 @@ namespace DAQ.Pages
         public string BobbinLotNo { get; set; }
         [DisplayName("Bobbin Part Name")]
         public string BobbinPartName { get; set; }
-        [DisplayName("Bobbin tool number")]
-        public string BobbinToolNo { get; set; }
-        [DisplayName("Bobbin cavity number")]
-        public string BobbinCavityNo { get; set; }
+        //[DisplayName("Bobbin tool number")]
+        //public string BobbinToolNo { get; set; }
+        //[DisplayName("Bobbin cavity number")]
+        //public string BobbinCavityNo { get; set; }
 
     }
 
@@ -65,9 +65,9 @@ namespace DAQ.Pages
         public string BobbinLotNo { get; set; }
         [DisplayName("Bobbin Part Name")]
         public string BobbinPartName { get; set; }
-        [DisplayName("Bobbin tool number")]
-        public string BobbinToolNo { get; set; }
-        [DisplayName("Bobbin cavity number")]
-        public string BobbinCavityNo { get; set; }
+        //[DisplayName("Bobbin tool number")]
+        //public string BobbinToolNo { get; set; }
+        //[DisplayName("Bobbin cavity number")]
+        //public string BobbinCavityNo { get; set; }
     }
 }

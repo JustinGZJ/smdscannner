@@ -159,8 +159,8 @@ namespace DAQ.Service
                                     BobbinPartName = settings.BobbinPartName,
                                     EmployeeNo = settings.EmployeeNo,
                                     MachineNo = settings.MachineNo,
-                                    BobbinCavityNo = settings.BobbinCavityNo,
-                                    BobbinToolNo = settings.BobbinToolNo,
+                                   // BobbinCavityNo = settings.BobbinCavityNo,
+                                   // BobbinToolNo = settings.BobbinToolNo,
                                     ShiftName = settings.ShiftName
                                 };
                                 var laserpoco = new LaserPoco
@@ -174,8 +174,8 @@ namespace DAQ.Service
                                     EmployeeNo = settings.EmployeeNo,
                                     MachineNo = settings.MachineNo,
                                     BobbinPartName = settings.BobbinPartName,
-                                    BobbinCavityNo = settings.BobbinCavityNo,
-                                    BobbinToolNo = settings.BobbinToolNo,
+                                 //   BobbinCavityNo = settings.BobbinCavityNo,
+                                   // BobbinToolNo = settings.BobbinToolNo,
                                     ShiftName = settings.ShiftName
                                 };
 
@@ -263,8 +263,8 @@ namespace DAQ.Service
                                 EmployeeNo = settings.EmployeeNo,
                                 MachineNo = settings.MachineNo,
                                 BobbinPartName = settings.BobbinPartName,
-                                BobbinCavityNo = settings.BobbinCavityNo,
-                                BobbinToolNo = settings.BobbinToolNo,
+                               // BobbinCavityNo = settings.BobbinCavityNo,
+                               //BobbinToolNo = settings.BobbinToolNo,
                                 ShiftName = settings.ShiftName
                             };
 
@@ -307,10 +307,13 @@ namespace DAQ.Service
         IMongoCollection<LaserPoco> collection;
         public LaserRecordsManager(string connStr = "mongodb://127.0.0.1:27017")
         {
+            try { 
                 this.connStr = connStr;
                 client = new MongoClient(connStr);
                 database = client.GetDatabase("smd");
                 collection = database.GetCollection<LaserPoco>("laser");
+            }
+            catch { }
         }
 
         public void Insert(LaserPoco laser)

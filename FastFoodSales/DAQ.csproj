@@ -396,6 +396,7 @@
     <Compile Include="Service\ScannerService.cs" />
     <Compile Include="Service\TestSpecViewModel.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="Settings\Configure.cs" />
     <Page Include="Pages\AboutView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
