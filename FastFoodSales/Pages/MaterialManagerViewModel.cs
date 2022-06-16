@@ -12,10 +12,18 @@ namespace DAQ.Pages
     public class MaterialManagerViewModel
     {
         public MaterialManager Manager { get; }
-
-        public MaterialManagerViewModel()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="configure"></param>
+        public MaterialManagerViewModel(IConfigureFile configure)
         {
-            Manager = MaterialManager.Load();
+            Manager = configure.GetValue<MaterialManager>(nameof(MaterialManager));
+            if (Manager==null)
+            {
+                configure.SetValue<MaterialManager>(nameof(MaterialManager), new MaterialManager());
+                Manager = configure.GetValue<MaterialManager>(nameof(MaterialManager));
+            }
         }
 
     }

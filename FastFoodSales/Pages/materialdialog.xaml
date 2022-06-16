@@ -158,7 +158,7 @@
                                 
                            二维码1坐标 Laser Location 1
                             </TextBlock>
-                            <TextBox Text="{Binding LaserLoc1}"
+                            <TextBox Text="{Binding MaterialManager.Manager.LaserLocations[0]}"
                                  Margin="0 8 0 0"
                                  HorizontalAlignment="Stretch"
                         />
@@ -167,7 +167,7 @@
                             <TextBlock>
                           二维码2坐标  Laser Location 2
                             </TextBlock>
-                            <TextBox Text="{Binding LaserLoc2}"
+                            <TextBox Text="{Binding MaterialManager.Manager.LaserLocations[1]}"
                                  Margin="0 8 0 0"
                                  HorizontalAlignment="Stretch"
                         />
@@ -176,7 +176,7 @@
                             <TextBlock>
                           二维码3坐标  Laser Location 3
                             </TextBlock>
-                            <TextBox Text="{Binding LaserLoc3}"
+                            <TextBox Text="{Binding MaterialManager.Manager.LaserLocations[2]}"
                                  Margin="0 8 0 0"
                                  HorizontalAlignment="Stretch"
                         />
@@ -186,7 +186,7 @@
                                 
                            二维码4坐标 Laser Location 4
                             </TextBlock>
-                            <TextBox Text="{Binding LaserLoc4}"
+                            <TextBox Text="{Binding MaterialManager.Manager.LaserLocations[3]}"
                                  Margin="0 8 0 0"
                                  HorizontalAlignment="Stretch"
                         />
@@ -195,7 +195,7 @@
                             <TextBlock>
                           二维码5坐标  Laser Location 25
                             </TextBlock>
-                            <TextBox Text="{Binding LaserLoc5}"
+                            <TextBox Text="{Binding MaterialManager.Manager.LaserLocations[4]}"
                                  Margin="0 8 0 0"
                                  HorizontalAlignment="Stretch"
                         />
@@ -204,7 +204,7 @@
                             <TextBlock>
                           二维码6坐标  Laser Location 6
                             </TextBlock>
-                            <TextBox Text="{Binding LaserLoc6}"
+                            <TextBox Text="{Binding MaterialManager.Manager.LaserLocations[5]}"
                                  Margin="0 8 0 0"
                                  HorizontalAlignment="Stretch"
                         />

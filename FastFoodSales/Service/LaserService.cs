@@ -26,6 +26,7 @@ namespace DAQ.Service
     {
         IEventAggregator Events;
         private readonly FileSaverFactory _factory;
+        private readonly IConfigureFile configure;
         SimpleTcpClient _laserClient = null;
         LaserRecordsManager LaserRecordsManager;
 
@@ -34,10 +35,11 @@ namespace DAQ.Service
         private IIoService _ioService;
         public event EventHandler<Laser> LaserHandler;
 
-        public LaserService([Inject] IEventAggregator @event, [Inject] IIoService ioService, [Inject] FileSaverFactory factory)
+        public LaserService([Inject] IEventAggregator @event, [Inject] IIoService ioService, [Inject] FileSaverFactory factory,[Inject] IConfigureFile configure)
         {
             Events = @event;
             _factory = factory;
+            this.configure = configure;
             _ioService = ioService;
             LaserRecordsManager = new LaserRecordsManager();
         }
@@ -106,7 +108,7 @@ namespace DAQ.Service
 
         public void GetLaserData()
         {
-            var locations = new string[] { settings.LaserLoc1, settings.LaserLoc2, settings.LaserLoc3, settings.LaserLoc4, settings.LaserLoc5, settings.LaserLoc6 };
+            var locations = configure.GetValue<MaterialManager>(nameof(MaterialManager)).LaserLocations;
             for (uint i = 0; i < 8; i++)
             {
                 _ioService.SetOutput(i, false);
@@ -135,19 +137,8 @@ namespace DAQ.Service
                         {
                             if (m1.MessageString.ToUpper().Contains("WX,OK"))
                             {
-                                //if (!(splits[2].Contains("A") || splits[2].Contains("B")))
-                                //{
-                                //    ngCount++;
-                                //    Events.PostMessage($"扫码等级不合格：{ngCount}");
-                                //}
-                                //else
-                                //{
-                                //    okCount++;
-                                //}
-                                //Events.PostMessage($"OK次数{okCount},NG次数{ngCount}");
-                                bool judge = true;
-                                Events.PostMessage($"扫码判定：{judge}");
-                                _ioService.SetOutput((uint)(i), judge);
+                                Events.PostMessage($"扫码判定：{true}");
+                                _ioService.SetOutput((uint)(i), true);
                                 var laser = new Laser
                                 {
                                     BobbinCode = splits[3].Trim('\r', '\n'),
@@ -174,14 +165,11 @@ namespace DAQ.Service
                                     EmployeeNo = settings.EmployeeNo,
                                     MachineNo = settings.MachineNo,
                                     BobbinPartName = settings.BobbinPartName,
-                                 //   BobbinCavityNo = settings.BobbinCavityNo,
+                                 //  BobbinCavityNo = settings.BobbinCavityNo,
                                    // BobbinToolNo = settings.BobbinToolNo,
                                     ShiftName = settings.ShiftName
                                 };
 
-
-                                if (judge)
-                                {
 
                                     var qr = LaserRecordsManager.Find(laser.BobbinCode);
                                     if (qr != null)
@@ -193,13 +181,11 @@ namespace DAQ.Service
                                     else
                                     {
                                         OnLaserHandler(laser);
-                                        _factory.GetFileSaver<Laser>((nunit).ToString()).Save(laser);
-                                        _factory.GetFileSaver<Laser>((nunit).ToString(), @"D:\\SumidaFile\Monitor").Save(laser);
-                                    }
-                                    LaserRecordsManager.Insert(laserpoco);
+                                  _factory.GetFileSaver<Laser>((nunit).ToString()).Save(laser);
+                                    _factory.GetFileSaver<Laser>((nunit).ToString(), @"D:\\SumidaFile\Monitor").Save(laser);
                                 }
-
-                                break;
+                                    LaserRecordsManager.Insert(laserpoco);
+              
                             }
                             else
                             {
@@ -209,13 +195,13 @@ namespace DAQ.Service
                                 if (reply == null) return;
                                 Events.PostMessage($"LASER RECV: {reply.MessageString}");
                                 SaveLaserLog2(reply, nunit);
-                                break;
+                     
                             }
                         }
                         else
                         {
                             Events.PostError(new Exception("Format error " + splits[2]));
-                            break;
+        
                         }
                     }
                 }
@@ -305,6 +291,10 @@ namespace DAQ.Service
         MongoClient client;
         IMongoDatabase database;
         IMongoCollection<LaserPoco> collection;
+        /// <summary>
+        /// 数据库连接
+        /// </summary>
+        /// <param name="connStr"></param>
         public LaserRecordsManager(string connStr = "mongodb://127.0.0.1:27017")
         {
             try { 
@@ -316,11 +306,19 @@ namespace DAQ.Service
             catch { }
         }
 
+        /// <summary>
+        /// 插入数据
+        /// </summary>
+        /// <param name="laser"></param>
         public void Insert(LaserPoco laser)
         {
             collection.InsertOne(laser);
         }
-
+        /// <summary>
+        /// 查询数据
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
         public LaserPoco Find(string code)
         {
             return collection.AsQueryable().FirstOrDefault(x => x.BobbinCode == code);

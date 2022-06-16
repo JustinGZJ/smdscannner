@@ -86,6 +86,10 @@ namespace DAQ.Pages
         private MaterialManager _materialManager;
 
         public string ScanRate { get; set; } = "100.00%";
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="message"></param>
         public void Handle(string message)
         {
             var splits=message.Split(',');

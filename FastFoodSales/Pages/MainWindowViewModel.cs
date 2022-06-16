@@ -35,12 +35,23 @@ namespace DAQ
 
 
         Settings settings = Properties.Settings.Default;
-        public LaserStaticViewModel LaserStatic { get; }
+        private readonly MaterialManagerViewModel materialManager;
+        private readonly IConfigureFile configure;
 
-        public MainWindowViewModel([Inject] IEnumerable<IMainTabViewModel> mainTabs, [Inject] LaserStaticViewModel laserStatic)
+        public LaserStaticViewModel LaserStatic { get; }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="mainTabs"></param>
+        /// <param name="laserStatic"></param>
+        /// <param name="MaterialManager"></param>
+        /// <param name="configure"></param>
+        public MainWindowViewModel([Inject] IEnumerable<IMainTabViewModel> mainTabs, [Inject] LaserStaticViewModel laserStatic,[Inject] MaterialManagerViewModel MaterialManager,[Inject] IConfigureFile configure)
         {
             Items.AddRange(mainTabs.Where(x => x.Visible == true).OrderBy(x => x.TabIndex));
             LaserStatic = laserStatic;
+            materialManager = MaterialManager;
+            this.configure = configure;
         }
         public string BobbinCavityNo
         {
@@ -176,7 +187,14 @@ namespace DAQ
                 settings.Save();
             }
         }
-        public MaterialManagerViewModel MaterialManager =>new MaterialManagerViewModel();
+
+        public MaterialManagerViewModel MaterialManager => materialManager;
+
+        //   public MaterialManagerViewModel MaterialManager =>new MaterialManagerViewModel();
+        /// <summary>
+        /// 异步加载
+        /// </summary>
+        /// <returns></returns>
         public async Task ShowSettingDialog()
         {
 
@@ -185,35 +203,50 @@ namespace DAQ
                 DataContext = MaterialManager
             };
             await DialogHost.Show(dialog, "root", ((sender, args) => { }),
-                ((sender, args) => { MaterialManager.Manager.Save(); }));
+                ((sender, args) => {
+                    configure.SetValue(nameof(MaterialManager), MaterialManager.Manager);
+                }));
         }
 
+        /// <summary>
+        /// 异步加载页面
+        /// </summary>
+        /// <returns></returns>
         public async Task ShowUserSetting()
         {
             var dialog=new materialdialog();
             dialog.DataContext = this;
-            await DialogHost.Show(dialog,closingEventHandler:(s,e)=>MaterialManager.Manager.Save());
+            await DialogHost.Show(dialog, closingEventHandler: (s, e) => configure.SetValue<MaterialManager>(nameof(MaterialManager),MaterialManager.Manager));
         }
 
 
-
+        /// <summary>
+        /// 
+        /// </summary>
         protected override void OnInitialActivate()
         {
             ActiveMessages();
             base.OnInitialActivate();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public void ShowSetting()
         {
           var item= Items.SingleOrDefault(x => x.TabIndex == (int) TabIndex.SETTING);
             ActivateItem(item);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public void ActiveValues()
         {
             //  var item = Items.SingleOrDefault(x => x.TabIndex == (int)TabIndex.VALUES);
             CurrentPage = LaserStatic;
         }
+        /// <summary>
+        /// 
+        /// </summary>
         public void ActiveMessages()
         {
             var item = Items.SingleOrDefault(x => x.TabIndex == (int)TabIndex.MESSAGES);

@@ -19,33 +19,21 @@ namespace DAQ.Service
 
         public string[] FlyWires { get; set; } = new string[8];
         public string[] Tubes { get; set; } = new string[8];
-
-        public MaterialManager Save()
-        {
-            Settings.Default.Materials = JsonConvert.SerializeObject(this);
-            Settings.Default.Save();
-            return this;
-        }
-
+        /// <summary>
+        /// 6个二维码
+        /// </summary>
+        public string[] LaserLocations { get; set; } = new string[8];
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        /// <exception cref="OutOfMemoryException"></exception>
         public (string, string) GetMaterial(int index)
         {
             if (index > 7 || index < 0)
                 throw new OutOfMemoryException("index mush be between 0 and 7");
             return (FlyWires[index], Tubes[index]);
-        }
-
-        public static MaterialManager Load()
-        {
-            MaterialManager m;
-            try
-            {
-                m = JsonConvert.DeserializeObject<MaterialManager>(Settings.Default.Materials)?? new MaterialManager();
-            }
-            catch (Exception e)
-            {
-                m = new MaterialManager();
-            }
-            return m;
         }
     }
 
@@ -62,7 +50,9 @@ namespace DAQ.Service
 
 
 
-
+        /// <summary>
+        /// 
+        /// </summary>
         public void CreateServer()
         {
 
@@ -81,7 +71,11 @@ namespace DAQ.Service
         {
             _server?.Stop();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Client_DelimiterDataReceived(object sender, Message e)
         {
             try
