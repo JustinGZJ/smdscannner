@@ -25,7 +25,15 @@ namespace DAQ
             InitializeComponent();
         }
 
-        private void Bell_Click(object sender, RoutedEventArgs e)
+
+        //最小化按钮事件
+        private void Min_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+        
+    //
+    private void Bell_Click(object sender, RoutedEventArgs e)
         {
             if (G_MSG.Width < 250)
             {
@@ -42,6 +50,7 @@ namespace DAQ
             Application.Current.Shutdown();
         }
        
+        
         private void Grid_MouseMove(object sender, MouseEventArgs e)
         {        
                 Dispatcher.BeginInvoke(new Action(() =>

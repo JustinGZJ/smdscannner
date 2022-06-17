@@ -56,10 +56,11 @@
                 <Button x:Name="Settings" ToolTip="设置" Foreground="DarkGray" Background="{x:Null}" BorderBrush="{x:Null}"   Command="{s:Action ShowUserSetting}">
                     <materialDesign:PackIcon Kind="Settings"/>
                 </Button>
+                <Button x:Name="BtnMin" Foreground="DarkGray" Content="—" Click="Min_Click" Background="{x:Null}" BorderBrush="{x:Null}"  />
                 <Button x:Name="Power" Foreground="DarkGray" Background="{x:Null}" BorderBrush="{x:Null}" Click="Power_Click">
                     <materialDesign:PackIcon Kind="Power"/>
                 </Button>
-                
+              
             </StackPanel>
             <Grid  Margin="20,35,20,20" Grid.Column="1" Grid.Row="1" >
                 <Grid.ColumnDefinitions>
