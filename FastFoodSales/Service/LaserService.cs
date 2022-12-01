@@ -273,20 +273,20 @@ namespace DAQ.Service
                         ShiftName = settings.ShiftName
                     };
                     OnLaserHandler(laser);
-                    _factory.GetFileSaver<Laser>((1).ToString()).Save(laser);
-                    var qr = LaserRecordsManager.Find(laser.BobbinCode);
-                    if (qr != null)
-                    {
-                        Events.PostWarn($"{qr.BobbinCode} {qr.DateTime} 镭射过了");
-                        Events.PostMessage("N1 设置扫码结果信号为 0");
-                        _ioService.SetOutput((uint)LASERSCAN_RES_OUT, false);
-                        Events.PostMessage("N1 设置扫码重码信号为 1");
-                        _ioService.SetOutput((uint)LASERSCAN_DUMPLICATE, true);
-                    }
-                    else
-                    {
-                        LaserRecordsManager.Insert(laserpoco);
-                    }
+                 //   _factory.GetFileSaver<Laser>((1).ToString()).Save(laser);
+                    //var qr = LaserRecordsManager.Find(laser.BobbinCode);
+                    //if (qr != null)
+                    //{
+                    //    Events.PostWarn($"{qr.BobbinCode} {qr.DateTime} 镭射过了");
+                    //    Events.PostMessage("N1 设置扫码结果信号为 0");
+                    //    _ioService.SetOutput((uint)LASERSCAN_RES_OUT, false);
+                    //    Events.PostMessage("N1 设置扫码重码信号为 1");
+                    //    _ioService.SetOutput((uint)LASERSCAN_DUMPLICATE, true);
+                    //}
+                    //else
+                    //{
+                    //    LaserRecordsManager.Insert(laserpoco);
+                    //}
 
                     var ret = SaveToMes(DateTime.Now.ToString("yyyy:MM:dd HH:mm:ss"), DateTime.Now.ToString("yyyy:MM:dd HH:mm:ss"), laser.Station, laser.Shift, laser.BobbinCode, laser.LineNo);
                     Events.PostWarn("N1 SHOPFLOW返回值" + ret.ToString());
