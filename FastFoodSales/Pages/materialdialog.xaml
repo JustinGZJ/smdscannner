@@ -108,15 +108,7 @@
                             </TextBlock>
                             <TextBox
                                  Margin="0 8 0 0"
-                                 HorizontalAlignment="Stretch"
-                             >
-                                <TextBox.Text>
-                                    <Binding Path="BobbinPartName" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
-                                        <Binding.ValidationRules>
-                                            <rules:BarcodeRule/>
-                                        </Binding.ValidationRules>
-                                    </Binding>
-                                </TextBox.Text>
+                                 HorizontalAlignment="Stretch" Text="{Binding BobbinPartName}">
                             </TextBox>
                         </StackPanel>
                         <StackPanel Margin="10">

@@ -11,6 +11,7 @@ using DAQ.Properties;
 using DAQ.Pages;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Linq;
 
 namespace DAQ.Service
 {
@@ -55,6 +56,80 @@ namespace DAQ.Service
         {
             _server?.Stop();
         }
+        private void Client_DelimiterDataReceived(object sender, Message e)
+        {
+            try
+            {
+                int num = -1;
+                foreach (uint pin in Enumerable.Range(0, 6))
+                {
+                    if (this.ioService.GetInput(pin))
+                    {
+                        num = (int)pin;
+                    }
+                }
+
+                this.Events.PostInfo($"N5 Scanner:{num}{e.MessageString}");
+
+                if (num == -1)
+                {
+                    this.Events.PostError("G4 轴号未指定");
+                    this.ioService.SetOutput(0U, false);
+                    return;
+                }
+
+                if (e.MessageString.Contains("ERROR"))
+                {
+                    this.Events.PostError("扫码错误");
+                    this.ioService.SetOutput(0U, false);
+                    return;
+                }
+
+                LaserPoco laserPoco = this.LaserRecordsManager.Find(e.MessageString);
+                if (laserPoco != null)
+                {
+                    this.Events.PostError($"{laserPoco.BobbinCode} :{laserPoco.DateTime:G} 扫过了。 ");
+                    this.ioService.SetOutput(0U, false);
+                    return;
+                }
+
+                this.ioService.SetOutput(0U, true);
+
+                Settings @default = Settings.Default;
+
+                Scan scan = new Scan
+                {
+                    Bobbin = e.MessageString,
+                    Shift = @default.Shift1 ?? "",
+                    ShiftName = @default.ShiftName1 ?? "",
+                    Station = @default.Station1 ?? "",
+                    Production = @default.ProductionOrder1 ?? "",
+                    LineNo = @default.LineNo1 ?? "",
+                    MachineNo = @default.MachineNo1 ?? "",
+                    EmployeeNo = @default.EmployeeNo1 ?? "",
+                    SpindleNo = (num + 1).ToString(),
+                    FlyWireLotNo = this._materialManager.FlyWires[num],
+                    TubeLotNo = this._materialManager.Tubes[num]
+                };
+
+                this.LaserRecordsManager.Insert(new LaserPoco
+                {
+                    BobbinCode = scan.Bobbin
+                });
+
+                EventAggregatorExtensions.PublishOnUIThread(this.Events, scan, Array.Empty<string>());
+
+                this._factory.GetFileSaver<Scan>((num + 1).ToString(), @default.SaveRootPath1).Save(scan);
+                this._factory.GetFileSaver<Scan>((num + 1).ToString(), "D:\\SumidaFile\\Scan").Save(scan);
+            }
+            finally
+            {
+                this.ioService.SetOutput(1U, true);
+                SpinWait.SpinUntil(() => this.ioService.GetInput(7U), 5000);
+                this.ioService.SetOutput(1U, false);
+            }
+        }
+
 
         private void Client_DelimiterDataReceived(object sender, Message e)
         {
@@ -109,7 +184,7 @@ namespace DAQ.Service
                 LaserRecordsManager.Insert(new LaserPoco() { BobbinCode = scan.Bobbin });
                 Events.PublishOnUIThread(scan);
                 _factory.GetFileSaver<Scan>((mIndex + 1).ToString(), settings.SaveRootPath1).Save(scan);
-                _factory.GetFileSaver<Scan>((mIndex + 1).ToString(), @"D:\\SumidaFile\Monitor\Scan").Save(scan);
+                _factory.GetFileSaver<Scan>((mIndex + 1).ToString(), @"D:\\SumidaFile\\Scan").Save(scan);
             }
             finally
             {

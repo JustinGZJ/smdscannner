@@ -163,7 +163,7 @@ namespace DAQ.Service
                     ShiftName = settings.ShiftName
                 };
                 _factory.GetFileSaver<Laser>((1).ToString()).Save(laser);
-                _factory.GetFileSaver<Laser>((1).ToString(), @"D:\\SumidaFile\Monitor").Save(laser);
+                _factory.GetFileSaver<Laser>((1).ToString(), @"D:\\SumidaFile\Laser").Save(laser);
                 OnLaserHandler(laserpoco);
               //  LaserRecordsManager.Insert(laserpoco);
 
